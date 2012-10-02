@@ -1,0 +1,28 @@
+<h1>ポスト一覧</h1>
+
+<table>
+  <tr>
+    <th>クリップ</th>
+    <th>ユーザ</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= image_tag post.url, style: 'max-width: 200px; max-height: 200px;' %></td>
+    <td><%= post.user.nick_name %></td>
+    <td><%= link_to 'Show', post %></td>
+    <% if user_signed_in? && post.user_id == current_user.id %>
+      <td><%= link_to 'Edit', edit_post_path(post) %></td>
+      <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %> |
+<%= link_to 'Home', root_path %>

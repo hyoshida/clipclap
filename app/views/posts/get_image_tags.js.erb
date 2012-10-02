@@ -1,0 +1,19 @@
+$('#result').html('<ul></ul>')
+<% @images.each_with_index do |image,i| %>
+  $('#result ul').append('<li><%= image_tag image, id: "image_#{i.to_s}", style: 'max-width: 120px; max-height: 120px' %></li>')
+<% end %>
+
+$('#result ul').galleryView({
+  transition_speed: 0,
+  transition_interval: 0,
+  panel_width: 480,
+  panel_height: 320,
+  panel_scale: 'fit',
+  show_filmstrip_nav: false,
+  enable_slideshow: false,
+  filmstrip_style: 'showall',
+  filmstrip_position: 'right',
+  frame_width: 50,
+  show_infobar: false,
+  frame_scale: 'fit',
+});

@@ -1,0 +1,53 @@
+ja:
+  "Sign up": 新規登録
+  sign_up: 新規登録
+  home: ホーム
+  game: パズル
+  option: 設定
+  next: 次へ
+  previous: 前へ
+  name: &g_name
+        ユーザー名
+  email: &g_email
+         メールアドレス
+  password: &g_password
+            パスワード
+  refresh: 更新
+  illust: イラスト
+
+  activerecord:
+    models:
+      collection: コレクション
+      puzzle: パズル
+      user: ユーザー
+
+    attributes:
+      collection:
+        puzzles: puzzles  #g
+        user: :activerecord.models.user  #g
+
+      puzzle:
+        collections: コレクション
+        comment: コメント
+        title: タイトル
+        illust: イラスト
+
+      user:
+        collection: :activerecord.models.collection  #g
+        current_sign_in_at: current_sign_in_at  #g
+        current_sign_in_ip: current_sign_in_ip  #g
+        email: *g_email
+        encrypted_password: encrypted_password  #g
+        last_sign_in_at: last_sign_in_at  #g
+        last_sign_in_ip: last_sign_in_ip  #g
+        name: *g_name
+        remember_created_at: remember_created_at  #g
+        reset_password_sent_at: reset_password_sent_at  #g
+        reset_password_token: reset_password_token  #g
+        password: *g_password
+        password_confirmation: パスワード（確認）
+        remember_me: 次回から自動的にログイン
+        sign_up: 新規登録
+        sign_in: ログイン
+        sign_out: ログアウト
+        current_password: 現在のパスワード

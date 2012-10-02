@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Postclip</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <% if params[:controller] == 'posts' && params[:action] == 'new' %>
+    <%= javascript_include_tag 'gallery/jquery.timers-1.2.js' %>
+    <%= javascript_include_tag 'gallery/jquery.galleryview-3.0-dev.js' %>
+    <%= stylesheet_link_tag 'gallery/jquery.galleryview-3.0-dev.css' %>
+  <% end %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>

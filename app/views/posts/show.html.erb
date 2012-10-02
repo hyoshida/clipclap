@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @post.title || @post.created_at.to_s %></h2>
+<%= link_to image_tag(@post.url, style: 'max-width: 640px; max-height: 480px;'), @post.url %>
+
+<dl>
+  <dt>元のURL:</dt>
+  <dd><%= link_to @post.origin_url, @post.origin_url %>
+
+  <dt>ユーザ:</dt>
+  <dd><%= @post.user.nick_name %>
+</dl>
+
+
+<% if user_signed_in? && @post.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<%= link_to 'Back', posts_path %> |
+<%= link_to 'Home', root_path %>

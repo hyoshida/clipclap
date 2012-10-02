@@ -1,0 +1,34 @@
+<div style="margin: 10px 0; padding: 10px; width: 400px; border: 1px solid red; background-color: #FFEEEE;">
+  <div id="result"></div>
+  <span style="color: red;">テスト中の機能（URLから動的に画像取得）</span>
+  <%= form_for @post, :url => { action: :get_image_tags }, :remote => true do |form| %>
+    <%= form.text_field :url %>
+    <%= form.submit %>
+  <% end %>
+</div>
+
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

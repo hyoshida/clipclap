@@ -1,0 +1,13 @@
+<div id="menubar">
+  <ul>
+    <% if user_signed_in? %>
+      <li><%= link_to 'あたらしくポスト', controller: :posts, action: :new %></li>
+    <% end %>
+
+    <li><%= link_to 'ポスト一覧', controller: :posts %></li>
+
+    <% if user_signed_in? %>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
+    <% end %>
+  </ul>
+</div><!-- /menubar -->
