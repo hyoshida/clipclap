@@ -1,19 +1,73 @@
-$('#result').html('<ul></ul>')
-<% @images.each_with_index do |image,i| %>
-  $('#result ul').append('<li><%= image_tag image, id: "image_#{i.to_s}", style: 'max-width: 120px; max-height: 120px' %></li>')
-<% end %>
+function uri_absolute_path(path) {
+  if (path.match(/^http:/) !== null) {
+    return path;
+  }
+  return '<%= @post.base_url %>' + path;
+}
 
-$('#result ul').galleryView({
-  transition_speed: 0,
-  transition_interval: 0,
-  panel_width: 480,
-  panel_height: 320,
-  panel_scale: 'fit',
-  show_filmstrip_nav: false,
-  enable_slideshow: false,
-  filmstrip_style: 'showall',
-  filmstrip_position: 'right',
-  frame_width: 50,
-  show_infobar: false,
-  frame_scale: 'fit',
+function on_load_image(image_path, callback) {
+  link = $('<a/>').attr('href', uri_absolute_path(image_path));
+  $("<img/>") // Make in memory copy of image to avoid css issues
+    .attr('src', uri_absolute_path(image_path))
+    .load(callback)
+    .appendTo(link);
+}
+
+function available_aspect_image(image) {
+  var aspect = [ 16, 5 ];
+  if ((image.width / image.height) >= (aspect[0] / aspect[1])) {
+    return false;
+  }
+  if ((image.width / image.height) <= (aspect[1] / aspect[0])) {
+    return false;
+  }
+  return true;
+}
+
+function append_available_image() {
+  if (this.width <= 16 || this.height <= 16 || !available_aspect_image(this)) {
+    return;
+  }
+
+  $(this).attr('style', 'max-width: 120px; max-height: 120px');
+  $(this).attr('class', 'result');
+
+  $(this).appendTo('#result');
+}
+
+Array.prototype.uniq = function() {
+  var i;
+  var hash = {};
+  var array = [];
+  for (i = 0; i < this.length; i += 1) hash[this[i]] = this[i];
+  for (i in hash) array.push(hash[i]);
+  return array;
+}
+
+
+
+////////////////
+// main
+
+$('#result').html('');
+
+var urls = [];
+// <div />で囲まないと、body 直下の img が取得できない
+var html = '<div><%= raw @html.gsub("'", '"').gsub(/\r?\n/, '') %></div>';
+
+$(html).find('img').each(function() {
+  urls.push($(this).attr('src'))
 });
+
+$.each(urls.uniq(), function() {
+  on_load_image(this, append_available_image);
+});
+
+$('img.result').live('click', function() {
+  $('img#selected').removeAttr('id');
+  $(this).attr('id', 'selected');
+  var url = $(this).attr('src');
+  $('#post_url').attr('value', url);
+});
+
+$('#post_origin_url').attr('value', '<%= @post.origin_url %>');

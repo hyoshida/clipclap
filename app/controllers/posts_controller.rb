@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def get_image_tags
     @post = Post.new(params[:post])
     @post.fill_origin_entry
-    @images = @post.listup_available_image_url
+    @html = @post.origin_html
     render
   end
 
@@ -53,7 +53,6 @@ class PostsController < ApplicationController
     post_attr = { user_id: current_user.id }
 
     @post = Post.new(post_attr.merge(params[:post]))
-    @post.fill_origin_entry
 
     respond_to do |format|
       if @post.save

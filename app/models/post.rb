@@ -39,21 +39,24 @@ class Post < ActiveRecord::Base
 
   def fill_origin_entry
     require 'open-uri'
-    self.origin_url = self.url
-    unless self.url =~ /\.(jpg|jpeg|png|gif)$/
-      # TODO: SSL 通信に対応させる(いまは例外発生)
-      open(self.url, 'r:binary') do |f|
-        # 厳密な画像判定
-        # f.content_type =~ /^image/
 
-        self.base_url = f.base_uri.to_s[ /(?:http:\/\/)?.*\// ]
-        # 変換できない文字があるときは適当な記号（デフォルトは ?）に置き換え
-        # TODO: http://moeimg.blog133.fc2.com/ このサイトがうまくエンコードできない
-        self.origin_html = f.read.encode(Encoding.default_internal, f.charset, invalid: :replace, undef: :replace)
+    if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
+      self.url = self.origin_url
+      return
+    end
 
-        image_url = pickup_image_url_from_html
-        self.url = image_url if image_url.present?
-      end
+    # TODO: SSL 通信に対応させる(いまは例外発生)
+    open(self.origin_url, 'r:binary') do |f|
+      # 厳密な画像判定
+      # f.content_type =~ /^image/
+
+      self.base_url = f.base_uri.to_s[ /(?:http:\/\/)?.*\// ]
+      # 変換できない文字があるときは適当な記号（デフォルトは ?）に置き換え
+      # TODO: http://moeimg.blog133.fc2.com/ このサイトがうまくエンコードできない
+      self.origin_html = f.read.encode(Encoding.default_internal, f.charset, invalid: :replace, undef: :replace)
+
+      image_url = pickup_image_url_from_html
+      self.url = image_url if image_url.present?
     end
   end
 
