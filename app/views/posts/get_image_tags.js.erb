@@ -30,9 +30,14 @@ function append_available_image() {
   }
 
   $(this).attr('style', 'max-width: 120px; max-height: 120px');
-  $(this).attr('class', 'result');
 
-  $(this).appendTo('#result');
+  var box = $('<div id="active_box" class="box" />');
+  box.appendTo('#container');
+  $(this).appendTo('#active_box');
+  box.removeAttr('id');
+
+  // TODO: リロードを最後の一回のみ行うようにする
+  $('#container').masonry('reload');
 }
 
 Array.prototype.uniq = function() {
@@ -49,7 +54,7 @@ Array.prototype.uniq = function() {
 ////////////////
 // main
 
-$('#result').html('');
+$('#container').html('')
 
 var urls = [];
 // <div />で囲まないと、body 直下の img が取得できない
@@ -63,7 +68,7 @@ $.each(urls.uniq(), function() {
   on_load_image(this, append_available_image);
 });
 
-$('img.result').live('click', function() {
+$('.box img').live('click', function() {
   $('img#selected').removeAttr('id');
   $(this).attr('id', 'selected');
   var url = $(this).attr('src');

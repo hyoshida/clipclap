@@ -1,6 +1,17 @@
 <h3>1. 画像をセレクト</h3>
-<div style="margin: 10px 0; padding: 10px; width: 400px; border: 1px solid red; background-color: #FFEEEE;">
-  <div id="result"></div>
+<div style="margin: 10px 0; padding: 10px; border: 1px solid red; background-color: #FFEEEE;">
+  <script>
+  <!--
+$(function() {
+  $('#container').masonry( {
+    itemSelector: '.box',
+    isAnimated: true
+  });
+});
+  -->
+  </script>
+
+  <div id="container">&nbsp;</div>
   <span style="color: red;">テスト中の機能（URLから動的に画像取得）</span>
   <%= form_for @post, :url => { action: :get_image_tags }, :remote => true do |form| %>
     <%= form.text_field :origin_url, id: 'loading_url' %>
