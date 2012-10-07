@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def get_image_tags
     @post = Post.new(params[:post])
     @post.fill_origin_entry
-    @html = @post.origin_html
+    @html = @post.create_html_only_images(@post.origin_html)
     render
   end
 

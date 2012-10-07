@@ -54,25 +54,30 @@ Array.prototype.uniq = function() {
 ////////////////
 // main
 
-$('#container').html('')
+<% if @post.error_info.present? %>
+  $('#container').html('<%= @post.error_info %>');
+  //$('#container').removeAttr('style');
+<% else %>
+  $('#container').html('&nbsp;');
 
-var urls = [];
-// <div />で囲まないと、body 直下の img が取得できない
-var html = '<div><%= raw @html.gsub("'", '"').gsub(/\r?\n/, '') %></div>';
+  var urls = [];
+  // <div />で囲まないと、body 直下の img が取得できない
+  var html = '<div><%= raw @html.gsub("'", '"') %></div>';
 
-$(html).find('img').each(function() {
-  urls.push($(this).attr('src'))
-});
+  $(html).find('img').each(function() {
+    urls.push($(this).attr('src'))
+  });
 
-$.each(urls.uniq(), function() {
-  on_load_image(this, append_available_image);
-});
+  $.each(urls.uniq(), function() {
+    on_load_image(this, append_available_image);
+  });
 
-$('.box img').live('click', function() {
-  $('img#selected').removeAttr('id');
-  $(this).attr('id', 'selected');
-  var url = $(this).attr('src');
-  $('#post_url').attr('value', url);
-});
+  $('.box img').live('click', function() {
+    $('img#selected').removeAttr('id');
+    $(this).attr('id', 'selected');
+    var url = $(this).attr('src');
+    $('#post_url').attr('value', url);
+  });
 
-$('#post_origin_url').attr('value', '<%= @post.origin_url %>');
+  $('#post_origin_url').attr('value', '<%= @post.origin_url %>');
+<% end %>

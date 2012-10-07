@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 
   # TODO: DBにする
   attr_accessor :base_url
+  attr_reader :error_info
 
   def listup_available_image_url
     require 'open-uri'
@@ -26,6 +27,12 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def create_html_only_images(html)
+    require 'hpricot'
+    doc = Hpricot(html || '')
+    (doc/:img).to_html
+  end
+
   def listup_image_url_from_html
     require 'hpricot'
     return [ self.origin_url ] if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
@@ -39,6 +46,8 @@ class Post < ActiveRecord::Base
 
   def fill_origin_entry
     require 'open-uri'
+
+    self.origin_url.insert(0, 'http://') unless self.origin_url =~ /^http:\/\//
 
     if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
       self.url = self.origin_url
@@ -58,6 +67,8 @@ class Post < ActiveRecord::Base
       image_url = pickup_image_url_from_html
       self.url = image_url if image_url.present?
     end
+  rescue
+    @error_info = $!.message
   end
 
   private
