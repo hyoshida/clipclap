@@ -1,6 +1,6 @@
 # config/unicorn.rb
 # Set environment to development unless something else is specified
-ENV["RAILS_ENV"] ||= 'production'
+ENV['RAILS_ENV'] ||= 'production'
 
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
@@ -12,10 +12,12 @@ preload_app true
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 60
 
-shared_path = "/home/yoshida/postclip"
+application = 'postclip'
+shared_path = "/home/yoshida/public_html/#{application}/shared"
 
 # Production specific settings
-if ENV["RAILS_ENV"] == "production"
+if ENV['RAILS_ENV'] == 'production'
+  worker_processes 4
 
   # listen on both a Unix domain socket and a TCP port,
   # we use a shorter backlog for quicker failover when busy
@@ -25,7 +27,7 @@ if ENV["RAILS_ENV"] == "production"
 
   # Help ensure your application will always spawn in the symlinked
   # "current" directory that Capistrano sets up.
-  working_directory "/home/yoshida/postclip"
+  working_directory "/home/yoshida/public_html/#{application}/current"
 
   # feel free to point this anywhere accessible on the filesystem
   user 'yoshida', 'wheel'
