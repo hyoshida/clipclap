@@ -1,0 +1,11 @@
+defaults: &defaults
+  page: 70
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

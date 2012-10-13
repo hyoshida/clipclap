@@ -1,6 +1,40 @@
 <%= render :partial => '/base/header' %>
 <%= render :partial => '/base/menubar' %>
 
+<script>
+<!--
+$(function() {
+  var $container = $('#container');
+
+  $container.imagesLoaded(function() {
+    $container.masonry({
+      itemSelector: '.box',
+      isAnimated: true
+    });
+  });
+
+  $container.infinitescroll({
+    navSelector  : '#page-nav',    // ページのナビゲーションを選択 
+    nextSelector : '#page-nav a',  // 次ページへのリンク
+    itemSelector : '.box',     // 持ってくる要素のclass
+    loading: {
+      finishedMsg: 'image was finished.', //次のページがない場合に表示するテキスト
+      img: '<%= image_path 'loader.gif' %>' //ローディング画像のパス
+    }
+  },
+  function(newElements) {
+    var $newElems = $(newElements).css({ opacity: 0 });
+
+    $newElems.imagesLoaded(function() {
+      $newElems.animate({ opacity: 1 });
+      $container.masonry('appended', $newElems, true);
+    });
+  });
+});
+-->
+</script>
+
+
 <h1>Welcoma to Postclip!</h1>
 
 <% if user_signed_in? %>
@@ -25,11 +59,18 @@
 
 <h2>最近のポスト一覧</h2>
 <% if @posts.present? %>
+<div id="container">
 <ul>
   <% @posts.each do |post| %>
-    <li><%= link_to image_tag(post.url, alt: post.title, style: 'max-width: 200px; max-height: 200px;' ), post %></li>
+    <li class='box'><%= link_to image_tag(post.url, alt: post.title, style: 'width: 180px;'), post %></li>
+  <% end %>
+  <% if false %>
+  <div id="page-nav">
+    <a href="/posts/get_image_tags?page=2">next</a>
+  </div>
   <% end %>
 </ul>
+</div>
 <% else %>
   <div>ポストが存在しません</div>
 <% end %>

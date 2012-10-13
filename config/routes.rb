@@ -3,6 +3,7 @@ Postclip::Application.routes.draw do
 
   get "home/index"
   post "posts/get_image_tags"
+  get "posts/get_image_tags"
 
   resources :posts
 

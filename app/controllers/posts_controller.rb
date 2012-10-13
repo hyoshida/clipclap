@@ -1,13 +1,29 @@
 # -*- encoding: utf-8 -*-
 class PostsController < ApplicationController
-  before_filter :logged_in?, except: [ :index, :show ]
+  before_filter :logged_in?, except: [ :index, :show, :get_image_tags ]
 
   # for Ajax
   def get_image_tags
-    @post = Post.new(params[:post])
-    @post.fill_origin_entry
-    @html = @post.create_html_only_images(@post.origin_html)
-    render
+    require 'will_paginate/array'
+    require 'hpricot'
+    html = ''
+    if params[:page].blank? || params[:page].to_i <= 1
+      @post = Post.new(params[:post])
+      @post.fill_origin_entry
+      html = @post.create_html_only_images
+      create_html_cahce_file(html)
+    else
+      html = load_html_cahce_file
+    end
+    doc = Hpricot(html)
+    @page = (doc/:img).paginate(page: params[:page], per_page: Post.per_page)
+    if params[:page].blank? || params[:page].to_i <= 1
+      @html = @page.join
+      render
+    else
+      @html = "<html><body><div id='container'>#{@page.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
+      render text: @html
+    end
   end
 
   # GET /posts.json
@@ -105,5 +121,28 @@ class PostsController < ApplicationController
     return if user_signed_in?
     flash.now[:notice] = 'この操作にはログインが必要です'
     redirect_to posts_url
+  end
+
+  def insert_div_tag_for_image_tag
+    -> image_tag { "<div class='box'>#{image_tag}</div>" }
+  end
+
+  def create_html_cahce_file(html)
+    FileUtils.mkdir html_cache_dir unless File.exist? html_cache_dir
+    File.open(html_cache_file_path, 'w') do |file|
+      file.write(html)
+    end
+  end
+
+  def load_html_cahce_file
+    File.open(html_cache_file_path).read
+  end
+
+  def html_cache_file_path
+    File.join(html_cache_dir, "#{current_user.id.to_s}.html")
+  end
+
+  def html_cache_dir
+    File.join(Rails.root, 'tmp', 'html_cache')
   end
 end

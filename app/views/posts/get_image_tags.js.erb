@@ -26,10 +26,11 @@ function available_aspect_image(image) {
 
 function append_available_image() {
   if (this.width <= 16 || this.height <= 16 || !available_aspect_image(this)) {
+    //$('<p>image is not supported.</p>').appendTo('#container');
     return;
   }
 
-  $(this).attr('style', 'max-width: 120px; max-height: 120px');
+  //$(this).attr('style', 'max-width: 120px');
 
   var box = $('<div id="active_box" class="box" />');
   box.appendTo('#container');
@@ -59,25 +60,44 @@ Array.prototype.uniq = function() {
   //$('#container').removeAttr('style');
 <% else %>
   $('#container').html('&nbsp;');
+  $('#container').attr('style', 'position: relative;');
+
+  var page_nav = $('<div/>');
+  page_nav.attr('id', 'page-nav');
+  page_nav.html('<%= link_to 'next', page: @page.next_page %>');
+  page_nav.insertAfter('#container');
 
   var urls = [];
   // <div />で囲まないと、body 直下の img が取得できない
-  var html = '<div><%= raw @html.gsub("'", '"') %></div>';
+  var html = '<div><%= raw @html.gsub("'", '"').presence || (@post.url && image_tag(@post.url)) || '' %></div>';
 
   $(html).find('img').each(function() {
-    urls.push($(this).attr('src'))
+    //urls.push($(this).attr('src'))
+
+    var box = $('<div id="active_box" class="box" />');
+    box.appendTo('#container');
+    $(this).appendTo('#active_box');
+    box.removeAttr('id');
   });
 
-  $.each(urls.uniq(), function() {
-    on_load_image(this, append_available_image);
-  });
+  //$.each(urls.uniq(), function() {
+  //  on_load_image(this, append_available_image);
+  //});
 
   $('.box img').live('click', function() {
     $('img#selected').removeAttr('id');
     $(this).attr('id', 'selected');
     var url = $(this).attr('src');
     $('#post_url').attr('value', url);
+    var link = $('<a/>');
+    link.attr('src', url);
+    link.attr('id', 'link');
+    link.insertBefore('img#selected');
+    $(this).appedTo('#link')
+    link.removeAttr('id');
+
   });
 
   $('#post_origin_url').attr('value', '<%= @post.origin_url %>');
+  $('#container').masonry('reload');
 <% end %>

@@ -2,10 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-img#selected {
-  border: 3px solid #9999FF;
+.box img#selected {
+  border: 5px solid #666666;
 }
 
-img {
-  border: 3px solid transparent;
+.box img {
+  border: 5px solid transparent;
+}
+
+.box img {
+  width: 180px;
+}
+
+#page-nav {
+  //display: none;
+  text-indent: -9999px;
 }
