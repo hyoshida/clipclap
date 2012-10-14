@@ -6,12 +6,19 @@
 $(function() {
   var $container = $('#container');
 
+  $('#container').masonry({
+    // options
+    itemSelector : '.box'
+  });
+
+  <% if false %>
   $container.imagesLoaded(function() {
     $container.masonry({
       itemSelector: '.box',
-      isAnimated: true
+      isAnimated: false
     });
   });
+  <% end %>
 
   $container.infinitescroll({
     navSelector  : '#page-nav',    // ページのナビゲーションを選択 
@@ -62,13 +69,16 @@ $(function() {
 <div id="container">
 <ul>
   <% @posts.each do |post| %>
-    <li class='box'><%= link_to image_tag(post.url, alt: post.title, style: 'width: 180px;'), post %></li>
+    <li class='box'>
+      <%= link_to image_tag(post.url, alt: post.title, style: 'width: 180px;'), post %>
+      <% if post.title.present? %>
+        <p class="title"><%= post.title %></p>
+      <% end %>
+    </li>
   <% end %>
-  <% if false %>
   <div id="page-nav">
-    <a href="/posts/get_image_tags?page=2">next</a>
+    <%= link_to 'next', page: 2 %>
   </div>
-  <% end %>
 </ul>
 </div>
 <% else %>
