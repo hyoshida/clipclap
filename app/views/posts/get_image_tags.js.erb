@@ -79,6 +79,9 @@ Array.prototype.uniq = function() {
     $(this).appendTo('#active_box');
     box.removeAttr('id');
   });
+  $('#container').masonry('reload');
+  // 最後の画像がロードされたらリロード（画像整理）
+  var timer = setInterval(function(){ if ($('.box img:last').width != 0) { clearInterval(timer); $('#container').masonry('reload');  }}, 500);
 
   //$.each(urls.uniq(), function() {
   //  on_load_image(this, append_available_image);
@@ -99,5 +102,4 @@ Array.prototype.uniq = function() {
   });
 
   $('#post_origin_url').attr('value', '<%= @post.origin_url %>');
-  $('#container').masonry('reload');
 <% end %>

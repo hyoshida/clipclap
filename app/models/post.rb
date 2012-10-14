@@ -88,7 +88,7 @@ class Post < ActiveRecord::Base
   end
 
   def create_image_tag_by_image_url(url)
-    "<img src=\"#{url}\" />"
+    "<img src=\"#{url}\" style=\"width: 180px\" />"
   end
 
   def available_size_image?(image_size)
