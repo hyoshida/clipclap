@@ -1,66 +1,11 @@
-function uri_absolute_path(path) {
-  if (path.match(/^http:/) !== null) {
-    return path;
-  }
-  return '<%= @post.base_url %>' + path;
-}
-
-function on_load_image(image_path, callback) {
-  link = $('<a/>').attr('href', uri_absolute_path(image_path));
-  $("<img/>") // Make in memory copy of image to avoid css issues
-    .attr('src', uri_absolute_path(image_path))
-    .load(callback)
-    .appendTo(link);
-}
-
-function available_aspect_image(image) {
-  var aspect = [ 16, 5 ];
-  if ((image.width / image.height) >= (aspect[0] / aspect[1])) {
-    return false;
-  }
-  if ((image.width / image.height) <= (aspect[1] / aspect[0])) {
-    return false;
-  }
-  return true;
-}
-
-function append_available_image() {
-  if (this.width <= 16 || this.height <= 16 || !available_aspect_image(this)) {
-    //$('<p>image is not supported.</p>').appendTo('#container');
-    return;
-  }
-
-  //$(this).attr('style', 'max-width: 120px');
-
-  var box = $('<div id="active_box" class="box" />');
-  box.appendTo('#container');
-  $(this).appendTo('#active_box');
-  box.removeAttr('id');
-
-  // TODO: リロードを最後の一回のみ行うようにする
-  $('#container').masonry('reload');
-}
-
-Array.prototype.uniq = function() {
-  var i;
-  var hash = {};
-  var array = [];
-  for (i = 0; i < this.length; i += 1) hash[this[i]] = this[i];
-  for (i in hash) array.push(hash[i]);
-  return array;
-}
-
-
-
-////////////////
-// main
+var $container = $('#container')
 
 <% if @post.error_info.present? %>
-  $('#container').html('<%= @post.error_info %>');
-  //$('#container').removeAttr('style');
+  $container.html('<%= @post.error_info %>');
+  //$container.removeAttr('style');
 <% else %>
-  $('#container').html('&nbsp;');
-  $('#container').attr('style', 'position: relative;');
+  $container.html('&nbsp;');
+  $container.attr('style', 'position: relative;');
 
   var page_nav = $('<div/>');
   page_nav.attr('id', 'page-nav');
@@ -72,20 +17,16 @@ Array.prototype.uniq = function() {
   var html = '<div><%= raw @html.gsub("'", '"').presence || (@post.url && image_tag(@post.url)) || '' %></div>';
 
   $(html).find('img').each(function() {
-    //urls.push($(this).attr('src'))
-
     var box = $('<div id="active_box" class="box" />');
     box.appendTo('#container');
     $(this).appendTo('#active_box');
     box.removeAttr('id');
   });
-  $('#container').masonry('reload');
-  // 最後の画像がロードされたらリロード（画像整理）
-  var timer = setInterval(function(){ if ($('.box img:last').width != 0) { clearInterval(timer); $('#container').masonry('reload');  }}, 500);
 
-  //$.each(urls.uniq(), function() {
-  //  on_load_image(this, append_available_image);
-  //});
+  $container.masonry('reload');
+  $container.imagesLoaded(function() {
+    $container.masonry('reload');
+  });
 
   $('.box img').live('click', function() {
     $('img#selected').removeAttr('id');

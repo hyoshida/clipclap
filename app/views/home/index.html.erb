@@ -7,18 +7,13 @@ $(function() {
   var $container = $('#container');
 
   $('#container').masonry({
-    // options
-    itemSelector : '.box'
+    itemSelector : '.box',
+    isAnimated: false
   });
 
-  <% if false %>
   $container.imagesLoaded(function() {
-    $container.masonry({
-      itemSelector: '.box',
-      isAnimated: false
-    });
+    $container.masonry('reload');
   });
-  <% end %>
 
   $container.infinitescroll({
     navSelector  : '#page-nav',    // ページのナビゲーションを選択 

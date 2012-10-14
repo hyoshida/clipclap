@@ -4,8 +4,8 @@
   <!--
 $(function() {
   $('#load').click(function() {
-    $('#container').html('<%= image_tag 'loader.gif' %>');
     $('#container').removeAttr('style');
+    $('#container img').removeAttr('style');
     $('#page-nav').remove();
     $('#load_form #loading_url').attr('style', 'display: none;');
     $('#load_form #load').attr('style', 'display: none;');
@@ -46,7 +46,7 @@ $(function() {
     <%= form.text_field :origin_url, id: 'loading_url' %>
     <%= form.submit 'ロード', id: 'load' %>
   <% end %>
-  <div id="container">&nbsp;</div>
+  <div id="container"><%= image_tag 'loader.gif', style: 'display: none;' %></div>
   <div id="page-nav">
     <%= link_to 'next', controller: :posts, action: :get_image_tags, page: 2 %>
   </div>
