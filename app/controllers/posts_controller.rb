@@ -128,7 +128,7 @@ class PostsController < ApplicationController
   end
 
   def create_html_cahce_file(html)
-    FileUtils.mkdir html_cache_dir unless File.exist? html_cache_dir
+    FileUtils.mkdir Settings.html_cache_dir unless File.exist? Settings.html_cache_dir
     File.open(html_cache_file_path, 'w') do |file|
       file.write(html)
     end
@@ -139,10 +139,6 @@ class PostsController < ApplicationController
   end
 
   def html_cache_file_path
-    File.join(html_cache_dir, "#{current_user.id.to_s}.html")
-  end
-
-  def html_cache_dir
-    File.join(Rails.root, 'tmp', 'html_cache')
+    File.join(Settings.html_cache_dir, "#{current_user.id.to_s}.html")
   end
 end
