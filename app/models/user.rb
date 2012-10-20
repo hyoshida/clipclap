@@ -16,4 +16,17 @@ class User < ActiveRecord::Base
   def nick_name
     self.name.presence || self.email
   end
+
+  def like?(post)
+    return false if self.likes.nil?
+    self.likes.split(',').include?(post.image_master_id.to_s)
+  end
+
+  def like(post)
+    if self.likes.nil?
+      self.likes = post.image_master_id.to_s
+    else
+      self.likes += ",#{post.image_master_id.to_s}"
+    end
+  end
 end

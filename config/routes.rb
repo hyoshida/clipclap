@@ -2,10 +2,17 @@ Postclip::Application.routes.draw do
   devise_for :users
 
   get "home/index"
-  post "posts/get_image_tags"
-  get "posts/get_image_tags"
 
-  resources :posts
+  resources :posts, except: [ :edit, :update ] do
+    member do
+      get "like"
+    end
+
+    collection do
+      get "get_image_tags"
+      post "get_image_tags"
+    end
+  end
 
   root :to => "home#index"
 

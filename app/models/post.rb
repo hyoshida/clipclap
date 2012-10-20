@@ -1,18 +1,39 @@
 # -*- encoding: utf-8 -*-
 class Post < ActiveRecord::Base
   belongs_to :user
+  belongs_to :image_master
 
   #before_save :fill_origin_entry
 
-  validates :url, :presence => true, :format => { :with => /^https?:\/\/.*\/.*\.(jpg|jpeg|png|gif)$/ }
   validates :origin_url, :allow_nil => true, :format => { :with => /^https?:\/\// }
   validates :origin_html, :allow_nil => true, :inclusion_html => { tags: [ 'img' ] }
 
+  attr_accessor :url
   # TODO: DBにする
   attr_accessor :base_url
   attr_reader :error_info
 
+  before_create :create_image_master
+
   self.per_page = Settings.page
+
+  def like(user)
+    return false if user.like? self
+    user.like self
+    return false unless user.save
+    self.like_count += 1
+    self.image_master.like_count += 1
+    self.save
+  end
+
+  def create_image_master
+    image_master = ImageMaster.create(url: @url)
+    self.image_master_id = image_master.id
+  end
+
+  def url
+    self.image_master.try(:url) || @url
+  end
 
   def create_html_only_images
     self.listup_available_image_urls.map {|url| create_image_tag_by_image_url(url) }.join
@@ -52,7 +73,7 @@ class Post < ActiveRecord::Base
     self.origin_url.insert(0, 'http://') unless self.origin_url =~ /^http:\/\//
 
     if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
-      self.url = self.origin_url
+      @url = self.origin_url
       return
     end
 
@@ -67,7 +88,7 @@ class Post < ActiveRecord::Base
       self.origin_html = f.read.encode(Encoding.default_internal, f.charset, invalid: :replace, undef: :replace)
 
       image_url = pickup_image_url_from_html
-      self.url = image_url if image_url.present?
+      @url = image_url if image_url.present?
     end
   rescue
     @error_info = $!.message

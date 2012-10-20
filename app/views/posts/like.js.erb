@@ -1,0 +1,2 @@
+var post_status = $('#post_<%= @post.id.to_s %> .status');
+post_status.html('<span>イイネ！ (<%= @post.like_count %>)</span>');

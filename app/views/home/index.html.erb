@@ -64,8 +64,17 @@ $(function() {
 <div id="container">
 <ul>
   <% @posts.each do |post| %>
-    <li class='box'>
+    <li id="post_<%= post.id.to_s %>" class="box">
       <%= link_to image_tag(post.url, alt: post.title, style: 'width: 180px;'), post %>
+      <% if user_signed_in? %>
+        <p class="status">
+        <% if current_user.like? post %>
+          <span>イイネ！ (<%= post.like_count %>)</span>
+        <% else %>
+          <%= link_to "イイネ！ (#{post.like_count})", like_post_path(:id => post), :remote => true %></p>
+        <% end %>
+        </p>
+      <% end %>
       <% if post.title.present? %>
         <p class="title"><%= post.title %></p>
       <% end %>

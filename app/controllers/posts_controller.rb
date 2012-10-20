@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 class PostsController < ApplicationController
-  before_filter :logged_in?, except: [ :index, :show, :get_image_tags ]
+  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like ]
 
   # for Ajax
   def get_image_tags
@@ -26,9 +26,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    @post = Post.where(id: params[:id]).includes(:image_master).first
+    return if @post.nil?
+    @post.like(current_user)
+    render
+  end
+
   # GET /posts.json
   def index
-    @posts = Post.includes(:user).all
+    @posts = Post.includes(:user).includes(:image_master).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,7 +46,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.includes(:user).find(params[:id])
+    @post = Post.includes(:user).includes(:image_master).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -65,17 +72,19 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
+ def create
     post_attr = { user_id: current_user.id }
-
     @post = Post.new(post_attr.merge(params[:post]))
 
+    exist_image_flag = ImageMaster.where(url: params[:post][:url]).first.present?
+
     respond_to do |format|
-      if @post.save
+      if !exist_image_flag && @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+        flash.now[:alert] = 'This image was existed.' if exist_image_flag
+        format.html { render action: :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -113,13 +122,13 @@ class PostsController < ApplicationController
 
   def owner_user_operation?
     return if user_signed_in?
-    flash.now[:notice] = 'この操作を実施する権限がありません'
+    flash.now[:alert] = 'この操作を実施する権限がありません'
     redirect_to posts_url
   end
 
   def logged_in?
     return if user_signed_in?
-    flash.now[:notice] = 'この操作にはログインが必要です'
+    flash.now[:alert] = 'この操作にはログインが必要です'
     redirect_to posts_url
   end
 

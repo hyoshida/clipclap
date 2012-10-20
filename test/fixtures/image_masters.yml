@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user_id: 1
-  image_master_id: 1
-  title: MyString
+  url: 'http://example.com/one'
+  hash: abc001
   like_count: 1
 
 two:
-  user_id: 1
-  image_master_id: 2
-  title: MyString
+  url: 'http://example.com/two'
+  hash: abc002
   like_count: 1

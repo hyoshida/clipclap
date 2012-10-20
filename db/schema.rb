@@ -11,20 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120929112628) do
+ActiveRecord::Schema.define(:version => 20121018201910) do
+
+  create_table "image_masters", :force => true do |t|
+    t.string   "url",                              :null => false
+    t.integer  "width",             :default => 0, :null => false
+    t.integer  "height",            :default => 0, :null => false
+    t.integer  "like_count",        :default => 0
+    t.datetime "delete_ordered_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
   create_table "posts", :force => true do |t|
+    t.integer  "user_id",                        :null => false
+    t.integer  "image_master_id",                :null => false
     t.string   "title"
-    t.string   "url"
-    t.string   "origin_url"
+    t.string   "origin_url",                     :null => false
     t.text     "origin_html"
-    t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "like_count",      :default => 0
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
+    t.string   "likes"
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
