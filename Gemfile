@@ -50,3 +50,5 @@ gem 'hpricot'
 gem 'image_size'
 gem 'settingslogic'
 gem 'will_paginate', '~> 3.0'
+
+gem 'yaml_db'

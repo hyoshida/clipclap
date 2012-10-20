@@ -134,6 +134,7 @@ GEM
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -153,3 +154,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   will_paginate (~> 3.0)
+  yaml_db
