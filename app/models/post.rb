@@ -36,12 +36,28 @@ class Post < ActiveRecord::Base
   end
 
   def create_image_master
-    image_master = ImageMaster.create(url: @url)
+    require 'open-uri'
+    require 'image_size'
+    image_size = ImageSize.new(open(@url))
+    image_master = ImageMaster.create(url: @url, width: image_size.width, height: image_size.height)
     self.image_master_id = image_master.id
   end
 
   def url
     self.image_master.try(:url) || @url
+  end
+
+  def thumb_size_for_style_sheet
+    return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
+    "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
+  end
+
+  def thumb_width
+    Settings.thumb_width
+  end
+
+  def thumb_height
+    (self.image_master.height * (self.thumb_width / self.image_master.width.to_f)).floor
   end
 
   def create_html_only_images
