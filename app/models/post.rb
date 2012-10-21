@@ -57,6 +57,7 @@ class Post < ActiveRecord::Base
   end
 
   def thumb_height
+    return 0 if self.image_master.width.zero? || self.image_master.height.zero? # for 下位互換
     (self.image_master.height * (self.thumb_width / self.image_master.width.to_f)).floor
   end
 
