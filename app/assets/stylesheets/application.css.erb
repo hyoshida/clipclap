@@ -35,7 +35,7 @@ li.box a:hover img {
 }
 
 li.box a {
-  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), auto;
+  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
 }
   
 
@@ -45,11 +45,10 @@ li.box a:hover {
 
 li.box .image_box {
   display: block;
-  width: 180px;
+  width: <%= Settings.thumb_width %>px;
 }
 
 li.box img {
-
   display: block;
   border: 1px solid #ccc;
   background: #fff;
@@ -59,7 +58,7 @@ li.box img {
 
 li.box .title {
   display: block;
-  width: 180px;
+  width: <%= Settings.thumb_width %>px;
   overflow: hidden;
   text-overflow: ellipsis;
   /* text-wrap: none; */
@@ -67,8 +66,8 @@ li.box .title {
 
 li.box {
   display: block;
-  width: 190px;
   float: left;
+  width: <%= Settings.thumb_width + 5 %>px;
   margin: 5px;
   padding: 10px;
   padding-bottom: 0;
@@ -94,14 +93,14 @@ li.box {
 
 .image_box .status {
   position: absolute;
-} 
+}
 
-.image_box .status .like { 
+.image_box .status .like {
   display: block;
   position: absolute;
   left: 2px;
   bottom: -1px;
-  width: 164px;
+  width: <%= Settings.thumb_width - 16 %>px;
   height: 18px;
   padding: 6px 8px;
   text-align: right;

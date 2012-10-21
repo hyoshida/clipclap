@@ -1,5 +1,5 @@
 defaults: &defaults
-  page: 70
+  page: 50
   thumb_width: 180
   html_cache_dir: <%= File.join(Rails.root, 'tmp', 'html_cache') %>
 
