@@ -61,32 +61,7 @@ $(function() {
 
 <h2>最近のポスト一覧</h2>
 <% if @posts.present? %>
-<div id="container">
-<ul>
-  <% @posts.each do |post| %>
-    <li id="post_<%= post.id.to_s %>" class="box">
-      <div class="image_box">
-        <%= link_to image_tag(post.url, alt: post.title, style: post.thumb_size_for_style_sheet), post %>
-        <div class="status">
-        <p class="like">
-          <% if user_signed_in? && current_user.unlike?(post) %>
-            <%= link_to "イイネ！ (#{post.like_count})", like_post_path(:id => post), :remote => true %>
-          <% else %>
-            <span>イイネ！ (<%= post.like_count %>) <%= link_to '×', unlike_post_path(:id => post), :remote => true if user_signed_in? %></span>
-          <% end %>
-        </p>
-        </div>
-      </div>
-      <% if post.title.present? %>
-        <p class="title"><%= post.title %></p>
-      <% end %>
-    </li>
-  <% end %>
-  <div id="page-nav">
-    <%= link_to 'next', page: 2 %>
-  </div>
-</ul>
-</div>
+  <%= render :partial => '/base/wall' %>
 <% else %>
   <div>ポストが存在しません</div>
 <% end %>
