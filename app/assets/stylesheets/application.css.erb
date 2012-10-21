@@ -38,13 +38,17 @@ li.box a {
   cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), auto;
 }
   
+
 li.box a:hover {
   background: #000;
 }
 
-li.box img {
+li.box .image_box {
   display: block;
   width: 180px;
+}
+
+li.box img {
 
   display: block;
   border: 1px solid #ccc;
@@ -72,4 +76,43 @@ li.box {
   border: 2px solid #aaaacc;
   background: #f3f3ff;
   box-shadow: 0 2px 4px #aaa;
+}
+
+
+/* status bar */
+.image_box:hover .status {
+  opacity: 0.0;
+  filter: alpha(opacity=0);
+  -ms-filter: "alpha( opacity=0 )";
+}
+
+.image_box .status:hover {
+  opacity: 1;
+  filter: alpha(opacity=1);
+  -ms-filter: "alpha( opacity=1 )";
+} 
+
+.image_box .status {
+  position: absolute;
+} 
+
+.image_box .status .like { 
+  display: block;
+  position: absolute;
+  left: 2px;
+  bottom: -1px;
+  width: 164px;
+  height: 18px;
+  padding: 6px 8px;
+  text-align: right;
+  color: #fff;
+  background-color: #000;
+  background-image: url("<%= image_path 'transblack.png' %>") repeat;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "alpha( opacity=75 )";
+}
+
+.image_box .status  a {
+  color: #fff;
 }
