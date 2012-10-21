@@ -1,0 +1,3 @@
+var post_status = $('#post_<%= @post.id.to_s %> .status');
+post_status.html('<%= link_to "イイネ！ (#{@post.like_count})", like_post_path(:id => @post), :remote => true %>');
+            

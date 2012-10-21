@@ -22,11 +22,20 @@ class User < ActiveRecord::Base
     self.likes.split(',').include?(post.image_master_id.to_s)
   end
 
+  def unlike?(post)
+    not like?(post)
+  end
+
   def like(post)
     if self.likes.nil?
       self.likes = post.image_master_id.to_s
     else
       self.likes += ",#{post.image_master_id.to_s}"
     end
+  end
+
+  def unlike(post)
+    return if self.likes.nil?
+    self.likes = (self.likes.split(',') - [ post.image_master_id.to_s ]).join(',')
   end
 end

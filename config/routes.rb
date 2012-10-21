@@ -6,6 +6,7 @@ Postclip::Application.routes.draw do
   resources :posts, except: [ :edit, :update ] do
     member do
       get "like"
+      get "unlike"
     end
 
     collection do

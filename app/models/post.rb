@@ -26,6 +26,15 @@ class Post < ActiveRecord::Base
     self.save
   end
 
+  def unlike(user)
+    return false if user.unlike? self
+    user.unlike self
+    return false unless user.save
+    self.like_count -= 1
+    self.image_master.like_count -= 1
+    self.save
+  end
+
   def create_image_master
     image_master = ImageMaster.create(url: @url)
     self.image_master_id = image_master.id

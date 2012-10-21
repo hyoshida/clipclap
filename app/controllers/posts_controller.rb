@@ -33,6 +33,13 @@ class PostsController < ApplicationController
     render
   end
 
+  def unlike
+    @post = Post.where(id: params[:id]).includes(:image_master).first
+    return if @post.nil?
+    @post.unlike(current_user)
+    render
+  end
+
   # GET /posts.json
   def index
     @posts = Post.includes(:user).includes(:image_master).all
