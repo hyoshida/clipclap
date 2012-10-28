@@ -2,7 +2,10 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :image_master
-  has_many :likes
+  has_many :likes, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
+
+  default_scope order: 'created_at DESC'
 
   #before_save :fill_origin_entry
 
@@ -17,6 +20,10 @@ class Post < ActiveRecord::Base
   before_create :create_image_master
 
   self.per_page = Settings.page
+
+  def tags_maximum?
+    self.tags.count >= Settings.maximum_tag_count
+  end
 
   def like_count
     # TODO: キャッシュすべき

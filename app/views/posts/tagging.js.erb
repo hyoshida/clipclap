@@ -1,0 +1,15 @@
+<% if @tag.nil? %>
+<% elsif @tag.errors.present? %>
+  var errors = $('<ul/>');
+  <% @tag.errors.full_messages.each do |message| %>
+    var error = $('<li/>');
+    error.html('<%= message %>')
+    errors.append(error);
+  <% end %>
+  $('.alert').html(errors);
+<% else %>
+  var tag = $('<li/>');
+  tag.attr('id', 'tag_<%= @tag.id %>');
+  tag.html('<%= @tag.name %><%= link_to '[×]', untagging_post_path(tag_id: @tag.id), :remote => true %>');
+  $('ul#tags').append(tag);
+<% end %>

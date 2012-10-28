@@ -7,6 +7,8 @@ Postclip::Application.routes.draw do
     member do
       get "like"
       get "unlike"
+      post "tagging"
+      get "untagging"
     end
 
     collection do

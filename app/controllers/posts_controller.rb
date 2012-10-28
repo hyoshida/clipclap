@@ -29,14 +29,28 @@ class PostsController < ApplicationController
   def like
     @post = Post.where(id: params[:id]).first
     current_user.like(@post) unless @post.nil?
-    render
   end
 
   def unlike
     @post = Post.where(id: params[:id]).first
     current_user.unlike(@post) unless @post.nil?
-    render
   end
+
+  def tagging
+    post = Post.where(id: params[:id]).first
+    return if post.tags_maximum?
+    attributes = {
+      name: params[:tag][:name].strip,
+      user_id: current_user.id
+    }
+    @tag = post.tags.create(attributes)
+  end
+
+  def untagging
+    @tag = Tag.where(id: params[:tag_id]).first
+    @tag.destroy
+  end
+
 
   # GET /posts.json
   def index

@@ -1,10 +1,9 @@
 # -*- encoding: utf-8 -*-
-class Like < ActiveRecord::Base
+class Tag < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
-  belongs_to :image_master
 
   validates :post_id, :presence => true
   validates :user_id, :presence => true
-  validates :image_master, :presence => true
+  validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 2 }
 end

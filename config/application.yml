@@ -2,6 +2,7 @@ defaults: &defaults
   page: 50
   thumb_width: 180
   html_cache_dir: <%= File.join(Rails.root, 'tmp', 'html_cache') %>
+  maximum_tag_count: 10
 
 development:
   <<: *defaults

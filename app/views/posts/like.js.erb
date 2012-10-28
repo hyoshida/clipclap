@@ -1,2 +1,2 @@
 var post_status = $('#post_<%= @post.id.to_s %> .like');
-post_status.html('<span>イイネ！ (<%= @post.like_count %>) <%= link_to '×', unlike_post_path(:id => @post), :remote => true if user_signed_in? %></span>');
+post_status.html('<span>イイネ！ (<%= @post.like_count %>) <%= link_to '×', unlike_post_path(:id => @post), :remote => true %></span>');

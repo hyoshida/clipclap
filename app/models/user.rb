@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class User < ActiveRecord::Base
   has_many :posts
-  has_many :likes
+  has_many :likes, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

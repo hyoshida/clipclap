@@ -3,6 +3,20 @@
 <h2><%= @post.title || @post.created_at.to_s %></h2>
 <%= link_to image_tag(@post.url, style: 'max-width: 640px; max-height: 480px;'), @post.url %>
 
+<h3>タグ一覧</h3>
+<ul id="tags">
+  <% @post.tags.each do |tag| %>
+    <li id="tag_<%= tag.id %>"><%= tag.name %><%= link_to '[×]', untagging_post_path(tag_id: tag.id), :remote => true if user_signed_in? && tag.user_id == current_user.id %></li>
+  <% end %>
+</ul>
+
+<% if user_signed_in? && !@post.tags_maximum? %>
+  <%= form_for Tag.new, :url => { action: :tagging }, :remote => true, :html => { :id => 'tagging_form' } do |form| %>
+    <%= form.text_field :name %>
+    <%= form.submit 'タグ追加' %>
+  <% end %>
+<% end %>
+
 <dl>
   <dt>元のURL:</dt>
   <dd><%= link_to @post.origin_url, @post.origin_url %>
@@ -13,7 +27,7 @@
 
 
 <% if user_signed_in? && @post.user_id == current_user.id %>
-  <%= link_to 'Destroy', @post, confirm: 'Are you sure?', method: :delete %>
+  <%= link_to 'Destroy', @post, confirm: 'Are you sure?', method: :delete %> |
 <% end %>
 <%= link_to 'Back', posts_path %> |
 <%= link_to 'Home', root_path %>
