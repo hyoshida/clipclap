@@ -108,10 +108,17 @@ li.box {
 }
 
 .image_box .status .tag {
+  z-index: 2;
   text-align: left;
+  width: <%= (Settings.thumb_width) / 2 - 16 %>px;
+  overflow: hidden;
+  text-wrap: none;
+  white-space:  nowrap;
+  text-overflow: ellipsis;
 }
 
 .image_box .status .like {
+  z-index: 1;
   text-align: right;
 
   background-color: #000;

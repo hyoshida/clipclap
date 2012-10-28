@@ -42,9 +42,9 @@ $(function() {
         <div class="status">
           <p class="like">
           <% if user_signed_in? && current_user.unlike?(post) %>
-            <%= link_to "イイネ！ (#{post.like_count})", like_post_path(:id => post), :remote => true %>
+            <%= link_to "イイネ！(#{post.like_count})", like_post_path(:id => post), :remote => true %>
           <% else %>
-            <span>イイネ！ (<%= post.like_count %>) <%= link_to '×', unlike_post_path(:id => post), :remote => true if user_signed_in? %></span>
+            <span>イイネ！(<%= post.like_count %>) <%= link_to '×', unlike_post_path(:id => post), :remote => true if user_signed_in? %></span>
           <% end %>
           <% if post.tags.count.nonzero? %>
           <p class="tag">
