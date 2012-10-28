@@ -6,7 +6,10 @@
 <h3>タグ一覧</h3>
 <ul id="tags">
   <% @post.tags.each do |tag| %>
-    <li id="tag_<%= tag.id %>"><%= tag.name %><%= link_to '[×]', untagging_post_path(tag_id: tag.id), :remote => true if user_signed_in? && tag.user_id == current_user.id %></li>
+    <li id="tag_<%= tag.id %>">
+      <%= link_to tag.name, controller: :tags, action: :show, name: tag.name %>
+      <%= link_to '[×]', untagging_post_path(tag_id: tag.id), :remote => true if user_signed_in? && tag.user_id == current_user.id %>
+    </li>
   <% end %>
 </ul>
 

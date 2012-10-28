@@ -1,4 +1,6 @@
 Postclip::Application.routes.draw do
+  get "tags/show"
+
   devise_for :users
 
   get "home/index"
@@ -16,6 +18,9 @@ Postclip::Application.routes.draw do
       post "get_image_tags"
     end
   end
+
+  get "tags/index"
+  match 'tags/:name/show' => 'tags#show'
 
   root :to => "home#index"
 

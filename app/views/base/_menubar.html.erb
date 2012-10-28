@@ -5,6 +5,7 @@
     <% end %>
 
     <li><%= link_to 'ポスト一覧', controller: :posts %></li>
+    <li><%= link_to 'タグ一覧', controller: :tags %></li>
 
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>

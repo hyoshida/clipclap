@@ -1,0 +1,9 @@
+<%= render :partial => '/base/header' %>
+<%= render :partial => '/base/menubar' %>
+
+<h2>タグ一覧</h2>
+<ul>
+<% @tag_hash.each_pair do |name,count| %>
+  <li style="font-size: <%= count + 11 %>px;"><%= link_to name, action: :show, name: name%></li>
+<% end %>
+</ul>
