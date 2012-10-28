@@ -6,4 +6,9 @@ class Tag < ActiveRecord::Base
   validates :post_id, :presence => true
   validates :user_id, :presence => true
   validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 2 }
+
+  def shortname(length = 4)
+    return self.name if self.name.size <= length
+    self.name[0..length] + '...'
+  end
 end
