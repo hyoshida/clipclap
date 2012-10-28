@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 class PostsController < ApplicationController
-  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like ]
+  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like, :unlike, :tagging, :untagging ]
 
   # for Ajax
   def get_image_tags
@@ -54,7 +54,7 @@ class PostsController < ApplicationController
 
   # GET /posts.json
   def index
-    @posts = Post.includes(:user).includes(:image_master).all
+    @posts = Post.includes(:user, :image_master, :likes, :tags).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.includes(:user).includes(:image_master).find(params[:id])
+    @post = Post.includes(:user, :image_master, :tags).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
