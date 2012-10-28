@@ -45,10 +45,12 @@ ActiveRecord::Schema.define(:version => 20121028090004) do
   create_table "tags", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "tags", ["post_id", "name"], :name => "tags_idx_01", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"
