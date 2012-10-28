@@ -15,6 +15,7 @@ class TagsController < ApplicationController
       .joins(:tags)
       .where('tags.name = ?', params[:name])
       .includes(:image_master, :likes)
+      .paginate(page: params[:page])
       .all
   end
 end

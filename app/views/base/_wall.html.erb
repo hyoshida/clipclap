@@ -1,3 +1,38 @@
+<script>
+<!--
+$(function() {
+  var $container = $('#container');
+
+  $('#container').masonry({
+    itemSelector : '.box',
+    isAnimated: false
+  });
+
+  $container.imagesLoaded(function() {
+    $container.masonry('reload');
+  });
+
+  $container.infinitescroll({
+    navSelector  : '#page-nav',    // ページのナビゲーションを選択 
+    nextSelector : '#page-nav a',  // 次ページへのリンク
+    itemSelector : '.box',     // 持ってくる要素のclass
+    loading: {
+      finishedMsg: 'image was finished.', //次のページがない場合に表示するテキスト
+      img: '<%= image_path 'loader.gif' %>' //ローディング画像のパス
+    }
+  },
+  function(newElements) {
+    var $newElems = $(newElements).css({ opacity: 0 });
+
+    $newElems.imagesLoaded(function() {
+      $newElems.animate({ opacity: 1 });
+      $container.masonry('appended', $newElems, true);
+    });
+  });
+});
+-->
+</script>
+
 <div id="container">
   <ul>
     <% @posts.each do |post| %>
@@ -25,7 +60,9 @@
       </li>
     <% end %>
   </ul> 
-  <div id="page-nav">
-    <%= link_to 'next', page: (@posts.respond_to?(:next_page) ? @posts.next_page : 2) %>
-  </div>
+  <% if @posts.respond_to?(:next_page) && @posts.next_page.present? %>
+    <div id="page-nav">
+      <%= link_to 'next', page: @posts.next_page %>
+    </div>
+<% end %>
 </div>

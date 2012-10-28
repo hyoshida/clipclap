@@ -1,42 +1,6 @@
 <%= render :partial => '/base/header' %>
 <%= render :partial => '/base/menubar' %>
 
-<script>
-<!--
-$(function() {
-  var $container = $('#container');
-
-  $('#container').masonry({
-    itemSelector : '.box',
-    isAnimated: false
-  });
-
-  $container.imagesLoaded(function() {
-    $container.masonry('reload');
-  });
-
-  $container.infinitescroll({
-    navSelector  : '#page-nav',    // ページのナビゲーションを選択 
-    nextSelector : '#page-nav a',  // 次ページへのリンク
-    itemSelector : '.box',     // 持ってくる要素のclass
-    loading: {
-      finishedMsg: 'image was finished.', //次のページがない場合に表示するテキスト
-      img: '<%= image_path 'loader.gif' %>' //ローディング画像のパス
-    }
-  },
-  function(newElements) {
-    var $newElems = $(newElements).css({ opacity: 0 });
-
-    $newElems.imagesLoaded(function() {
-      $newElems.animate({ opacity: 1 });
-      $container.masonry('appended', $newElems, true);
-    });
-  });
-});
--->
-</script>
-
-
 <h1>Welcoma to Postclip!</h1>
 
 <% if user_signed_in? %>
