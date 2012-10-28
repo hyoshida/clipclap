@@ -27,16 +27,14 @@ class PostsController < ApplicationController
   end
 
   def like
-    @post = Post.where(id: params[:id]).includes(:image_master).first
-    return if @post.nil?
-    @post.like(current_user)
+    @post = Post.where(id: params[:id]).first
+    current_user.like(@post) unless @post.nil?
     render
   end
 
   def unlike
-    @post = Post.where(id: params[:id]).includes(:image_master).first
-    return if @post.nil?
-    @post.unlike(current_user)
+    @post = Post.where(id: params[:id]).first
+    current_user.unlike(@post) unless @post.nil?
     render
   end
 

@@ -2,6 +2,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :image_master
+  has_many :likes
 
   #before_save :fill_origin_entry
 
@@ -17,22 +18,9 @@ class Post < ActiveRecord::Base
 
   self.per_page = Settings.page
 
-  def like(user)
-    return false if user.like? self
-    user.like self
-    return false unless user.save
-    self.like_count += 1
-    self.image_master.like_count += 1
-    self.save
-  end
-
-  def unlike(user)
-    return false if user.unlike? self
-    user.unlike self
-    return false unless user.save
-    self.like_count -= 1
-    self.image_master.like_count -= 1
-    self.save
+  def like_count
+    # TODO: キャッシュすべき
+    Like.where(post_id: self.id).count
   end
 
   def create_image_master

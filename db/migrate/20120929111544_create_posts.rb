@@ -6,7 +6,6 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.string :origin_url, null: false
       t.text :origin_html
-      t.integer :like_count, default: 0
 
       t.timestamps
     end
