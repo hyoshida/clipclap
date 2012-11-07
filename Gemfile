@@ -9,6 +9,10 @@ group :development do
   gem 'sqlite3'
 end
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
+
 group :production do
   gem 'mysql2'
 end
@@ -51,5 +55,7 @@ gem 'image_size'
 gem 'settingslogic'
 gem 'will_paginate', '~> 3.0'
 
+
 gem 'yaml_db'
 gem 'rails_admin'
+gem 'i18n_generators'

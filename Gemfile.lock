@@ -50,6 +50,9 @@ GEM
       orm_adapter (~> 0.0.7)
       railties (~> 3.1)
       warden (~> 1.1.1)
+    diff-lcs (1.1.3)
+    domain_name (0.5.4)
+      unf (~> 0.0.3)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -61,6 +64,9 @@ GEM
     hike (1.2.1)
     hpricot (0.8.6)
     i18n (0.6.1)
+    i18n_generators (1.2.1)
+      mechanize
+      rails (>= 3.0.0)
     image_size (1.1.1)
     journey (1.0.4)
     jquery-rails (2.1.3)
@@ -79,10 +85,20 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (2.5.1)
+      domain_name (~> 0.5, >= 0.5.1)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.19)
     multi_json (1.3.6)
     mysql2 (0.3.11)
     nested_form (0.2.3)
+    net-http-digest_auth (1.2.1)
+    net-http-persistent (2.8)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -92,6 +108,7 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
+    ntlm-http (0.1.1)
     orm_adapter (0.0.7)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -138,6 +155,19 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     remotipart (1.0.2)
+    rspec (2.11.0)
+      rspec-core (~> 2.11.0)
+      rspec-expectations (~> 2.11.0)
+      rspec-mocks (~> 2.11.0)
+    rspec-core (2.11.1)
+    rspec-expectations (2.11.3)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.11.3)
+    rspec-rails (2.11.4)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (~> 2.11.0)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -158,12 +188,16 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    unf (0.0.5)
+      unf_ext
+    unf_ext (0.0.5)
     unicorn (4.3.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
     warden (1.1.1)
       rack (>= 1.0)
+    webrobots (0.0.13)
     will_paginate (3.0.3)
     yaml_db (0.2.3)
 
@@ -175,11 +209,13 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   hpricot
+  i18n_generators
   image_size
   jquery-rails
   mysql2
   rails (= 3.2.1)
   rails_admin
+  rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
   settingslogic
   sqlite3

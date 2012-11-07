@@ -1,0 +1,4 @@
+admin_user:
+  email: admin@example.com
+  password: pass
+  password_confirmation: pass
