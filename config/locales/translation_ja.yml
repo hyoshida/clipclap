@@ -6,34 +6,22 @@ ja:
   option: 設定
   next: 次へ
   previous: 前へ
-  name: &g_name
-        ユーザー名
-  email: &g_email
-         メールアドレス
-  password: &g_password
-            パスワード
+  name: &g_name ユーザー名
+  email: &g_email メールアドレス
+  password: &g_password パスワード
   refresh: 更新
-  illust: イラスト
 
   activerecord:
     models:
-      collection: コレクション
-      puzzle: パズル
       user: ユーザー
+      admin_user: 管理者
+      image_master: 画像マスタ
+      like: イイネ
+      post: ポスト
+      tag: タグ
 
     attributes:
-      collection:
-        puzzles: puzzles  #g
-        user: :activerecord.models.user  #g
-
-      puzzle:
-        collections: コレクション
-        comment: コメント
-        title: タイトル
-        illust: イラスト
-
-      user:
-        collection: :activerecord.models.collection  #g
+      user: &user
         current_sign_in_at: current_sign_in_at  #g
         current_sign_in_ip: current_sign_in_ip  #g
         email: *g_email
@@ -51,3 +39,36 @@ ja:
         sign_in: ログイン
         sign_out: ログアウト
         current_password: 現在のパスワード
+        likes: likes  #g
+        posts: posts  #g
+        tags: tags  #g
+
+      admin_user:
+        <<: *user
+
+      image_master:
+        delete_ordered_at: delete_ordered_at  #g
+        likes: likes  #g
+        posts: posts  #g
+        url: URL
+        width: 幅
+        height: 高さ
+
+      like:
+        image_master: :activerecord.models.image_master  #g
+        post: :activerecord.models.post  #g
+        user: :activerecord.models.user  #g
+
+      post:
+        image_master: :activerecord.models.image_master  #g
+        likes: likes  #g
+        origin_html: origin_html  #g
+        origin_url: origin_url  #g
+        tags: tags  #g
+        title: タイトル
+        user: :activerecord.models.user  #g
+
+      tag:
+        name: タグ名
+        post: :activerecord.models.post  #g
+        user: :activerecord.models.user  #g
