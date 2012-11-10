@@ -1,4 +1,3 @@
 admin_user:
   email: admin@example.com
-  password: pass
-  password_confirmation: pass
+  encrypted_password: "$2a$10$XQpXZRCtAZDWqZiGyv5NwO7tMy7U.LaJJVeXZ4Q2PulNK875AO3KC"
