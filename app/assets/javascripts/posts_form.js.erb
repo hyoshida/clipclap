@@ -1,0 +1,32 @@
+$(function() {
+  var $post_field = $('#post_dialog')
+  var $container = $('#container');
+
+  $post_field.dialog({
+    autoOpen: false,
+    title: '投稿ダイアログ',
+    closeOnEscape: true,
+    modal: true,
+    resizable: false,
+    minWidth: 480,
+    buttons: {
+      'キャンセル': function() {
+        $(this).dialog('close');
+      }
+    }
+  });
+  var $image = $('#selected')
+  $image.live('click', function() {
+    $preview_image = $('<img/>')
+    $preview_image.attr('src', $(this).attr('src'))
+    $preview_image.attr('style', $(this).attr('style'))
+    $('#preview').html($preview_image);
+    $post_field.dialog('open');
+  });
+
+  $('#load').click(function() {
+    $('#page-nav').remove();
+    $container.removeAttr('style');
+    $container.html('<%= image_tag 'loader.gif' %>');
+  });
+});

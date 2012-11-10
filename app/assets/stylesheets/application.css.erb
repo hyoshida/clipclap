@@ -14,6 +14,7 @@
 */
 
 #page-nav {
+  clear: both;
   /* display: none; */
   text-indent: -9999px;
 }
@@ -81,19 +82,11 @@ li.box {
 
 /* status bar */
 .image_box:hover .status {
-  opacity: 1;
-  filter: alpha(opacity=1);
-  -ms-filter: "alpha( opacity=1 )";
-
+  display: none;
 }
 
 .image_box .status {
-  opacity: 0.0;
-  filter: alpha(opacity=0);
-  -ms-filter: "alpha( opacity=0 )";
-} 
-
-.image_box .status {
+  display: block;
   position: absolute;
 }
 

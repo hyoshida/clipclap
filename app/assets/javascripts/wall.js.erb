@@ -1,0 +1,29 @@
+$(function() {
+  var $container = $('#container');
+
+  $container.css({ opacity: 0 });
+  $container.imagesLoaded(function() {
+    $container.animate({ opacity: 1 });
+    $container.masonry({
+      itemSelector: '.box',
+      isAnimated: false
+    });
+  });
+
+  $container.infinitescroll({
+    navSelector: '#page-nav',     // ページのナビゲーションを選択 
+    nextSelector: '#page-nav a',  // 次ページへのリンク
+    itemSelector: '.box',         // 持ってくる要素のclass
+    loading: {
+      finishedMsg: 'image was finished.',   // 次のページがない場合に表示するテキスト
+      img: '<%= image_path 'loader.gif' %>' // ローディング画像のパス
+    }
+  },
+  function(newElements) {
+    var $newElems = $(newElements).css({ opacity: 0 });
+    $newElems.imagesLoaded(function() {
+      $newElems.animate({ opacity: 1 });
+      $container.masonry('appended', $newElems, true);
+    });
+  });
+});
