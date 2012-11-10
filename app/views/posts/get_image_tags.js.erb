@@ -26,6 +26,7 @@ var $container = $('#container')
   $container.masonry('reload');
   $container.imagesLoaded(function() {
     $container.masonry('reload');
+    $container.find('img:first').attr('id', 'selected');
   });
 
   $('.box img').live('click', function() {
@@ -39,7 +40,6 @@ var $container = $('#container')
     link.insertBefore('img#selected');
     $(this).appedTo('#link')
     link.removeAttr('id');
-
   });
 
   $('#post_origin_url').attr('value', '<%= @post.origin_url %>');

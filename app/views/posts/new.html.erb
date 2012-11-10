@@ -1,5 +1,8 @@
-<h1>New post</h1>
+<%= render :partial => '/base/header' %>
+<%= render :partial => '/base/menubar' %>
 
+<h2>あたらしくポスト</h2>
 <%= render 'form' %>
 
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path %> |
+<%= link_to 'Home', root_path %>

@@ -43,17 +43,7 @@ class Post < ActiveRecord::Base
   end
 
   def thumb_size_for_style_sheet
-    return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
-    "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
-  end
-
-  def thumb_width
-    Settings.thumb_width
-  end
-
-  def thumb_height
-    return 0 if self.image_master.width.zero? || self.image_master.height.zero? # for 下位互換
-    (self.image_master.height * (self.thumb_width / self.image_master.width.to_f)).floor
+    self.image_master.thumb_size_for_style_sheet
   end
 
   def create_html_only_images
@@ -130,7 +120,11 @@ class Post < ActiveRecord::Base
   end
 
   def create_image_tag_by_image_url(url)
-    "<img src=\"#{url}\" style=\"width: 180px\" />"
+    require 'open-uri'
+    require 'image_size'
+    image_size = ImageSize.new(open(url))
+    image_master = ImageMaster.new(url: url, width: image_size.width, height: image_size.height)
+    "<img src=\"#{url}\" style=\"#{image_master.thumb_size_for_style_sheet}\" />"
   end
 
   def available_size_image?(image_size)

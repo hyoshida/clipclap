@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+<%= render :partial => '/base/header' %>
+<%= render :partial => '/base/menubar' %>
 
 <h2><%= @post.title || @post.created_at.to_s %></h2>
 <%= link_to image_tag(@post.url, style: 'max-width: 640px; max-height: 480px;'), @post.url %>
@@ -27,7 +28,6 @@
   <dt>ユーザ:</dt>
   <dd><%= @post.user.nick_name %>
 </dl>
-
 
 <% if user_signed_in? && @post.user_id == current_user.id %>
   <%= link_to 'Destroy', @post, confirm: 'Are you sure?', method: :delete %> |
