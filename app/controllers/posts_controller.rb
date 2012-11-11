@@ -66,6 +66,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.includes(:user, :image_master, :tags).find(params[:id])
+    @post.increment_view_count!(request)
 
     respond_to do |format|
       format.html # show.html.erb

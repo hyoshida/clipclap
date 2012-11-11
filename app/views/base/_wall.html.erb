@@ -3,7 +3,7 @@
 <div id="container">
   <ul>
     <% @posts.each do |post| %>
-      <li id="post_<%= post.id.to_s %>" class="box">
+      <li id="post_<%= post.id %>" class="box">
         <div class="image_box">
           <%= link_to image_tag(post.url, alt: post.title, style: post.thumb_size_for_style_sheet), post %>
           <div class="status">

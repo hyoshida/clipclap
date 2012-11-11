@@ -21,6 +21,14 @@ class Post < ActiveRecord::Base
 
   self.per_page = Settings.page
 
+  def increment_view_count!(request = nil)
+    return false if self.last_access_ip == request.remote_ip
+    self.update_attributes(
+      view_count: self.view_count + 1,
+      last_access_ip: request.remote_ip
+    )
+  end
+
   def tags_maximum?
     self.tags.count >= Settings.maximum_tag_count
   end

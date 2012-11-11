@@ -48,13 +48,15 @@ ActiveRecord::Schema.define(:version => 20121107170407) do
   add_index "likes", ["user_id", "post_id"], :name => "likes_idx_01", :unique => true
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",         :null => false
-    t.integer  "image_master_id", :null => false
+    t.integer  "user_id",                        :null => false
+    t.integer  "image_master_id",                :null => false
     t.string   "title"
-    t.string   "origin_url",      :null => false
+    t.string   "origin_url",                     :null => false
     t.text     "origin_html"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "view_count",      :default => 0
+    t.string   "last_access_ip"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "rails_admin_histories", :force => true do |t|
