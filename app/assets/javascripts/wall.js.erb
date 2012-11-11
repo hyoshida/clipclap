@@ -27,4 +27,48 @@ $(function() {
       $container.masonry('appended', $newElems, true);
     });
   });
+
+  var $detail = $('#detail_dialog')
+  $detail.dialog({
+    autoOpen: false,
+    closeOnEscape: true,
+    modal: true,
+    resizable: false,
+    draggable: false,
+  });
+  $('.box a img').live('click', function() {
+    $preview_link = $('<a/>');
+    $preview_link.attr('href', $(this).parent().attr('href'));
+
+    $preview_image = $('<img/>');
+    $preview_image.attr('src', $(this).attr('src'));
+    $preview_image.attr('style', $(this).attr('style'));
+
+    var screen = getScreenSize();
+    var img_width = screen['width'] - 300;
+    var img_height = (img_width / $(this).width()) * $(this).height();
+    if (screen['height'] <= img_height) {
+      img_height = screen['height'] - 200;
+      img_width = (img_height / $(this).height()) * $(this).width();
+    }
+    $preview_image.css({ width: img_width, height: img_height });
+    $detail.dialog({ width: img_width + 30 });
+
+    $preview_link.append($preview_image);
+    $('#preview').html($preview_link);
+
+    $detail.dialog('open');
+    return false;
+  });
+});
+
+function getScreenSize() {
+  return {
+    width: window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || document.body.clientWidth,
+    height: window.innerHeight || (document.documentElement && document.documentElement.clientHeight) || document.body.clientHeight
+  };
+}
+
+$(document).on("click", ".ui-widget-overlay", function() {
+  $(this).prev().find(".ui-dialog-content").dialog("close");
 });

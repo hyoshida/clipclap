@@ -33,3 +33,7 @@
     <%= link_to 'next', page: @posts.next_page if @posts.respond_to?(:next_page) && @posts.next_page.present? %>
   </div>
 </div>
+
+<div id="detail_dialog">
+  <div id="preview">&nbsp;</div>
+</div>
