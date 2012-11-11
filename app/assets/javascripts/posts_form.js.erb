@@ -17,9 +17,9 @@ $(function() {
   });
   var $image = $('#selected')
   $image.live('click', function() {
-    $preview_image = $('<img/>')
-    $preview_image.attr('src', $(this).attr('src'))
-    $preview_image.attr('style', $(this).attr('style'))
+    $preview_image = $('<img/>');
+    $preview_image.attr('src', $(this).attr('src'));
+    $preview_image.attr('style', $(this).attr('style'));
     $('#preview').html($preview_image);
     $post_field.dialog('open');
   });
