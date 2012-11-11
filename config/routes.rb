@@ -1,12 +1,11 @@
 Postclip::Application.routes.draw do
+  get "ranking/views"
+  get "ranking/likes"
+
   devise_for :admin_users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  get "tags/show"
-
   devise_for :users
-
-  get "home/index"
 
   resources :posts, except: [ :edit, :update ] do
     member do
@@ -23,8 +22,10 @@ Postclip::Application.routes.draw do
   end
 
   get "tags/index"
+  get "tags/show"
   match 'tags/:name/show' => 'tags#show'
 
+  get "home/index"
   root :to => "home#index"
 
   # The priority is based upon order of creation:

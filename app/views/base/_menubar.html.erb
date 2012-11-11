@@ -7,6 +7,9 @@
     <li><%= link_to 'ポスト一覧', controller: :posts %></li>
     <li><%= link_to 'タグ一覧', controller: :tags %></li>
 
+    <li><%= link_to '閲覧数ランキング', controller: :ranking, action: :views %></li>
+    <li><%= link_to 'イイネ！ランキング', controller: :ranking, action: :likes %></li>
+
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
     <% end %>

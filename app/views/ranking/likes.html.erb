@@ -1,0 +1,13 @@
+<%= render :partial => '/base/header' %>
+<%= render :partial => '/base/menubar' %>
+
+<h2>イイネ！ランキング</h2>
+<% if @posts.present? %>
+  <%= render :partial => '/base/wall' %>
+<% else %>
+  <div>ポストが存在しません</div>
+<% end %>
+
+<div id="footer">
+  <%= link_to 'Home', root_path %>
+</div>
