@@ -3,6 +3,7 @@ $(function() {
 
   $container.css({ opacity: 0 });
   $container.imagesLoaded(function() {
+    $container.css({ visibility: 'visible' });
     $container.animate({ opacity: 1 });
     $container.masonry({
       itemSelector: '.box',

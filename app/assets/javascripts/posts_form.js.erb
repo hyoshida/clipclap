@@ -28,5 +28,6 @@ $(function() {
     $('#page-nav').remove();
     $container.removeAttr('style');
     $container.html('<%= image_tag 'loader.gif' %>');
+    $container.css({ visibility: 'visible' });
   });
 });
