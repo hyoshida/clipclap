@@ -1,5 +1,4 @@
-<%= render :partial => '/base/header' %>
-<%= render :partial => '/base/menubar' %>
+<%= render :partial => 'menu' %>
 
 <h2>イイネ！ランキング</h2>
 <% if @posts.present? %>
@@ -7,7 +6,3 @@
 <% else %>
   <div>ポストが存在しません</div>
 <% end %>
-
-<div id="footer">
-  <%= link_to 'Home', root_path %>
-</div>

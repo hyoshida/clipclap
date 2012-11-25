@@ -10,19 +10,21 @@
             <p class="tag">
             <% if post.tags.count.nonzero? %>
               <span>#<%= "#{post.tags.last.shortname}" %></span>
+            <% else %>
+              <span>タグなし</span>
             <% end %>
             </p>
             <p class="like">
             <% if user_signed_in? && current_user.unlike?(post) %>
-              <%= link_to "イイネ！(#{post.like_count})", like_post_path(:id => post), :remote => true %>
+              <%= like_to post %>
             <% else %>
-              <span>イイネ！(<%= post.like_count %>) <%= link_to '×', unlike_post_path(:id => post), :remote => true if user_signed_in? %></span>
+              <%= unlike_to post %>
             <% end %>
             </p>
           </div>
         </div>
         <% if post.title.present? %>
-          <p class="title"><%= post.title %></p>
+          <p class="title"><%= link_to post.title, post %></p>
         <% end %>
       </li>
     <% end %>

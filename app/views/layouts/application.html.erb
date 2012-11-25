@@ -8,10 +8,32 @@
 </head>
 <body>
 
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
+<%= render :partial => '/base/header' %>
+
+<div id="main">
+  <div id="leftContainer">
+    <ul>
+      <li><%= link_to 'ユーザー', user_session_path, class: 'icon-user' %></li>
+      <li><%= link_to 'ポスト一覧', posts_path, class: 'icon-th-list' %></li>
+    </ul>
+    <ul>
+      <li><%= link_to '検索', root_path, class: 'icon-search' %></li>
+      <li><%= link_to 'タグ', tags_index_path, class: 'icon-tags' %></li>
+      <li><%= link_to 'ランキング', ranking_views_path, class: 'icon-signal' %></li>
+    </ul>
+    &nbsp;
+  </div><!-- /leftContainer -->
+
+  <div id="mainContainer">
+    <p id="notice"><%= notice %></p>
+    <p id="alert"><%= alert %></p>
 
 <%= yield %>
+
+  </div><!-- /mainContainer -->
+</div><!-- /main -->
+
+<%= render :partial => '/base/footer' %>
 
 </body>
 </html>

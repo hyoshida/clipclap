@@ -208,6 +208,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   devise
+  font-awesome-sass-rails
   hpricot
   i18n_generators
   image_size

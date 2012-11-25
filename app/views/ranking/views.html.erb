@@ -1,5 +1,4 @@
-<%= render :partial => '/base/header' %>
-<%= render :partial => '/base/menubar' %>
+<%= render :partial => 'menu' %>
 
 <h2>閲覧数ランキング</h2>
 
@@ -8,7 +7,3 @@
 <% else %>
   <div>ポストが存在しません</div>
 <% end %>
-
-<div id="footer">
-  <%= link_to 'Home', root_path %>
-</div>
