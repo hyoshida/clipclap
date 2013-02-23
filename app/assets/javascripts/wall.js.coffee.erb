@@ -1,0 +1,82 @@
+hideContainerToImageLoaded = ->
+  $('#container').css({ opacity: 0 }).imagesLoaded( ->
+    @.removeClass('hidden')
+    @.animate({ opacity: 1 })
+    @.masonry({
+      itemSelector: '.box',
+      isAnimated: false
+    })
+  )
+
+prepareInfinitescrollContainer = ->
+  $container = $('#container')
+  $container.infinitescroll(infinitescrollOptions, (newElements) ->
+    $(newElements).css({ opacity: 0 }).imagesLoaded( ->
+      @.animate({ opacity: 1 })
+      $container.masonry('appended', @, true)
+    )
+  )
+
+infinitescrollOptions = ->
+  {
+    navSelector: '#page-nav',     # ページのナビゲーションを選択 
+    nextSelector: '#page-nav a',  # 次ページへのリンク
+    itemSelector: '.box',         # 持ってくる要素のclass
+    loading: {
+      finishedMsg: 'image was finished.',   # 次のページがない場合に表示するテキスト
+      img: '<%= image_path 'loader.gif' %>' # ローディング画像のパス
+    }
+  }
+
+previewDialogOptions = ->
+  {
+    autoOpen: false,
+    closeOnEscape: true,
+    modal: true,
+    resizable: false,
+    draggable: false,
+  }
+
+registerEventForOpenPreviewDialog = ->
+  $('.box a img').on('click', ->
+    $preview_link = $('<a/>')
+    $preview_link.attr('href', $(@).parent().attr('href'))
+
+    $preview_image = $('<img/>')
+    $preview_image.attr('src', $(@).attr('src'))
+    $preview_image.attr('style', $(@).attr('style'))
+
+    screen = getScreenSize()
+    img_width = screen['width'] - 300
+    img_height = (img_width / $(@).width()) * $(@).height()
+    if (screen['height'] <= img_height)
+      img_height = screen['height'] - 200
+      img_width = (img_height / $(@).height()) * $(@).width()
+    $preview_image.css({ width: img_width, height: img_height })
+
+    $preview_link.append($preview_image)
+    $('#preview').html($preview_link)
+
+    $detail = $('#detail_dialog')
+    $detail.dialog($.extend(previewDialogOptions(), { width: img_width + 30 }))
+    $detail.dialog('open')
+    return false
+  )
+
+getScreenSize = ->
+  return {
+    width: window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || document.body.clientWidth,
+    height: window.innerHeight || (document.documentElement && document.documentElement.clientHeight) || document.body.clientHeight
+  }
+
+registerEventForClosePreviewDialog =->
+  $(document).on('click', '.ui-widget-overlay', ->
+    $(@).prev().find('.ui-dialog-content').dialog('close')
+  )
+
+$ ->
+  hideContainerToImageLoaded()
+  prepareInfinitescrollContainer()
+
+  registerEventForOpenPreviewDialog()
+  registerEventForClosePreviewDialog()
