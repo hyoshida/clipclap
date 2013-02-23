@@ -1,6 +1,6 @@
 <%= javascript_include_tag "wall" %>
 
-<div id="container">
+<div id="container" class="hidden">
   <ul>
     <% @posts.each do |post| %>
       <li id="post_<%= post.id %>" class="box">

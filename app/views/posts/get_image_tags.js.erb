@@ -29,7 +29,7 @@ var $container = $('#container')
     $container.find('img:first').attr('id', 'selected');
   });
 
-  $('.box img').live('click', function() {
+  $container.on('click', '.box img', function() {
     $('img#selected').removeAttr('id');
     $(this).attr('id', 'selected');
     var url = $(this).attr('src');
@@ -44,5 +44,3 @@ var $container = $('#container')
 
   $('#post_origin_url').attr('value', '<%= @post.origin_url %>');
 <% end %>
-
-$container.css({ visibility: 'visible' });

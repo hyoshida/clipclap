@@ -3,7 +3,7 @@ $(function() {
 
   $container.css({ opacity: 0 });
   $container.imagesLoaded(function() {
-    $container.css({ visibility: 'visible' });
+    $container.removeClass('hidden');
     $container.animate({ opacity: 1 });
     $container.masonry({
       itemSelector: '.box',
@@ -36,7 +36,7 @@ $(function() {
     resizable: false,
     draggable: false,
   });
-  $('.box a img').live('click', function() {
+  $('.box a img').on('click', function() {
     $preview_link = $('<a/>');
     $preview_link.attr('href', $(this).parent().attr('href'));
 

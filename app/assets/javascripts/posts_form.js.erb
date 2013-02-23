@@ -15,8 +15,8 @@ $(function() {
       }
     }
   });
-  var $image = $('#selected')
-  $image.live('click', function() {
+
+  $container.on('click', '#selected', function() {
     $preview_image = $('<img/>');
     $preview_image.attr('src', $(this).attr('src'));
     $preview_image.attr('style', $(this).attr('style'));
@@ -28,6 +28,5 @@ $(function() {
     $('#page-nav').remove();
     $container.removeAttr('style');
     $container.html('<%= image_tag 'loader.gif' %>');
-    $container.css({ visibility: 'visible' });
   });
 });
