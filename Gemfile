@@ -59,5 +59,7 @@ gem 'will_paginate', '~> 3.0'
 
 
 gem 'yaml_db'
-gem 'rails_admin'
 gem 'i18n_generators'
+
+# YAML まわりでワーニングが出るので最新版を取得
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'

@@ -1,3 +1,23 @@
+GIT
+  remote: git://github.com/sferik/rails_admin.git
+  revision: c817613564ee297134f16d81b24b78d987ed1602
+  specs:
+    rails_admin (0.4.5)
+      bootstrap-sass (~> 2.2)
+      builder (~> 3.0)
+      coffee-rails (~> 3.1)
+      font-awesome-sass-rails (~> 3.0, >= 3.0.0.1)
+      haml (~> 4.0)
+      jquery-rails (~> 2.1)
+      jquery-ui-rails (~> 3.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.3)
+      rack-pjax (~> 0.6)
+      rails (~> 3.1)
+      remotipart (~> 1.0)
+      safe_yaml (~> 0.6)
+      sass-rails (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -129,21 +149,6 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
-    rails_admin (0.4.5)
-      bootstrap-sass (~> 2.2)
-      builder (~> 3.0)
-      coffee-rails (~> 3.1)
-      font-awesome-sass-rails (~> 3.0, >= 3.0.0.1)
-      haml (~> 4.0)
-      jquery-rails (~> 2.1)
-      jquery-ui-rails (~> 3.0)
-      kaminari (~> 0.14)
-      nested_form (~> 0.3)
-      rack-pjax (~> 0.6)
-      rails (~> 3.1)
-      remotipart (~> 1.0)
-      safe_yaml (~> 0.6)
-      sass-rails (~> 3.1)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -217,7 +222,7 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   rails (= 3.2.11)
-  rails_admin
+  rails_admin!
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
   settingslogic
