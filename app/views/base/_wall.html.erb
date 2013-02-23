@@ -1,4 +1,6 @@
-<%= javascript_include_tag "wall" %>
+<% content_for :head do %>
+  <%= javascript_include_tag "wall" %>
+<% end %>
 
 <div id="container" class="hidden">
   <ul>

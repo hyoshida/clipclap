@@ -1,5 +1,7 @@
-<%= javascript_include_tag "wall" %>
-<%= javascript_include_tag "posts_form" %>
+<% content_for :head do %>
+  <%= javascript_include_tag "wall" %>
+  <%= javascript_include_tag "posts_form" %>
+<% end %>
 
 <div id="image_selecter">
   <h3>1. 画像をセレクト</h3>

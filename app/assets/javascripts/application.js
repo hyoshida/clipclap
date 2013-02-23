@@ -13,4 +13,4 @@
 //= require jquery
 //= require jquery.ui.dialog
 //= require jquery_ujs
-//= require_tree .
+//= require_tree ./gallery
