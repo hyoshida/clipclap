@@ -10,7 +10,7 @@ hideContainerToImageLoaded = ->
 
 prepareInfinitescrollContainer = ->
   $container = $('#container')
-  $container.infinitescroll(infinitescrollOptions, (newElements) ->
+  $container.infinitescroll(infinitescrollOptions(), (newElements) ->
     $(newElements).css({ opacity: 0 }).imagesLoaded( ->
       @.animate({ opacity: 1 })
       $container.masonry('appended', @, true)

@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery.ui.dialog
 //= require jquery_ujs
-//= require_tree ./gallery
+//= require masonry/jquery.masonry
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min

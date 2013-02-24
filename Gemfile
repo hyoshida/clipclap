@@ -11,6 +11,7 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+  gem 'factory_girl_rails'
 end
 
 group :production do
@@ -30,7 +31,8 @@ group :assets do
   gem 'font-awesome-sass-rails'
 end
 
-gem 'jquery-rails'
+# 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
+gem 'jquery-rails', '~> 2.1.4'
 gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
@@ -48,18 +50,29 @@ gem 'capistrano'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-
 # To use user authentication
 gem 'devise'
 
+# HTMLをRubyで簡単に扱えるようにする
 gem 'hpricot'
+
+# 画像サイズの取得に利用
 gem 'image_size'
+
+# アプリケーションの設定を保存
 gem 'settingslogic'
+
+# ページングに利用(TODO: kaminariに切り替え)
 gem 'will_paginate', '~> 3.0'
 
-
+# DBデータのインポート/エクスポート
 gem 'yaml_db'
+
+# ローカライズ
 gem 'i18n_generators'
 
-# YAML $B$^$o$j$G%o!<%K%s%0$,=P$k$N$G:G?7HG$r<hF@(B
+# 管理画面(YAMLまわりでワーニングが出るので最新版を取得)
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+
+# ブロック整列, image loaded, infinitescroll
+gem 'masonry-rails'
