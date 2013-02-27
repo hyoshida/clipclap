@@ -1,25 +1,55 @@
 # -*- encoding: utf-8 -*-
 module ApplicationHelper
+  def icon_tag(icon_name, options ={})
+    title = options[:title].try {|p| %{ title="#{p}"} } || ''
+    raw %{<i class="icon-#{icon_name}"#{title}></i>}
+  end
+
+  def icon_heart
+    raw '<i class="icon-heart" title="イイネ！"></i>'
+  end
+
+  def icon_heart_empty
+    raw '<i class="icon-heart-empty" title="イイネ！"></i>'
+  end
+
+  def icon_remove
+    raw '<i class="icon-remove" title="取り消す"></i>'
+  end
+
   def like_text_to(post)
-    raw "<span class=\"icon-heart\">#{post.like_count}</span>"
+    raw icon_heart + post.like_count.to_s
+  end
+
+  def comment_text_to(comment)
+    raw comment.body
   end
 
   def nostyle_like
     raw '<span style="display: none;">イイネ！</span>'
   end
 
-  def nostyle_unlike
+  def nostyle_remove
     raw '<span style="display: none;">×</span>'
   end
 
   def like_to(post)
-    link_to(nostyle_like + post.like_count.to_s, like_post_path(:id => post), class: 'icon-heart', title: 'イイネ！する', remote: true)
+    link_to(icon_heart_empty + nostyle_like + post.like_count.to_s, like_post_path(:id => post), title: 'イイネ！する', remote: true)
   end
 
   def unlike_to(post)
     remove_link = ''
-    remove_link = link_to(nostyle_unlike, unlike_post_path(:id => post), class: 'icon-remove', title: 'イイネ！を取り消す', remote: true) if user_signed_in?
-    nostyle_like + like_text_to(post) + remove_link
+    remove_link = link_to(icon_remove + nostyle_remove, unlike_post_path(:id => post), title: 'イイネ！を取り消す', remote: true) if user_signed_in? 
+    like_text_to(post) + remove_link
+  end
+
+  def comment_to(comment)
+    comment_text_to(comment)
+  end
+
+  def uncomment_to(comment)
+    remove_link = link_to(icon_remove + nostyle_remove, uncomment_post_path(:id => comment.post_id, :comment_id => comment), title: 'コメントを取り消す', remote: true)
+    comment_text_to(comment) + remove_link
   end
 
   def resource_name

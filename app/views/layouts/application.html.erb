@@ -14,27 +14,27 @@
 <div id="main">
   <div id="leftContainer">
     <ul>
-      <li><%= link_to 'ユーザー', user_session_path, class: 'icon-user' %></li>
-      <li><%= link_to 'ポスト一覧', posts_path, class: 'icon-th-list' %></li>
+      <li><%= link_to(user_session_path) { icon_tag('user') + 'ユーザー' } %></li>
+      <li><%= link_to(posts_path) { icon_tag('th-list') + 'ポスト一覧' } %></li>
     </ul>
     <ul>
-      <li><%= link_to '検索', root_path, class: 'icon-search' %></li>
-      <li><%= link_to 'タグ', tags_index_path, class: 'icon-tags' %></li>
-      <li><%= link_to 'ランキング', ranking_views_path, class: 'icon-signal' %></li>
+      <li><%= link_to(root_path) { icon_tag('search') + '検索' } %></li>
+      <li><%= link_to(tags_index_path) { icon_tag('tags') + 'タグ' } %></li>
+      <li><%= link_to(ranking_views_path) { icon_tag('signal') + 'ランキング' } %></li>
     </ul>
     &nbsp;
   </div><!-- /leftContainer -->
 
   <div id="mainContainer">
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
+    <div cass="wrap">
+      <p id="notice"><%= notice %></p>
+      <p id="alert"><%= alert %></p>
 
 <%= yield %>
 
+    </div>
   </div><!-- /mainContainer -->
 </div><!-- /main -->
-
-<%= render :partial => '/base/footer' %>
 
 </body>
 </html>

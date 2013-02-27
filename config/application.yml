@@ -1,11 +1,13 @@
 defaults: &defaults
   page: 50
   ranking_limit: 50
-  thumb_width: 180
+  thumb_width: 240
   html_cache_dir: <%= File.join(Rails.root, 'tmp', 'html_cache') %>
   maximum_tag_count: 10
+  maximum_comment_count: 10
 
 development:
+  page: 25
   <<: *defaults
 
 test:

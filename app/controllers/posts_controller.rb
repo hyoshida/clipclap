@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 class PostsController < ApplicationController
-  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like, :unlike, :tagging, :untagging ]
+  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like, :unlike, :tagging, :untagging, :comment, :uncomment ]
 
   # for Ajax
   def get_image_tags
@@ -51,6 +51,17 @@ class PostsController < ApplicationController
     @tag.destroy
   end
 
+  def comment
+    @comment = Post.where(id: params[:id]).first.comments.create(
+      user_id: current_user.id,
+      body: params[:comment][:body].strip
+    )
+  end
+
+  def uncomment
+    @comment = Comment.where(id: params[:comment_id]).first
+    @comment.destroy
+  end
 
   # GET /posts.json
   def index

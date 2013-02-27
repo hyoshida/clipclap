@@ -79,3 +79,10 @@ gem 'masonry-rails'
 
 # to use Rails 4 like arel
 gem 'everywhere'
+
+# to use Twitter-Boostrap
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
+

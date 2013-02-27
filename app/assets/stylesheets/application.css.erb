@@ -11,6 +11,13 @@
  *= require_self
  *= require jquery.ui.dialog
  *= require _font-awesome
+ *= #require 'masonry/basic'
+ *= require 'masonry/centered'
+ *= require 'masonry/fluid'
+ *= require 'masonry/gutters'
+ *= require 'masonry/infinitescroll'
+ *= require 'masonry/right-to-left'
+ *= require 'masonry/transitions'
  *= require_tree .
 */
 
@@ -27,33 +34,48 @@
   clear: both;
 }
 
+.icon-remove {
+  color: #ccc;
+}
+
+form {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+input {
+  margin: 7px 5px !important;
+}
+
 
 
 /* header */
 body, #header * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif !important;
 }
 
 #header {
   top: 0;
   left: 0;
   right: 0;
-  position: fixed;
   z-index: 300;
   min-width: 980px;
   height: 40px;
-  background: #333;
   /* box-shadow: 0 2px 4px #999; */
+  background-color: #fb0;
+  border-bottom: 1px solid #d48423;
+  position: relative;
 }
 
 #header a {
-  color: #FFF;
+  color: #000;
 }
 
 #header a:hover {
   color: #000;
-  background-color: #DDD;
+  background-color: transparent;
 }
 
 #headerBar {
@@ -83,6 +105,10 @@ body, #header * {
   line-height: 40px;
   padding: 0 20px;
   text-decoration: none;
+}
+
+#signup a {
+  color: #fff;
 }
 
 #menu {
@@ -168,16 +194,15 @@ body, #header * {
 
 /* main */
 #main {
-  position: relative;
-  top: 40px;
-  margin: 0 auto;
-  width: 980px;
+  width: 100%;
+  min-width: 480px;
+  background: #333;
 }
 
 #leftContainer {
   float: left;
   padding: 15px 0;
-  width: 120px;
+  width: 130px;
   position: absolute;
   position: fixed;
   top: 40px;
@@ -194,10 +219,12 @@ body, #header * {
 #leftContainer ul li a {
   display: block;
   padding-left: 20px;
-  width: 100px;
+  width: 110px;
   height: 40px;
   line-height: 40px;
   text-align: left;
+  color: #867c6d !important;
+  font-weight: bold;
 }
 
 #leftContainer ul li a, #leftContainer ul li a:visited {
@@ -208,6 +235,7 @@ body, #header * {
 #leftContainer ul li a:hover {
   color: #fff;
   background-color: #666;
+  background-color: #000;
 }
 
 #leftContainer ul li a[class^="icon-"]:before, #leftContainer ul li a[class*=" icon-"]:before {
@@ -215,12 +243,18 @@ body, #header * {
 }
 
 #mainContainer {
-  float: right;
-  width: 838px;
-  padding: 0 10px;
+  margin-left: 130px;
+  padding: 5px 10px;
   border-right: 1px solid #ccc;
   border-left: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  background-color: #eee;
+}
+
+#mainContainer .wrap {
+  float: right;
+  /* width: 838px; */
+  width: 100%;
 }
 
 
@@ -238,21 +272,25 @@ body, #header * {
 
 li.box {
   display: block;
-  float: left;
-  width: <%= Settings.thumb_width + 5 %>px;
+  width: <%= Settings.thumb_width %>px;
   margin: 2px;
-  padding: 9px;
   padding-bottom: 0;
+  padding: 9px;
+  padding: 0;
   list-style-type: none;
-  border: 1px solid #aaa;
-  background: #eee;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 li.box .title {
   position: relative;
   top: -5px;
   margin: 0;
-  padding: 4px 0;
+  padding: 4px 10px;
 
   display: block;
   width: <%= Settings.thumb_width %>px;
@@ -275,18 +313,19 @@ li.box .title a:hover {
 
 li.box img {
   display: block;
-  border: 1px solid #ccc;
   background: #fff;
   margin-bottom: 10px;
   vertical-align: bottom;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 li.box a img, li.box a:visited img {
-  border: 2px solid #666;
+  border: 0;
 }
 
 li.box a:hover img {
-  border: 2px solid #666;
+  border: 0;
 }
 
 li.box a {
@@ -303,6 +342,45 @@ li.box .image_box {
 }
 
 
+li.box ul.comments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  border-bottom: 1px solid #ddd;
+}
+
+li.box ul.comments li {
+  padding: 10px;
+  background-color: #eed;
+  background-color: transparent;
+  border-top: 1px solid #ddd;
+}
+
+li.box ul.comments li:nth-child(even) {
+  background-color: #f4f4e4;
+  background-color: transparent;
+}
+
+li.box .comment_feild form {
+  background-color: #eee;
+  background-color: #eed;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+/* info bar */
+.info {
+  padding: 0 10px;
+}
+
+.info p {
+  display: inline-block;
+  margin-right: 5px;
+}
+
 
 /* status bar */
 .image_box {
@@ -312,7 +390,7 @@ li.box .image_box {
 .image_box .status {
   display: block;
   height: 18px;
-  padding: 6px 10px;
+  padding: 6px 8px;
   position: absolute;
   left: 0;
   bottom: 0;
