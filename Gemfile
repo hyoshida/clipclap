@@ -76,3 +76,6 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 # ブロック整列, image loaded, infinitescroll
 gem 'masonry-rails'
+
+# to use Rails 4 like arel
+gem 'everywhere'

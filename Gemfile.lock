@@ -75,6 +75,8 @@ GEM
     domain_name (0.5.7)
       unf (~> 0.0.3)
     erubis (2.7.0)
+    everywhere (2.0.0)
+      activerecord
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -221,6 +223,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   devise
+  everywhere
   factory_girl_rails
   font-awesome-sass-rails
   hpricot
