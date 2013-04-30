@@ -65,11 +65,17 @@ class PostsController < ApplicationController
 
   # GET /posts.json
   def index
-    @posts = Post.includes(:user, :image_master, :likes, :tags).all
+    # @posts = Post.includes(:user, :image_master, :likes, :tags).all
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.json { render json: @posts }
+    # end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+    @posts = Post.paginate(page: params[:page])
+    if first_page?
+      render
+    else
+      render 'home/next_page'
     end
   end
 

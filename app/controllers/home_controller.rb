@@ -7,10 +7,4 @@ class HomeController < ApplicationController
       render action: 'next_page'
     end
   end
-
-  private
-
-  def first_page?
-    params[:page].blank? || params[:page].to_i <= 1
-  end
 end
