@@ -22,7 +22,7 @@ class RankingController < ApplicationController
     Post
       .where.not(view_count: 0)
       .includes(:user, :image_master, :likes, :tags)
-      .order('view_count DESC')
+      .reorder('view_count DESC, created_at DESC')
       .limit(Settings.ranking_limit)
       .all
   end
