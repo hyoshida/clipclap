@@ -82,7 +82,25 @@ class Post < ActiveRecord::Base
     return [ self.origin_url ] if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
     doc = Hpricot(self.origin_html)
     # TODO: alt をそいでいる・・
-    (doc/:img).map {|img| uri_absolute_path(img.attributes['src']) }.uniq
+    (doc/:img).map {|img| BetterImageGetter.new(uri_absolute_path(img.attributes['src'])).exec }.uniq
+  end
+
+  class BetterImageGetter
+    def initialize(url)
+      @uri = URI.parse(url)
+      @service = @uri.host
+    end
+
+    def exec
+      case @service
+      when /pixiv\.net/
+        p @uri.to_s.sub(/_87ms\.jpg/, '_240mw.jpg')
+        @uri.to_s.sub(/_87ms\.jpg/, '_240mw.jpg')
+      else
+        p @uri.host
+        @uri.to_s
+      end
+    end
   end
 
   def pickup_image_url_from_html
