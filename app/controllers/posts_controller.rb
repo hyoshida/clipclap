@@ -78,6 +78,7 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
+    @url = params[:url] if params[:url]
 
     respond_to do |format|
       format.html # new.html.erb
