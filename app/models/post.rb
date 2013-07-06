@@ -41,11 +41,13 @@ class Post < ActiveRecord::Base
 
   def create_image_master
     return if @url.nil?
-    return unless ImageMaster.where(url: @url).nil?
-    require 'open-uri'
-    require 'image_size'
-    image_size = ImageSize.new(open(@url))
-    image_master = ImageMaster.create(url: @url, width: image_size.width, height: image_size.height)
+    image_master = ImageMaster.where(url: @url).first
+    if image_master.nil?
+      require 'open-uri'
+      require 'image_size'
+      image_size = ImageSize.new(open(@url))
+      image_master = ImageMaster.create(url: @url, width: image_size.width, height: image_size.height)
+    end
     self.image_master_id = image_master.id
   end
 
