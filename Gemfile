@@ -23,9 +23,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
 
-  gem 'uglifier', '>= 1.0.3'
   gem 'font-awesome-sass-rails'
 
   # ブロック整列, image loaded, infinitescroll
@@ -43,6 +41,10 @@ end
 # 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
 gem 'jquery-rails', '~> 2.1.4'
 gem 'jquery-ui-rails'
+
+# Support CoffeeScript
+gem 'coffee-rails'
+gem 'uglifier'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
