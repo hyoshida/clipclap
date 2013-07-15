@@ -63,7 +63,7 @@ gem 'image_size'
 gem 'settingslogic'
 
 # ページングに利用(TODO: kaminariに切り替え)
-gem 'will_paginate', '~> 3.0'
+gem 'will_paginate', '~> 3.0.3'
 
 # DBデータのインポート/エクスポート
 gem 'yaml_db'
