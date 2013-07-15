@@ -14,6 +14,9 @@ role :web, '49.212.160.224'                          # Your HTTP server, Apache/
 role :app, '49.212.160.224'                          # This may be the same as your `Web` server
 role :db,  '49.212.160.224', :primary => true # This is where Rails migrations will run
 
+require 'capistrano-rbenv'
+set :rbenv_ruby_version, '2.0.0-p0'
+
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
