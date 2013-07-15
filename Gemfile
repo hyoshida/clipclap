@@ -79,3 +79,6 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 # to use Rails 4 like arel
 gem 'everywhere'
+
+# Facebookでログイン
+gem 'omniauth-facebook'

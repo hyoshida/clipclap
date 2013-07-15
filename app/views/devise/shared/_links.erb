@@ -16,8 +16,8 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <li><%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %></li>
+  <%- resource.class.omniauth_providers.each do |provider| %>
+    <li><%= link_to "#{provider.to_s.titleize}でログイン", omniauth_authorize_path(resource_name, provider) %></li>
   <% end -%>
 <% end -%>
 </ul>

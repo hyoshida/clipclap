@@ -5,7 +5,7 @@ Postclip::Application.routes.draw do
   devise_for :admin_users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :user, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :posts, except: [ :edit, :update ] do
     member do
