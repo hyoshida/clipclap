@@ -10,10 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require bootstrap
 //= require jquery
 //= require jquery.ui.dialog
 //= require jquery_ujs
+//= require bootstrap
+//= require bootstrap-tooltip
+//= require bootstrap-popover
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
