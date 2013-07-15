@@ -36,5 +36,6 @@ class RankingController < ApplicationController
       .map {|image_master| image_master.posts.sort_by {|post| [ -post.likes.count, -post.created_at.to_i ] }.first }
       .uniq
       .slice(0..Settings.ranking_limit)
+      .compact
   end
 end
