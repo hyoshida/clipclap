@@ -36,6 +36,7 @@ group :assets do
 
   gem 'compass-rails'
   gem 'compass-colors'
+  gem 'zurui-sass-rails'
 end
 
 # 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
