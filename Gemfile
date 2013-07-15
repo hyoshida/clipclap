@@ -24,11 +24,18 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
   gem 'uglifier', '>= 1.0.3'
   gem 'font-awesome-sass-rails'
+
+  # ブロック整列, image loaded, infinitescroll
+  gem 'masonry-rails'
+
+  # to use Twitter-Boostrap
+  gem 'therubyracer'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
+
+  gem 'compass-rails'
+  gem 'compass-colors'
 end
 
 # 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
@@ -74,15 +81,5 @@ gem 'i18n_generators'
 # 管理画面(YAMLまわりでワーニングが出るので最新版を取得)
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
-# ブロック整列, image loaded, infinitescroll
-gem 'masonry-rails'
-
 # to use Rails 4 like arel
 gem 'everywhere'
-
-# to use Twitter-Boostrap
-gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-
-

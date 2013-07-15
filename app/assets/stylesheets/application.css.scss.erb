@@ -1,25 +1,30 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require jquery.ui.dialog
- *= require _font-awesome
- *= #require 'masonry/basic'
- *= require 'masonry/centered'
- *= require 'masonry/fluid'
- *= require 'masonry/gutters'
- *= require 'masonry/infinitescroll'
- *= require 'masonry/right-to-left'
- *= require 'masonry/transitions'
- *= require_tree .
-*/
+//
+// This is a manifest file that'll be compiled into application.css, which will include all the files
+// listed below.
+//
+// Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+// or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+//
+// You're free to add application-wide styles to this file and they'll appear at the top of the
+// compiled file, but it's generally better to create a new file per style scope.
+//
+//= require_self
+//= require jquery.ui.dialog
+//= #require 'masonry/basic'
+//= require 'masonry/centered'
+//= require 'masonry/fluid'
+//= require 'masonry/gutters'
+//= require 'masonry/infinitescroll'
+//= require 'masonry/right-to-left'
+//= require 'masonry/transitions'
+//= require_tree .
+//= require 'posts.css.scss'
+//
+
+@import "bootstrap";
+@import 'font-awesome';
+@import "compass/utilities";
+@import "compass/css3";
 
 /* commons */
 .lfloat { 
@@ -38,6 +43,12 @@
   color: #ccc;
 }
 
+html,
+body {
+  font-family: sans-serif !important;
+  background-color: #333;
+}
+
 form {
   margin: 0 !important;
   padding: 0 !important;
@@ -47,36 +58,44 @@ input {
   margin: 7px 5px !important;
 }
 
+h1 {
+  font-weight: bold !important;
+}
 
 
 /* header */
-body, #header * {
+body,
+#header * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif !important;
 }
 
 #header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 300;
   min-width: 980px;
   height: 40px;
   /* box-shadow: 0 2px 4px #999; */
   background-color: #fb0;
-  border-bottom: 1px solid #d48423;
   position: relative;
+  @include background-image(linear-gradient(top, #fa0, #f90));
+  border-bottom: 2px solid #d48423;
 }
 
 #header a {
   color: #000;
+  background-color: transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  &:hover {
+    background-color: #fa0;
+    border-left: 1px solid #e80;
+    border-right: 1px solid #e80;
+    @include background-image(linear-gradient(top, #fa0, #f70));
+  }
 }
 
-#header a:hover {
-  color: #000;
-  background-color: transparent;
-}
 
 #headerBar {
   margin: 0 auto;
@@ -86,6 +105,8 @@ body, #header * {
   border-left: 1px solid #666;
   border-right: 1px solid #666;
   */
+  position: relative;
+  z-index: 99;
 }
 
 #logo {
@@ -96,7 +117,12 @@ body, #header * {
   width: 80px;
   text-align: center;
   text-decoration: none;
-  font-size: large;
+  font-size: 100%;
+  &:hover {
+    background: transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
 }
 
 #logo a, #menu li a, #signin a, #signup a {
@@ -105,6 +131,14 @@ body, #header * {
   line-height: 40px;
   padding: 0 20px;
   text-decoration: none;
+}
+
+#menu li a:hover {
+  color: #fff;
+}
+
+#signin a:hover {
+  color: #fff;
 }
 
 #signup a {
@@ -129,11 +163,18 @@ body, #header * {
   font-weight: bold;
   text-align: right;
   background: #a30;
+  font-size: 90%;
+  @include background-image(linear-gradient(top, #c40, #a30));
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
 }
 
 #signup a:hover {
   color: #fff;
   background: #e30;
+  @include background-image(linear-gradient(top, #f40, #e30));
+  border-left: 1px solid #d20;
+  border-right: 1px solid #d20;
 }
 
 #account_from {
@@ -196,17 +237,25 @@ body, #header * {
 #main {
   width: 100%;
   min-width: 480px;
-  background: #333;
+  min-height: 300px;
+  background-color: #333;
+  @include background-image(linear-gradient(top, #f90, #e70));
+  font-size: 75%;
 }
 
 #leftContainer {
   float: left;
   padding: 15px 0;
-  width: 130px;
+  width: 65px;
+  min-height: 100%;
+  font-size: 150%;
   position: absolute;
   position: fixed;
   top: 40px;
+  @include background-image(linear-gradient(top, #ddd, #eee));
+  @include background-image(linear-gradient(top, #f4f4f4, #e4e4e4));
   /* background-color: #ddd; */
+  border-top: 2px solid #d48423;
 }
 
 #leftContainer ul {
@@ -219,11 +268,12 @@ body, #header * {
 #leftContainer ul li a {
   display: block;
   padding-left: 20px;
-  width: 110px;
+  width: 45px;
   height: 40px;
   line-height: 40px;
   text-align: left;
   color: #867c6d !important;
+  color: #789 !important;
   font-weight: bold;
 }
 
@@ -236,6 +286,7 @@ body, #header * {
   color: #fff;
   background-color: #666;
   background-color: #000;
+  background-color: #d0d0d0;
 }
 
 #leftContainer ul li a[class^="icon-"]:before, #leftContainer ul li a[class*=" icon-"]:before {
@@ -243,12 +294,14 @@ body, #header * {
 }
 
 #mainContainer {
-  margin-left: 130px;
+  margin-left: 65px;
   padding: 5px 10px;
+  min-height: 100%;
   border-right: 1px solid #ccc;
   border-left: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   background-color: #eee;
+  background-color: #fff;
 }
 
 #mainContainer .wrap {
@@ -260,7 +313,11 @@ body, #header * {
 
 
 /* container */
+#container {
+}
+
 .hidden {
+  display: none !important;
   visibility: hidden;
 }
 
@@ -273,13 +330,14 @@ body, #header * {
 li.box {
   display: block;
   width: <%= Settings.thumb_width %>px;
-  margin: 2px;
+  margin: 4px;
   padding-bottom: 0;
   padding: 9px;
   padding: 0;
   list-style-type: none;
   background-color: #fff;
   border: 1px solid #ccc;
+  border: 1px solid #aaa;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -348,7 +406,18 @@ li.box ul.comments {
   padding: 0;
   word-break: break-all;
   word-wrap: break-word;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ccc;
+  color: #ccc;
+  color: #8e8276;
+  background-color: #333;
+  @include background-image(linear-gradient(top, #e3d9cd, #f8ebde));
+  @include background-image(linear-gradient(top, #f1e8db, #fff8f2));
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+li.box ul.comments.signed_in {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 li.box ul.comments li {
@@ -356,6 +425,12 @@ li.box ul.comments li {
   background-color: #eed;
   background-color: transparent;
   border-top: 1px solid #ddd;
+  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
+}
+
+li.box ul.comments li:first-child {
+  border-top: none;
 }
 
 li.box ul.comments li:nth-child(even) {
@@ -364,8 +439,11 @@ li.box ul.comments li:nth-child(even) {
 }
 
 li.box .comment_feild form {
+  border-top: 1px solid #ccc;
   background-color: #eee;
   background-color: #eed;
+  background-color: #e1daca;
+  background-color: #f1e8db;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -379,6 +457,8 @@ li.box .comment_feild form {
 .info p {
   display: inline-block;
   margin-right: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 
