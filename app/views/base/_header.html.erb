@@ -8,8 +8,8 @@
     <div id="menu" class="lfloat">
       <ul>
         <% if user_signed_in? %>
-          <li><%= link_to 'あたらしくポスト', controller: :posts, action: :new %></li>
-          <li><%= link_to 'お気に入り', root_path %></li>
+          <li><%= link_to(new_post_path, title: 'あたらしくポスト') { icon_tag('plus') } %></li>
+          <li><%= link_to(root_path, title: 'お気に入り') { icon_tag('heart') } %></li>
         <% end %>
         <% if false %>
         <li><%= link_to '閲覧数ランキング', controller: :ranking, action: :views %></li>
@@ -27,12 +27,12 @@
     <% if controller_name != 'sessions' %>
       <div id="signin" class="rfloat">
         <% if user_signed_in? %>
-          <a href="#">ようこそ！ <%= current_user.nick_name %> さん</a>
+          <%= link_to(root_path, title: "ようこそ！ #{current_user.nick_name} さん") { icon_tag('cog') } %>
           <div id="account_from">
             <p><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></p>
           </div>
         <% else %>
-          <%= link_to 'ログイン', user_session_path %>
+          <%= link_to(user_session_path, title: 'ログイン') { icon_tag('signin') } %>
           <div id="account_from">
             <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
               <dl>

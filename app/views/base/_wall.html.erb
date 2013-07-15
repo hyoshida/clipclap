@@ -66,8 +66,8 @@
         </div>
 
         <div class="comment_feild">
-          <ul class="comments">
           <% if post.comments.count.nonzero? %>
+          <ul class="comments<%= ' signed_in' if user_signed_in? %>">
           <% post.comments.limit(Settings.maximum_comment_count).each do |comment| %>
             <% if user_signed_in? && current_user.id == comment.user_id %>
               <li id="comment_<%= comment.id %>"><%= uncomment_to comment %></li>
@@ -75,8 +75,8 @@
               <li id="comment_<%= comment.id %>"><%= comment_to comment %></li>
             <% end %>
           <% end %>
-          <% end %>
           </ul>
+          <% end %>
 
           <% if user_signed_in? %>
           <%= form_for Comment.new, :url => { controller: :posts, action: :comment, id: post.id }, :remote => true, :html => { :id => "comment_form_#{post.id}" } do |form| %>

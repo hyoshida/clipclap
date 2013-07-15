@@ -14,13 +14,13 @@
 <div id="main">
   <div id="leftContainer">
     <ul>
-      <li><%= link_to(user_session_path) { icon_tag('user') + 'ユーザー' } %></li>
-      <li><%= link_to(posts_path) { icon_tag('th-list') + 'ポスト一覧' } %></li>
+      <li><%= link_to(user_session_path, title: 'ユーザー') { icon_tag('user') } %></li>
+      <li><%= link_to(posts_path, title: 'ポスト一覧') { icon_tag('th-list')  } %></li>
     </ul>
     <ul>
-      <li><%= link_to(root_path) { icon_tag('search') + '検索' } %></li>
-      <li><%= link_to(tags_index_path) { icon_tag('tags') + 'タグ' } %></li>
-      <li><%= link_to(ranking_views_path) { icon_tag('signal') + 'ランキング' } %></li>
+      <li><%= link_to(root_path, title: '検索') { icon_tag('search') } %></li>
+      <li><%= link_to(tags_index_path, title: 'タグ') { icon_tag('tags') } %></li>
+      <li><%= link_to(ranking_views_path, title: 'ランキング') { icon_tag('signal') } %></li>
     </ul>
     &nbsp;
   </div><!-- /leftContainer -->
