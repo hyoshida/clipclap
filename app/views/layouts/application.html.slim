@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Postclip
+    title Clipclap
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     == yield :head
@@ -14,7 +14,7 @@ html
     #leftContainer
       ul
         li = link_to(user_session_path, title: 'ユーザー') { icon_tag('user') }
-        li = link_to(posts_path, title: 'ポスト一覧') { icon_tag('th-list')  }
+        li = link_to(clips_path, title: 'クリップ一覧') { icon_tag('th-list')  }
       ul
         li = link_to(root_path, title: '検索') { icon_tag('search') }
         li = link_to(tags_index_path, title: 'タグ') { icon_tag('tags') }

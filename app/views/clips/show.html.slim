@@ -1,0 +1,40 @@
+h2 = @clip.title || @clip.created_at.to_s
+= link_to image_tag(@clip.url, style: 'max-width: 640px; max-height: 480px;'), @clip.url
+
+h3 タグ一覧
+ul#tags
+  - @clip.tags.each do |tag|
+    li id="tag_#{tag.id}"
+      = link_to tag.name, controller: :tags, action: :show, name: tag.name
+      = link_to '[×]', untagging_clip_path(tag_id: tag.id), remote: true if user_signed_in? && tag.user_id == current_user.id
+
+- if user_signed_in? && !@clip.tags_maximum?
+  = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
+    = f.text_field :name
+    = f.submit 'タグ追加'
+
+h3 その他の情報
+div id="clip_#{@clip.id}"
+  .like
+    - if user_signed_in? && current_user.unlike?(@clip)
+      = link_to "イイネ！(#{@clip.like_count})", like_clip_path(id: @clip), remote: true
+    - else
+      span イイネ！(#{@clip.like_count}) #{link_to '×', unlike_clip_path(id: @clip), remote: true if user_signed_in?}
+
+  dl
+    dt 元のURL:
+    dd = link_to @clip.origin_url, @clip.origin_url
+
+    dt ユーザ:
+    dd = @clip.user.nick_name
+
+    dt 閲覧数:
+    dd = @clip.view_count
+
+- if user_signed_in? && @clip.user_id == current_user.id
+  = link_to 'Destroy', @clip, confirm: 'Are you sure?', method: :delete
+  span |
+
+= link_to 'Back', clips_path
+span |
+= link_to 'Home', root_path

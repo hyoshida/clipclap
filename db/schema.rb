@@ -28,8 +28,20 @@ ActiveRecord::Schema.define(:version => 20130715021335) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
 
+  create_table "clips", :force => true do |t|
+    t.integer  "user_id",                        :null => false
+    t.integer  "image_master_id",                :null => false
+    t.string   "title"
+    t.string   "origin_url",                     :null => false
+    t.text     "origin_html"
+    t.integer  "view_count",      :default => 0
+    t.string   "last_access_ip"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "comments", :force => true do |t|
-    t.integer  "post_id"
+    t.integer  "clip_id"
     t.integer  "user_id"
     t.text     "body",       :null => false
     t.datetime "created_at", :null => false
@@ -47,25 +59,13 @@ ActiveRecord::Schema.define(:version => 20130715021335) do
 
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "clip_id"
     t.integer  "image_master_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "likes", ["user_id", "post_id"], :name => "likes_idx_01", :unique => true
-
-  create_table "posts", :force => true do |t|
-    t.integer  "user_id",                        :null => false
-    t.integer  "image_master_id",                :null => false
-    t.string   "title"
-    t.string   "origin_url",                     :null => false
-    t.text     "origin_html"
-    t.integer  "view_count",      :default => 0
-    t.string   "last_access_ip"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
+  add_index "likes", ["user_id", "clip_id"], :name => "likes_idx_01", :unique => true
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -81,14 +81,14 @@ ActiveRecord::Schema.define(:version => 20130715021335) do
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "tags", :force => true do |t|
-    t.integer  "post_id"
+    t.integer  "clip_id"
     t.integer  "user_id"
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "tags", ["post_id", "name"], :name => "tags_idx_01", :unique => true
+  add_index "tags", ["clip_id", "name"], :name => "tags_idx_01", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

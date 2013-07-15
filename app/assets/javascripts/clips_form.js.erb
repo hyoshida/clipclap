@@ -1,8 +1,8 @@
 $(function() {
-  var $post_field = $('#post_dialog')
+  var $clip_field = $('#clip_dialog')
   var $container = $('#container');
 
-  $post_field.dialog({
+  $clip_field.dialog({
     autoOpen: false,
     title: '投稿ダイアログ',
     closeOnEscape: true,
@@ -21,7 +21,7 @@ $(function() {
     $preview_image.attr('src', $(this).attr('src'));
     $preview_image.attr('style', $(this).attr('style'));
     $('#preview').html($preview_image);
-    $post_field.dialog('open');
+    $clip_field.dialog('open');
   });
 
   $('#load').click(function() {

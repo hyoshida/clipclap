@@ -12,7 +12,7 @@ preload_app true
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 60
 
-application = 'postclip'
+application = 'clipclap'
 shared_path = "/home/yoshida/public_html/#{application}/shared"
 
 # Production specific settings
@@ -23,7 +23,7 @@ if ENV['RAILS_ENV'] == 'production'
   # we use a shorter backlog for quicker failover when busy
   #listen 80, :backlog => 1024
   #listen 4422, :tcp_nopush => true
-  listen '/tmp/postclip_unicorn.socket', :backlog => 1024
+  listen '/tmp/clipclap_unicorn.socket', :backlog => 1024
 
   # Help ensure your application will always spawn in the symlinked
   # "current" directory that Capistrano sets up.

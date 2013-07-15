@@ -17,7 +17,7 @@ ja:
       admin_user: 管理者
       image_master: 画像マスタ
       like: イイネ
-      post: ポスト
+      clip: クリップ
       tag: タグ
 
     attributes:
@@ -40,7 +40,7 @@ ja:
         sign_out: ログアウト
         current_password: 現在のパスワード
         likes: likes  #g
-        posts: posts  #g
+        clips: clips  #g
         tags: tags  #g
 
       admin_user:
@@ -49,17 +49,17 @@ ja:
       image_master:
         delete_ordered_at: delete_ordered_at  #g
         likes: likes  #g
-        posts: posts  #g
+        clips: clips  #g
         url: URL
         width: 幅
         height: 高さ
 
       like:
         image_master: :activerecord.models.image_master  #g
-        post: :activerecord.models.post  #g
+        clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
 
-      post:
+      clip:
         image_master: :activerecord.models.image_master  #g
         likes: likes  #g
         origin_html: origin_html  #g
@@ -70,5 +70,5 @@ ja:
 
       tag:
         name: タグ名
-        post: :activerecord.models.post  #g
+        clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g

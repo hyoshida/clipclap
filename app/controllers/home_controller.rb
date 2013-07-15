@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.paginate(page: params[:page])
+    @clips = Clip.paginate(page: params[:page])
     if first_page?
       render
     else

@@ -1,6 +1,6 @@
-class CreatePosts < ActiveRecord::Migration
+class CreateClips < ActiveRecord::Migration
   def change
-    create_table :posts do |t|
+    create_table :clips do |t|
       t.integer :user_id, null: false
       t.integer :image_master_id, null: false
       t.string :title

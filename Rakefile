@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Postclip::Application.load_tasks
+Clipclap::Application.load_tasks

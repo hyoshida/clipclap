@@ -17,8 +17,8 @@ module ApplicationHelper
     raw '<i class="icon-remove" title="取り消す"></i>'
   end
 
-  def like_text_to(post)
-    raw icon_heart + post.like_count.to_s
+  def like_text_to(clip)
+    raw icon_heart + clip.like_count.to_s
   end
 
   def comment_text_to(comment)
@@ -33,14 +33,14 @@ module ApplicationHelper
     raw '<span style="display: none;">×</span>'
   end
 
-  def like_to(post)
-    link_to(icon_heart_empty + nostyle_like + post.like_count.to_s, like_post_path(:id => post), title: 'イイネ！する', remote: true)
+  def like_to(clip)
+    link_to(icon_heart_empty + nostyle_like + clip.like_count.to_s, like_clip_path(:id => clip), title: 'イイネ！する', remote: true)
   end
 
-  def unlike_to(post)
+  def unlike_to(clip)
     remove_link = ''
-    remove_link = link_to(icon_remove + nostyle_remove, unlike_post_path(:id => post), title: 'イイネ！を取り消す', remote: true) if user_signed_in? 
-    like_text_to(post) + remove_link
+    remove_link = link_to(icon_remove + nostyle_remove, unlike_clip_path(:id => clip), title: 'イイネ！を取り消す', remote: true) if user_signed_in? 
+    like_text_to(clip) + remove_link
   end
 
   def comment_to(comment)
@@ -48,7 +48,7 @@ module ApplicationHelper
   end
 
   def uncomment_to(comment)
-    remove_link = link_to(icon_remove + nostyle_remove, uncomment_post_path(:id => comment.post_id, :comment_id => comment), title: 'コメントを取り消す', remote: true)
+    remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(:id => comment.clip_id, :comment_id => comment), title: 'コメントを取り消す', remote: true)
     comment_text_to(comment) + remove_link
   end
 

@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
-set :application, 'postclip'
-set :repository,  'git@49.212.160.224:postclip.git'
+set :application, 'clipclap'
+set :repository,  'git@49.212.160.224:clipclap.git'
 set :deploy_to, "/home/yoshida/public_html/#{application}"
 set :rails_env, 'production'
 set :user, 'yoshida'

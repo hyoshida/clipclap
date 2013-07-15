@@ -1,12 +1,12 @@
 #header
   #headerBar
     #logo.lfloat
-      h1 = link_to 'Postclip', root_path
+      h1 = link_to 'Clipclap', root_path
 
     #menu.lfloat
       ul
         - if user_signed_in?
-          li = link_to(new_post_path, title: 'あたらしくポスト') { icon_tag('plus') }
+          li = link_to(new_clip_path, title: 'あたらしくクリップ') { icon_tag('plus') }
           li = link_to(root_path, title: 'お気に入り') { icon_tag('heart') }
         - if false
           li = link_to '閲覧数ランキング', controller: :ranking, action: :views

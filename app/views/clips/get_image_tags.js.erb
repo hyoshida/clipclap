@@ -1,7 +1,7 @@
 var $container = $('#container')
 
-<% if @post.error_info.present? %>
-  $container.html('<%= @post.error_info %>');
+<% if @clip.error_info.present? %>
+  $container.html('<%= @clip.error_info %>');
   //$container.removeAttr('style');
 <% else %>
   $container.html('&nbsp;');
@@ -14,7 +14,7 @@ var $container = $('#container')
 
   var urls = [];
   // <div />で囲まないと、body 直下の img が取得できない
-  var html = '<div><%= raw @html.gsub("'", '"').presence || (@post.url && image_tag(@post.url)) || '' %></div>';
+  var html = '<div><%= raw @html.gsub("'", '"').presence || (@clip.url && image_tag(@clip.url)) || '' %></div>';
 
   $(html).find('img').each(function() {
     var box = $('<div id="active_box" class="box" />');
@@ -33,7 +33,7 @@ var $container = $('#container')
     $('img#selected').removeAttr('id');
     $(this).attr('id', 'selected');
     var url = $(this).attr('src');
-    $('#post_url').attr('value', url);
+    $('#clip_url').attr('value', url);
     var link = $('<a/>');
     link.attr('src', url);
     link.attr('id', 'link');
@@ -42,5 +42,5 @@ var $container = $('#container')
     link.removeAttr('id');
   });
 
-  $('#post_origin_url').attr('value', '<%= @post.origin_url %>');
+  $('#clip_origin_url').attr('value', '<%= @clip.origin_url %>');
 <% end %>

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 class User < ActiveRecord::Base
-  has_many :posts
+  has_many :clips
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
 
@@ -45,23 +45,23 @@ class User < ActiveRecord::Base
     self.name.presence || self.email
   end
 
-  def like?(post)
-    Like.where(user_id: self.id, post_id: post.id).count.nonzero?
+  def like?(clip)
+    Like.where(user_id: self.id, clip_id: clip.id).count.nonzero?
   end
 
-  def unlike?(post)
-    not like?(post)
+  def unlike?(clip)
+    not like?(clip)
   end
 
-  def like(post)
+  def like(clip)
     Like.create(
       user_id: self.id,
-      post_id: post.id,
-      image_master_id: post.image_master_id
+      clip_id: clip.id,
+      image_master_id: clip.image_master_id
     )
   end
 
-  def unlike(post)
-    Like.where(user_id: self.id, post_id: post.id).first.destroy
+  def unlike(clip)
+    Like.where(user_id: self.id, clip_id: clip.id).first.destroy
   end
 end

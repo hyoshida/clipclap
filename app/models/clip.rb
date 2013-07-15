@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-class Post < ActiveRecord::Base
+class Clip < ActiveRecord::Base
   belongs_to :user
   belongs_to :image_master
   has_many :likes, :dependent => :destroy
@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
 
   def like_count
     # TODO: キャッシュすべき
-    Like.where(post_id: self.id).count
+    Like.where(clip_id: self.id).count
   end
 
   def create_image_master

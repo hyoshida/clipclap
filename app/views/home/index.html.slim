@@ -1,7 +1,7 @@
-h1 Welcoma to Postclip!
+h1 Welcoma to Clipclap!
 
-h2 最近のポスト一覧
-- if @posts.present?
+h2 最近のクリップ一覧
+- if @clips.present?
   == render partial: '/base/wall'
 - else
-  p ポストが存在しません
+  p クリップが存在しません

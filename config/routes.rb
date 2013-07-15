@@ -1,4 +1,4 @@
-Postclip::Application.routes.draw do
+Clipclap::Application.routes.draw do
   get "ranking/views"
   get "ranking/likes"
 
@@ -7,7 +7,7 @@ Postclip::Application.routes.draw do
 
   devise_for :user, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :posts, except: [ :edit, :update ] do
+  resources :clips, except: [ :edit, :update ] do
     member do
       get "like"
       get "unlike"

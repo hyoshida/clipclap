@@ -11,7 +11,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @posts = Post
+    @clips = Clip
       .joins(:tags)
       .where('tags.name = ?', params[:name])
       .includes(:image_master, :likes)

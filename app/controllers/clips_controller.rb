@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-class PostsController < ApplicationController
+class ClipsController < ApplicationController
   before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like, :unlike, :tagging, :untagging, :comment, :uncomment ]
 
   # for Ajax
@@ -8,15 +8,15 @@ class PostsController < ApplicationController
     require 'hpricot'
     html = ''
     if params[:page].blank? || params[:page].to_i <= 1
-      @post = Post.new(params[:post])
-      @post.fill_origin_entry
-      html = @post.create_html_only_images
+      @clip = Clip.new(params[:clip])
+      @clip.fill_origin_entry
+      html = @clip.create_html_only_images
       create_html_cahce_file(html)
     else
       html = load_html_cahce_file
     end
     doc = Hpricot(html)
-    @page = (doc/:img).paginate(page: params[:page], per_page: Post.per_page)
+    @page = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
     if params[:page].blank? || params[:page].to_i <= 1
       @html = @page.join
       render
@@ -27,23 +27,23 @@ class PostsController < ApplicationController
   end
 
   def like
-    @post = Post.where(id: params[:id]).first
-    current_user.like(@post) unless @post.nil?
+    @clip = Clip.where(id: params[:id]).first
+    current_user.like(@clip) unless @clip.nil?
   end
 
   def unlike
-    @post = Post.where(id: params[:id]).first
-    current_user.unlike(@post) unless @post.nil?
+    @clip = Clip.where(id: params[:id]).first
+    current_user.unlike(@clip) unless @clip.nil?
   end
 
   def tagging
-    post = Post.where(id: params[:id]).first
-    return if post.tags_maximum?
+    clip = Clip.where(id: params[:id]).first
+    return if clip.tags_maximum?
     attributes = {
       name: params[:tag][:name].strip,
       user_id: current_user.id
     }
-    @tag = post.tags.create(attributes)
+    @tag = clip.tags.create(attributes)
   end
 
   def untagging
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   end
 
   def comment
-    @comment = Post.where(id: params[:id]).first.comments.create(
+    @comment = Clip.where(id: params[:id]).first.comments.create(
       user_id: current_user.id,
       body: params[:comment][:body].strip
     )
@@ -63,15 +63,15 @@ class PostsController < ApplicationController
     @comment.destroy
   end
 
-  # GET /posts.json
+  # GET /clips.json
   def index
-    # @posts = Post.includes(:user, :image_master, :likes, :tags).all
+    # @clips = Clip.includes(:user, :image_master, :likes, :tags).all
     # respond_to do |format|
     #   format.html # index.html.erb
-    #   format.json { render json: @posts }
+    #   format.json { render json: @clips }
     # end
 
-    @posts = Post.paginate(page: params[:page])
+    @clips = Clip.paginate(page: params[:page])
     if first_page?
       render
     else
@@ -79,79 +79,79 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+  # GET /clips/1
+  # GET /clips/1.json
   def show
-    @post = Post.includes(:user, :image_master, :tags).find(params[:id])
-    @post.increment_view_count!(request)
+    @clip = Clip.includes(:user, :image_master, :tags).find(params[:id])
+    @clip.increment_view_count!(request)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @post }
+      format.json { render json: @clip }
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
+  # GET /clips/new
+  # GET /clips/new.json
   def new
-    @post = Post.new
+    @clip = Clip.new
     @url = params[:url] if params[:url]
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @post }
+      format.json { render json: @clip }
     end
   end
 
-  # GET /posts/1/edit
+  # GET /clips/1/edit
   def edit
-    @post = Post.find(params[:id])
+    @clip = Clip.find(params[:id])
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST /clips
+  # POST /clips.json
  def create
-    post_attr = { user_id: current_user.id }
-    @post = Post.new(post_attr.merge(params[:post]))
+    clip_attr = { user_id: current_user.id }
+    @clip = Clip.new(clip_attr.merge(params[:clip]))
 
-    exist_image_flag = ImageMaster.where(url: params[:post][:url]).first.present?
+    exist_image_flag = ImageMaster.where(url: params[:clip][:url]).first.present?
 
     respond_to do |format|
-      if !exist_image_flag && @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
+      if !exist_image_flag && @clip.save
+        format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
+        format.json { render json: @clip, status: :created, location: @clip }
       else
         flash.now[:alert] = 'This image was existed.' if exist_image_flag
         format.html { render action: :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @clip.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.json
+  # PUT /clips/1
+  # PUT /clips/1.json
   def update
-    @post = Post.find(params[:id])
+    @clip = Clip.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+      if @clip.update_attributes(params[:clip])
+        format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @clip.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+  # DELETE /clips/1
+  # DELETE /clips/1.json
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    @clip = Clip.find(params[:id])
+    @clip.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to clips_url }
       format.json { head :no_content }
     end
   end
@@ -161,13 +161,13 @@ class PostsController < ApplicationController
   def owner_user_operation?
     return if user_signed_in?
     flash.now[:alert] = 'この操作を実施する権限がありません'
-    redirect_to posts_url
+    redirect_to clips_url
   end
 
   def logged_in?
     return if user_signed_in?
     flash.now[:alert] = 'この操作にはログインが必要です'
-    redirect_to posts_url
+    redirect_to clips_url
   end
 
   def insert_div_tag_for_image_tag

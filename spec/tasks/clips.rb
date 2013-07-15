@@ -11,7 +11,7 @@ FactoryGirl.define do
     http://www.ebookjapan.jp/ebj/
   )
 
-  factory :dummy_post, class: Post do
+  factory :dummy_clip, class: Clip do
     user_id 1
     title ''
     origin_html nil

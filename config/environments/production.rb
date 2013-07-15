@@ -1,4 +1,4 @@
-Postclip::Application.configure do
+Clipclap::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -50,7 +50,7 @@ Postclip::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w( wall.js posts_form.js )
+  config.assets.precompile += %w( wall.js clips_form.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -70,5 +70,5 @@ Postclip::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # added by yoshida 2012-11-11
-  config.action_controller.relative_url_root = "/postclip"
+  config.action_controller.relative_url_root = "/clipclap"
 end
