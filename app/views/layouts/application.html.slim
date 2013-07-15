@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title Postclip
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    == yield :head
+    = csrf_meta_tags
+
+  body
+    == render partial: '/base/header'
+
+  #main
+    #leftContainer
+      ul
+        li = link_to(user_session_path, title: 'ユーザー') { icon_tag('user') }
+        li = link_to(posts_path, title: 'ポスト一覧') { icon_tag('th-list')  }
+      ul
+        li = link_to(root_path, title: '検索') { icon_tag('search') }
+        li = link_to(tags_index_path, title: 'タグ') { icon_tag('tags') }
+        li = link_to(ranking_views_path, title: 'ランキング') { icon_tag('signal') }
+
+    #mainContainer
+      p#notice = notice
+      p#alert = alert
+      == yield

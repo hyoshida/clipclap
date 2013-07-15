@@ -1,0 +1,41 @@
+- content_for :head do
+  = javascript_include_tag "wall"
+  = javascript_include_tag "posts_form"
+  = javascript_include_tag "dnd"
+  = javascript_include_tag "bookmarklet"
+
+#image_selecter
+  h3 1. 画像をセレクト
+  = form_for @post, url: { action: :get_image_tags }, remote: true, html: { id: 'load_form' } do |f|
+    p 画像のあるページのURLを入力してください。
+    = f.text_field :origin_url, id: 'loading_url', value: @url
+    = f.submit 'ロード', id: 'load'
+
+  #container
+
+  #page-nav
+    = link_to 'next', controller: :posts, action: :get_image_tags, page: 2
+
+#post_dialog
+  = form_for(@post) do |f|
+    - if @post.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+
+        ul
+          - @post.errors.full_messages.each do |msg|
+            li = msg
+
+    #preview
+
+    h3 2. タイトルを入力（任意）
+    #field
+      = f.label :title
+      br
+      = f.text_field :title
+      = f.hidden_field :url
+      = f.hidden_field :origin_url
+
+    h3 3. 投稿！
+    .actions
+      = f.submit

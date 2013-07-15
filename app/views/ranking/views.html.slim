@@ -1,0 +1,8 @@
+== render partial: 'menu'
+
+h2 閲覧数ランキング
+
+- if @posts.present?
+  == render partial: '/base/wall'
+- else
+  p ポストが存在しません

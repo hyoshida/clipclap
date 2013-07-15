@@ -1,0 +1,73 @@
+- content_for :head do
+  = javascript_include_tag "wall"
+
+#detail_dialog
+  #preview
+
+#container.hidden
+  ul
+    - @posts.each do |post|
+      li.box id="post_#{post.id}"
+        .image_box
+          = link_to image_tag(post.url, alt: post.title, style: post.thumb_size_for_style_sheet), post
+          .status
+            p.tag
+              - if post.tags.count.nonzero?
+                span = "##{post.tags.last.shortname}"
+              - else
+                span タグなし
+            p.like
+              - if user_signed_in? && current_user.unlike?(post)
+                = like_to post
+              - else
+                = unlike_to post
+
+        - if post.title.present?
+          p.title = link_to post.title, post
+
+        .info
+          - if post.likes.count.nonzero?
+            p.like
+              - if user_signed_in? && current_user.unlike?(post)
+                = like_to post
+              - else
+                = unlike_to post
+
+          - if post.image_master.likes.count.nonzero?
+            p.we_like
+              i.icon-group title="みんなのイイネ！"
+              = post.image_master.likes.count
+
+          - if false
+            - if post.comments.present?
+              p.comment_count
+                i.icon-comment-alt title="コメント数"
+                = post.comments.size
+
+          - reclip_count = Post.where(image_master_id: post.image_master_id).count
+          - if reclip_count.nonzero?
+            p.reclip_count
+              i.icon-paper-clip title="リクリップ数"
+              = reclip_count
+
+          - if post.view_count.nonzero?
+            p.view_count
+              i.icon-eye-open title="閲覧数"
+              = post.view_count
+
+        .comment_feild
+          - if post.comments.count.nonzero?
+            ul class="comments#{' signed_in' if user_signed_in?}"
+              - post.comments.limit(Settings.maximum_comment_count).each do |comment|
+                - if user_signed_in? && current_user.id == comment.user_id
+                    li id="comment_#{comment.id}" = uncomment_to comment
+                - else
+                    li id="comment_#{comment.id}" = comment_to comment
+
+          - if user_signed_in?
+            = form_for Comment.new, url: { controller: :posts, action: :comment, id: post.id }, remote: true, html: { id: "comment_form_#{post.id}" } do |form|
+              = form.text_field :body, placeholder: 'コメントする'
+              = form.submit 'ポスト', class: 'hidden btn'
+
+  #page-nav
+    = link_to 'next', page: @posts.next_page if @posts.respond_to?(:next_page) && @posts.next_page.present?

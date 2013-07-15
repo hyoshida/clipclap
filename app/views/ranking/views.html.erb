@@ -1,9 +1,0 @@
-<%= render :partial => 'menu' %>
-
-<h2>閲覧数ランキング</h2>
-
-<% if @posts.present? %>
-  <%= render :partial => '/base/wall' %>
-<% else %>
-  <div>ポストが存在しません</div>
-<% end %>

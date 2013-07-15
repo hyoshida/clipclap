@@ -1,0 +1,7 @@
+== render partial: 'menu'
+
+h2 イイネ！ランキング
+- if @posts.present?
+  == render partial: '/base/wall'
+- else
+  p ポストが存在しません

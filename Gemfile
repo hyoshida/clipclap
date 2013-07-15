@@ -82,3 +82,6 @@ gem 'everywhere'
 
 # Facebookでログイン
 gem 'omniauth-facebook'
+
+# RailsのViewにSlimを利用
+gem "slim-rails"

@@ -1,6 +1,0 @@
-<h2>「<%= params[:name] %>」タグがつけられたポスト一覧</h2>
-<% if @posts.present? %>
-  <%= render :partial => '/base/wall' %>
-<% else %>
-  <div>ポストが存在しません</div>
-<% end %>

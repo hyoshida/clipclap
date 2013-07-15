@@ -1,0 +1,40 @@
+h2 = @post.title || @post.created_at.to_s
+= link_to image_tag(@post.url, style: 'max-width: 640px; max-height: 480px;'), @post.url
+
+h3 タグ一覧
+ul#tags
+  - @post.tags.each do |tag|
+    li id="tag_#{tag.id}"
+      = link_to tag.name, controller: :tags, action: :show, name: tag.name
+      = link_to '[×]', untagging_post_path(tag_id: tag.id), remote: true if user_signed_in? && tag.user_id == current_user.id
+
+- if user_signed_in? && !@post.tags_maximum?
+  = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
+    = f.text_field :name
+    = f.submit 'タグ追加'
+
+h3 その他の情報
+div id="post_#{@post.id}"
+  .like
+    - if user_signed_in? && current_user.unlike?(@post)
+      = link_to "イイネ！(#{@post.like_count})", like_post_path(id: @post), remote: true
+    - else
+      span イイネ！(#{@post.like_count}) #{link_to '×', unlike_post_path(id: @post), remote: true if user_signed_in?}
+
+  dl
+    dt 元のURL:
+    dd = link_to @post.origin_url, @post.origin_url
+
+    dt ユーザ:
+    dd = @post.user.nick_name
+
+    dt 閲覧数:
+    dd = @post.view_count
+
+- if user_signed_in? && @post.user_id == current_user.id
+  = link_to 'Destroy', @post, confirm: 'Are you sure?', method: :delete
+  span |
+
+= link_to 'Back', posts_path
+span |
+= link_to 'Home', root_path
