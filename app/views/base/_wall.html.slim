@@ -56,16 +56,14 @@
               = clip.view_count
 
         .comment_feild
-          - if clip.comments.count.nonzero?
-            ul class="comments#{' signed_in' if user_signed_in?}"
-              - clip.comments.limit(Settings.maximum_comment_count).each do |comment|
-                - if user_signed_in? && current_user.id == comment.user_id
-                    li id="comment_#{comment.id}" = uncomment_to comment
-                - else
-                    li id="comment_#{comment.id}" = comment_to comment
+          ul class="comments#{' signed_in' if user_signed_in?}"
+            - clip.comments.limit(Settings.maximum_comment_count).each do |comment|
+              li id="comment_#{comment.id}"
+                = render partial: '/base/comment', locals: { comment: comment }
 
           - if user_signed_in?
             = form_for Comment.new, url: { controller: :clips, action: :comment, id: clip.id }, remote: true, html: { id: "comment_form_#{clip.id}" } do |form|
+              p.avater = image_tag avatar_url(current_user)
               = form.text_field :body, placeholder: 'コメントする'
               = form.submit 'クリップ', class: 'hidden btn'
 

@@ -1,0 +1,6 @@
+p.avater = image_tag avatar_url(comment.user)
+- if user_signed_in? && current_user.id == comment.user_id
+  p.body = uncomment_to comment
+- else
+  p.body = comment_to comment
+p.time = "#{time_ago_in_words comment.created_at}前"

@@ -147,6 +147,23 @@ body,
   text-align: right;
 }
 
+#signin .profile {
+  a {
+    font-weight: normal;
+  }
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  span.avater {
+    vertical-align: top;
+    img {
+      margin: 4px 0;
+    }
+  }
+}
+
 #signup a {
   font-weight: bold;
   text-align: right;
@@ -358,34 +375,28 @@ li.box .title a:hover {
   background: none;
 }
 
-li.box img {
+li.box .image_box {
+  display: block;
+  width: <%= Settings.thumb_width %>px;
+}
+
+li.box .image_box a {
+  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
+  &:hover {
+    background: #000;
+  }
+  & img, &:visited img, &:hover img {
+    border: 0;
+  }
+}
+
+li.box .image_box a img {
   display: block;
   background: #fff;
   margin-bottom: 10px;
   vertical-align: bottom;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-}
-
-li.box a img, li.box a:visited img {
-  border: 0;
-}
-
-li.box a:hover img {
-  border: 0;
-}
-
-li.box a {
-  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
-}
-
-li.box a:hover {
-  background: #000;
-}
-
-li.box .image_box {
-  display: block;
-  width: <%= Settings.thumb_width %>px;
 }
 
 
@@ -395,8 +406,7 @@ li.box ul.comments {
   padding: 0;
   word-break: break-all;
   word-wrap: break-word;
-  @include zurui-line-top(0.1, 1.0);
-  color: #666;
+  color: #444;
   background-color: #fafafa;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -407,7 +417,7 @@ li.box ul.comments {
 }
 
 li.box ul.comments li {
-  padding: 10px;
+  padding: 5px;
   background-color: transparent;
   @include zurui-line-top(0.1, 1.0);
   position: relative;
@@ -426,15 +436,6 @@ li.box ul.comments li {
   }
 }
 
-li.box ul.comments li:first-child {
-  border-top: none;
-}
-
-li.box ul.comments li:nth-child(even) {
-  background-color: #f4f4e4;
-  background-color: transparent;
-}
-
 li.box ul.comments li a:hover {
   i.icon-remove {
     color: #fff;
@@ -443,11 +444,46 @@ li.box ul.comments li a:hover {
   }
 }
 
+.avater img {
+  @include border-radius(4px);
+}
+
+li.box ul.comments li p {
+  display: block;
+  padding: 5px;
+
+  &.avater {
+    clear: both;
+    float: left;
+    padding-top: 3px;
+    padding-right: 10px;
+  }
+  &.body {
+    padding: 5px 0;
+  }
+  &.time {
+    color: #aaa;
+    padding: 0 0 5px;
+  }
+}
+
 li.box .comment_feild form {
-  @include zurui-line-top(.25, 1.0);
+  @include zurui-line-top(0.1, 1.0);
   background-color: #fafafa;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+
+  p.avater {
+    clear: both;
+    float: left;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 3px;
+  }
+
+  input {
+    width: 165px;
+  }
 }
 
 

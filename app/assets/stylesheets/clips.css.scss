@@ -2,11 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.box img#selected {
+#image_selecter .box img#selected {
   border: 5px solid #666666;
 }
 
-.box img {
+#image_selecter .box img {
   border: 5px solid transparent;
 }
 

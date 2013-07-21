@@ -10,7 +10,7 @@ $('.alert').html(errors)
 <% else %>
 comment = $('<li/>')
 comment.attr('id', 'comment_<%= @comment.id %>')
-comment.html('<%= uncomment_to @comment %>')
+comment.append("<%= escape_javascript render(partial: '/base/comment', locals: { comment: @comment }) %>")
 $('#clip_<%= @comment.clip_id %> ul.comments').append(comment)
 $('#clip_<%= @comment.clip_id %> input').attr('value', '')
 $('#container').masonry('reload')

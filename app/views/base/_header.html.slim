@@ -19,7 +19,10 @@
     - if controller_name != 'sessions'
       #signin.rfloat
         - if user_signed_in?
-          p = link_to(root_path, title: "ようこそ！ #{current_user.nick_name} さん") { icon_tag('cog') }
+          p.profile = link_to(root_path, title: "ようこそ！ #{current_user.nick_name} さん") do
+            span.avater = image_tag avatar_url(current_user)
+            span.name = current_user.nick_name
+            span.arrow = icon_tag('angle-down')
           #account_from
             p = link_to 'ログアウト', destroy_user_session_path, method: :delete
         - else
