@@ -26,6 +26,12 @@
           p.title = link_to clip.title, clip
 
         .info
+          - reclip_count = Clip.where(image_master_id: clip.image_master_id).count - 1
+          - if reclip_count.nonzero?
+            p.reclip_count
+              i.icon-paper-clip title="リクリップ数"
+              = reclip_count
+
           - if clip.likes.count.nonzero?
             p.like
               - if user_signed_in? && current_user.unlike?(clip)
@@ -33,27 +39,20 @@
               - else
                 = unlike_to clip
 
-          - if clip.image_master.likes.count.nonzero?
+          - if false && clip.image_master.likes.count.nonzero?
             p.we_like
               i.icon-group title="みんなのイイネ！"
               = clip.image_master.likes.count
-
-          - if false
-            - if clip.comments.present?
-              p.comment_count
-                i.icon-comment-alt title="コメント数"
-                = clip.comments.size
-
-          - reclip_count = Clip.where(image_master_id: clip.image_master_id).count
-          - if reclip_count.nonzero?
-            p.reclip_count
-              i.icon-paper-clip title="リクリップ数"
-              = reclip_count
 
           - if clip.view_count.nonzero?
             p.view_count
               i.icon-eye-open title="閲覧数"
               = clip.view_count
+
+          - if clip.comments.present?
+            p.comment_count
+              i.icon-comment-alt title="コメント数"
+              = clip.comments.size
 
         .comment_feild
           ul class="comments#{' signed_in' if user_signed_in?}"
