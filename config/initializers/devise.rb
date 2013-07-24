@@ -205,7 +205,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require 'omniauth-facebook'
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
+  # production環境にSSLが用意でき次第、下記行をコメントアウト
+  #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE unless Rails.env.production?
   config.omniauth :facebook, '520109864725351', 'd56427de565d1fbc5d7f2268063c4a30'
 
   # ==> Warden configuration
