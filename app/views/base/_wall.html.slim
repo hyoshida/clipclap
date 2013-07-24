@@ -12,7 +12,7 @@
           = link_to image_tag(clip.url, alt: clip.title, style: clip.thumb_size_for_style_sheet), clip
           .status
             p.tag
-              - if clip.tags.count.nonzero?
+              - if clip.tags.any?
                 span = "##{clip.tags.last.shortname}"
               - else
                 span タグなし
@@ -32,31 +32,31 @@
               i.icon-paper-clip title="リクリップ数"
               = reclip_count
 
-          - if clip.likes.count.nonzero?
+          - if clip.likes.any?
             p.like
               - if user_signed_in? && current_user.unlike?(clip)
                 = like_to clip
               - else
                 = unlike_to clip
 
-          - if false && clip.image_master.likes.count.nonzero?
+          - if false && clip.image_master.likes.any?
             p.we_like
               i.icon-group title="みんなのイイネ！"
-              = clip.image_master.likes.count
+              = clip.image_master.likes.size
 
           - if clip.view_count.nonzero?
             p.view_count
               i.icon-eye-open title="閲覧数"
               = clip.view_count
 
-          - if clip.comments.present?
+          - if clip.comments.any?
             p.comment_count
               i.icon-comment-alt title="コメント数"
               = clip.comments.size
 
         .comment_feild
           ul class="comments#{' signed_in' if user_signed_in?}"
-            - clip.comments.limit(Settings.maximum_comment_count).each do |comment|
+            - clip.comments.take(Settings.maximum_comment_count).each do |comment|
               li id="comment_#{comment.id}"
                 = render partial: '/base/comment', locals: { comment: comment }
 

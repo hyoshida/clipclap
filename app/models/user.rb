@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def like?(clip)
-    Like.where(user_id: self.id, clip_id: clip.id).count.nonzero?
+    self.likes.exists?(clip_id: clip.id)
   end
 
   def unlike?(clip)
@@ -68,14 +68,13 @@ class User < ActiveRecord::Base
   end
 
   def like(clip)
-    Like.create(
-      user_id: self.id,
+    self.likes.create(
       clip_id: clip.id,
       image_master_id: clip.image_master_id
     )
   end
 
   def unlike(clip)
-    Like.where(user_id: self.id, clip_id: clip.id).first.destroy
+    self.likes.where(clip_id: clip.id).first.destroy
   end
 end

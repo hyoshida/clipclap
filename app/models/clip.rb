@@ -31,12 +31,11 @@ class Clip < ActiveRecord::Base
   end
 
   def tags_maximum?
-    self.tags.count >= Settings.maximum_tag_count
+    self.tags.size >= Settings.maximum_tag_count
   end
 
   def like_count
-    # TODO: キャッシュすべき
-    Like.where(clip_id: self.id).count
+    self.likes.size
   end
 
   def create_image_master
