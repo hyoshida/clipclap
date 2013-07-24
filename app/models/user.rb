@@ -19,7 +19,14 @@ class User < ActiveRecord::Base
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = self.where(provider: auth.provider, uid: auth.uid).first
-    user ||= self.create_with_auth(auth)
+    user ||= self.create_or_update_with_auth(auth)
+    user
+  end
+
+  def self.create_or_update_with_auth(auth)
+    user = self.where(email: auth.info.email).first
+    return self.create_with_auth(auth) if user.nil?
+    user.update_with_auth(auth)
     user
   end
 
@@ -30,6 +37,13 @@ class User < ActiveRecord::Base
       uid: auth.uid,
       email: auth.info.email,
       password: Devise.friendly_token[0, 20]
+    )
+  end
+
+  def update_with_auth(auth)
+    self.update_attributes(
+      provider: auth.provider,
+      uid: auth.uid
     )
   end
 
