@@ -51,12 +51,24 @@ body {
 }
 
 form {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 input {
-  margin: 7px 5px !important;
+  margin: 7px 5px;
+  &[type="radio"], &[type="checkbox"] {
+    margin: 7px 5px;
+  }
+}
+
+label {
+  display: inline;
+  margin: 7px 5px;
+}
+
+.input-small {
+  width: 110px;
 }
 
 h1 {
@@ -65,8 +77,7 @@ h1 {
 
 
 /* header */
-body,
-#header * {
+body {
   margin: 0;
   padding: 0;
 }
@@ -83,17 +94,40 @@ body,
   z-index: 99;
 }
 
+@mixin hilight_menu_item {
+  background-color: #fa0;
+  border-left: 1px solid #e80;
+  border-right: 1px solid #e80;
+  @include background-image(linear-gradient(top, #fa0, #f70));
+}
+
 #header a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  text-decoration: none;
+
   color: #fff;
   background-color: transparent;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
-  &:hover {
-    background-color: #fa0;
-    border-left: 1px solid #e80;
-    border-right: 1px solid #e80;
-    @include background-image(linear-gradient(top, #fa0, #f70));
+  &:hover, &:focus {
+    @include hilight_menu_item;
   }
+}
+
+.dropdown.open a.dropdown-toggle {
+  @include hilight_menu_item;
+}
+
+.navbar .dropdown-menu {
+}
+
+.navbar .pull-right .dropdown-menu {
+  left: auto;
+  right: 0px;
+  margin-top: 3px !important;
 }
 
 #headerBar {
@@ -113,26 +147,6 @@ body,
   }
 }
 
-#logo a, #menu li a, #signin a, #signup a {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 20px;
-  text-decoration: none;
-}
-
-#menu li a:hover {
-  color: #fff;
-}
-
-#signin a:hover {
-  color: #fff;
-}
-
-#signup a {
-  color: #fff;
-}
-
 #menu {
   margin-left: 10px;
 }
@@ -143,7 +157,6 @@ body,
 }
 
 #signin a {
-  font-weight: bold;
   text-align: right;
 }
 
@@ -168,7 +181,6 @@ body,
   font-weight: bold;
   text-align: right;
   background: #a30;
-  font-size: 90%;
   @include background-image(linear-gradient(top, #c40, #a30));
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
@@ -183,44 +195,41 @@ body,
 }
 
 #account_from {
-  display: none;
-  background-color: #666;
-  background-color: #fff;
+  width: 300px;
   padding: 3px;
   border: 1px solid #aaa;
   border-top: 0;
+}
+
+#account_from form {
+  padding: 10px;
+  text-align: center;
+  background-color: #fff3da;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  input {
+    margin-bottom: 10px;
+    &[type="radio"], &[type="checkbox"] {
+      margin-top: 10px;
+    }
+  }
 }
 
 #account_from a {
   color: #333;
   font-weight: normal;
   text-align: left;
-  text-decoration: underline;
   background: transparent;
 }
 
-#account_from li {
-  display: inline;
-  margin-right: 10px;
-}
-
-#account_from li a {
-  display: inline; 
-  padding: 0;
-  width: auto;
-  height: auto;
-  line-height: auto;
+#account_from ul {
+  margin: 5px 0px;
 }
 
 #account_from li a:hover {
   color: #fff;
   text-decoration: underline;
   background-color: #000;
-}
-
-#signin:hover #account_from {
-  display: block;
-  margin-top: 3px;
 }
 
 #search_form {

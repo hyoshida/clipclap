@@ -14,6 +14,7 @@ timeout 60
 
 application = 'clipclap'
 shared_path = "/home/yoshida/public_html/#{application}/shared"
+  listen '/tmp/clipclap_unicorn.socket', :backlog => 1024
 
 # Production specific settings
 if ENV['RAILS_ENV'] == 'production'
