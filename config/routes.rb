@@ -23,9 +23,8 @@ Clipclap::Application.routes.draw do
     end
   end
 
-  get "tags/index"
-  get "tags/show"
-  match 'tags/:name/show' => 'tags#show'
+  match 'tags/:name' => 'tags#show', via: :get, as: :tag
+  resources :tags, only: [ :index ]
 
   get "home/index"
   root :to => "home#index"
