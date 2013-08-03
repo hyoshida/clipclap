@@ -29,27 +29,24 @@
 
         .info
           - reclip_count = Clip.where(image_master_id: clip.image_master_id).count - 1
-          - if reclip_count.nonzero?
-            p.reclip_count
-              i.icon-paper-clip title="リクリップ数"
-              = reclip_count
+          p.reclip_count
+            i.icon-paper-clip title="リクリップ数"
+            = reclip_count
 
-          - if clip.likes.any?
-            p.like
-              - if user_signed_in? && current_user.unlike?(clip)
-                = like_to clip
-              - else
-                = unlike_to clip
+          p.like
+            - if user_signed_in? && current_user.unlike?(clip)
+              = like_to clip
+            - else
+              = unlike_to clip
 
           - if false && clip.image_master.likes.any?
             p.we_like
               i.icon-group title="みんなのイイネ！"
               = clip.image_master.likes.size
 
-          - if clip.view_count.nonzero?
-            p.view_count
-              i.icon-eye-open title="閲覧数"
-              = clip.view_count
+          p.view_count
+            i.icon-eye-open title="閲覧数"
+            = clip.view_count
 
           - if clip.comments.any?
             p.comment_count
