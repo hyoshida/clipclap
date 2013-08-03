@@ -1,0 +1,19 @@
+$login_form = $('#login_form');
+if ($login_form.length == 0) {
+  $login_form = $('<div/>');
+} else {
+  $login_form.remove();
+}
+
+$login_form.attr('id', 'login_form');
+$login_form.html('<%= escape_javascript(render template: 'devise/sessions/new', formats: :html) %>');
+$('#container').append($login_form);
+
+$login_form.dialog({
+  autoOpen: false,
+  closeOnEscape: true,
+  modal: true,
+  resizable: false
+});
+
+$login_form.dialog('open');

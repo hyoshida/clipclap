@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 class ClipsController < ApplicationController
-  before_filter :logged_in?, except: [ :index, :show, :get_image_tags, :like, :unlike, :tagging, :untagging, :comment, :uncomment ]
+  before_filter :authenticate_user!, except: [ :index, :show, :get_image_tags ]
 
   # for Ajax
   def get_image_tags
