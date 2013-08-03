@@ -89,16 +89,17 @@ body {
   min-width: 980px;
   height: 40px;
   position: fixed;
-  @include zurui-gradient-top-lighten(#222);
-  border-bottom: 3px solid #f70;
+  @include zurui-gradient-top-lighten(#1a1a1a);
+  border-bottom: 4px solid #f70;
   z-index: 99;
 }
 
 @mixin hilight_menu_item {
-  background-color: #fa0;
-  border-left: 1px solid #e80;
-  border-right: 1px solid #e80;
   @include background-image(linear-gradient(top, #fa0, #f70));
+}
+
+@mixin hilight_right_menu_item {
+  @include zurui-gradient-top-lighten(#111);
 }
 
 #header a {
@@ -109,19 +110,13 @@ body {
   text-decoration: none;
 
   color: #fff;
-  background-color: transparent;
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
   &:hover, &:focus {
     @include hilight_menu_item;
   }
 }
 
 .dropdown.open a.dropdown-toggle {
-  @include hilight_menu_item;
-}
-
-.navbar .dropdown-menu {
+  @include hilight_right_menu_item;
 }
 
 .navbar .pull-right .dropdown-menu {
@@ -140,10 +135,9 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 100%;
-  &:hover {
-    background: transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+  color: #fff;
+  &:hover, &:focus {
+    @include hilight_right_menu_item;
   }
 }
 
@@ -158,6 +152,9 @@ body {
 
 #signin a {
   text-align: right;
+  &:hover, &:focus {
+    @include hilight_right_menu_item;
+  }
 }
 
 #signin .profile {
@@ -196,9 +193,6 @@ body {
 
 #account_from {
   width: 300px;
-  padding: 3px;
-  border: 1px solid #aaa;
-  border-top: 0;
 }
 
 #account_from form {
@@ -223,13 +217,15 @@ body {
 }
 
 #account_from ul {
-  margin: 5px 0px;
+  margin: 0px 0px;
 }
 
-#account_from li a:hover {
-  color: #fff;
-  text-decoration: underline;
-  background-color: #000;
+#account_from li a {
+  &:hover, &:focus {
+    color: #fff;
+    text-decoration: underline;
+    @include hilight_menu_item;
+  }
 }
 
 #search_form {
@@ -520,14 +516,17 @@ li.box .comment_feild form {
   padding: 6px 8px;
   position: absolute;
   left: 0;
-  bottom: 0;
+  top: 0;
   width: <%= Settings.thumb_width - 16 %>px;
-  background: transparent url("<%= image_path 'transblack.png' %>") repeat;
   visibility: hidden;
 }
 
 .image_box:hover .status {
   visibility: visible;
+}
+
+.image_box .status .count {
+  font-size: 120%;
 }
 
 .image_box .status p {
@@ -539,6 +538,7 @@ li.box .comment_feild form {
 }
 
 .image_box .status .tag {
+  display: none;
   float: left;
   text-align: left;
   width: <%= (Settings.thumb_width) / 2 - 16 %>px;
@@ -548,22 +548,63 @@ li.box .comment_feild form {
   text-overflow: ellipsis;
 }
 
-.image_box .status .like {
-  text-align: right;
-}
-
 .image_box .status a {
   color: #fff;
   cursor: pointer;
 }
 
-.image_box .status .like a {
-  text-decoration: none;
-  border-bottom: 1px solid #e30;
+@mixin btn-reclip {
+  @extend .btn;
+  @extend .btn-warning;
+  @include zurui-gradient-top-lighten($color: #fa0, $lighten: 20%);
+  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
+  color: #4f2e2b;
+  border: 1px solid #a60;
+  &:hover, &:focus {
+    background-color: #fa0;
+    color: #211;
+  }
+  &:focus {
+    @include box-shadow(rgba(0, 0, 0, 0.50) 0 1px 2px);
+  }
 }
 
-.image_box .status .like a.icon-remove {
-  border-bottom: 1px solid #fff;
+@mixin btn-like {
+  @extend .btn;
+  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
+  color: #666;
+  border: 1px solid #aaa;
+  &:focus {
+    @include box-shadow(rgba(0, 0, 0, 0.50) 0 1px 2px);
+  }
+}
+
+.image_box .status .reclip {
+  float: left;
+  text-align: left;
+  width: <%= (Settings.thumb_width) / 2 - 16 %>px;
+  a {
+    @include btn-reclip;
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
+.image_box .status .like {
+  text-align: right;
+}
+
+.image_box .status .like a {
+  text-decoration: none;
+  height: 24px;
+  line-height: 24px;
+  @include btn-like;
+  &.opacity {
+    @include opacity(0.5);
+  }
+  &:hover.opacity, &:focus.opacity {
+    @include opacity(0.75);
+  }
 }
 
 .image_box .status [class^="icon-"], .image_box .status [class*=" icon-"] {
@@ -574,8 +615,21 @@ li.box .comment_feild form {
   letter-spacing: 3px;
 }
 
-.image_box .status .icon-heart:before {
-  color: #e30;
+.image_box .status a {
+  & .icon-heart:before {
+    color: #e30;
+  }
+  &:hover .icon-heart:before, &:focus .icon-heart:before {
+    color: #333;
+  }
+
+  & .icon-heart-empty:before {
+    color: #333;
+  }
+  &:hover .icon-heart-empty:before, &:focus .icon-heart-empty:before {
+    @extend .icon-heart:before;
+    color: #e30;
+  }
 }
 
 .image_box .status .icon-remove {

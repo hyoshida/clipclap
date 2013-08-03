@@ -16,11 +16,13 @@
                 span = "##{clip.tags.last.shortname}"
               - else
                 span タグなし
+            p.reclip
+              = reclip_to clip
             p.like
-              - if user_signed_in? && current_user.unlike?(clip)
+              - if !user_signed_in? || current_user.unlike?(clip)
                 = like_to clip
               - else
-                = unlike_to clip
+                = unlike_to clip, class: "opacity"
 
         - if clip.title.present?
           p.title = link_to clip.title, clip

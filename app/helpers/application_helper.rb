@@ -6,19 +6,23 @@ module ApplicationHelper
   end
 
   def icon_heart
-    raw '<i class="icon-heart" title="イイネ！"></i>'
+    raw '<i class="icon-heart"></i>'
   end
 
   def icon_heart_empty
-    raw '<i class="icon-heart-empty" title="イイネ！"></i>'
+    raw '<i class="icon-heart-empty"></i>'
+  end
+
+  def icon_clip
+    raw '<i class="icon-paper-clip"></i>'
   end
 
   def icon_remove
-    raw '<i class="icon-remove" title="取り消す"></i>'
+    raw '<i class="icon-remove"></i>'
   end
 
-  def like_text_to(clip)
-    raw icon_heart + clip.like_count.to_s
+  def like_count(clip)
+    raw %{<span class="count">#{clip.like_count}</sapn>}
   end
 
   def comment_text_to(comment)
@@ -33,14 +37,19 @@ module ApplicationHelper
     raw '<span style="display: none;">×</span>'
   end
 
-  def like_to(clip)
-    link_to(icon_heart_empty + nostyle_like + clip.like_count.to_s, like_clip_path(:id => clip), title: 'イイネ！する', remote: true)
+  def like_to(clip, options={})
+    default_options = { title: 'イイネ！する', remote: true }
+    link_to(icon_heart_empty + nostyle_like + like_count(clip), like_clip_path(:id => clip), default_options.merge(options))
   end
 
-  def unlike_to(clip)
-    remove_link = ''
-    remove_link = link_to(icon_remove + nostyle_remove, unlike_clip_path(:id => clip), title: 'イイネ！を取り消す', remote: true) if user_signed_in? 
-    like_text_to(clip) + remove_link
+  def unlike_to(clip, options={})
+    default_options = { title: 'イイネ！を取り消す', remote: true }
+    link_to(icon_heart + nostyle_remove + like_count(clip), unlike_clip_path(:id => clip), default_options.merge(options)) if user_signed_in? 
+  end
+
+  def reclip_to(clip, options={})
+    default_options = { title: 'リクリップする', remote: true }
+    link_to(icon_clip + "リクリップ", clip_path(:id => clip), default_options.merge(options))
   end
 
   def comment_to(comment)
