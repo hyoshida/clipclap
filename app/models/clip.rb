@@ -22,6 +22,12 @@ class Clip < ActiveRecord::Base
 
   self.per_page = Settings.page
 
+  def origin_url_domain
+    return nil if self.origin_url.blank?
+    require 'uri'
+    return URI(self.origin_url).host
+  end
+
   def increment_view_count!(request = nil)
     return false if self.last_access_ip == request.remote_ip
     self.update_attributes(

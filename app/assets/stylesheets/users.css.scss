@@ -1,10 +1,6 @@
 @import "compass/css3";
 
-#main .clear {
-  clear: both;
-}
-
-#main .profile {
+#user .profile {
   margin: 20px;
   padding: 20px;
   height: 128px;
@@ -31,7 +27,7 @@
   }
 }
 
-#main ul.user_menu {
+#user ul.user_menu {
   $padding-top: 64px + 20px;
   $user_menu_height: 100px;
   padding-top: $padding-top;
@@ -83,6 +79,6 @@
   }
 }
 
-#main #user_wrapper {
+#user #user_wrapper {
   margin-top: 100px;
 }

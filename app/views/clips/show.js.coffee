@@ -18,4 +18,6 @@ $('#mainContainer').append($slide_overlay)
 $clip_detail_pane.show("slide", { direction: "right" })
 $slide_overlay.show("fade")
 
+$('body').addClass('noscroll')
+
 $(':focus').blur()

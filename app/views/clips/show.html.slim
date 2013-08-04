@@ -1,40 +1,69 @@
-h2 = @clip.title.presence || l(@clip.created_at)
-= link_to image_tag(@clip.url, style: 'max-width: 640px; max-height: 480px;'), @clip.url
+#clip
+  .profile
+    p.avatar = link_to_user_by_avatar(@clip.user, size: 64)
+    .description
+      p.who = raw "#{link_to @clip.user.nick_name, @clip.user}さんが"
+      p.when = "#{time_ago_in_words @clip.created_at}前にクリップしました"
+      p.source = raw "(ソース: #{link_to @clip.origin_url_domain, @clip.origin_url})"
 
-h3 タグ一覧
-ul#tags
-  - @clip.tags.each do |tag|
-    li id="tag_#{tag.id}"
-      = link_to tag.name, controller: :tags, action: :show, name: tag.name
-      = link_to '[×]', untagging_clip_path(tag_id: tag.id), remote: true if user_signed_in? && tag.user_id == current_user.id
+  .info
+    .image_box
+      = link_to image_tag(@clip.url), @clip.url
 
-- if user_signed_in? && !@clip.tags_maximum?
-  = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
-    = f.text_field :name
-    = f.submit 'タグ追加'
+    - if @clip.title.present?
+      h2.title = @clip.title
 
-h3 その他の情報
-div id="clip_#{@clip.id}"
-  .like
-    - if user_signed_in? && current_user.unlike?(@clip)
-      = link_to "イイネ！(#{@clip.like_count})", like_clip_path(id: @clip), remote: true
-    - else
-      span イイネ！(#{@clip.like_count}) #{link_to '×', unlike_clip_path(id: @clip), remote: true if user_signed_in?}
+    .comment_feild
+      ul class="comments#{' signed_in' if user_signed_in?}"
+        - @clip.comments.take(Settings.maximum_comment_count).each do |comment|
+          li id="comment_#{comment.id}"
+            = render partial: '/base/comment', locals: { comment: comment, avatar_size: 48 }
 
-  dl
-    dt 元のURL:
-    dd = link_to @clip.origin_url, @clip.origin_url
+      - if user_signed_in?
+        = form_for Comment.new, url: { controller: :clips, action: :comment, id: @clip.id }, remote: true, html: { id: "comment_form_#{@clip.id}" } do |f|
+          p.avatar = link_to_user_by_avatar(current_user, size: 48)
+          = f.text_field :body, placeholder: 'コメントする'
+          = f.submit 'クリップ', class: 'hidden btn'
 
-    dt ユーザ:
-    dd = @clip.user.nick_name
+  .additional_info
+    .tag_feild
+      ul#tags
+        - @clip.tags.each do |tag|
+          li id="tag_#{tag.id}"
+            = link_to tag.name, controller: :tags, action: :show, name: tag.name
+            span &nbsp;
+            = link_to '×', untagging_clip_path(tag_id: tag.id), class: 'remove', remote: true if user_signed_in? && tag.user_id == current_user.id
 
-    dt 閲覧数:
-    dd = @clip.view_count
+      - if user_signed_in? && !@clip.tags_maximum?
+        = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
+          = f.text_field :name, class: 'span2'
+          = f.submit 'タグを追加', class: 'btn'
 
-- if user_signed_in? && @clip.user_id == current_user.id
-  = link_to 'Destroy', @clip, confirm: 'Are you sure?', method: :delete
-  span |
+    -if @clip.likes.size.nonzero?
+      .like_feild
+        p
+          - if user_signed_in? && @clip.likes.map(&:user_id).flatten.include?(current_user.id)
+            span.you あなた
+            - if (@clip.likes.size - 1).nonzero?
+             span.and と
+             span.count = "#{@clip.likes.size - 1}人"
+          - else
+             span.count = "#{@clip.likes.size}人"
+          span.message がイイネ！と言っています
+        ul
+          - @clip.likes.map(&:user).flatten.each do |user|
+            li.avatar = link_to_user_by_avatar user
 
-= link_to 'Back', clips_path
-span |
-= link_to 'Home', root_path
+    .view_feild
+        p
+          span.count = @clip.view_count
+          span.message 回の訪問があります
+
+  .other_info
+    - if user_signed_in? && @clip.user_id == current_user.id
+      = link_to 'Destroy', @clip, confirm: 'Are you sure?', method: :delete
+      span |
+
+    = link_to 'Back', clips_path
+    span |
+    = link_to 'Home', root_path

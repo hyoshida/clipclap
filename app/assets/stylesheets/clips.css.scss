@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/utilities";
+@import "compass/css3";
+
 #image_selecter .box img#selected {
   border: 5px solid #666666;
 }
@@ -34,7 +37,6 @@
   $header_menu_height: 40px;
   $header_border_height: 4px;
   $header_height: $header_menu_height + $header_border_height;
-  padding: 40px;
   width: 85%;
   z-index: 10;
   position: fixed;
@@ -43,4 +45,153 @@
   right: 0;
   background-color: #fff;
   border-left: 1px solid #aaa;
+  overflow-y: scroll;
+}
+
+#clip {
+  padding: 20px;
+}
+
+#clip .profile {
+  margin-bottom: 20px;
+  height: 64px;
+  @include clearfix;
+
+  .avatar {
+    float: left;
+    margin-right: 20px;
+  }
+
+  .description {
+    font-size: medium;
+    height: 64px;
+    p {
+      margin-bottom: 7px;
+    }
+    .who a {
+      font-weight: bold;
+    }
+    .source {
+      color: #999;
+      a, a:hover {
+        color: #286bcc;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#clip .info {
+  margin: 0px;
+  padding: 0px;
+  width: 800px;
+}
+
+#clip .image_box {
+  margin: 0;
+  text-align: center;
+  border: 1px solid #aaa;
+
+  img {
+    max-width: 800px;
+    border: none !important;
+    vertical-align: bottom;
+  }
+}
+
+h2.title {
+  margin-top: 20px;
+  text-align: center;
+  font-size: x-large;
+}
+
+#clip .comment_feild {
+  margin: 20px 0 0;
+  border: 1px solid #ddd;
+  border-top: none;
+  font-size: medium;
+  @include border-bottom-radius(4px);
+
+  input[type="text"] {
+    height: 48px - 8px;
+    width: 800px - 40px - 48px - 20px;
+  }
+  .body {
+    margin-bottom: 3px;
+  }
+  ul.commentsd li, form {
+    padding: 5px;
+    min-height: 48px + 10px;
+  }
+}
+
+.info p {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+#clip .info {
+  float: left;
+  margin-right: 20px;
+}
+
+#clip .additional_info {
+  width: 320px;
+  margin-left: 800px + 20px;
+}
+
+@mixin additional_info_box {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+
+  .count {
+    font-size: medium;
+    font-weight: bold;
+  }
+
+  ul {
+    margin: 5px;
+    margin-bottom: 0;
+  }
+
+  li {
+    padding: 5px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  a.remove {
+    color:  #689;
+  }
+}
+
+#clip .tag_feild {
+  @include additional_info_box;
+
+  li {
+    background-color: #d4e1f5;
+    border: 1px solid #a9c4eb;
+    @include border-radius(4px);
+  }
+
+  form {
+    margin-top: 5px;
+  }
+}
+
+#clip .like_feild {
+  @include additional_info_box;
+}
+
+#clip .view_feild {
+  @include additional_info_box;
+}
+
+#clip .other_info {
+  clear: both;
 }

@@ -1,4 +1,5 @@
-p.avatar = link_to_user_by_avatar comment.user
+- avatar_size ||= 32
+p.avatar = link_to_user_by_avatar comment.user, size: avatar_size
 - if user_signed_in? && current_user.id == comment.user_id
   p.body = uncomment_to comment
 - else

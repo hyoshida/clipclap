@@ -32,6 +32,7 @@ registerEventForCloseClipDetailPane =->
   $(document).on('click', '#slide_overlay', ->
     $('#clip_detail_pane').hide("slide", { direction: "right" }, 400, -> $(@).remove())
     $('#slide_overlay').hide("fade", null, 400, -> $(@).remove())
+    $('body').removeClass('noscroll')
   )
 
 $ ->

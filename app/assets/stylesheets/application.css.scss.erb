@@ -18,7 +18,6 @@
 //= require 'masonry/right-to-left'
 //= require 'masonry/transitions'
 //= require_tree .
-//= require 'clips.css.scss'
 //
 
 @import "bootstrap";
@@ -406,7 +405,7 @@ li.box .image_box a img {
 }
 
 
-li.box ul.comments {
+ul.comments {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -422,7 +421,7 @@ li.box ul.comments {
   }
 }
 
-li.box ul.comments li {
+ul.comments li {
   padding: 5px;
   background-color: transparent;
   @include zurui-line-top(0.1, 1.0);
@@ -442,7 +441,7 @@ li.box ul.comments li {
   }
 }
 
-li.box ul.comments li a:hover {
+ul.comments li a:hover {
   i.icon-remove {
     color: #fff;
     background-color: #eee;
@@ -454,16 +453,10 @@ li.box ul.comments li a:hover {
   @include border-radius(4px);
 }
 
-li.box ul.comments li p {
+ul.comments li p {
   display: block;
   padding: 5px;
 
-  &.avatar {
-    clear: both;
-    float: left;
-    padding-top: 3px;
-    padding-right: 10px;
-  }
   &.body {
     padding: 5px 0;
   }
@@ -473,20 +466,22 @@ li.box ul.comments li p {
   }
 }
 
-li.box .comment_feild form {
+.comment_feild .avatar {
+  clear: both;
+  float: left;
+  padding: 3px 10px 5px 5px;
+}
+
+.comment_feild form {
+  padding: 5px;
   @include zurui-line-top(0.1, 1.0);
   background-color: #fafafa;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  p.avatar {
-    clear: both;
-    float: left;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 3px;
-  }
 
   input {
+    margin: 0;
+    margin-top: 4px;
     width: 165px;
   }
 }
@@ -643,4 +638,8 @@ li.box .comment_feild form {
 
 .ui-widget-overlay {
   background: transparent url("<%= image_path 'transblack.png' %>") repeat !important;
+}
+
+.noscroll {
+  overflow: hidden;
 }
