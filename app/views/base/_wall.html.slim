@@ -61,7 +61,7 @@
 
           - if user_signed_in?
             = form_for Comment.new, url: { controller: :clips, action: :comment, id: clip.id }, remote: true, html: { id: "comment_form_#{clip.id}" } do |form|
-              p.avatar = image_tag avatar_url(current_user)
+              p.avatar = link_to_user_by_avatar current_user
               = form.text_field :body, placeholder: 'コメントする'
               = form.submit 'クリップ', class: 'hidden btn'
 

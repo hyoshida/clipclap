@@ -2,6 +2,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       t.string :name
+      t.text :description
 
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
@@ -34,7 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Token authenticatable
       # t.string :authentication_token
-
 
       t.timestamps
     end

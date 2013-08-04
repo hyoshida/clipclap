@@ -1,4 +1,4 @@
-p.avatar = image_tag avatar_url(comment.user)
+p.avatar = link_to_user_by_avatar comment.user
 - if user_signed_in? && current_user.id == comment.user_id
   p.body = uncomment_to comment
 - else

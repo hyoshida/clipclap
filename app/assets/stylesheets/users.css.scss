@@ -1,0 +1,88 @@
+@import "compass/css3";
+
+#main .clear {
+  clear: both;
+}
+
+#main .profile {
+  margin: 20px;
+  padding: 20px;
+  height: 128px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  z-index: 12;
+  position: relative;
+  @include border-radius(4px);
+
+  .avatar {
+    float: left;
+    margin-right: 20px;
+  }
+
+  .name {
+    font-size: x-large;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .description {
+    font-size: large;
+    height: 64px;
+  }
+}
+
+#main ul.user_menu {
+  $padding-top: 64px + 20px;
+  $user_menu_height: 100px;
+  padding-top: $padding-top;
+  width: 100%;
+  height: $user_menu_height;
+  background-color: #f7efe0;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  z-index: 11;
+  position: absolute;
+  top: 64px + 40px + 10px;
+  left: 0;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    padding-left: 60px;
+  }
+
+  li {
+    display: inline-block;
+    font-size: larger;
+    a {
+      width: 150px;
+      height: $user_menu_height;
+      display: table-cell;
+      vertical-align: middle;
+      layout-grid-line: $user_menu_height;
+      &:hover, &:focus, &.current {
+        color: #420 !important;
+        text-decoration: none;
+        background-color: #e7dfd0;
+      }
+      &:visited {
+        color: #000;
+      }
+    }
+    p {
+      margin: 5px 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    i {
+      margin-right: 3px;
+    }
+    .count {
+      font-size: 250%;
+    }
+  }
+}
+
+#main #user_wrapper {
+  margin-top: 100px;
+}

@@ -57,13 +57,18 @@ module ApplicationHelper
   end
 
   def uncomment_to(comment)
-    remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(:id => comment.clip_id, :comment_id => comment), title: 'コメントを取り消す', remote: true)
+    remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(:id => comment.clip_id, :comment_id => comment), title: 'コメントを取り消す', class: 'remove', remote: true)
     comment_text_to(comment) + remove_link
   end
 
-  def avatar_url(user, size=32)
+  def link_to_user_by_avatar(user, options={})
+    link_to image_tag(avatar_url(user, options)), user_path(user)
+  end
+
+  def avatar_url(user, options={})
+    options = avatar_url_default_options.merge(options)
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{options[:size]}"
   end
 
   def resource_name
@@ -76,5 +81,13 @@ module ApplicationHelper
 
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  private
+
+  def avatar_url_default_options
+    {
+      size: 32
+    }
   end
 end

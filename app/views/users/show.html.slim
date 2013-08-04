@@ -1,0 +1,36 @@
+.profile
+  p.avatar = image_tag avatar_url(@user, size: 128)
+  h2.name = @user.nick_name
+  p.description = @user.description
+
+ul.user_menu
+  li.user_clips
+    = link_to clips_path(user_id: @user) do
+      p.count = @user.clips.size
+      p.title
+        i.icon-paper-clip
+        span クリップ
+
+  li.user_tags
+    =link_to tags_path(user_id: @user) do
+      p.count = @user.tags.size
+      p.title
+        i.icon-tags
+        span タグ
+
+  li.user_likes
+    =link_to tags_path(user_id: @user) do
+      p.count = @user.likes.size
+      p.title
+        i.icon-heart
+        span イイネ！
+
+#user_wrapper
+
+- if user_signed_in? && @user.id == current_user.id
+  = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete
+  span |
+
+= link_to 'Back', clips_path
+span |
+= link_to 'Home', root_path
