@@ -21,7 +21,7 @@
         - if user_signed_in?
           .dropdown
             = link_to(root_path, class: "profile dropdown-toggle", role: "button", data: { toggle: "dropdown" }) do
-              span.avater = image_tag avatar_url(current_user)
+              span.avatar = image_tag avatar_url(current_user)
               span.name = current_user.nick_name
               span.arrow = icon_tag('angle-down')
             #account_from.dropdown-menu role="menu"
