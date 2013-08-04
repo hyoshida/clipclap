@@ -28,55 +28,13 @@ infinitescrollOptions = ->
     }
   }
 
-previewDialogOptions = ->
-  {
-    autoOpen: false,
-    closeOnEscape: true,
-    modal: true,
-    resizable: false,
-    draggable: false,
-  }
-
-registerEventForOpenPreviewDialog = ->
-  $('.box a img').on('click', ->
-    $preview_link = $('<a/>')
-    $preview_link.attr('href', $(@).parent().attr('href'))
-
-    $preview_image = $('<img/>')
-    $preview_image.attr('src', $(@).attr('src'))
-    $preview_image.attr('style', $(@).attr('style'))
-
-    screen = getScreenSize()
-    img_width = screen['width'] - 300
-    img_height = (img_width / $(@).width()) * $(@).height()
-    if (screen['height'] <= img_height)
-      img_height = screen['height'] - 200
-      img_width = (img_height / $(@).height()) * $(@).width()
-    $preview_image.css({ width: img_width, height: img_height })
-
-    $preview_link.append($preview_image)
-    $('#preview').html($preview_link)
-
-    $detail = $('#detail_dialog')
-    $detail.dialog($.extend(previewDialogOptions(), { width: img_width + 30 }))
-    $detail.dialog('open')
-    return false
-  )
-
-getScreenSize = ->
-  return {
-    width: window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || document.body.clientWidth,
-    height: window.innerHeight || (document.documentElement && document.documentElement.clientHeight) || document.body.clientHeight
-  }
-
-registerEventForClosePreviewDialog =->
-  $(document).on('click', '.ui-widget-overlay', ->
-    $(@).prev().find('.ui-dialog-content').dialog('close')
+registerEventForCloseClipDetailPane =->
+  $(document).on('click', '#slide_overlay', ->
+    $('#clip_detail_pane').hide("slide", { direction: "right" }, 400, -> $(@).remove())
+    $('#slide_overlay').hide("fade", null, 400, -> $(@).remove())
   )
 
 $ ->
   hideContainerToImageLoaded()
   prepareInfinitescrollContainer()
-
-  registerEventForOpenPreviewDialog()
-  registerEventForClosePreviewDialog()
+  registerEventForCloseClipDetailPane()

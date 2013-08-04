@@ -29,3 +29,18 @@
   margin-right: 10px;
   min-height: 150px;
 }
+
+#clip_detail_pane {
+  $header_menu_height: 40px;
+  $header_border_height: 4px;
+  $header_height: $header_menu_height + $header_border_height;
+  padding: 40px;
+  width: 85%;
+  z-index: 10;
+  position: fixed;
+  top: $header_height;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  border-left: 1px solid #aaa;
+}

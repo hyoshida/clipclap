@@ -80,14 +80,14 @@ class ClipsController < ApplicationController
   end
 
   # GET /clips/1
-  # GET /clips/1.json
+  # GET /clips/1.js
   def show
     @clip = Clip.includes(:user, :image_master, :tags).find(params[:id])
     @clip.increment_view_count!(request)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @clip }
+      format.js # show.js.coffee
     end
   end
 

@@ -1,4 +1,4 @@
-h2 = @clip.title || @clip.created_at.to_s
+h2 = @clip.title.presence || l(@clip.created_at)
 = link_to image_tag(@clip.url, style: 'max-width: 640px; max-height: 480px;'), @clip.url
 
 h3 タグ一覧
