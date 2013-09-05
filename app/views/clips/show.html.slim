@@ -6,7 +6,7 @@
       p.when = "#{time_ago_in_words @clip.created_at}前にクリップしました"
       p.source = raw "(ソース: #{link_to @clip.origin_url_domain, @clip.origin_url})"
 
-  .info
+  .info id="clip_#{@clip.id}"
     .image_box
       = link_to image_tag(@clip.url), @clip.url
 
