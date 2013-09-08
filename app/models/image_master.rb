@@ -11,12 +11,12 @@ class ImageMaster < ActiveRecord::Base
   end
 
   def thumb_height
-    return 0 if self.width.zero? || self.height.zero? # for $B2<0L8_49(B
+    return 0 if self.width.zero? || self.height.zero? # for 下位互換
     (self.height * (self.thumb_width / self.width.to_f)).floor
   end
 
   def thumb_size_for_style_sheet
-    return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for $B2<0L8_49(B
+    return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
     "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
   end
 end
