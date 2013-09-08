@@ -101,10 +101,8 @@ class Clip < ActiveRecord::Base
     def exec
       case @service
       when /pixiv\.net/
-        p @uri.to_s.sub(/_87ms\.jpg/, '_240mw.jpg')
-        @uri.to_s.sub(/_87ms\.jpg/, '_240mw.jpg')
+        @uri.to_s.sub(/(_128x128|87ms|240mw)\.jpg/, '_480mw.jpg')
       else
-        p @uri.host
         @uri.to_s
       end
     end
