@@ -6,6 +6,21 @@ class ImageMaster < ActiveRecord::Base
   #validates :url, :uniqueness => true, :presence => true, :format => { :with => /^https?:\/\/.*\/.*\.(jpg|jpeg|png|gif)$/ }
   validates :url, :uniqueness => true, :presence => true, :format => { :with => /^https?:\/\/.*\/.*$/ }
 
+  def thumb_path
+    require 'digest/sha2'
+    sha256 = Digest::SHA256.hexdigest(self.url)
+    File.join(Settings.image_cache_dir, [ sha256, File.extname(self.url) ].join)
+  end
+
+  def create_thumb_cache_file
+    require 'open-uri'
+    FileUtils.mkdir Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
+    File.open(self.thumb_path, 'wb') do |file|
+      image_data = OpenURI.open_uri(self.url, "rb:#{Encoding::ASCII_8BIT}").read
+      file.write(image_data)
+    end
+  end
+
   def thumb_width
     Settings.thumb_width
   end
