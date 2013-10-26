@@ -61,6 +61,21 @@ module ApplicationHelper
     comment_text_to(comment) + remove_link
   end
 
+  def follow_to(followable, options={})
+    return unless user_signed_in?
+    return if current_user == followable
+    return if current_user.following?(followable)
+    default_options = { title: 'フォローする', remote: true }
+    link_to('フォロー', follow_user_path(followable), default_options.merge(options))
+  end
+
+  def unfollow_to(followable, options={})
+    return unless user_signed_in?
+    return unless current_user.following?(followable)
+    default_options = { title: 'フォローを取り消す', remote: true }
+    link_to('フォローを取り消す', unfollow_user_path(followable), default_options.merge(options))
+  end
+
   def link_to_user_by_avatar(user, options={})
     link_to image_tag(avatar_url(user, options)), user_path(user)
   end

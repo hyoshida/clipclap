@@ -1,3 +1,6 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/buttons";
 @import "compass/css3";
 
 #user .profile {
@@ -81,4 +84,8 @@
 
 #user #user_wrapper {
   margin-top: 100px;
+}
+
+#follow_button a {
+  @extend .btn;
 }

@@ -11,6 +11,6 @@ class UsersController < ApplicationController
 
   def unfollow
     @user = User.where(id: params[:id]).first
-    current_user.stop_follow(@user) if @user
+    current_user.stop_following(@user) if @user
   end
 end

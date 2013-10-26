@@ -26,12 +26,17 @@
           i.icon-heart
           span イイネ！
 
-  #user_wrapper
-    = link_to 'フォロー', follow_user_path(@user)
-    ul.all_follows
-      - @user.followers.each do |follower|
-        li = follower.email
+    li#followers
+      = link_to '#' do
+        p.count = @user.followers.size
+        p.title フォロワー
 
+  #user_wrapper
+    #follow_button
+      - if current_user.following? @user
+        = unfollow_to @user
+      - else
+        = follow_to @user
 
   - if user_signed_in? && @user.id == current_user.id
     = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete
