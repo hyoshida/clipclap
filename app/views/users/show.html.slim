@@ -32,6 +32,16 @@
         p.title フォロワー
 
   #user_wrapper
+    #followers_carousel.carousel.slide
+      .carousel-inner
+        -@user.followers.each_with_index do |follower,index|
+          - class_names = [ :item ]
+          - class_names << :active if index.zero?
+          div class="#{class_names.join(' ')}"
+              = image_tag avatar_url(follower)
+      a.carousel-control.left href="#followers_carousel" data-slide="prev" &lsaquo;
+      a.carousel-control.right href="#followers_carousel" data-slide="next" &rsaquo;
+
     #follow_button
       - if current_user.following? @user
         = unfollow_to @user
