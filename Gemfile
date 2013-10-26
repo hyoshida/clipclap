@@ -90,3 +90,6 @@ gem 'omniauth-facebook'
 
 # RailsのViewにSlimを利用
 gem "slim-rails"
+
+# フォロー/フォロワー機能を追加
+gem 'acts_as_follower', '~> 0.1.1'

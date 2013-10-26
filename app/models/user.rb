@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
 
+  acts_as_followable
+  acts_as_follower
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

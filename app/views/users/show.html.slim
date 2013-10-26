@@ -13,20 +13,25 @@
           span クリップ
 
     li.user_tags
-      =link_to tags_path(user_id: @user) do
+      = link_to tags_path(user_id: @user) do
         p.count = @user.tags.size
         p.title
           i.icon-tags
           span タグ
 
     li.user_likes
-      =link_to tags_path(user_id: @user) do
+      = link_to tags_path(user_id: @user) do
         p.count = @user.likes.size
         p.title
           i.icon-heart
           span イイネ！
 
   #user_wrapper
+    = link_to 'フォロー', follow_user_path(@user)
+    ul.all_follows
+      - @user.followers.each do |follower|
+        li = follower.email
+
 
   - if user_signed_in? && @user.id == current_user.id
     = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete

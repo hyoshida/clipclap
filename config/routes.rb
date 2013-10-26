@@ -23,9 +23,15 @@ Clipclap::Application.routes.draw do
     end
   end
 
+  resources :users, only: [ :index, :show ] do
+    member do
+      get :follow
+      get :unfollow
+    end
+  end
+
   match 'tags/:name' => 'tags#show', via: :get, as: :tag
   resources :tags, only: [ :index ]
-  resources :users, only: [ :index, :show ]
   resources :image_masters, only: [ :show ]
 
   get "home/index"
