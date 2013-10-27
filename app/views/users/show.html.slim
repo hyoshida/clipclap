@@ -66,11 +66,6 @@
           i.icon-heart
           span イイネ！
 
-    li#followers
-      = link_to '#' do
-        p.count = @user.followers.size
-        p.title フォロワー
-
   #user_wrapper
     - if current_user
       #follow_button
