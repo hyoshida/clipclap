@@ -9,6 +9,13 @@
       p.avatar = image_tag avatar_url(@user, size: 128)
       h2.name = @user.nick_name
       p.description = @user.description
+      .buttons
+        - if current_user
+          p#follow_button.button
+            - if current_user.following? @user
+              = unfollow_to @user
+            - else
+              = follow_to @user
 
     #follower_list.carousel_box
       .description
@@ -67,12 +74,6 @@
           span イイネ！
 
   #user_wrapper
-    - if current_user
-      #follow_button
-        - if current_user.following? @user
-          = unfollow_to @user
-        - else
-          = follow_to @user
 
   - if user_signed_in? && @user.id == current_user.id
     = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete

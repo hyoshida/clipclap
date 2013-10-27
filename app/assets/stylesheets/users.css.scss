@@ -43,14 +43,20 @@ $profile_height: $user_info_height - $profile_padding * 2;
   }
 
   .name {
-    font-size: x-large;
-    height: 64px;
-    line-height: 64px;
+    font-size: xx-large;
+    height: $profile_height / 3;
+    line-height: $profile_height / 3;
   }
 
   .description {
     font-size: large;
-    height: 64px;
+    height: $profile_height / 3;
+  }
+
+  .buttons {
+    height: $profile_height / 3;
+    line-height: $profile_height / 3;
+    text-align: right;
   }
 }
 
