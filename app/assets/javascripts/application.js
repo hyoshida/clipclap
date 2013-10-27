@@ -20,6 +20,7 @@
 //= require bootstrap-popover
 //= require bootstrap-dropdown
 //= require bootstrap-carousel
+//= require bootstrap-transition
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
