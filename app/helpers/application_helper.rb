@@ -77,7 +77,7 @@ module ApplicationHelper
   end
 
   def link_to_user_by_avatar(user, options={})
-    link_to image_tag(avatar_url(user, options)), user_path(user)
+    link_to image_tag(avatar_url(user, options)), user_path(user), 'title' => user.nick_name, 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'data-container' => 'body'
   end
 
   def avatar_url(user, options={})

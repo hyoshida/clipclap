@@ -1,4 +1,9 @@
 #user
+  javascript:
+    $(function () {
+      $("[data-toggle='tooltip']").tooltip();
+    });
+
   .user_info
     .profile
       p.avatar = image_tag avatar_url(@user, size: 128)
