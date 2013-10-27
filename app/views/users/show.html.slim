@@ -42,11 +42,12 @@
       a.carousel-control.left href="#followers_carousel" data-slide="prev" &lsaquo;
       a.carousel-control.right href="#followers_carousel" data-slide="next" &rsaquo;
 
-    #follow_button
-      - if current_user.following? @user
-        = unfollow_to @user
-      - else
-        = follow_to @user
+    - if current_user
+      #follow_button
+        - if current_user.following? @user
+          = unfollow_to @user
+        - else
+          = follow_to @user
 
   - if user_signed_in? && @user.id == current_user.id
     = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete
