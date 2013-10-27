@@ -1,13 +1,40 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/buttons";
 @import "compass/css3";
 
-#user .profile {
+$screen_width: 860px;
+$carousel_item_count_x: 4;
+$carousel_item_count_y: 2;
+$carousel_item_size: 32px;
+$carousel_item_margin: 7px;
+$carousel_control_size: 20px;
+$carousel_inner_width: ($carousel_item_size + $carousel_item_margin) * $carousel_item_count_x;
+$carousel_inner_height: ($carousel_item_size + $carousel_item_margin) * $carousel_item_count_y - $carousel_item_margin;
+$carousel_width: $carousel_inner_width + $carousel_item_margin + $carousel_control_size * 2;
+$carousel_height: $carousel_inner_height;
+$user_info_width: $screen_width;
+$user_info_height: 168px;
+$profile_margin: 20px;
+$profile_padding: 20px;
+$profile_width: $screen_width - $carousel_width - $profile_margin - $profile_padding * 2;
+$profile_height: $user_info_height - $profile_padding * 2;
+
+#user .user_info {
   margin: 20px;
-  padding: 20px;
-  height: 128px;
-  background-color: #fff;
-  border: 1px solid #aaa;
+  width: $user_info_width;
+  height: $user_info_height;
   z-index: 12;
   position: relative;
+}
+
+#user .profile {
+  padding: $profile_padding;
+  width: $profile_width;
+  height: $profile_height;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  position: absolute;
   @include border-radius(4px);
 
   .avatar {
@@ -16,14 +43,20 @@
   }
 
   .name {
-    font-size: x-large;
-    height: 64px;
-    line-height: 64px;
+    font-size: xx-large;
+    height: $profile_height / 3;
+    line-height: $profile_height / 3;
   }
 
   .description {
     font-size: large;
-    height: 64px;
+    height: $profile_height / 3;
+  }
+
+  .buttons {
+    height: $profile_height / 3;
+    line-height: $profile_height / 3;
+    text-align: right;
   }
 }
 
@@ -81,4 +114,78 @@
 
 #user #user_wrapper {
   margin-top: 100px;
+}
+
+#follow_button a {
+  @extend .btn;
+}
+
+#following_list {
+  top: $carousel_height + 20px * 2 + 27px;
+}
+
+.carousel_box {
+  width: $carousel_width;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  position: absolute;
+  right: 0;
+  @include border-radius(4px);
+
+  .description {
+    margin-top: 0.25em;
+    margin-left: 0.75em;
+    position: relative;
+    top: 0.75em;
+  }
+}
+
+.carousel_box .carousel {
+  margin: 20px 0;
+  width: $carousel_width;
+  height: $carousel_height;
+  position: relative;
+
+  ul {
+    width: $carousel_inner_width;
+    height: $carousel_inner_height;
+    margin-left: $carousel_control_size;
+    padding: 0 $carousel_item_margin;
+  }
+
+  li {
+    display: inline-block;
+    width: $carousel_item_size + $carousel_item_margin;
+    height: $carousel_item_size + $carousel_item_margin;
+  }
+
+  &.carousel {
+    margin-bottom: 0 default;
+  }
+
+  .carousel-control {
+    margin-top: 0;
+    width: $carousel_control_size;
+    height: $carousel_height;
+    line-height: $carousel_height - 5px;
+    font-size: $carousel_item_size;
+    border: 0;
+    top: 0;
+
+    &.left {
+      left: 0;
+      @include border-corner-radius(top, right, 2px);
+      @include border-corner-radius(bottom, right, 2px);
+      @include border-corner-radius(top, left, 0);
+      @include border-corner-radius(bottom, left, 0);
+    }
+
+    &.right {
+      right: 0;
+      @include border-corner-radius(top, left, 2px);
+      @include border-corner-radius(bottom, left, 2px);
+      @include border-corner-radius(top, right, 0);
+      @include border-corner-radius(bottom, right, 0);
+    }
+  }
 }

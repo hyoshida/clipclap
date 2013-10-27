@@ -43,6 +43,10 @@
   color: #ccc;
 }
 
+.tooltip.in {
+  opacity: 0.9;
+}
+
 html,
 body {
   font-family: sans-serif !important;
@@ -71,6 +75,11 @@ label {
 }
 
 h1 {
+  font-weight: bold !important;
+}
+
+strong {
+  font-size: medium !important;
   font-weight: bold !important;
 }
 
@@ -454,8 +463,14 @@ ul.comments li a:hover {
   }
 }
 
-.avatar img {
-  @include border-radius(4px);
+.avatar {
+  a {
+    display: block;
+  }
+
+  img {
+    @include border-radius(4px);
+  }
 }
 
 ul.comments li p {
