@@ -68,7 +68,7 @@ module ApplicationHelper
   def avatar_url(user, options={})
     options = avatar_url_default_options.merge(options)
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{options[:size]}"
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{options[:size]}&d=#{options[:default]}"
   end
 
   def resource_name
@@ -87,6 +87,7 @@ module ApplicationHelper
 
   def avatar_url_default_options
     {
+      default: 'identicon',
       size: 32
     }
   end
