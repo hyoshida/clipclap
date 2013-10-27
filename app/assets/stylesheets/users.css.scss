@@ -114,6 +114,10 @@ $profile_height: $user_info_height - $profile_padding * 2;
   @extend .btn;
 }
 
+#following_list {
+  top: $carousel_height + 20px * 2 + 27px;
+}
+
 .carousel_box {
   width: $carousel_width;
   background-color: #fff;

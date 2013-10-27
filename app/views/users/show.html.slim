@@ -22,6 +22,23 @@
         a.carousel-control.left href="#followers_carousel" data-slide="prev" &lsaquo;
         a.carousel-control.right href="#followers_carousel" data-slide="next" &rsaquo;
 
+    #following_list.carousel_box
+      .description
+        strong
+          i.icon-heart-empty &nbsp;
+          = @user.all_following.size
+        | 人をフォロー
+      #following_carousel.carousel.slide
+        .carousel-inner
+          - @user.all_following.each_slice(8).each_with_index do |followings,index|
+            - class_names = [ :item ]
+            - class_names << :active if index.zero?
+            ul class="#{class_names.join(' ')}"
+              - followings.each do |following|
+                li.avatar = link_to_user_by_avatar(following)
+        a.carousel-control.left href="#following_carousel" data-slide="prev" &lsaquo;
+        a.carousel-control.right href="#following_carousel" data-slide="next" &rsaquo;
+
   ul.user_menu
     li.user_clips
       = link_to clips_path(user_id: @user) do
