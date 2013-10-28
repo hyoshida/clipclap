@@ -66,7 +66,9 @@
           span タグ
 
     li.user_likes
-      = link_to tags_path(user_id: @user) do
+      - class_name = nil
+      - class_name = 'current' if params[:controller] == 'likes'
+      = link_to user_likes_path(user_id: @user), class: class_name do
         p.count = @user.likes.size
         p.title
           i.icon-heart
