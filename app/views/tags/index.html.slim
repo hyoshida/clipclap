@@ -1,4 +1,9 @@
-h2 タグ一覧
-ul
-- @tag_hash.each_pair do |name,count|
-  li style="font-size: #{count + 11}px;" = link_to name, action: :show, name: name
+- if @user.present?
+  == render partial: '/base/user'
+
+- if @tags.present?
+  ul
+    - @tag_hash.each_pair do |name,count|
+      li style="font-size: #{count + 11}px;" = link_to name, action: :show, name: name
+- else
+  p タグが存在しません

@@ -30,6 +30,7 @@ Clipclap::Application.routes.draw do
     end
 
     resources :clips, only: :index
+    resources :tags, only: :index
   end
 
   match 'tags/:name' => 'tags#show', via: :get, as: :tag
