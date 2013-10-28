@@ -1,4 +1,5 @@
-h2 クリップ一覧
+- if @user.present?
+  == render partial: '/base/user'
 
 - if @clips.present?
   == render partial: '/base/wall'

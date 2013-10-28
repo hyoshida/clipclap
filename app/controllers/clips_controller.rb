@@ -71,7 +71,14 @@ class ClipsController < ApplicationController
     #   format.json { render json: @clips }
     # end
 
-    @clips = Clip.paginate(page: params[:page])
+    conditions = {}
+
+    if params[:user_id]
+      @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
+      conditions.update(user_id: params[:user_id]) if @user
+    end
+
+    @clips = Clip.where(conditions).paginate(page: params[:page])
     if first_page?
       render
     else
