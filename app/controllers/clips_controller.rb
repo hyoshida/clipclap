@@ -65,18 +65,13 @@ class ClipsController < ApplicationController
 
   # GET /clips.json
   def index
-    # @clips = Clip.includes(:user, :image_master, :likes, :tags).all
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.json { render json: @clips }
-    # end
-
-    @clips = Clip.paginate(page: params[:page])
-    if first_page?
-      render
-    else
-      render 'home/next_page'
+    if params[:user_id]
+      @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
+      @clips = @user.clips if @user
     end
+
+    @clips = (@clips || Clip).paginate(page: params[:page])
+    render 'home/next_page' unless first_page?
   end
 
   # GET /clips/1

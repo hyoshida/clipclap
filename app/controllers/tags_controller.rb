@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 class TagsController < ApplicationController
   def index
-    @tags = Tag.all
+    if params[:user_id]
+      @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
+      @tags = @user.tags if @user
+    end
 
+    @tags = (@tags || Tag).all
     @tag_hash = {}
     @tags.each do |tag|
       @tag_hash[tag.name] ||= 0

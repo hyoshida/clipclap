@@ -28,6 +28,10 @@ Clipclap::Application.routes.draw do
       get :follow
       get :unfollow
     end
+
+    resources :clips, only: :index
+    resources :tags, only: :index
+    resources :likes, only: :index
   end
 
   match 'tags/:name' => 'tags#show', via: :get, as: :tag

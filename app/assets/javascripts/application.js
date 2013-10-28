@@ -24,3 +24,9 @@
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
+
+$(
+  function () {
+    $(".carousel [data-toggle='tooltip']").tooltip();
+  }
+);

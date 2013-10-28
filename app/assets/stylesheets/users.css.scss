@@ -19,8 +19,15 @@ $profile_margin: 20px;
 $profile_padding: 20px;
 $profile_width: $screen_width - $carousel_width - $profile_margin - $profile_padding * 2;
 $profile_height: $user_info_height - $profile_padding * 2;
+$user_menu_height: 100px;
 
-#user .user_info {
+#user_header {
+  margin-bottom: 10px;
+  width: $screen_width;
+  height: $user_info_height + $user_menu_height + 2px;
+}
+
+#user_header .user_info {
   margin: 20px;
   width: $user_info_width;
   height: $user_info_height;
@@ -28,7 +35,7 @@ $profile_height: $user_info_height - $profile_padding * 2;
   position: relative;
 }
 
-#user .profile {
+#user_header .profile {
   padding: $profile_padding;
   width: $profile_width;
   height: $profile_height;
@@ -60,9 +67,11 @@ $profile_height: $user_info_height - $profile_padding * 2;
   }
 }
 
-#user ul.user_menu {
-  $padding-top: 64px + 20px;
+#user_header ul.user_menu {
+  $top: $profile_height / 2;
+  $padding-top: $profile_height / 2 + 20px;
   $user_menu_height: 100px;
+
   padding-top: $padding-top;
   width: 100%;
   height: $user_menu_height;
@@ -70,8 +79,10 @@ $profile_height: $user_info_height - $profile_padding * 2;
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
   z-index: 11;
+  position: relative;
   position: absolute;
-  top: 64px + 40px + 10px;
+  top: $profile_height / 2 + 40px + 10px;
+
   left: 0;
 
   &:before {
@@ -112,7 +123,7 @@ $profile_height: $user_info_height - $profile_padding * 2;
   }
 }
 
-#user #user_wrapper {
+#user_header #user_wrapper {
   margin-top: 100px;
 }
 
