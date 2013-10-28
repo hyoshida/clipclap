@@ -26,6 +26,7 @@
               span.arrow = icon_tag('angle-down')
             #account_from.dropdown-menu role="menu"
               ul
+                li = link_to 'プロフィール', user_path(current_user)
                 li = link_to 'ログアウト', destroy_user_session_path, method: :delete
         - else
           .dropdown
