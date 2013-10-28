@@ -50,7 +50,7 @@
     li.user_clips
       - class_name = nil
       - class_name = 'current' if params[:controller] == 'clips'
-      = link_to user_clips_path(user_id: @user), class: class_name do
+      = link_to user_clips_path(@user), class: class_name do
         p.count = @user.clips.size
         p.title
           i.icon-paper-clip
@@ -59,7 +59,7 @@
     li.user_tags
       - class_name = nil
       - class_name = 'current' if params[:controller] == 'tags'
-      = link_to user_tags_path(user_id: @user), class: class_name do
+      = link_to user_tags_path(@user), class: class_name do
         p.count = @user.tags.size
         p.title
           i.icon-tags
@@ -68,10 +68,8 @@
     li.user_likes
       - class_name = nil
       - class_name = 'current' if params[:controller] == 'likes'
-      = link_to user_likes_path(user_id: @user), class: class_name do
+      = link_to user_likes_path(@user), class: class_name do
         p.count = @user.likes.size
         p.title
           i.icon-heart
           span イイネ！
-
-
