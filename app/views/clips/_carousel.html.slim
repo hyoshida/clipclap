@@ -6,9 +6,11 @@
       span.you あなた
       - if (count - 1).nonzero?
        span.and と
-       span.count = "#{count - 1}人"
+       span.count = count - 1
+       span.unit 人
     - else
-       span.count = "#{count}人"
+       span.count = count
+       span.unit 人
     span.message = message
   .carousel.slide id="{name}"
     .carousel-inner

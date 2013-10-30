@@ -176,6 +176,17 @@ h2.title {
 
 @import "carousel";
 
+strong {
+  font-size: medium;
+  font-weight: bold;
+}
+
+#clip .carousel_box {
+  .count {
+    @extend strong;
+  }
+}
+
 #clip #reclips_carousel_box {
   @include carousel(5, 2, 36px, 16px, 21px);
   @include border-radius(0);
