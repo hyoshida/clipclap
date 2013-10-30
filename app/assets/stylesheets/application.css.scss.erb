@@ -566,6 +566,9 @@ ul.comments li p {
 .image_box .status a {
   color: #fff;
   cursor: pointer;
+  &.inactive {
+    @include opacity(0.5);
+  }
 }
 
 @mixin btn-reclip {
@@ -608,9 +611,6 @@ ul.comments li p {
   height: 24px;
   line-height: 24px;
   @include btn-like;
-  &.opacity {
-    @include opacity(0.5);
-  }
   &:hover.opacity, &:focus.opacity {
     @include opacity(0.75);
   }

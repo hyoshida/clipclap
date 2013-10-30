@@ -43,13 +43,18 @@ module ApplicationHelper
   end
 
   def unlike_to(clip, options={})
-    default_options = { title: 'イイネ！を取り消す', remote: true }
+    default_options = { title: 'イイネ！を取り消す', remote: true, class: 'inactive' }
     link_to(icon_heart + nostyle_remove + like_count(clip), unlike_clip_path(:id => clip), default_options.merge(options)) if user_signed_in? 
   end
 
   def reclip_to(clip, options={})
-    default_options = { title: 'リクリップする', remote: true }
+    default_options = { title: 'リクリップする', remote: true, method: :put }
     link_to(icon_clip + "リクリップ", reclip_clip_path(:id => clip), default_options.merge(options))
+  end
+
+  def unreclip_to(clip, options={})
+    default_options = { title: 'リクリップを取り消す', remote: true, method: :put, class: 'inactive' }
+    link_to(icon_clip + "リクリップ" + nostyle_remove, unreclip_clip_path(:id => clip), default_options.merge(options))
   end
 
   def comment_to(comment)

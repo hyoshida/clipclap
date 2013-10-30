@@ -80,4 +80,8 @@ class User < ActiveRecord::Base
   def unlike(clip)
     self.likes.where(clip_id: clip.id).first.destroy
   end
+
+  def reclip?(clip)
+    self.clips.exists?(parent_id: clip.id)
+  end
 end

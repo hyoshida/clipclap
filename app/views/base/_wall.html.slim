@@ -17,12 +17,15 @@
               - else
                 span タグなし
             p.reclip
-              = reclip_to clip
+              - if user_signed_in? && current_user.reclip?(clip)
+                = unreclip_to clip
+              - else
+                = reclip_to clip
             p.like
               - if !user_signed_in? || current_user.unlike?(clip)
                 = like_to clip
               - else
-                = unlike_to clip, class: "opacity"
+                = unlike_to clip
 
         - if clip.title.present?
           p.title = link_to clip.title, clip

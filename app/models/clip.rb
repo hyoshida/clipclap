@@ -2,6 +2,8 @@
 class Clip < ActiveRecord::Base
   belongs_to :user
   belongs_to :image_master
+  belongs_to :parent, class_name: 'Clip'
+  belongs_to :origin, class_name: 'Clip'
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
   has_many :comments, :dependent => :destroy
