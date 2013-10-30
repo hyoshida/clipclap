@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def reclip_to(clip, options={})
     default_options = { title: 'リクリップする', remote: true }
-    link_to(icon_clip + "リクリップ", clip_path(:id => clip), default_options.merge(options))
+    link_to(icon_clip + "リクリップ", reclip_clip_path(:id => clip), default_options.merge(options))
   end
 
   def comment_to(comment)

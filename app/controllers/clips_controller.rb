@@ -63,6 +63,27 @@ class ClipsController < ApplicationController
     @comment.destroy
   end
 
+  def reclip
+    return unless signed_in?
+    @parent_clip = Clip.where(id: params[:id]).first
+    return unless @parent_clip
+    @clip = Clip.create(
+      user_id: current_user.id,
+      parent_id: @parent_clip.id,
+      origin_id: @parent_clip.origin_id,
+      origin_url: @parent_clip.origin_url,
+      origin_html: @parent_clip.origin_html,
+      image_master_id: @parent_clip.image_master_id
+    )
+  end
+
+  def unreclip
+    return unless signed_in?
+    @clip = Clip.where(parent_id: params[:id], user_id: current_user.id).first
+    return unless @clip
+    @clip.destroy
+  end
+
   # GET /clips.json
   def index
     if params[:user_id]
