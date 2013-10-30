@@ -38,23 +38,23 @@ module ApplicationHelper
   end
 
   def like_to(clip, options={})
-    default_options = { title: 'イイネ！する', remote: true }
-    link_to(icon_heart_empty + nostyle_like + like_count(clip), like_clip_path(:id => clip), default_options.merge(options))
+    default_options = { remote: true, title: 'イイネ！する' }
+    link_to(icon_heart_empty + nostyle_like + like_count(clip), like_clip_path(clip), default_options.merge(options))
   end
 
   def unlike_to(clip, options={})
-    default_options = { title: 'イイネ！を取り消す', remote: true, class: 'inactive' }
-    link_to(icon_heart + nostyle_remove + like_count(clip), unlike_clip_path(:id => clip), default_options.merge(options)) if user_signed_in? 
+    default_options = { remote: true, title: 'イイネ！を取り消す', class: 'inactive' }
+    link_to(icon_heart + nostyle_remove + like_count(clip), unlike_clip_path(clip), default_options.merge(options))
   end
 
   def reclip_to(clip, options={})
-    default_options = { title: 'リクリップする', remote: true, method: :put }
-    link_to(icon_clip + "リクリップ", reclip_clip_path(:id => clip), default_options.merge(options))
+    default_options = { remote: true, method: :put, title: 'リクリップする' }
+    link_to(icon_clip + "リクリップ", reclip_clip_path(clip), default_options.merge(options))
   end
 
   def unreclip_to(clip, options={})
-    default_options = { title: 'リクリップを取り消す', remote: true, method: :put, class: 'inactive' }
-    link_to(icon_clip + "リクリップ" + nostyle_remove, unreclip_clip_path(:id => clip), default_options.merge(options))
+    default_options = { remote: true, method: :put, title: 'リクリップを取り消す', class: 'inactive' }
+    link_to(icon_clip + "リクリップ" + nostyle_remove, unreclip_clip_path(clip), default_options.merge(options))
   end
 
   def comment_to(comment)
@@ -62,7 +62,8 @@ module ApplicationHelper
   end
 
   def uncomment_to(comment)
-    remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(:id => comment.clip_id, :comment_id => comment), title: 'コメントを取り消す', class: 'remove', remote: true)
+    options = { remote: true, title: 'コメントを取り消す', class: 'remove' }
+    remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(id: comment.clip_id, comment_id: comment.id), options)
     comment_text_to(comment) + remove_link
   end
 
