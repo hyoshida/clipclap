@@ -70,7 +70,7 @@ class ClipsController < ApplicationController
     @clip = Clip.create(
       user_id: current_user.id,
       parent_id: parent_clip.id,
-      origin_id: parent_clip.origin_id,
+      title: parent_clip.title,
       origin_url: parent_clip.origin_url,
       origin_html: parent_clip.origin_html,
       image_master_id: parent_clip.image_master_id
