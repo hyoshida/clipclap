@@ -24,6 +24,10 @@ class Clip < ActiveRecord::Base
 
   self.per_page = Settings.page
 
+  def reclip?
+    self.parent_id.present?
+  end
+
   def reclips
     self.class.where(parent_id: self.id)
   end
