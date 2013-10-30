@@ -1,0 +1,22 @@
+.carousel_box id="#{name}_box"
+  - count = objects.size
+  - users = objects.map(&:user).flatten
+  p.description
+    - if user_signed_in? && users.include?(current_user)
+      span.you あなた
+      - if (count - 1).nonzero?
+       span.and と
+       span.count = "#{count - 1}人"
+    - else
+       span.count = "#{count}人"
+    span.message = message
+  .carousel.slide id="{name}"
+    .carousel-inner
+      - users.each_slice(8).each_with_index do |sliced_users,index|
+        - class_names = [ :item ]
+        - class_names << :active if index.zero?
+        ul class="#{class_names.join(' ')}"
+          - sliced_users.each do |user|
+            li.avatar = link_to_user_by_avatar(user, size: 36)
+    a.carousel-control.left href="##{name}" data-slide="prev" &lsaquo;
+    a.carousel-control.right href="##{name}" data-slide="next" &rsaquo;

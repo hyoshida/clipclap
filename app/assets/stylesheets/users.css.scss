@@ -3,11 +3,13 @@
 @import "bootstrap/buttons";
 @import "compass/css3";
 
+@import "carousel";
+
 $screen_width: 860px;
 $carousel_item_count_x: 4;
 $carousel_item_count_y: 2;
 $carousel_item_size: 32px;
-$carousel_item_margin: 7px;
+$carousel_item_margin: 10px;
 $carousel_control_size: 20px;
 $carousel_inner_width: ($carousel_item_size + $carousel_item_margin) * $carousel_item_count_x;
 $carousel_inner_height: ($carousel_item_size + $carousel_item_margin) * $carousel_item_count_y - $carousel_item_margin;
@@ -132,71 +134,12 @@ $user_menu_height: 100px;
 }
 
 #following_list {
-  top: $carousel_height + 20px * 2 + 27px;
+  top: $carousel_height + 20px * 2 + 21px;
 }
 
-.carousel_box {
-  width: $carousel_width;
-  background-color: #fff;
-  border: 1px solid #aaa;
+#user_header .carousel_box {
+  @include carousel($carousel_item_count_x, $carousel_item_count_y, $carousel_item_size, $carousel_item_margin, $carousel_control_size);
+  @include border-radius(4px);
   position: absolute;
   right: 0;
-  @include border-radius(4px);
-
-  .description {
-    margin-top: 0.25em;
-    margin-left: 0.75em;
-    position: relative;
-    top: 0.75em;
-  }
-}
-
-.carousel_box .carousel {
-  margin: 20px 0;
-  width: $carousel_width;
-  height: $carousel_height;
-  position: relative;
-
-  ul {
-    width: $carousel_inner_width;
-    height: $carousel_inner_height;
-    margin-left: $carousel_control_size;
-    padding: 0 $carousel_item_margin;
-  }
-
-  li {
-    display: inline-block;
-    width: $carousel_item_size + $carousel_item_margin;
-    height: $carousel_item_size + $carousel_item_margin;
-  }
-
-  &.carousel {
-    margin-bottom: 0 default;
-  }
-
-  .carousel-control {
-    margin-top: 0;
-    width: $carousel_control_size;
-    height: $carousel_height;
-    line-height: $carousel_height - 5px;
-    font-size: $carousel_item_size;
-    border: 0;
-    top: 0;
-
-    &.left {
-      left: 0;
-      @include border-corner-radius(top, right, 2px);
-      @include border-corner-radius(bottom, right, 2px);
-      @include border-corner-radius(top, left, 0);
-      @include border-corner-radius(bottom, left, 0);
-    }
-
-    &.right {
-      right: 0;
-      @include border-corner-radius(top, left, 2px);
-      @include border-corner-radius(bottom, left, 2px);
-      @include border-corner-radius(top, right, 0);
-      @include border-corner-radius(bottom, right, 0);
-    }
-  }
 }

@@ -21,3 +21,5 @@ $slide_overlay.show("fade")
 $('body').addClass('noscroll')
 
 $(':focus').blur()
+
+$("[data-toggle='tooltip']").tooltip();
