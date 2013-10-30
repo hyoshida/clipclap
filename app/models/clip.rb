@@ -24,6 +24,18 @@ class Clip < ActiveRecord::Base
 
   self.per_page = Settings.page
 
+  def reclips
+    self.class.where(parent_id: self.id)
+  end
+
+  def reclip_count
+    self.reclips.count
+  end
+
+  def origin_clip
+    self.image_master.clip
+  end
+
   def origin_url_domain
     return nil if self.origin_url.blank?
     require 'uri'

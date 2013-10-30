@@ -31,10 +31,9 @@
           p.title = link_to clip.title, clip
 
         .info
-          - reclip_count = Clip.where(image_master_id: clip.image_master_id).count - 1
           p.reclip_count
             i.icon-paper-clip title="リクリップ数"
-            = reclip_count
+            = clip.reclip_count
 
           p.like
             - if user_signed_in? && current_user.unlike?(clip)

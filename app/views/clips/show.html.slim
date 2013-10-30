@@ -39,6 +39,21 @@
           = f.text_field :name, class: 'span2'
           = f.submit 'タグを追加', class: 'btn'
 
+    -if @clip.reclips.size.nonzero?
+      .reclip_feild
+        p
+          - if user_signed_in? && @clip.reclips.map(&:user).flatten.include?(current_user)
+            span.you あなた
+            - if (@clip.reclips.size - 1).nonzero?
+             span.and と
+             span.count = "#{@clip.reclips.size - 1}人"
+          - else
+             span.count = "#{@clip.reclips.size}人"
+          span.message がリクリップしています
+        ul
+          - @clip.reclips.map(&:user).flatten.each do |user|
+            li.avatar = link_to_user_by_avatar user
+
     -if @clip.likes.size.nonzero?
       .like_feild
         p
