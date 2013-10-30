@@ -41,8 +41,9 @@
 
     -if @clip.reclips.size.nonzero?
       .reclip_feild
+        - users = @clip.reclips.map(&:user).flatten
         p
-          - if user_signed_in? && @clip.reclips.map(&:user).flatten.include?(current_user)
+          - if user_signed_in? && users.include?(current_user)
             span.you あなた
             - if (@clip.reclips.size - 1).nonzero?
              span.and と
@@ -51,13 +52,14 @@
              span.count = "#{@clip.reclips.size}人"
           span.message がリクリップしています
         ul
-          - @clip.reclips.map(&:user).flatten.each do |user|
+          - users.each do |user|
             li.avatar = link_to_user_by_avatar user
 
     -if @clip.likes.size.nonzero?
       .like_feild
+        - users = @clip.likes.map(&:user).flatten
         p
-          - if user_signed_in? && @clip.likes.map(&:user_id).flatten.include?(current_user.id)
+          - if user_signed_in? && users.include?(current_user)
             span.you あなた
             - if (@clip.likes.size - 1).nonzero?
              span.and と
@@ -66,7 +68,7 @@
              span.count = "#{@clip.likes.size}人"
           span.message がイイネ！と言っています
         ul
-          - @clip.likes.map(&:user).flatten.each do |user|
+          - users.each do |user|
             li.avatar = link_to_user_by_avatar user
 
     .view_feild
