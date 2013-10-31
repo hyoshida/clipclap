@@ -3,10 +3,10 @@ class TagsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
-      @tags = @user.tags.select(&:clip) if @user
+      @tags = @user.tags if @user
     end
 
-    @grouped_tags = (@tags || Tag).group_by(&:name)
+    @grouped_tags = (@tags || Tag.all).select(&:clip).group_by(&:name)
   end
 
   def show

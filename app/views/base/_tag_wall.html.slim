@@ -12,11 +12,11 @@
             | クリップ
         .image_box
           - clip = tags.shift.clip
-          = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), user_tag_path(@user, name: tag_name)
+          = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), tag_path(user_id: @user, name: tag_name)
           - if tags.size.nonzero?
             .sub_image_boxes
               - tags.take(3).map(&:clip).each do |clip|
-                = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), user_tag_path(@user, name: tag_name)
+                = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), tag_path(user_id: @user, name: tag_name)
 
   #page-nav
     = link_to 'next', page: @tags.next_page if @tags.respond_to?(:next_page) && @tags.next_page.present?

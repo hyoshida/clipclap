@@ -1,7 +1,7 @@
 - if @user.present?
   == render partial: '/base/user'
 
-- if @tags.present?
+- if @grouped_tags.present?
   == render partial: '/base/tag_wall'
 - else
   p タグが存在しません
