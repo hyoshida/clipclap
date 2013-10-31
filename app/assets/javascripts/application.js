@@ -25,8 +25,6 @@
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
 
-$(
-  function () {
-    $(".carousel [data-toggle='tooltip']").tooltip();
-  }
-);
+$(function () {
+  $("[data-toggle='tooltip']").tooltip();
+});

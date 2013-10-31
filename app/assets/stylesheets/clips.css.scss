@@ -174,8 +174,30 @@ h2.title {
   }
 }
 
-#clip .like_feild {
-  @include additional_info_box;
+@import "carousel";
+
+strong {
+  font-size: medium;
+  font-weight: bold;
+}
+
+#clip .carousel_box {
+  .count {
+    @extend strong;
+  }
+}
+
+#clip #reclips_carousel_box {
+  @include carousel(5, 2, 36px, 16px, 21px);
+  @include border-radius(0);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+#clip #likes_carousel_box {
+  @include carousel(5, 2, 36px, 16px, 21px);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
 }
 
 #clip .view_feild {

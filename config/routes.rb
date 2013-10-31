@@ -9,12 +9,16 @@ Clipclap::Application.routes.draw do
 
   resources :clips, except: [ :edit, :update ] do
     member do
+      # TODO: RESTを考慮した上でURI再設計
       get "like"
       get "unlike"
       post "tagging"
       get "untagging"
       post "comment"
       get "uncomment"
+
+      put :reclip
+      put :unreclip
     end
 
     collection do

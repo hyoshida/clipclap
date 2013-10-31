@@ -2,6 +2,8 @@
 class Clip < ActiveRecord::Base
   belongs_to :user
   belongs_to :image_master
+  belongs_to :parent, class_name: 'Clip'
+  belongs_to :origin, class_name: 'Clip'
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
   has_many :comments, :dependent => :destroy
@@ -21,6 +23,22 @@ class Clip < ActiveRecord::Base
   before_create :create_image_master
 
   self.per_page = Settings.page
+
+  def reclip?
+    self.parent_id.present?
+  end
+
+  def reclips
+    self.class.where(parent_id: self.id)
+  end
+
+  def reclip_count
+    self.reclips.count
+  end
+
+  def origin_clip
+    self.image_master.clip
+  end
 
   def origin_url_domain
     return nil if self.origin_url.blank?

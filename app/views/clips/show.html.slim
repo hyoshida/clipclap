@@ -3,7 +3,13 @@
     p.avatar = link_to_user_by_avatar(@clip.user, size: 64)
     .description
       p.who = raw "#{link_to @clip.user.nick_name, @clip.user}さんが"
-      p.when = "#{time_ago_in_words @clip.created_at}前にクリップしました"
+      p
+        span.when = "#{time_ago_in_words @clip.created_at}前に"
+        - if @clip.reclip?
+          span.where = raw " #{link_to "##{@clip.parent_id}", clip_path(@clip.parent)} から"
+          span.what リクリップしました
+        - else
+          span.what クリップしました
       p.source = raw "(ソース: #{link_to @clip.origin_url_domain, @clip.origin_url})"
 
   .info id="clip_#{@clip.id}"
@@ -39,20 +45,11 @@
           = f.text_field :name, class: 'span2'
           = f.submit 'タグを追加', class: 'btn'
 
+    -if @clip.reclips.size.nonzero?
+      = render partial: 'carousel', locals: { objects: @clip.reclips, name: 'reclips_carousel', message: 'がリクリップしています' }
+
     -if @clip.likes.size.nonzero?
-      .like_feild
-        p
-          - if user_signed_in? && @clip.likes.map(&:user_id).flatten.include?(current_user.id)
-            span.you あなた
-            - if (@clip.likes.size - 1).nonzero?
-             span.and と
-             span.count = "#{@clip.likes.size - 1}人"
-          - else
-             span.count = "#{@clip.likes.size}人"
-          span.message がイイネ！と言っています
-        ul
-          - @clip.likes.map(&:user).flatten.each do |user|
-            li.avatar = link_to_user_by_avatar user
+      = render partial: 'carousel', locals: { objects: @clip.likes, name: 'likes_carousel', message: 'がイイネ！と言っています' }
 
     .view_feild
         p
