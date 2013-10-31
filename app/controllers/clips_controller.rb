@@ -64,21 +64,12 @@ class ClipsController < ApplicationController
   end
 
   def reclip
-    return unless signed_in?
     parent_clip = Clip.where(id: params[:id]).first
     return unless parent_clip
-    @clip = Clip.create(
-      user_id: current_user.id,
-      parent_id: parent_clip.id,
-      title: parent_clip.title,
-      origin_url: parent_clip.origin_url,
-      origin_html: parent_clip.origin_html,
-      image_master_id: parent_clip.image_master_id
-    )
+    @clip = current_user.reclip(parent_clip)
   end
 
   def unreclip
-    return unless signed_in?
     @clip = Clip.where(parent_id: params[:id], user_id: current_user.id).first
     return unless @clip
     @clip.destroy

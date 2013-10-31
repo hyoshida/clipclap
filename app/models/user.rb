@@ -84,4 +84,14 @@ class User < ActiveRecord::Base
   def reclip?(clip)
     self.clips.exists?(parent_id: clip.id)
   end
+
+  def reclip(parent_clip)
+    self.clips.create(
+      parent_id: parent_clip.id,
+      image_master_id: parent_clip.image_master_id,
+      title: parent_clip.title,
+      origin_url: parent_clip.origin_url,
+      origin_html: parent_clip.origin_html
+    )
+  end
 end
