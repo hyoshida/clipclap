@@ -1,0 +1,22 @@
+- content_for :head do
+  = javascript_include_tag "wall"
+
+#container.hidden
+  ul
+    - @grouped_tags.each_pair do |tag_name,tags|
+      li.group_box.box
+        h2.title = link_to tag_name, tag_path(tag_name)
+        p.description
+          span.clip_count
+            = tags.size
+            | クリップ
+        .image_box
+          - clip = tags.shift.clip
+          = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), tag_path(tag_name)
+          - if tags.size.nonzero?
+            .sub_image_boxes
+              - tags.take(3).map(&:clip).each do |clip|
+                = link_to image_tag(image_master_path(clip.image_master), alt: clip.title), tag_path(tag_name)
+
+  #page-nav
+    = link_to 'next', page: @tags.next_page if @tags.respond_to?(:next_page) && @tags.next_page.present?

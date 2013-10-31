@@ -1,0 +1,82 @@
+// Place all the styles related to the tags controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "compass/utilities";
+@import "compass/css3";
+
+$group_box_width: <%= Settings.thumb_width %>px;
+$group_box_height: <%= Settings.thumb_width %>px;
+
+li.group_box {
+  display: block;
+  width: $group_box_width;
+  padding: 0;
+  border: 0;
+
+  h2.title {
+    margin: 10px 0 0;
+    padding: 0;
+    width: $group_box_width;
+
+    a {
+      @include ellipsis;
+    }
+  }
+
+  p.description {
+    margin-bottom: 10px;
+    color: #888;
+    text-align: center;
+  }
+
+  .image_box {
+    margin: 4px;
+    padding: 0;
+    width: $group_box_width;
+    height: $group_box_height;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    @include border-radius(5px);
+
+    a {
+      display: block;
+      cursor: pointer;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  .sub_image_boxes {
+    display: inline-block;
+    width: $group_box_width;
+    height: $group_box_height / 3 - 1;
+    overflow: hidden;
+    background-color: #ccc;
+    border-top: 1px solid #aaa;
+    position: relative;
+    bottom: $group_box_width / 3;
+
+    a {
+      display: inline-block;
+      width: $group_box_width / 3;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+
+      &:nth-child(even) {
+        width: $group_box_width / 3 - 2;
+        border-left: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+      }
+
+      img {
+        width: 100%;
+        @include border-radius(0);
+      }
+    }
+  }
+}

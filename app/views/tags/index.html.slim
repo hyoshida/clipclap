@@ -2,8 +2,6 @@
   == render partial: '/base/user'
 
 - if @tags.present?
-  ul
-    - @tag_hash.each_pair do |name,count|
-      li style="font-size: #{count + 11}px;" = link_to name, action: :show, name: name
+  == render partial: '/base/tag_wall'
 - else
   p タグが存在しません
