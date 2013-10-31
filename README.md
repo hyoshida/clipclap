@@ -7,3 +7,5 @@ Clipclap
 [![Dependency Status](https://www.versioneye.com/user/projects/527279fe632bac02d400004b/badge.png)](https://www.versioneye.com/user/projects/527279fe632bac02d400004b)
 
 Clipclap is a tool for collecting and sharing pictures you love.
+
+[Check out a demo](http://clipclap.heroku.com/).
