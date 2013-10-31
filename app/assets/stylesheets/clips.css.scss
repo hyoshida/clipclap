@@ -28,7 +28,7 @@
   $header_border_height: 4px;
   $header_height: $header_menu_height + $header_border_height;
   width: 85%;
-  z-index: 10;
+  z-index: 100;
   position: fixed;
   top: $header_height;
   bottom: 0;
