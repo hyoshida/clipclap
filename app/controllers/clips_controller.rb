@@ -165,16 +165,11 @@ class ClipsController < ApplicationController
 
   private
 
-  def owner_user_operation?
+  def authenticate_user!
+    return super unless request.xhr?
     return if user_signed_in?
-    flash.now[:alert] = 'この操作を実施する権限がありません'
-    redirect_to clips_url
-  end
-
-  def logged_in?
-    return if user_signed_in?
-    flash.now[:alert] = 'この操作にはログインが必要です'
-    redirect_to clips_url
+    flash[:alert] = 'この操作にはログインが必要です'
+    render js: %{window.location = "#{new_user_session_path}"}
   end
 
   def insert_div_tag_for_image_tag
