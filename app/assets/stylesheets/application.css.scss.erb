@@ -99,7 +99,7 @@ body {
   position: fixed;
   @include zurui-gradient-top-lighten(#1a1a1a);
   border-bottom: 4px solid #f70;
-  z-index: 99;
+  z-index: 999;
 }
 
 @mixin hilight_menu_item {
@@ -657,6 +657,7 @@ ul.comments li p {
 }
 
 .ui-widget-overlay {
+  z-index: 90;
   background: transparent url("<%= image_path 'transblack.png' %>") repeat !important;
 }
 
