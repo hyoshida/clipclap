@@ -1,4 +1,5 @@
 defaults: &defaults
+  site_name: 'Clipclap(β)'
   page: 50
   ranking_limit: 50
   thumb_width: 240
