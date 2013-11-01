@@ -107,3 +107,6 @@ gem 'resque'
 # リアルタイムメッセージング
 gem 'private_pub'
 gem 'thin'
+
+# 複数アプリケーションの管理
+gem 'foreman'
