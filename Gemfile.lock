@@ -99,6 +99,9 @@ GEM
     erubis (2.7.0)
     everywhere (2.0.0)
       activerecord
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     excon (0.25.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -310,6 +313,7 @@ DEPENDENCIES
   coveralls
   devise
   everywhere
+  exception_notification
   factory_girl_rails
   font-awesome-sass-rails
   heroku

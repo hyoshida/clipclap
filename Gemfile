@@ -97,3 +97,6 @@ gem "slim-rails"
 
 # フォロー/フォロワー機能を追加
 gem 'acts_as_follower', '~> 0.1.1'
+
+# 補足出来なかった例外をメール送信
+gem 'exception_notification'
