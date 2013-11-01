@@ -6,20 +6,23 @@ class TagsController < ApplicationController
       @tags = @user.tags if @user
     end
 
-    @tags = (@tags || Tag).all
-    @tag_hash = {}
-    @tags.each do |tag|
-      @tag_hash[tag.name] ||= 0
-      @tag_hash[tag.name] += 1
-    end
+    @grouped_tags = (@tags || Tag.all).select(&:clip).group_by(&:name)
   end
 
   def show
-    @clips = Clip
-      .joins(:tags)
-      .where('tags.name = ?', params[:name])
-      .includes(:image_master, :likes)
-      .paginate(page: params[:page])
-      .all
+    contditions_for_tags = { name: params[:name] }
+
+    if params[:user_id]
+      @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
+      contditions_for_tags.update(user_id: @user.id) if @user
+    end
+
+    @clips ||= Clip.
+      joins(:tags).
+      where(tags: contditions_for_tags).
+      includes(:image_master).
+      includes(:likes).
+      paginate(page: params[:page]).
+      all
   end
 end
