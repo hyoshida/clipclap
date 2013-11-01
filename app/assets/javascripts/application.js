@@ -24,6 +24,7 @@
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require masonry/jquery.infinitescroll.min
+//= require private_pub
 
 $(function () {
   $("[data-toggle='tooltip']").tooltip();

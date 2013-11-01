@@ -171,6 +171,7 @@ class Clip < ActiveRecord::Base
     path
   end
 
+  # TODO: 高速化
   def create_image_tag_by_image_url(url)
     require 'open-uri'
     require 'image_size'

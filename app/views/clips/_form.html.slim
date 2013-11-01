@@ -4,6 +4,8 @@
   = javascript_include_tag "dnd"
   = javascript_include_tag "bookmarklet"
 
+= subscribe_to "/cliped"
+
 #image_selecter
   h3 1. 画像をセレクト
   = form_for @clip, url: { action: :get_image_tags }, remote: true, html: { id: 'load_form' } do |f|
