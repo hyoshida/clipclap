@@ -100,3 +100,10 @@ gem 'acts_as_follower', '~> 0.1.1'
 
 # 補足出来なかった例外をメール送信
 gem 'exception_notification'
+
+# 非同期処理
+gem 'resque'
+
+# リアルタイムメッセージング
+gem 'private_pub'
+gem 'thin'

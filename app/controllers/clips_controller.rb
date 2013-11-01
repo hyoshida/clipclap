@@ -2,28 +2,31 @@
 class ClipsController < ApplicationController
   before_filter :authenticate_user!, except: [ :index, :show, :get_image_tags ]
 
+  require 'will_paginate/array'
+
   # for Ajax
   def get_image_tags
-    require 'will_paginate/array'
-    require 'hpricot'
-    html = ''
-    if params[:page].blank? || params[:page].to_i <= 1
-      @clip = Clip.new(params[:clip])
-      @clip.fill_origin_entry
-      html = @clip.create_html_only_images
-      create_html_cahce_file(html)
-    else
-      html = load_html_cahce_file
+    raise unless params[:clip]
+    raise unless params[:clip][:origin_url]
+
+    @clip = Clip.new(params[:clip])
+    raise unless @clip
+
+    if not exist_html_cahce_file?
+      Resque.enqueue(ImageClipper, @clip.origin_url)
+      raise
     end
-    doc = Hpricot(html)
+
+    doc = Hpricot(load_html_cahce_file)
     @page = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    if params[:page].blank? || params[:page].to_i <= 1
+    if params[:page].to_i.zero?
       @html = @page.join
-      render
     else
       @html = "<html><body><div id='container'>#{@page.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
       render text: @html
     end
+  rescue
+    render nothing: true
   end
 
   def like
@@ -183,11 +186,20 @@ class ClipsController < ApplicationController
     end
   end
 
+  def exist_html_cahce_file?
+    File.exist? html_cache_file_path
+  end
+
   def load_html_cahce_file
     File.open(html_cache_file_path).read
   end
 
   def html_cache_file_path
-    File.join(Settings.html_cache_dir, "#{current_user.id.to_s}.html")
+    File.join(Settings.html_cache_dir, "#{hash_by_target_url}.html")
+  end
+
+  def hash_by_target_url
+    require 'digest/sha2'
+    Digest::SHA256.hexdigest(@clip.origin_url)
   end
 end
