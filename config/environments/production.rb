@@ -74,17 +74,17 @@ Clipclap::Application.configure do
     authentication: :plain,
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
-    domain: 'heroku.com'
+    domain: 'clipclap.org'
   }
 
   # for Device
-  config.action_mailer.default_url_options = { :host => 'clipclap.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'clipclap.org' }
 
   config.middleware.use(
     ExceptionNotification::Rack,
     email: {
       email_prefix: "[Clipclap] ",
-      sender_address: "Clipclap <noreply@clipclap.herokuapp.com>",
+      sender_address: %{"Clipclap" <no-reply@clipclap.org>},
       exception_recipients: %w( hyoshida@appirits.com )
     }
   )
