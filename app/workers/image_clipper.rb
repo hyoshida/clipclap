@@ -24,11 +24,18 @@ class ImageClipper
       }
     end
 
+    def publish_for_error(message)
+      PrivatePub.publish_to('/cliped', "$('#alert').text('#{message}');")
+    end
+
     def download_html
       clip = Clip.new(origin_url: @target_url)
       clip.fill_origin_entry
       html = clip.create_html_only_images
       create_html_cahce_file(html)
+    rescue
+      publish_for_error($!.message)
+      raise
     end
 
     def create_html_cahce_file(html)
