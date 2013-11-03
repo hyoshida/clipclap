@@ -1,0 +1,10 @@
+development:
+  server: "http://vistlip:9292/faye"
+  secret_token: "secret"
+test:
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+production:
+  server: "http://clipclap.org:9292/faye"
+  secret_token: "e80f7407d68f55b87adced51d1aae06c62f493048def5e86a408019cd4d04350"
+  signature_expiration: 3600 # one hour

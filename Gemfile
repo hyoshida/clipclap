@@ -58,6 +58,7 @@ gem 'uglifier'
 
 # Use unicorn as the web server
 gem 'unicorn'
+gem 'unicorn-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
@@ -100,3 +101,13 @@ gem 'acts_as_follower', '~> 0.1.1'
 
 # 補足出来なかった例外をメール送信
 gem 'exception_notification'
+
+# 非同期処理
+gem 'resque'
+
+# リアルタイムメッセージング
+gem 'private_pub'
+gem 'thin'
+
+# 複数アプリケーションの管理
+gem 'foreman'
