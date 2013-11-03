@@ -340,6 +340,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unicorn-rails (1.1.0)
+      rack
+      unicorn
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.2.3)
@@ -390,6 +393,7 @@ DEPENDENCIES
   thin
   uglifier
   unicorn
+  unicorn-rails
   will_paginate (~> 3.0.3)
   yaml_db
   zurui-sass-rails
