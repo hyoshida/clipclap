@@ -9,6 +9,10 @@
 // compiled file, but it's generally better to create a new file per style scope.
 //
 //= require_self
+//
+// デザイン崩れのもとになるので先に読み込む
+//= require screen
+//
 //= require jquery.ui.dialog
 //= #require 'masonry/basic'
 //= require 'masonry/centered'
@@ -45,42 +49,6 @@
 
 .tooltip.in {
   opacity: 0.9;
-}
-
-html,
-body {
-  font-family: sans-serif !important;
-  background-color: #fff;
-}
-
-form {
-  margin: 0;
-  padding: 0;
-}
-
-input {
-  margin: 7px 5px;
-  &[type="radio"], &[type="checkbox"] {
-    margin: 7px 5px;
-  }
-}
-
-label {
-  display: inline;
-  margin: 7px 5px;
-}
-
-.input-small {
-  width: 110px;
-}
-
-h1 {
-  font-weight: bold !important;
-}
-
-strong {
-  font-size: medium !important;
-  font-weight: bold !important;
 }
 
 

@@ -1,21 +1,11 @@
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 11px;
 }
 
 a {
@@ -61,5 +51,54 @@ div {
   ul li {
     font-size: 12px;
     list-style: square;
+  }
+}
+
+html,
+body {
+  font-family: sans-serif !important;
+  background-color: #fff;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  margin: 7px 5px;
+  &[type="radio"], &[type="checkbox"] {
+    margin: 7px 5px;
+  }
+}
+
+label {
+  display: inline;
+  margin: 7px 5px;
+}
+
+.input-small {
+  width: 110px;
+}
+
+h1 {
+  font-weight: bold !important;
+}
+
+strong {
+  font-size: medium !important;
+  font-weight: bold !important;
+}
+
+legend {
+  display: block;
+  font-size: 21px;
+  line-height: 40px;
+  color: #333;
+  border-bottom: 1px solid #E5E5E5;
+
+  + * {
+    margin-top: 20px;
+    -webkit-margin-top-collapse: separate;
   }
 }

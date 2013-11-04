@@ -1,7 +1,6 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 @import "bootstrap/buttons";
-@import "bootstrap/forms";
 @import "compass/css3";
 
 @import "carousel";
@@ -152,15 +151,6 @@ $user_menu_height: 100px;
 
   fieldset {
     margin-bottom: 50px;
-  }
-
-  legend {
-    margin-bottom: 0;
-
-    + * {
-      margin-top: 20px;
-      -webkit-margin-top-collapse: separate;
-    }
   }
 }
 
