@@ -6,11 +6,15 @@
       p.description = @user.description
       .buttons
         - if current_user
-          p#follow_button.button
-            - if current_user.following? @user
-              = unfollow_to @user
-            - else
-              = follow_to @user
+          - if current_user.id == @user.id
+            p#edit_button.button
+              = link_to 'プロフィールを編集', edit_user_path(@user), class: 'btn'
+          - else
+            p#follow_button.button
+              - if current_user.following? @user
+                = unfollow_to @user
+              - else
+                = follow_to @user
 
     #follower_list.carousel_box
       .description
