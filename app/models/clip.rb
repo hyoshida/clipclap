@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class Clip < ActiveRecord::Base
   belongs_to :user
-  belongs_to :image_master
+  belongs_to :image
   belongs_to :parent, class_name: 'Clip'
   belongs_to :origin, class_name: 'Clip'
   has_many :likes, :dependent => :destroy
@@ -20,7 +20,7 @@ class Clip < ActiveRecord::Base
   attr_accessor :base_url
   attr_reader :error_info
 
-  before_create :create_image_master
+  before_create :create_image
 
   self.per_page = Settings.page
 
@@ -37,7 +37,7 @@ class Clip < ActiveRecord::Base
   end
 
   def origin_clip
-    self.image_master.clip
+    self.image.clip
   end
 
   def origin_url_domain
@@ -62,24 +62,24 @@ class Clip < ActiveRecord::Base
     self.likes.size
   end
 
-  def create_image_master
+  def create_image
     return if @url.nil?
-    image_master = ImageMaster.where(url: @url).first
-    if image_master.nil?
+    image = Image.where(url: @url).first
+    if image.nil?
       require 'open-uri'
       require 'image_size'
       image_size = ImageSize.new(open(@url))
-      image_master = ImageMaster.create(url: @url, width: image_size.width, height: image_size.height)
+      image = Image.create(url: @url, width: image_size.width, height: image_size.height)
     end
-    self.image_master_id = image_master.id
+    self.image_id = image.id
   end
 
   def url
-    self.image_master.try(:url) || @url
+    self.image.try(:url) || @url
   end
 
   def thumb_size_for_style_sheet
-    self.image_master.thumb_size_for_style_sheet
+    self.image.thumb_size_for_style_sheet
   end
 
   def create_html_only_images
@@ -176,8 +176,8 @@ class Clip < ActiveRecord::Base
     require 'open-uri'
     require 'image_size'
     image_size = ImageSize.new(open(url))
-    image_master = ImageMaster.new(url: url, width: image_size.width, height: image_size.height)
-    "<img src=\"#{url}\" style=\"#{image_master.thumb_size_for_style_sheet}\" />"
+    image = Image.new(url: url, width: image_size.width, height: image_size.height)
+    "<img src=\"#{url}\" style=\"#{image.thumb_size_for_style_sheet}\" />"
   end
 
   def available_size_image?(image_size)

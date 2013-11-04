@@ -18,6 +18,6 @@ FactoryGirl.define do
     created_at Time.now
     updated_at Time.now
     sequence(:origin_url) {|n| ORIGIN_URL_LIST[n % ORIGIN_URL_LIST.size] }
-    sequence(:image_master_id) {|n| (n % ORIGIN_URL_LIST.size) + 1 }
+    sequence(:image_id) {|n| (n % ORIGIN_URL_LIST.size) + 1 }
   end
 end

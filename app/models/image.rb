@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-class ImageMaster < ActiveRecord::Base
+class Image < ActiveRecord::Base
   has_many :clips
   has_many :likes
 

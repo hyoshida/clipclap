@@ -9,7 +9,7 @@
     - @clips.each do |clip|
       li.box id="clip_#{clip.id}"
         .image_box
-          = link_to image_tag(image_master_path(clip.image_master), alt: clip.title, style: clip.thumb_size_for_style_sheet), clip, remote: true
+          = link_to image_tag(image_path(clip.image), alt: clip.title, style: clip.thumb_size_for_style_sheet), clip, remote: true
           .status
             p.tag
               - if clip.tags.any?
@@ -41,10 +41,10 @@
             - else
               = unlike_to clip
 
-          - if false && clip.image_master.likes.any?
+          - if false && clip.image.likes.any?
             p.we_like
               i.icon-group title="みんなのイイネ！"
-              = clip.image_master.likes.size
+              = clip.image.likes.size
 
           p.view_count
             i.icon-eye-open title="閲覧数"

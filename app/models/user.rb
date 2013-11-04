@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
   def like(clip)
     self.likes.create(
       clip_id: clip.id,
-      image_master_id: clip.image_master_id
+      image_id: clip.image_id
     )
   end
 
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   def reclip(parent_clip)
     self.clips.create(
       parent_id: parent_clip.id,
-      image_master_id: parent_clip.image_master_id,
+      image_id: parent_clip.image_id,
       title: parent_clip.title,
       origin_url: parent_clip.origin_url,
       origin_html: parent_clip.origin_html
