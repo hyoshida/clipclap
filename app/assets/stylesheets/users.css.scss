@@ -163,3 +163,13 @@ $user_menu_height: 100px;
     }
   }
 }
+
+#user_header .profile {
+  #edit_button {
+    visibility: hidden;
+  }
+
+  &:hover #edit_button {
+    visibility: visible;
+  }
+}
