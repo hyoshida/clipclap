@@ -18,9 +18,6 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano'
   gem 'capistrano-rbenv'
-
-  # for Heroku
-  gem 'heroku'
 end
 
 # Gems used only for assets and not required
