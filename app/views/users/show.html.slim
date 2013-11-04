@@ -4,11 +4,3 @@
   #user_wrapper
     - if @clips.present?
       == render partial: '/base/wall'
-
-  - if user_signed_in? && @user.id == current_user.id
-    = link_to 'Destroy', @user, confirm: 'Are you sure?', method: :delete
-    span |
-
-  = link_to 'Back', clips_path
-  span |
-  = link_to 'Home', root_path

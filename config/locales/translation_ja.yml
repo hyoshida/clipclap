@@ -42,6 +42,7 @@ ja:
         likes: likes  #g
         clips: clips  #g
         tags: tags  #g
+        description: 自己紹介
 
       admin_user:
         <<: *user

@@ -1,6 +1,7 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 @import "bootstrap/buttons";
+@import "bootstrap/forms";
 @import "compass/css3";
 
 @import "carousel";
@@ -142,4 +143,33 @@ $user_menu_height: 100px;
   @include border-radius(4px);
   position: absolute;
   right: 0;
+}
+
+#user {
+  form {
+    width: $screen_width;
+  }
+
+  fieldset {
+    margin-bottom: 50px;
+  }
+
+  legend {
+    margin-bottom: 0;
+
+    + * {
+      margin-top: 20px;
+      -webkit-margin-top-collapse: separate;
+    }
+  }
+}
+
+#user_header .profile {
+  #edit_button {
+    visibility: hidden;
+  }
+
+  &:hover #edit_button {
+    visibility: visible;
+  }
 }

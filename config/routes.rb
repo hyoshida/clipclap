@@ -27,7 +27,7 @@ Clipclap::Application.routes.draw do
     end
   end
 
-  resources :users, only: [ :index, :show ] do
+  resources :users do
     member do
       get :follow
       get :unfollow
