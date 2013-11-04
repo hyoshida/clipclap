@@ -15,7 +15,7 @@ ja:
     models:
       user: ユーザー
       admin_user: 管理者
-      image_master: 画像マスタ
+      image: 画像
       like: イイネ
       clip: クリップ
       tag: タグ
@@ -47,7 +47,7 @@ ja:
       admin_user:
         <<: *user
 
-      image_master:
+      image:
         delete_ordered_at: delete_ordered_at  #g
         likes: likes  #g
         clips: clips  #g
@@ -56,12 +56,12 @@ ja:
         height: 高さ
 
       like:
-        image_master: :activerecord.models.image_master  #g
+        image: :activerecord.models.image  #g
         clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
 
       clip:
-        image_master: :activerecord.models.image_master  #g
+        image: :activerecord.models.image  #g
         likes: likes  #g
         origin_html: origin_html  #g
         origin_url: origin_url  #g

@@ -27,10 +27,10 @@ RailsAdmin.config do |config|
   # config.default_items_per_page = 20
 
   # Exclude specific models (keep the others):
-  # config.excluded_models = ['AdminUser', 'ImageMaster', 'Like', 'Clip', 'Tag', 'User']
+  # config.excluded_models = ['AdminUser', 'Image', 'Like', 'Clip', 'Tag', 'User']
 
   # Include specific models (exclude the others):
-  # config.included_models = ['AdminUser', 'ImageMaster', 'Like', 'Clip', 'Tag', 'User']
+  # config.included_models = ['AdminUser', 'Image', 'Like', 'Clip', 'Tag', 'User']
 
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
@@ -103,11 +103,11 @@ RailsAdmin.config do |config|
   # end
 
 
-  ###  ImageMaster  ###
+  ###  Image  ###
 
-  # config.model 'ImageMaster' do
+  # config.model 'Image' do
 
-  #   # You can copy this to a 'rails_admin do ... end' block inside your image_master.rb model definition
+  #   # You can copy this to a 'rails_admin do ... end' block inside your image.rb model definition
 
   #   # Found associations:
 
@@ -160,14 +160,14 @@ RailsAdmin.config do |config|
 
   #     configure :user, :belongs_to_association 
   #     configure :clip, :belongs_to_association 
-  #     configure :image_master, :belongs_to_association 
+  #     configure :image, :belongs_to_association 
 
   #   # Found columns:
 
   #     configure :id, :integer 
   #     configure :user_id, :integer         # Hidden 
   #     configure :clip_id, :integer         # Hidden 
-  #     configure :image_master_id, :integer         # Hidden 
+  #     configure :image_id, :integer         # Hidden 
   #     configure :created_at, :datetime 
   #     configure :updated_at, :datetime 
 
@@ -206,7 +206,7 @@ RailsAdmin.config do |config|
   #   # Found associations:
 
   #     configure :user, :belongs_to_association 
-  #     configure :image_master, :belongs_to_association 
+  #     configure :image, :belongs_to_association 
   #     configure :likes, :has_many_association 
   #     configure :tags, :has_many_association 
 
@@ -214,7 +214,7 @@ RailsAdmin.config do |config|
 
   #     configure :id, :integer 
   #     configure :user_id, :integer         # Hidden 
-  #     configure :image_master_id, :integer         # Hidden 
+  #     configure :image_id, :integer         # Hidden 
   #     configure :title, :string 
   #     configure :origin_url, :string 
   #     configure :origin_html, :text 

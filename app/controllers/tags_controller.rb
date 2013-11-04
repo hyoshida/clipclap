@@ -20,7 +20,7 @@ class TagsController < ApplicationController
     @clips ||= Clip.
       joins(:tags).
       where(tags: contditions_for_tags).
-      includes(:image_master).
+      includes(:image).
       includes(:likes).
       paginate(page: params[:page]).
       all

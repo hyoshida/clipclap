@@ -92,7 +92,7 @@ class ClipsController < ApplicationController
   # GET /clips/1
   # GET /clips/1.js
   def show
-    @clip = Clip.includes(:user, :image_master, :tags).find(params[:id])
+    @clip = Clip.includes(:user, :image, :tags).find(params[:id])
     @clip.increment_view_count!(request)
 
     respond_to do |format|
