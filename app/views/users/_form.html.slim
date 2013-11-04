@@ -1,0 +1,14 @@
+table.table.table-hover.table-bordered
+  tr
+    th = f.label :name
+    td = f.text_field :name, placeholder: @user.class.human_attribute_name(:name)
+
+  tr
+    th = f.label :email
+    td = f.text_field :email, placeholder: @user.class.human_attribute_name(:email)
+
+  tr
+    th = f.label :description
+    td = f.text_area :description, rows: 3, placeholder: @user.class.human_attribute_name(:description)
+
+= f.submit class: 'btn btn-primary'
