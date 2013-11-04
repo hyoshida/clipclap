@@ -111,3 +111,4 @@ gem 'thin'
 
 # 複数アプリケーションの管理
 gem 'foreman'
+gem 'foreman-export-initscript'
