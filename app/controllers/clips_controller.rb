@@ -124,7 +124,7 @@ class ClipsController < ApplicationController
     clip_attr = { user_id: current_user.id }
     @clip = Clip.new(clip_attr.merge(params[:clip]))
 
-    exist_image_flag = ImageMaster.where(url: params[:clip][:url]).first.present?
+    exist_image_flag = Image.where(url: params[:clip][:url]).first.present?
 
     respond_to do |format|
       if !exist_image_flag && @clip.save
