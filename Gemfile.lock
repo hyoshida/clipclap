@@ -211,6 +211,7 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     netrc (0.7.7)
+    newrelic_rpm (3.6.8.168)
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
     oauth2 (0.8.1)
@@ -383,6 +384,7 @@ DEPENDENCIES
   jquery-ui-rails
   masonry-rails
   mysql2
+  newrelic_rpm
   omniauth-facebook
   private_pub
   rails (= 3.2.14)
