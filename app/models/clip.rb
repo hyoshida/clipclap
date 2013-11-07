@@ -137,7 +137,7 @@ class Clip < ActiveRecord::Base
       return
     end
 
-    open(self.origin_url, allow_redirections: :all, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
+    open(self.origin_url, 'r:binary', allow_redirections: :all, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
       # 厳密な画像判定
       # f.content_type =~ /^image/
 

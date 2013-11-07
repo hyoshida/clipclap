@@ -117,5 +117,5 @@ gem 'newrelic_rpm'
 # アクセス解析
 gem 'google-analytics-rails'
 
-# open-uriにリダイレクト用のオプションを追加
-gem 'open_uri_redirections'
+# open-uriにリダイレクト用のオプションを追加(mode引数対応版)
+gem 'open_uri_redirections', git: 'git://github.com/hyoshida/open_uri_redirections.git', branch: 'support_mode_argument'
