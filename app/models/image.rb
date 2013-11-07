@@ -5,6 +5,9 @@ class Image < ActiveRecord::Base
 
   #validates :url, :uniqueness => true, :presence => true, :format => { :with => /^https?:\/\/.*\/.*\.(jpg|jpeg|png|gif)$/ }
   validates :url, :uniqueness => true, :presence => true, :format => { :with => /^https?:\/\/.*\/.*$/ }
+  validates :width, :numericality => { :greater_than => Settings.minimum_image_width }
+  validates :height, :numericality => { :greater_than => Settings.minimum_image_height }
+  validates_with ImageAspectValidator, :width => :width, :height => :height, :aspect => Settings.allowed_image_aspect
 
   def thumb_path
     require 'digest/sha2'

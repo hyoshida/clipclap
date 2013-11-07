@@ -1,3 +1,11 @@
+function is_available_image_size(width, height) {
+  var aspect = width / height * 1.0;
+  return width > <%= Settings.minimum_image_width %> &&
+    height > <%= Settings.minimum_image_height %> &&
+    aspect < <%= Settings.allowed_image_aspect[0] / Settings.allowed_image_aspect[1] * 1.0 %> &&
+    aspect > <%= Settings.allowed_image_aspect[1] / Settings.allowed_image_aspect[0] * 1.0 %>;
+}
+
 var $container = $('#container')
 
 <% if @clip.error_info.present? %>
@@ -23,10 +31,21 @@ var $container = $('#container')
     box.removeAttr('id');
   });
 
-  $container.masonry('reload');
-  $container.imagesLoaded(function() {
-    $container.masonry('reload');
-    $container.find('img:first').attr('id', 'selected');
+  $('#container').css({ opacity: 0 }).imagesLoaded(function() {
+    $(this).find('.box img').each(function() {
+      width = <%= Settings.thumb_width %>;
+      height = Math.floor($(this).height() * (width / $(this).width() * 1.0));
+      if (is_available_image_size(width, height)) {
+        $(this).width(width);
+        $(this).height(height);
+      } else {
+        $(this).parent().remove();
+      }
+    });
+    $(this).removeClass('hidden');
+    $(this).masonry('reload');
+    $(this).find('img:first').attr('id', 'selected');
+    $(this).animate({ opacity: 1 });
   });
 
   $container.on('click', '.box img', function() {

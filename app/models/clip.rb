@@ -63,14 +63,18 @@ class Clip < ActiveRecord::Base
   end
 
   def create_image
-    return if @url.nil?
+    return true if self.parent_id
+    return false if @url.nil?
+
     image = Image.where(url: @url).first
     if image.nil?
       require 'open-uri'
       require 'image_size'
       image_size = ImageSize.new(open(@url))
       image = Image.create(url: @url, width: image_size.width, height: image_size.height)
+      return false if image.nil?
     end
+
     self.image_id = image.id
   end
 
@@ -83,22 +87,14 @@ class Clip < ActiveRecord::Base
   end
 
   def create_html_only_images
-    self.listup_available_image_urls.map {|url| create_image_tag_by_image_url(url) }.join
+    self.listup_image_urls_from_html.map do |url|
+      ActionController::Base.helpers.image_tag(url)
+    end.join
   end
 
   def create_html_only_images_with_pagenate(page)
     require 'will_paginate/array'
     create_html_only_images.paginate(page: page, per_page: self.class.per_page).join
-  end
-
-  def listup_available_image_urls
-    require 'open-uri'
-    require 'image_size'
-    listup_image_urls_from_html.select do |image_url|
-      file = open(image_url) rescue next
-      image_size = ImageSize.new(file)
-      (image_size.size.present? && available_size_image?(image_size) && available_aspect_image?(image_size))
-    end
   end
 
   def listup_image_urls_from_html
@@ -149,9 +145,6 @@ class Clip < ActiveRecord::Base
       # 変換できない文字があるときは適当な記号（デフォルトは ?）に置き換え
       # TODO: http://moeimg.blog133.fc2.com/ このサイトがうまくエンコードできない
       self.origin_html = f.read.encode(Encoding.default_internal, f.charset, invalid: :replace, undef: :replace)
-
-      image_url = pickup_image_url_from_html
-      @url = image_url if image_url.present?
     end
   rescue
     @error_info = $!.message
@@ -169,24 +162,5 @@ class Clip < ActiveRecord::Base
     require 'uri'
     return URI.parse(path).path if path =~ /^http/
     path
-  end
-
-  # TODO: 高速化
-  def create_image_tag_by_image_url(url)
-    require 'open-uri'
-    require 'image_size'
-    image_size = ImageSize.new(open(url))
-    image = Image.new(url: url, width: image_size.width, height: image_size.height)
-    "<img src=\"#{url}\" style=\"#{image.thumb_size_for_style_sheet}\" />"
-  end
-
-  def available_size_image?(image_size)
-    image_size.width > 16 && image_size.height > 16
-  end
-
-  def available_aspect_image?(image_size)
-    aspect = [ 16, 5 ]
-    image_aspect = 1.0 * image_size.width / image_size.height
-    image_aspect < (aspect[0] / aspect[1]) && image_aspect > (aspect[1] / aspect[0])
   end
 end
