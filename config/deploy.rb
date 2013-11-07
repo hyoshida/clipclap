@@ -41,7 +41,7 @@ namespace :foreman do
   desc "Export the Procfile to scripts"
   task :export, roles: :app do
     run "if [ ! -d #{foreman_location_path} ]; then mkdir -p #{foreman_location_path}; fi"
-    run "cd #{release_path} && bundle exec foreman export #{foreman_export_format} #{foreman_location_path} #{foreman_format(foreman_options)}"
+    run "cd #{current_path} && bundle exec foreman export #{foreman_export_format} #{foreman_location_path} #{foreman_format(foreman_options)}"
   end
 
   def foreman_options
@@ -62,8 +62,8 @@ after 'deploy:update', 'foreman:export'
 namespace :bluepill do
   desc "Stop processes that bluepill is monitoring and quit bluepill"
   task :quit, roles: :app do
-    run "cd #{release_path} && #{sudo} bundle exec bluepill stop"
-    run "cd #{release_path} && #{sudo} bundle exec bluepill quit"
+    run "cd #{current_path} && #{sudo} bundle exec bluepill stop"
+    run "cd #{current_path} && #{sudo} bundle exec bluepill quit"
   end
 
   desc "Load bluepill configuration and start it"
@@ -71,13 +71,19 @@ namespace :bluepill do
     run "cd #{current_path} && #{sudo} bundle exec bluepill load #{foreman_location_path}/#{application}.pill"
   end
 
+  desc "Restart bluepill by quit and start task"
+  task :restart, roles: :app do
+    bluepill.quit rescue puts '[WARNING] Bluepill was not running?'
+    bluepill.start
+  end
+
   desc "Prints bluepills monitored processes statuses"
   task :status, roles: :app do
-    run "cd #{release_path} && #{sudo} bundle exec bluepill status"
+    run "cd #{current_path} && #{sudo} bundle exec bluepill status"
   end
 end
 
-after "deploy:update", "bluepill:quit", "bluepill:start"
+after "deploy:update", "bluepill:restart"
 
 namespace :deploy do
   desc "Create a symbolic link .env file to release path"
