@@ -128,16 +128,16 @@ class Clip < ActiveRecord::Base
 
   def fill_origin_entry
     require 'open-uri'
+    require 'open_uri_redirections'
 
-    self.origin_url.insert(0, 'http://') unless self.origin_url =~ /^http:\/\//
+    self.origin_url.insert(0, 'http://') unless self.origin_url =~ /^https?:\/\//
 
     if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
       @url = self.origin_url
       return
     end
 
-    # TODO: SSL 通信に対応させる(いまは例外発生)
-    open(self.origin_url, 'r:binary') do |f|
+    open(self.origin_url, 'r:binary', ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) do |f|
       # 厳密な画像判定
       # f.content_type =~ /^image/
 
@@ -146,8 +146,6 @@ class Clip < ActiveRecord::Base
       # TODO: http://moeimg.blog133.fc2.com/ このサイトがうまくエンコードできない
       self.origin_html = f.read.encode(Encoding.default_internal, f.charset, invalid: :replace, undef: :replace)
     end
-  rescue
-    @error_info = $!.message
   end
 
   private
