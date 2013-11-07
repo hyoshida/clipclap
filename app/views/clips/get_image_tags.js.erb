@@ -23,10 +23,17 @@ var $container = $('#container')
     box.removeAttr('id');
   });
 
-  $container.masonry('reload');
-  $container.imagesLoaded(function() {
-    $container.masonry('reload');
-    $container.find('img:first').attr('id', 'selected');
+  $('#container').css({ opacity: 0 }).imagesLoaded(function() {
+    $(this).find('.box img').each(function() {
+      width = <%= Settings.thumb_width %>;
+      height = Math.floor($(this).height() * (width / $(this).width() * 1.0));
+      $(this).width(width);
+      $(this).height(height);
+    });
+    $(this).removeClass('hidden');
+    $(this).masonry('reload');
+    $(this).find('img:first').attr('id', 'selected');
+    $(this).animate({ opacity: 1 });
   });
 
   $container.on('click', '.box img', function() {
