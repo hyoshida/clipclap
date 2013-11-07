@@ -106,8 +106,9 @@ gem 'resque'
 gem 'private_pub'
 gem 'thin'
 
-# 複数アプリケーションの管理
+# アプリケーション管理
 gem 'foreman'
+gem 'bluepill'
 
 # リソース監視
 gem 'newrelic_rpm'
