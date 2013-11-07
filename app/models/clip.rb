@@ -63,7 +63,9 @@ class Clip < ActiveRecord::Base
   end
 
   def create_image
+    return true if self.parent_id
     return false if @url.nil?
+
     image = Image.where(url: @url).first
     if image.nil?
       require 'open-uri'
@@ -72,6 +74,7 @@ class Clip < ActiveRecord::Base
       image = Image.create(url: @url, width: image_size.width, height: image_size.height)
       return false if image.nil?
     end
+
     self.image_id = image.id
   end
 
