@@ -18,9 +18,6 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano'
   gem 'capistrano-rbenv'
-
-  # for Heroku
-  gem 'heroku'
 end
 
 # Gems used only for assets and not required
@@ -109,8 +106,9 @@ gem 'resque'
 gem 'private_pub'
 gem 'thin'
 
-# 複数アプリケーションの管理
+# アプリケーション管理
 gem 'foreman'
+gem 'bluepill'
 
 # リソース監視
 gem 'newrelic_rpm'

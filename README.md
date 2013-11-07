@@ -8,4 +8,4 @@ Clipclap
 
 Clipclap is a tool for collecting and sharing pictures you love.
 
-[Check out a demo](http://clipclap.heroku.com/).
+[Check out a demo](http://clipclap.org/).
