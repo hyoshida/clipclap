@@ -15,6 +15,9 @@
 /log/*.log
 /tmp
 
+# Ignore dotenv
+/.env
+
 /public/assets
 *.swp
 *~
