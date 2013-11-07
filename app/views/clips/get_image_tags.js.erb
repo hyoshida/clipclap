@@ -27,8 +27,13 @@ var $container = $('#container')
     $(this).find('.box img').each(function() {
       width = <%= Settings.thumb_width %>;
       height = Math.floor($(this).height() * (width / $(this).width() * 1.0));
-      $(this).width(width);
-      $(this).height(height);
+      aspect = width / height * 1.0;
+      if (width > 16 && height > 16 && (aspect < (16 / 5.0) && aspect > (5.0 / 16))) {
+        $(this).width(width);
+        $(this).height(height);
+      } else {
+        $(this).parent().remove();
+      }
     });
     $(this).removeClass('hidden');
     $(this).masonry('reload');
