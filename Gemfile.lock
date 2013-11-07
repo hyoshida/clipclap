@@ -144,6 +144,7 @@ GEM
     foreman-export-initscript (0.0.1)
       foreman
     fssm (0.2.10)
+    google-analytics-rails (0.0.4)
     haml (4.0.0)
       tilt
     hashie (2.0.5)
@@ -376,6 +377,7 @@ DEPENDENCIES
   font-awesome-sass-rails
   foreman
   foreman-export-initscript
+  google-analytics-rails
   heroku
   hpricot
   i18n_generators

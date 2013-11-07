@@ -115,3 +115,6 @@ gem 'foreman-export-initscript'
 
 # リソース監視
 gem 'newrelic_rpm'
+
+# アクセス解析
+gem 'google-analytics-rails'

@@ -88,4 +88,8 @@ Clipclap::Application.configure do
       exception_recipients: %w( hyoshida@appirits.com )
     }
   )
+
+
+  # for Google Analytics
+  GA.tracker = ENV['GA_TRACKINGID']
 end
