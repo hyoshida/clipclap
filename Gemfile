@@ -105,6 +105,7 @@ gem 'resque'
 # リアルタイムメッセージング
 gem 'private_pub'
 gem 'thin'
+gem 'addressable'
 
 # アプリケーション管理
 gem 'foreman'
