@@ -116,3 +116,6 @@ gem 'newrelic_rpm'
 
 # アクセス解析
 gem 'google-analytics-rails'
+
+# open-uriにリダイレクト用のオプションを追加
+gem 'open_uri_redirections'
