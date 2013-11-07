@@ -9,16 +9,16 @@ describe Image do
 
     it "高さが足りない場合" do
       image = invalid_image
-      image.width = 17
-      image.height = 16
+      image.width = Settings.minimum_image_width + 1
+      image.height = Settings.minimum_image_height
       image.should be_invalid
       image.errors[:height].should be_present
     end
 
     it "幅が足りない場合" do
       image = invalid_image
-      image.width = 16
-      image.height = 17
+      image.width = Settings.minimum_image_width
+      image.height = Settings.minimum_image_height + 1
       image.should be_invalid
       image.errors[:width].should be_present
     end

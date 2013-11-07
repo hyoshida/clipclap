@@ -1,3 +1,11 @@
+function is_available_image_size(width, height) {
+  var aspect = width / height * 1.0;
+  return width > <%= Settings.minimum_image_width %> &&
+    height > <%= Settings.minimum_image_height %> &&
+    aspect < <%= Settings.allowed_image_aspect[0] / Settings.allowed_image_aspect[1] * 1.0 %> &&
+    aspect > <%= Settings.allowed_image_aspect[1] / Settings.allowed_image_aspect[0] * 1.0 %>;
+}
+
 var $container = $('#container')
 
 <% if @clip.error_info.present? %>
@@ -27,8 +35,7 @@ var $container = $('#container')
     $(this).find('.box img').each(function() {
       width = <%= Settings.thumb_width %>;
       height = Math.floor($(this).height() * (width / $(this).width() * 1.0));
-      aspect = width / height * 1.0;
-      if (width > 16 && height > 16 && (aspect < (16 / 5.0) && aspect > (5.0 / 16))) {
+      if (is_available_image_size(width, height)) {
         $(this).width(width);
         $(this).height(height);
       } else {
