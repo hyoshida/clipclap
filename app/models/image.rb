@@ -9,6 +9,8 @@ class Image < ActiveRecord::Base
   validates :height, :numericality => { :greater_than => Settings.minimum_image_height }
   validates_with ImageAspectValidator, :width => :width, :height => :height, :aspect => Settings.allowed_image_aspect
 
+  include OpenUriSweet
+
   def thumb_path
     require 'digest/sha2'
     sha256 = Digest::SHA256.hexdigest(self.url)
@@ -16,10 +18,9 @@ class Image < ActiveRecord::Base
   end
 
   def create_thumb_cache_file
-    require 'open-uri'
     FileUtils.mkdir Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
     File.open(self.thumb_path, 'wb') do |file|
-      image_data = OpenURI.open_uri(self.url, "rb:#{Encoding::ASCII_8BIT}").read
+      image_data = open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}").read
       file.write(image_data)
     end
   end
