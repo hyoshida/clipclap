@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/hyoshida/open_uri_redirections.git
+  revision: ab6ba9eeaf6a0ef8d60afda06a2b7e8090f17f28
+  branch: support_mode_argument
+  specs:
+    open_uri_redirections (0.1.1)
+
+GIT
   remote: git://github.com/sferik/rails_admin.git
   revision: 1b1de2189a11a855c82705fb711cec33c4943936
   specs:
@@ -379,6 +386,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   omniauth-facebook
+  open_uri_redirections!
   private_pub
   rails (= 3.2.14)
   rails_admin!
