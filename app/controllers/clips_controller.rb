@@ -4,29 +4,35 @@ class ClipsController < ApplicationController
 
   require 'will_paginate/array'
 
+  def clipping
+    return unless params[:clip]
+    return unless params[:clip][:origin_url]
+    Resque.enqueue(ImageClipper, current_user.id, params[:clip][:origin_url])
+  ensure
+    render nothing: true
+  end
+
   # for Ajax
   def get_image_tags
-    raise unless params[:clip]
-    raise unless params[:clip][:origin_url]
+    return get_image_tags_for_next_page if params[:page].to_i.nonzero?
 
+    return unless params[:clip]
+    return unless params[:clip][:origin_url]
     @clip = Clip.new(params[:clip])
-    raise unless @clip
-
-    if not exist_html_cahce_file?
-      Resque.enqueue(ImageClipper, @clip.origin_url)
-      raise
-    end
+    return unless @clip
 
     doc = Hpricot(load_html_cahce_file)
     @page = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    if params[:page].to_i.zero?
-      @html = @page.join
-    else
-      @html = "<html><body><div id='container'>#{@page.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
-      render text: @html
-    end
+    @html = @page.join
   rescue
-    render nothing: true
+    render nothing: true unless @clip
+  end
+
+  def get_image_tags_for_next_page
+    doc = Hpricot(load_html_cahce_file)
+    @page = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
+    @html = "<html><body><div id='container'>#{@page.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
+    render text: @html
   end
 
   def like
@@ -186,20 +192,11 @@ class ClipsController < ApplicationController
     end
   end
 
-  def exist_html_cahce_file?
-    File.exist? html_cache_file_path
-  end
-
   def load_html_cahce_file
     File.open(html_cache_file_path).read
   end
 
   def html_cache_file_path
-    File.join(Settings.html_cache_dir, "#{hash_by_target_url}.html")
-  end
-
-  def hash_by_target_url
-    require 'digest/sha2'
-    Digest::SHA256.hexdigest(@clip.origin_url)
+    File.join(Settings.html_cache_dir, "#{current_user.id}.html")
   end
 end

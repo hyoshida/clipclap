@@ -4,7 +4,8 @@ class ImageClipper
   require 'hpricot'
 
   class << self
-    def perform(target_url)
+    def perform(user_id, target_url)
+      @user_id = user_id
       @target_url = target_url
       download_html
       publish
@@ -46,12 +47,7 @@ class ImageClipper
     end
 
     def html_cache_file_path
-      File.join(Settings.html_cache_dir, "#{hash_by_target_url}.html")
-    end
-
-    def hash_by_target_url
-      require 'digest/sha2'
-      Digest::SHA256.hexdigest(@target_url)
+      File.join(Settings.html_cache_dir, "#{@user_id}.html")
     end
   end
 end
