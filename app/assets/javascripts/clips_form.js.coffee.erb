@@ -1,0 +1,30 @@
+$( ->
+  $clip_field = $('#clip_dialog')
+  $container = $('#container')
+
+  $clip_field.dialog({
+    autoOpen: false,
+    title: '投稿ダイアログ',
+    closeOnEscape: true,
+    modal: true,
+    resizable: false,
+    minWidth: 480,
+    buttons: {
+      'キャンセル': -> $(@).dialog('close')
+    }
+  })
+
+  $container.on('click', '#selected', ->
+    $preview_image = $('<img/>')
+    $preview_image.attr('src', $(@).attr('src'))
+    $preview_image.attr('style', $(@).attr('style'))
+    $('#preview').html($preview_image)
+    $clip_field.dialog('open')
+  )
+
+  $('#load').click( ->
+    $('#page-nav').remove()
+    $container.removeAttr('style')
+    $container.html('<%= image_tag 'loader.gif' %>')
+  )
+)
