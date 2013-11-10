@@ -1,6 +1,6 @@
 defaults: &defaults
   site_name: 'Clipclap(β)'
-  page: 50
+  page: 25
   ranking_limit: 50
   thumb_width: 240
   html_cache_dir: <%= File.join(Rails.root, 'tmp', 'html_cache') %>
@@ -12,8 +12,8 @@ defaults: &defaults
   allowed_image_aspect: [ 16, 5 ]
 
 development:
-  page: 25
   <<: *defaults
+  page: 10
 
 test:
   <<: *defaults
