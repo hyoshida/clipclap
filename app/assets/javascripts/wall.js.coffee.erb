@@ -1,7 +1,8 @@
-$ ->
+$( ->
   initialize_masonry()
   initialize_infinitescroll()
   register_event_for_close_clip_detail_pane()
+)
 
 window.destroy_infinitescroll = ->
   $container = $('#container')
@@ -37,7 +38,7 @@ window.register_event_for_close_clip_detail_pane =->
   )
 
 window.resize_images = ->
-  $('#container').find('.box img').each( ->
+  $('#container').find('.image_box img').each( ->
     width = <%= Settings.thumb_width %>
     height = Math.floor($(@).height() * (width / $(@).width() * 1.0))
     if is_available_image_size(width, height)

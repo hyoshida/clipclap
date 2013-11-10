@@ -182,7 +182,7 @@ class ClipsController < ApplicationController
   end
 
   def insert_div_tag_for_image_tag
-    -> image_tag { "<div class='box'>#{image_tag}</div>" }
+    -> image_tag { "<div class='box image_box'>#{image_tag}</div>" }
   end
 
   def create_html_cahce_file(html)

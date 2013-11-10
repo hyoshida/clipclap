@@ -14,7 +14,7 @@ page_nav.insertAfter('#container')
 html = '<div><%= raw @html.gsub("'", '"').presence || (@clip.url && image_tag(@clip.url)) || '' %></div>'
 
 $(html).find('img').each( ->
-  box = $('<div id="active_box" class="box" />')
+  box = $('<div id="active_box" class="box image_box" />')
   box.appendTo('#container')
   $(@).appendTo('#active_box')
   box.removeAttr('id')
