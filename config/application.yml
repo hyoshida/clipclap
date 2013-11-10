@@ -3,6 +3,7 @@ defaults: &defaults
   page: 25
   ranking_limit: 50
   thumb_width: 240
+  thumb_format: 'jpg'
   html_cache_dir: <%= File.join(Rails.root, 'tmp', 'html_cache') %>
   image_cache_dir:  <%= File.join(Rails.root, 'tmp', 'image_cache') %>
   maximum_tag_count: 10

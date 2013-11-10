@@ -14,15 +14,15 @@ class Image < ActiveRecord::Base
   def thumb_path
     require 'digest/sha2'
     sha256 = Digest::SHA256.hexdigest(self.url)
-    File.join(Settings.image_cache_dir, [ sha256, File.extname(self.url) ].join)
+    File.join(Settings.image_cache_dir, [ sha256, Settings.thumb_format ].join)
   end
 
   def create_thumb_cache_file
     FileUtils.mkdir Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
-    File.open(self.thumb_path, 'wb') do |file|
-      image_data = open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}").read
-      file.write(image_data)
-    end
+    image = MiniMagick::Image.read(open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}").read)
+    image.format Settings.thumb_format
+    image.resize "#{self.thumb_width}x#{self.thumb_height}"
+    image.write self.thumb_path
   end
 
   def thumb_width
