@@ -67,7 +67,7 @@ var $container = $('#container');
 
   var page_nav = $('<div/>');
   page_nav.attr('id', 'page-nav');
-  page_nav.html('<%= link_to 'next', page: @page.next_page %>');
+  page_nav.html('<%= link_to 'next', page: @image_tags.next_page %>');
   page_nav.insertAfter('#container');
 
   var urls = [];
