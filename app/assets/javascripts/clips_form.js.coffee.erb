@@ -20,14 +20,6 @@ $( ->
 
     url = $(@).attr('src')
     $('#clip_url').attr('value', url)
-
-    link = $('<a/>')
-    link.attr('src', url)
-    link.attr('id', 'link')
-    link.insertBefore('img#selected')
-
-    $(@).appedTo('#link')
-    link.removeAttr('id')
   )
 
   $container.on('click', '#selected', ->
