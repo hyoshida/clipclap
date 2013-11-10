@@ -18,7 +18,7 @@ class Image < ActiveRecord::Base
   end
 
   def create_thumb_cache_file
-    FileUtils.mkdir Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
+    FileUtils.mkdir_p Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
     image = MiniMagick::Image.read(open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}").read)
     image.format Settings.thumb_format
     image.resize "#{self.thumb_width}x#{self.thumb_height}"
