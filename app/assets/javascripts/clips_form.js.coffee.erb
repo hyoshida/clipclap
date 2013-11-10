@@ -14,6 +14,22 @@ $( ->
     }
   })
 
+  $container.on('click', '.box img', ->
+    $('img#selected').removeAttr('id')
+    $(@).attr('id', 'selected')
+
+    url = $(@).attr('src')
+    $('#clip_url').attr('value', url)
+
+    link = $('<a/>')
+    link.attr('src', url)
+    link.attr('id', 'link')
+    link.insertBefore('img#selected')
+
+    $(@).appedTo('#link')
+    link.removeAttr('id')
+  )
+
   $container.on('click', '#selected', ->
     $preview_image = $('<img/>')
     $preview_image.attr('src', $(@).attr('src'))
