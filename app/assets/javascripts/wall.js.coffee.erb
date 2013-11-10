@@ -1,4 +1,25 @@
-hideContainerToImageLoaded = ->
+$ ->
+  initialize_masonry()
+  initialize_infinitescroll()
+  register_event_for_close_clip_detail_pane()
+
+window.destroy_infinitescroll = ->
+  $container = $('#container')
+  $container.infinitescroll('destroy')
+  $container.data('infinitescroll', null)
+
+window.initialize_infinitescroll = ->
+  $container = $('#container')
+  $container.infinitescroll(infinitescroll_options(), (newElements) ->
+    $(newElements).css({ opacity: 0 }).imagesLoaded( ->
+      resize_images()
+      $container.masonry('appended', @, true)
+      @.animate({ opacity: 1 })
+    )
+  )
+  $container.infinitescroll('bind')
+
+window.initialize_masonry = ->
   $('#container').css({ opacity: 0 }).imagesLoaded( ->
     @.removeClass('hidden')
     @.masonry({
@@ -8,34 +29,42 @@ hideContainerToImageLoaded = ->
     @.animate({ opacity: 1 })
   )
 
-prepareInfinitescrollContainer = ->
-  $container = $('#container')
-  $container.infinitescroll(infinitescrollOptions(), (newElements) ->
-    $(newElements).css({ opacity: 0 }).imagesLoaded( ->
-      $container.masonry('appended', @, true)
-      @.animate({ opacity: 1 })
-    )
-  )
-
-infinitescrollOptions = ->
-  {
-    navSelector: '#page-nav',     # ページのナビゲーションを選択 
-    nextSelector: '#page-nav a',  # 次ページへのリンク
-    itemSelector: '.box',         # 持ってくる要素のclass
-    loading: {
-      finishedMsg: 'image was finished.',   # 次のページがない場合に表示するテキスト
-      img: '<%= image_path 'loader.gif' %>' # ローディング画像のパス
-    }
-  }
-
-registerEventForCloseClipDetailPane =->
+window.register_event_for_close_clip_detail_pane =->
   $(document).on('click', '#slide_overlay', ->
     $('#clip_detail_pane').hide("slide", { direction: "right" }, 400, -> $(@).remove())
     $('#slide_overlay').hide("fade", null, 400, -> $(@).remove())
     $('body').removeClass('noscroll')
   )
 
-$ ->
-  hideContainerToImageLoaded()
-  prepareInfinitescrollContainer()
-  registerEventForCloseClipDetailPane()
+window.resize_images = ->
+  $('#container').find('.box img').each( ->
+    width = <%= Settings.thumb_width %>
+    height = Math.floor($(@).height() * (width / $(@).width() * 1.0))
+    if is_available_image_size(width, height)
+      $(@).width(width)
+      $(@).height(height)
+    else
+      $(@).parent().remove()
+  )
+
+is_available_image_size = (width, height) ->
+  aspect = width / height * 1.0
+  width > <%= Settings.minimum_image_width %> &&
+    height > <%= Settings.minimum_image_height %> &&
+    aspect < <%= Settings.allowed_image_aspect[0] / Settings.allowed_image_aspect[1] * 1.0 %> &&
+    aspect > <%= Settings.allowed_image_aspect[1] / Settings.allowed_image_aspect[0] * 1.0 %>
+
+infinitescroll_options = ->
+  {
+    navSelector: '#page-nav',     # ページのナビゲーションを選択
+    nextSelector: '#page-nav a',  # 次ページへのリンク
+    itemSelector: '.box',         # 持ってくる要素のclass
+    loading: {
+      finishedMsg: 'image was finished.',   # 次のページがない場合に表示するテキスト
+      img: '<%= image_path 'loader.gif' %>' # ローディング画像のパス
+    },
+    state: {
+      isDestroyed: false,
+      isDone: false
+    }
+  }

@@ -8,7 +8,7 @@
 
 #image_selecter
   h3 1. 画像をセレクト
-  = form_for @clip, url: { action: :get_image_tags }, remote: true, html: { id: 'load_form' } do |f|
+  = form_for @clip, url: { action: :clipping }, remote: true, html: { id: 'load_form' } do |f|
     p 画像のあるページのURLを入力してください。
     = f.text_field :origin_url, id: 'loading_url', value: @url
     = f.submit 'ロード', id: 'load'

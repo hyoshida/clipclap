@@ -22,8 +22,8 @@ Clipclap::Application.routes.draw do
     end
 
     collection do
+      post "clipping"
       get "get_image_tags"
-      post "get_image_tags"
     end
   end
 
