@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ClipsController do
   let (:clip) { FactoryGirl.create(:clip) }
 
+  before_stub_request
   before { clip }
 
   describe "PUT 'reclip'" do

@@ -101,6 +101,7 @@ GEM
       simplecov (>= 0.7)
       term-ansicolor
       thor
+    crack (0.3.2)
     daemons (1.1.9)
     devise (3.0.1)
       bcrypt-ruby (~> 3.0)
@@ -352,6 +353,9 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.15.2)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
     webrobots (0.1.0)
     websocket-driver (0.3.0)
     will_paginate (3.0.4)
@@ -404,6 +408,7 @@ DEPENDENCIES
   uglifier
   unicorn
   unicorn-rails
+  webmock
   will_paginate (~> 3.0.3)
   yaml_db
   zurui-sass-rails

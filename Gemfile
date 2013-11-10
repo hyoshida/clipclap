@@ -8,6 +8,10 @@ gem 'mysql2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+group :test do
+  gem "webmock"
+end
+
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'factory_girl_rails'
