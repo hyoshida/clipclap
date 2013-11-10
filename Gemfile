@@ -8,6 +8,10 @@ gem 'mysql2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+group :test do
+  gem "webmock"
+end
+
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'factory_girl_rails'
@@ -119,3 +123,6 @@ gem 'google-analytics-rails'
 
 # open-uriにリダイレクト用のオプションを追加(mode引数対応版)
 gem 'open_uri_redirections', git: 'git://github.com/hyoshida/open_uri_redirections.git', branch: 'support_mode_argument'
+
+# 画像リサイズ用
+gem 'mini_magick'

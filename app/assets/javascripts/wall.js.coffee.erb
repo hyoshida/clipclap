@@ -12,7 +12,9 @@ window.destroy_infinitescroll = ->
 window.initialize_infinitescroll = ->
   $container = $('#container')
   $container.infinitescroll(infinitescroll_options(), (newElements) ->
+    $(newElements).addClass('hidden')
     $(newElements).css({ opacity: 0 }).imagesLoaded( ->
+      @.removeClass('hidden')
       resize_images()
       $container.masonry('appended', @, true)
       @.animate({ opacity: 1 })
