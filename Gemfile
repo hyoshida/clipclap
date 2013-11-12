@@ -10,6 +10,9 @@ gem 'mysql2'
 
 group :test do
   gem "webmock"
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 group :test, :development do

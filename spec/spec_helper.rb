@@ -6,6 +6,10 @@ require 'rspec/autorun'
 
 require 'webmock/rspec'
 
+require 'capybara/rspec'
+require 'capybara-webkit'
+Capybara.javascript_driver = :webkit
+
 require 'coveralls'
 Coveralls.wear!('rails')
 
@@ -40,4 +44,23 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # TODO: 整理
+  config.include Capybara::DSL
+  # http://stackoverflow.com/questions/8178120/capybara-with-js-true-causes-test-to-fail
+  # http://d.hatena.ne.jp/sandmark/20120325/1332635997
+  config.use_transactional_fixtures = false
+
+  config.before :each do
+    if Capybara.current_driver == :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
+    end
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
 end
