@@ -89,7 +89,9 @@ class Clip < ActiveRecord::Base
   end
 
   def create_html_only_images
-    self.listup_image_urls_from_html.map do |url|
+    images = [ @url ] if @url
+    images ||= self.listup_image_urls_from_html
+    images.map do |url|
       ActionController::Base.helpers.image_tag(url)
     end.join
   end
