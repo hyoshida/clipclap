@@ -16,7 +16,13 @@ window.initialize_infinitescroll = ->
     $(newElements).css({ opacity: 0 }).imagesLoaded( ->
       @.removeClass('hidden')
       resize_images()
-      $container.masonry('appended', @, true)
+
+      if can_scroll()
+        $container.masonry('appended', @, true)
+      else
+        $container.infinitescroll('retrieve')
+        $container.masonry('reload')
+
       @.animate({ opacity: 1 })
     )
   )
@@ -71,3 +77,7 @@ infinitescroll_options = ->
       isDone: false
     }
   }
+
+window.can_scroll = ->
+  # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
+  $(window).height() <= $('html').height()
