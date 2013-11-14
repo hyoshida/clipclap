@@ -126,7 +126,7 @@ class ClipsController < ApplicationController
 
   # POST /clips
   # POST /clips.json
- def create
+  def create
     clip_attr = { user_id: current_user.id }
     @clip = Clip.new(clip_attr.merge(params[:clip]))
 
