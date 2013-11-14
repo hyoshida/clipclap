@@ -6,7 +6,9 @@
       p
         span.when = "#{time_ago_in_words @clip.created_at}前に"
         - if @clip.reclip?
-          span.where = raw " #{link_to "##{@clip.parent_id}", clip_path(@clip.parent)} から"
+          - ref = link_to("##{@clip.parent_id}", clip_path(@clip.parent)) if @clip.parent
+          - ref ||= "##{@clip.parent_id}"
+          span.where = raw " #{ref} から"
           span.what リクリップしました
         - else
           span.what クリップしました

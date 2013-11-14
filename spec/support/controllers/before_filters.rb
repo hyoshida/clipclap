@@ -9,6 +9,5 @@ module BeforeFilters
 end
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, type: :controller
   config.extend BeforeFilters, type: :controller
 end

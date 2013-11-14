@@ -8,5 +8,15 @@ FactoryGirl.define do
     url 'http://www.google.co.jp/images/srpr/logo11w.png'
     origin_url 'http://www.google.co.jp/'
     origin_html '<html><body><p><img src="http://www.google.co.jp/images/srpr/logo11w.png" /></p></body></html>'
+
+    trait :reclip do
+      parent { Clip.first || FactoryGirl.create(:clip) }
+      image { parent.image }
+    end
+
+    trait :destroyed_parent do
+      parent_id 999
+      image { Image.first || FactoryGirl.create(:image) }
+    end
   end
 end
