@@ -40,7 +40,7 @@ class ImageClipper
     end
 
     def create_html_cahce_file(html)
-      FileUtils.mkdir(Settings.html_cache_dir) unless File.exist? Settings.html_cache_dir
+      FileUtils.mkdir_p(Settings.html_cache_dir) unless File.exist? Settings.html_cache_dir
       File.open(html_cache_file_path, 'w') do |file|
         file.write(html)
       end
