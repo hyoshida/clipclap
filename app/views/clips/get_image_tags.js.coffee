@@ -29,6 +29,8 @@ $container.css({ opacity: 0 }).imagesLoaded( ->
 
   # 無限スクロール機能の初期化
   initialize_infinitescroll()
+
+  $container.infinitescroll('retrieve') unless can_scroll()
 )
 
 $('#clip_origin_url').attr('value', '<%= @clip.origin_url %>')
