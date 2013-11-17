@@ -10,6 +10,7 @@
 @import "bootstrap/buttons";
 @import "compass/css3";
 @import "zurui-sass";
+@import "common";
 
 /* container */
 #container {
@@ -248,26 +249,6 @@ ul.comments li p {
   &.inactive {
     @include opacity(0.5);
   }
-}
-
-@mixin btn-reclip {
-  @extend .btn;
-  @extend .btn-warning;
-  @include zurui-gradient-top-lighten($color: #fa0, $lighten: 20%);
-  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
-  color: #4f2e2b;
-  border: 1px solid #a60;
-  &:hover, &:focus {
-    background-color: #fa0;
-    color: #211;
-  }
-}
-
-@mixin btn-like {
-  @extend .btn;
-  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
-  color: #666;
-  border: 1px solid #aaa;
 }
 
 .image_box .status .reclip {

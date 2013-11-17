@@ -10,29 +10,14 @@
 @import "compass/utilities";
 @import "compass/css3";
 @import "zurui-sass";
+@import "common";
 
 $font-awesome-enable-ie7-support: true;
-
-// mix-in
-// from https://github.com/FortAwesome/Font-Awesome/issues/213
-@mixin icon($name) {
-  &:before {
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: inherit;
-    margin-right: 0.4em;
-  }
-  @extend .icon-#{$name};
-}
 
 // variables
 $contents_width: 1000px;
 $header_width: $contents_width;
 $header_height: 300px;
-$font_gothic: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
-$font_serif: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
 
 // wrapper
 #wrapper {

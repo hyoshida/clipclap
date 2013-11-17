@@ -4,46 +4,7 @@
 @import "compass/css3";
 @import "zurui-sass";
 @import 'font-awesome';
-
-$font-awesome-enable-ie7-support: true;
-
-// mix-in
-// from https://github.com/FortAwesome/Font-Awesome/issues/213
-@mixin icon($name) {
-  &:before {
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: inherit;
-    margin-right: 0.4em;
-  }
-  @extend .icon-#{$name};
-}
-
-@mixin btn-reclip {
-  @extend .btn;
-  @extend .btn-warning;
-  @include zurui-gradient-top-lighten($color: #fa0, $lighten: 20%);
-  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
-  color: #4f2e2b;
-  border: 1px solid #a60;
-  &:hover, &:focus {
-    background-color: #fa0;
-    color: #211;
-  }
-}
-
-@mixin btn-like {
-  @extend .btn;
-  @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
-  color: #666;
-  border: 1px solid #aaa;
-}
-
-// variables
-$font_gothic: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
-$font_serif: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
+@import "common";
 
 // introduction
 #introduction {
