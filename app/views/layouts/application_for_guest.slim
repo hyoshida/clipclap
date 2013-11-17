@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title = Settings.site_name
+    = stylesheet_link_tag "guest/application", media: "all"
+    = javascript_include_tag "guest/application"
+    == yield :head
+    = csrf_meta_tags
+    = analytics_init if Rails.env.production?
+
+  body
+    #wrapper
+      #header
+        .wrap
+          .logo
+            p =  Settings.site_name
+          .form
+            p.facebook = link_to "Facebookでログイン", user_omniauth_authorize_path(:facebook)
+            p.signup = link_to '新規登録', new_user_registration_path
+            p.description
+             | すでにアカウントをお持ちの方は
+             span = link_to 'こちら', new_user_session_path
+             | からログインできます
+      #main
+        == yield
