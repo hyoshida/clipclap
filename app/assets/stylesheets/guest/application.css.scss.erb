@@ -1,0 +1,119 @@
+//= require_self
+//= require screen
+//= require scaffolds
+//= require clips
+//= require wall
+//= require_directory .
+
+@import "bootstrap";
+@import 'font-awesome';
+@import "compass/utilities";
+@import "compass/css3";
+@import "zurui-sass";
+@import "common";
+
+$font-awesome-enable-ie7-support: true;
+
+// variables
+$contents_width: 1000px;
+$header_width: $contents_width;
+$header_height: 300px;
+
+// wrapper
+#wrapper {
+  background: #f0f0e9;
+}
+
+// header
+#header {
+  margin-bottom: 50px;
+}
+
+#header .wrap {
+}
+
+#header .logo {
+  padding: 0.5em 0;
+  color: #fff;
+  font-size: 72pt;
+  font-family: $font_serif;
+  font-weight: bold;
+  text-align: center;
+  background-color: #000;
+  border-bottom: 10px solid #f90;
+  @include zurui-gradient-top-lighten(#222);
+}
+
+#header .form {
+  margin: 0px auto;
+  padding: 30px 0;
+  width: $header_width / 2 + 50px * 2;
+  text-align: center;
+  border: 1px solid #aaa;
+  border-top: 0;
+  background-color: #fff;
+  @include border-bottom-radius(4px);
+
+  p {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .facebook a, .signup a {
+    padding: 10px 20px;
+    font-size: large;
+    font-family: $font_gothic;
+    @extend .btn;
+  }
+
+  .facebook a {
+    @extend .btn-primary;
+    @include icon(facebook);
+    &:before {
+      margin-right: 15px;
+      padding-right: 17px;
+      border-right: 1px solid #37d;
+    }
+  }
+
+  .description {
+    margin-top: 20px;
+
+    a {
+      font-weight: bold;
+      color: #f90;
+    }
+  }
+}
+
+// main
+#main {
+  margin: 0px auto;
+  width: $contents_width;
+}
+
+// container
+#container {
+  margin: 0 !important;
+  font-size: 75%;
+}
+
+// siginup_dialog
+#siginup_dialog {
+  $width: $header_width / 2 + 50px * 2;
+
+  margin-left: -($width / 2 + 1);
+  width: $width;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 50%;
+
+  @extend #header;
+}
+
+.ui-widget-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+}

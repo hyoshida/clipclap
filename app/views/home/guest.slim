@@ -1,0 +1,14 @@
+#introduction
+  h1 = "#{Settings.site_name}へようこそ！"
+  p あなたの気に入ったイラストを簡単にまとめることができるサービスです。
+  p
+    | 気に入ったイラストがあれば
+    i.btn-reclip リクリップ
+    | か
+    i.btn-like いいね
+    | を押してみましょう。
+
+- if @clips.present?
+  == render partial: '/base/wall'
+- else
+  p クリップが存在しません

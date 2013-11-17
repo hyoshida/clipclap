@@ -1,0 +1,323 @@
+//= require masonry/centered
+//= require masonry/fluid
+//= require masonry/gutters
+//= require masonry/infinitescroll
+//= require masonry/right-to-left
+//= require masonry/transitions
+
+@import "compass/css3";
+@import "zurui-sass";
+@import "common";
+
+/* container */
+#container {
+}
+
+#container .avatar img {
+  width: 32px;
+  height: 32px;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+#page-nav {
+  clear: both;
+  /* display: none; */
+  text-indent: -9999px;
+}
+
+li.box {
+  display: block;
+  width: <%= Settings.thumb_width %>px;
+  margin: 4px;
+  padding-bottom: 0;
+  padding: 9px;
+  padding: 0;
+  list-style-type: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid #aaa;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+li.box .title {
+  position: relative;
+  top: -5px;
+  margin: 0;
+  padding: 4px 10px;
+
+  display: block;
+  width: <%= Settings.thumb_width %>px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* text-wrap: none; */
+}
+
+li.box .title a {
+  font-weight: bold;
+  color: #444;
+  text-decoration: none;
+}
+
+li.box .title a:hover {
+  color: #666;
+  text-decoration: underline;
+  background: none;
+}
+
+li.box .image_box {
+  display: block;
+  width: <%= Settings.thumb_width %>px;
+}
+
+li.box .image_box a {
+  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
+  &:hover {
+    background: #000;
+  }
+  & img, &:visited img, &:hover img {
+    border: 0;
+  }
+}
+
+li.box .image_box a img {
+  display: block;
+  background: #fff;
+  margin-bottom: 10px;
+  vertical-align: bottom;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+
+ul.comments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #444;
+  background-color: #fafafa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  &.signed_in {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+ul.comments li {
+  padding: 5px;
+  background-color: transparent;
+  @include zurui-line-top(0.1, 1.0);
+  position: relative;
+  a.remove {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  i.icon-remove {
+    padding: 3px;
+    border: 1px solid #ddd;
+    visibility: hidden;
+  }
+  &:hover i.icon-remove {
+    visibility: visible;
+  }
+}
+
+ul.comments li a:hover {
+  i.icon-remove {
+    color: #fff;
+    background-color: #eee;
+    text-decoration: none;
+  }
+}
+
+.avatar {
+  a {
+    display: block;
+  }
+
+  img {
+    @include border-radius(4px);
+  }
+}
+
+ul.comments li p {
+  display: block;
+  padding: 5px;
+
+  &.body {
+    padding: 5px 0;
+  }
+  &.time {
+    color: #aaa;
+    padding: 0 0 5px;
+  }
+}
+
+.comment_feild .avatar {
+  clear: both;
+  float: left;
+  padding: 3px 10px 5px 5px;
+}
+
+.comment_feild form {
+  padding: 5px;
+  @include zurui-line-top(0.1, 1.0);
+  background-color: #fafafa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  input {
+    margin: 0;
+    margin-top: 4px;
+    width: 165px;
+  }
+}
+
+
+/* info bar */
+.info {
+  padding: 0 10px;
+}
+
+.info p {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+
+/* status bar */
+.image_box {
+  position: relative;
+}
+
+.image_box .status {
+  display: block;
+  height: 18px;
+  padding: 6px 8px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: <%= Settings.thumb_width - 16 %>px;
+  visibility: hidden;
+}
+
+.image_box:hover .status {
+  visibility: visible;
+}
+
+.image_box .status .count {
+  font-size: 120%;
+}
+
+.image_box .status p {
+  display: block;
+  width: <%= Settings.thumb_width - 16 %>px;
+  margin: 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+.image_box .status .tag {
+  display: none;
+  float: left;
+  text-align: left;
+  width: <%= (Settings.thumb_width) / 2 - 16 %>px;
+  overflow: hidden;
+  text-wrap: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.image_box .status a {
+  color: #fff;
+  cursor: pointer;
+  &.inactive {
+    @include opacity(0.5);
+  }
+}
+
+.image_box .status .reclip {
+  float: left;
+  text-align: left;
+  width: 50%;
+  a {
+    @include btn-reclip;
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
+.image_box .status .like {
+  text-align: right;
+}
+
+.image_box .status .like a {
+  text-decoration: none;
+  height: 24px;
+  line-height: 24px;
+  @include btn-like;
+  &:hover.opacity, &:focus.opacity {
+    @include opacity(0.75);
+  }
+}
+
+.image_box .status [class^="icon-"], .image_box .status [class*=" icon-"] {
+  display: inline;
+}
+
+.image_box .status [class^="icon-"]:before, .image_box .status [class*=" icon-"]:before {
+  letter-spacing: 3px;
+}
+
+.image_box .status a {
+  & .icon-heart:before {
+    color: #e30;
+  }
+  &:hover .icon-heart:before, &:focus .icon-heart:before {
+    color: #333;
+  }
+
+  & .icon-heart-empty:before {
+    color: #333;
+  }
+  &:hover .icon-heart-empty:before, &:focus .icon-heart-empty:before {
+    @extend .icon-heart:before;
+    color: #e30;
+  }
+}
+
+.image_box .status .icon-remove {
+  margin-left: 0.5em;
+}
+
+.image_box .status .icon-remove:before {
+  letter-spacing: 0;
+}
+
+
+
+/* jQuery */
+.ui-dialog-titlebar {
+  display: none;
+}
+
+.ui-widget-overlay {
+  z-index: 90;
+  background: transparent url("<%= image_path 'transblack.png' %>") repeat !important;
+}
+
+.noscroll {
+  overflow: hidden;
+}
