@@ -48,37 +48,58 @@ li.group_box {
       cursor: pointer;
 
       img {
-        height: 100%;
+        max-width: none;
       }
     }
   }
 
   .sub_image_boxes {
-    display: inline-block;
-    width: $group_box_width;
-    height: $group_box_height / 3 - 1;
-    overflow: hidden;
-    background-color: #ccc;
-    border-top: 1px solid #aaa;
-    position: relative;
-    bottom: $group_box_width / 3;
+    $width: $group_box_width;
+    $height: $group_box_height / 3 - 1;
 
-    a {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    overflow: hidden;
+    border-top: 1px solid #aaa;
+    position: absolute;
+    top: $width - $height;
+
+    li {
       display: inline-block;
       width: $group_box_width / 3;
       height: 100%;
-      position: relative;
-      cursor: pointer;
+      overflow: hidden;
+
+      &:first-child {
+        @include border-bottom-left-radius(5px);
+      }
+
+      &:last-child {
+        @include border-bottom-right-radius(5px);
+      }
 
       &:nth-child(even) {
         width: $group_box_width / 3 - 2;
         border-left: 1px solid #aaa;
         border-right: 1px solid #aaa;
       }
+    }
+
+    a {
+      display: block;
+      width: $group_box_width / 3;
+      height: 100%;
+      cursor: pointer;
+      background-color: #fff;
 
       img {
-        width: 100%;
+        max-width: none;
         @include border-radius(0);
+      }
+
+      &:hover {
+        background-color: #fff;
       }
     }
   }
