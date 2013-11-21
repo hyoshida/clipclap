@@ -51,6 +51,15 @@
         a.carousel-control.right href="#following_carousel" data-slide="next" &rsaquo;
 
   ul.user_menu
+    li.user_matomes
+      - class_name = nil
+      - class_name = 'current' if params[:controller] == 'matomes'
+      = link_to new_matome_path, class: class_name do
+        p.count = @user.matomes.size
+        p.title
+          i.icon-star
+          span まとめ
+
     li.user_clips
       - class_name = nil
       - class_name = 'current' if params[:controller] == 'clips'

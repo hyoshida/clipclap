@@ -1,0 +1,27 @@
+- content_for :head do
+  = javascript_include_tag "wall"
+  = javascript_include_tag "matomes_form"
+
+#matome
+  = form_for @matome do |f|
+    .header
+      //.cover &nbsp;
+      h1 = f.text_field :title, placeholder: 'タイトル'
+      .description
+        p = f.text_area :description, placeholder: '説明', rows: 3
+      = f.submit '作成'
+
+    #matome_container
+
+    #clip_selecter
+      = f.submit 'あたらしいクリップ', id: 'new_clip', :type => 'button'
+
+#matome_dialog
+  h3 1. クリップを選択
+  = form_for @matome, url: { action: :clips }, remote: true, method: :get do |f|
+    p クリップを選択ください。
+    = f.submit '選択...', id: 'load', disable_with: '取得中...'
+
+  #container
+
+  #page-nav

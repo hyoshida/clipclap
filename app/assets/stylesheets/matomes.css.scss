@@ -1,0 +1,132 @@
+// Place all the styles related to the matomes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/buttons";
+@import "bootstrap/forms";
+@import "compass/utilities";
+@import "compass/css3";
+@import "common";
+
+$cover_size: 100px;
+
+// header
+#matome .header {
+  margin-bottom: 10px;
+  padding: 20px;
+  //height: $cover_size;
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #f0f0f0;
+
+  h1 {
+    font-size: xx-large;
+  }
+
+  .cover {
+    $size: $cover_size;
+    $forgrond_color: #ddd;
+    $background_color: #eee;
+
+    float: left;
+    margin-right: 20px;
+    width: $size;
+    height: $size;
+    overflow: hidden;
+    background-color: $background_color;
+    border: 2px solid $forgrond_color;
+
+    img {
+      max-width: none;
+    }
+
+    &.none {
+      @include icon(plus);
+
+      &:before {
+        display: block;
+        width: $size;
+        height: $size;
+        line-height: $size;
+        color: $forgrond_color;
+        font-size: $size / 2;
+        text-align: center;
+      }
+    }
+  }
+
+  h1,
+  p {
+    line-height: 150%;
+  }
+
+  .meta {
+    .updated_at {
+      color: #aaa;
+    }
+  }
+
+  .user {
+    margin-top: 5px;
+
+    img {
+      vertical-align: middle;
+    }
+
+    .avatar a {
+      display: inline;
+      margin-right: 5px;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .title {
+    }
+  }
+}
+
+// form
+#matome form {
+  input[type="text"] {
+    font-size: x-large;
+    height: 1.5em;
+    line-height: 1.5em;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  input[type="text"], textarea {
+    width: 640px;
+    //@extend .input-block-level;
+  }
+
+  input[type="button"] {
+    @extend .btn;
+  }
+
+  input[type="submit"] {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+}
+
+// container
+#matome_container {
+  @extend #container;
+}
+
+// dialog
+#matome_dialog {
+  img {
+    border: 5px solid transparent;
+
+    &#selected {
+      border: 5px solid #666;
+    }
+  }
+}

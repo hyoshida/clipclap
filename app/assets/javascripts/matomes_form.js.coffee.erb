@@ -1,0 +1,66 @@
+$( ->
+  initialize_matome_dialog()
+
+  $clip_field = $('#clip_selecter')
+  $matome_dialog = $('#matome_dialog')
+  $container = $('#container')
+  $matome_container = $('#matome_container')
+
+  initialize_masonry($matome_container)
+
+  $container.on('click', '.box img', ->
+    $('img#selected').removeAttr('id')
+    $(@).attr('id', 'selected')
+
+    url = $(@).attr('src')
+    $('#clip_url').attr('value', url)
+  )
+
+  $container.on('click', '#selected', ->
+    $hidden_data = $('<input/>')
+    $hidden_data.attr('type', 'hidden')
+    $hidden_data.attr('name', 'matome[clip_ids][]')
+    $hidden_data.attr('value', $(@).attr('data-clip-id'))
+    $image = $('<img/>')
+    $image.attr('src', $(@).attr('src'))
+    $image.attr('style', $(@).attr('style'))
+    $image_box = $('<div/>')
+    $image_box.attr('class', 'image_box')
+    $image_box.html($image)
+    $box = $('<div/>')
+    $box.attr('class', 'box')
+    $box.html($image_box)
+    $matome_container.append($box)
+    $matome_container.append($hidden_data)
+    $matome_container.masonry('reload')
+    $matome_dialog.dialog('close')
+  )
+
+  $('#new_clip').click( ->
+    open_matome_dialog()
+  )
+
+  $('#load').click( ->
+    $('#page-nav').remove()
+    $container.removeAttr('style')
+    $container.html('<%= image_tag 'loader.gif' %>')
+  )
+)
+
+initialize_matome_dialog = ->
+  $matome_diaplog = $('#matome_dialog')
+  $matome_diaplog.dialog({
+    autoOpen: false,
+    title: '投稿ダイアログ',
+    closeOnEscape: true,
+    modal: true,
+    resizable: false,
+    minWidth: 960,
+    buttons: {
+      'キャンセル': -> $(@).dialog('close')
+    }
+  })
+
+open_matome_dialog = ->
+  $matome_diaplog = $('#matome_dialog')
+  $matome_diaplog.dialog('open')

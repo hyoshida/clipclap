@@ -73,3 +73,9 @@ ja:
         name: タグ名
         clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
+
+      matome:
+        title: タイトル
+        description: 説明
+        clips: clips
+        user: :activerecord.models.user
