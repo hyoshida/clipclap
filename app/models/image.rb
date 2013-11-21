@@ -25,17 +25,42 @@ class Image < ActiveRecord::Base
     image.write self.thumb_path
   end
 
-  def thumb_width
-    Settings.thumb_width
+  def thumb_width(size_type=nil)
+    case size_type
+    when :tag
+      return Settings.thumb_width if self.thumb_width < self.thumb_height
+      (self.width * (self.thumb_height(:tag) / self.height.to_f)).floor
+    else
+      Settings.thumb_width
+    end
   end
 
-  def thumb_height
+  def thumb_height(size_type=nil)
     return 0 if self.width.zero? || self.height.zero? # for 下位互換
-    (self.height * (self.thumb_width / self.width.to_f)).floor
+    case size_type
+    when :tag
+      return self.thumb_height if self.thumb_width < self.thumb_height
+      Settings.thumb_width
+    else
+      (self.height * (self.thumb_width / self.width.to_f)).floor
+    end
   end
 
-  def thumb_size_for_style_sheet
+  def thumb_size_for_style_sheet(size_type=nil)
     return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
-    "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
+    case size_type
+    when :tag, :tag_small
+      width = self.thumb_width(:tag)
+      height = self.thumb_height(:tag)
+      if size_type == :tag_small
+        width = (width / 3.0).floor
+        height = (height / 3.0).floor
+      end
+      width_offset = width - Settings.thumb_width
+      height_offset = height - Settings.thumb_width
+      "width: #{width}px; height: #{height}px; margin-left: -#{width_offset/2}px; margin-top: -#{height_offset/2}px;"
+    else
+      "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
+    end
   end
 end
