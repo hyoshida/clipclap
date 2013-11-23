@@ -23,12 +23,30 @@ describe Image do
       image.errors[:width].should be_present
     end
 
-    it "アスペクト比が不正な場合" do
+    context "アスペクト比が不正な場合" do
+      it "横長すぎるためにエラーになること" do
+        image = invalid_image
+        image.width = Settings.allowed_image_aspect[0] * 10 + 1
+        image.height = Settings.allowed_image_aspect[1] * 10
+        image.should be_invalid
+        image.errors[:base].should be_present
+      end
+
+      it "縦長すぎるためにエラーになること" do
+        image = invalid_image
+        image.width = Settings.allowed_image_aspect[1] * 10
+        image.height = Settings.allowed_image_aspect[0] * 10 + 1
+        image.should be_invalid
+        image.errors[:base].should be_present
+      end
+    end
+
+    it "アスペクト比が正しい場合" do
       image = invalid_image
-      image.width *= 100
-      image.height *= 100
-      image.should be_invalid
-      image.errors[:base].should be_present
+      image.width = Settings.allowed_image_aspect[0] * 10
+      image.height = Settings.allowed_image_aspect[1] * 10
+      image.should be_valid
+      image.errors[:base].should be_blank
     end
   end
 end

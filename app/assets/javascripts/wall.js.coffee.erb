@@ -59,11 +59,13 @@ window.resize_images = ($container) ->
   )
 
 is_available_image_size = (width, height) ->
+  horizontal_aspect = <%= Settings.allowed_image_aspect[0] %> * 1.0
+  vertical_aspect = <%= Settings.allowed_image_aspect[1] %> * 1.0
   aspect = (width * 1.0) / (height * 1.0)
   width > <%= Settings.minimum_image_width %> &&
     height > <%= Settings.minimum_image_height %> &&
-    aspect < <%= Settings.allowed_image_aspect[0] / Settings.allowed_image_aspect[1] * 1.0 %> &&
-    aspect > <%= Settings.allowed_image_aspect[1] / Settings.allowed_image_aspect[0] * 1.0 %>
+    aspect <= (horizontal_aspect / vertical_aspect) &&
+    aspect >= (vertical_aspect / horizontal_aspect)
 
 infinitescroll_options = ->
   {
