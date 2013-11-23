@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :clips
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
+  has_many :matomes, :dependent => :destroy
 
   acts_as_followable
   acts_as_follower

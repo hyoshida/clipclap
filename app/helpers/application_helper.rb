@@ -92,6 +92,11 @@ module ApplicationHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{options[:size]}&d=#{options[:default]}"
   end
 
+  def image_tag_by_clip(clip, options={})
+    style = clip.thumb_size_for_style_sheet(options)
+    image_tag image_path(clip.image), alt: clip.title, style: style
+  end
+
   def resource_name
     :user
   end

@@ -6,7 +6,13 @@
     #menu.lfloat.nav.navbar-nav
       ul
         - if user_signed_in?
-          li = link_to(new_clip_path, title: 'あたらしくクリップ') { icon_tag('plus') }
+          li.dropdown
+            = link_to(new_clip_path, class: "profile dropdown-toggle", role: "button", data: { toggle: "dropdown" }) { icon_tag('plus') }
+            .dropdown-menu role="menu"
+              ul
+                li = link_to 'URLから投稿', new_clip_path
+                li.hr
+                li = link_to 'まとめを作成', new_matome_path
           li = link_to(root_path, title: 'お気に入り') { icon_tag('heart') }
         - if false
           li = link_to '閲覧数ランキング', controller: :ranking, action: :views

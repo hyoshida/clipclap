@@ -24,15 +24,15 @@
 @import "zurui-sass";
 
 /* commons */
-.lfloat { 
+.lfloat {
   float: left;
 }
 
-.rfloat { 
+.rfloat {
   float: right;
 }
 
-.clear { 
+.clear {
   clear: both;
 }
 
@@ -177,19 +177,29 @@ body {
   }
 }
 
-#account_from a {
+#header .dropdown-menu a {
   color: #333;
   font-weight: normal;
   text-align: left;
   background: transparent;
 }
 
-#account_from ul {
-  margin: 0px 0px;
+#header .dropdown-menu ul {
+  margin: 0;
+  padding: 0;
 }
 
-#account_from li a {
-  &:hover, &:focus {
+#header .dropdown-menu li {
+  display: block;
+
+  &.hr {
+    margin: 0.5em 0;
+    height: auto;
+    @extend hr;
+  }
+
+  a:hover,
+  a:focus {
     color: #fff;
     text-decoration: underline;
     @include hilight_menu_item;

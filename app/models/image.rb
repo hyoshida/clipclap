@@ -25,41 +25,34 @@ class Image < ActiveRecord::Base
     image.write self.thumb_path
   end
 
-  def thumb_width(size_type=nil)
-    case size_type
-    when :tag
-      return Settings.thumb_width if self.thumb_width < self.thumb_height
-      (self.width * (Settings.thumb_width / self.height.to_f)).floor
+  def thumb_width(crop_size=nil)
+    if crop_size
+      return crop_size if self.thumb_width < self.thumb_height
+      (self.width * (crop_size / self.height.to_f)).floor
     else
       Settings.thumb_width
     end
   end
 
-  def thumb_height(size_type=nil)
+  def thumb_height(crop_size=nil)
     return 0 if self.width.zero? || self.height.zero? # for 下位互換
-    case size_type
-    when :tag
-      return self.thumb_height if self.thumb_width < self.thumb_height
-      Settings.thumb_width
+    if crop_size
+      return crop_size if self.thumb_width >= self.thumb_height
+      (self.height * (crop_size / self.width.to_f)).floor
     else
       (self.height * (self.thumb_width / self.width.to_f)).floor
     end
   end
 
-  def thumb_size_for_style_sheet(size_type=nil)
+  def thumb_size_for_style_sheet(options={})
     return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
-    case size_type
-    when :tag, :tag_small
-      width = self.thumb_width(:tag)
-      height = self.thumb_height(:tag)
-      box_size = Settings.thumb_width
-      if size_type == :tag_small
-        width = (width / 3.0).floor
-        height = (height / 3.0).floor
-        box_size = (box_size / 3.0).floor
-      end
-      width_offset = width - box_size
-      height_offset = height - box_size
+    case options[:mode]
+    when :crop
+      crop_size = options[:size]
+      width = self.thumb_width(crop_size)
+      height = self.thumb_height(crop_size)
+      width_offset = width - crop_size
+      height_offset = height - crop_size
       "width: #{width}px; height: #{height}px; margin-left: -#{width_offset / 2}px; margin-top: -#{height_offset / 2}px;"
     else
       "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
