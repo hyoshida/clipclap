@@ -13,7 +13,7 @@
                 li = link_to 'URLから投稿', new_clip_path
                 li.hr
                 li = link_to 'まとめを作成', new_matome_path
-          li = link_to(root_path, title: 'お気に入り') { icon_tag('heart') }
+          li = link_to(user_likes_path(current_user), title: 'お気に入り') { icon_tag('heart') }
         - if false
           li = link_to '閲覧数ランキング', controller: :ranking, action: :views
           li = link_to 'イイネ！ランキング', controller: :ranking, action: :likes
