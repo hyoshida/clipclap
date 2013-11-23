@@ -63,12 +63,13 @@ $cover_size: 100px;
 
   .meta {
     .updated_at {
+      margin-left: 0.5em;
       color: #aaa;
     }
   }
 
   .user {
-    margin-top: 5px;
+    margin-top: 0.5em;
 
     img {
       vertical-align: middle;
@@ -76,7 +77,7 @@ $cover_size: 100px;
 
     .avatar a {
       display: inline;
-      margin-right: 5px;
+      margin-right: 0.5em;
     }
 
     .name {
