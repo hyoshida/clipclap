@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature "ウォール" do
   given(:clip) { FactoryGirl.create(:clip) }
+  given(:user) { FactoryGirl.create(:user) }
 
   background_stub_request
   background { visit root_path }
@@ -11,6 +12,8 @@ feature "ウォール" do
   end
 
   scenario "無限スクロールが正常に動作すること", js: true do
+    sign_in_as(user)
+
     per_page = Settings.page
     FactoryGirl.create_list(:clip, per_page + 1)
 
