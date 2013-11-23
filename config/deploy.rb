@@ -15,7 +15,7 @@ role :app, 'clipclap.org'                   # This may be the same as your `Web`
 role :db,  'clipclap.org', :primary => true # This is where Rails migrations will run
 
 require 'capistrano-rbenv'
-set :rbenv_ruby_version, '2.0.0-p247'
+set :rbenv_ruby_version, '2.0.0-p353'
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
