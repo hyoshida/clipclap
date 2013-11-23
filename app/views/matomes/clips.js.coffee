@@ -1,6 +1,9 @@
 # 古い無限スクロールのメタデータを破棄
 destroy_infinitescroll()
 
+# 複数ロードできないようにボタンを削除
+$('#load').remove()
+
 $container = $('#container')
 $container.html('&nbsp;')
 $container.attr('style', 'position: relative;')

@@ -6,8 +6,8 @@
       .cover.none
     h1 = @matome.title
     p.meta
-      span.description
-       = @matome.description
+      - if @matome.description.present?
+        span.description = @matome.description
       span.updated_at
         | 更新日:
         = I18n.l @matome.updated_at.to_date, format: :long

@@ -14,12 +14,11 @@
     #matome_container
 
     #clip_selecter
-      = f.submit 'あたらしいクリップ', id: 'new_clip', :type => 'button'
+      = f.submit 'クリップを追加', id: 'new_clip', :type => 'button'
 
 #matome_dialog
-  h3 1. クリップを選択
+  h3 投稿済みのクリップから選択
   = form_for @matome, url: { action: :clips }, remote: true, method: :get do |f|
-    p クリップを選択ください。
     = f.submit '選択...', id: 'load', disable_with: '取得中...'
 
   #container

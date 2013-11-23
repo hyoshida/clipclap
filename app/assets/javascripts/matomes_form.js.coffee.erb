@@ -21,6 +21,7 @@ $( ->
     $hidden_data.attr('type', 'hidden')
     $hidden_data.attr('name', 'matome[clip_ids][]')
     $hidden_data.attr('value', $(@).attr('data-clip-id'))
+
     $image = $('<img/>')
     $image.attr('src', $(@).attr('src'))
     $image.attr('style', $(@).attr('style'))
@@ -30,6 +31,10 @@ $( ->
     $box = $('<div/>')
     $box.attr('class', 'box')
     $box.html($image_box)
+
+    $(@).parent('.box').remove()
+    $container.masonry('reload')
+
     $matome_container.append($box)
     $matome_container.append($hidden_data)
     $matome_container.masonry('reload')

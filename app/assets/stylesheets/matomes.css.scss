@@ -62,9 +62,12 @@ $cover_size: 100px;
   }
 
   .meta {
+    .description {
+      margin-right: 0.5em;
+    }
+
     .updated_at {
-      margin-left: 0.5em;
-      color: #aaa;
+      color: #888;
     }
   }
 
@@ -119,6 +122,14 @@ $cover_size: 100px;
 // container
 #matome_container {
   @extend #container;
+
+  .box {
+    margin: 5px;
+
+    img {
+      @include border-radius(4px);
+    }
+  }
 }
 
 // dialog
