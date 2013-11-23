@@ -9,6 +9,6 @@ class ImageAspectValidator < ActiveModel::Validator
     horizontal_aspect = options[:aspect][0].to_f
     vertical_aspect = options[:aspect][1].to_f
     aspect = width.to_f / height.to_f
-    aspect < (horizontal_aspect / vertical_aspect) && aspect > (vertical_aspect / horizontal_aspect)
+    aspect <= (horizontal_aspect / vertical_aspect) && aspect >= (vertical_aspect / horizontal_aspect)
   end
 end
