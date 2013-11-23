@@ -1,4 +1,13 @@
 class MatomesController < ApplicationController
+  # GET /matomes
+  def index
+    if params[:user_id]
+      @user = User.includes(:clips, :likes, :tags).find(params[:user_id])
+      @matomes = @user.matomes if @user
+    end
+    @matomes ||= Matome.all
+  end
+
   # GET /matomes/:id
   def show
     @matome = Matome.find(params[:id])
