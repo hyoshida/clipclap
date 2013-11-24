@@ -92,4 +92,4 @@ namespace :deploy do
   end
 end
 
-before 'deploy:assets:precompile', 'deploy:link_dotenv'
+before 'foreman:export', 'deploy:link_dotenv'
