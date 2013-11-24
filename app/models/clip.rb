@@ -43,6 +43,12 @@ class Clip < ActiveRecord::Base
     self.image.clip
   end
 
+  def open_image
+    options = {}
+    options['Referer'] = self.origin_url if self.origin_url.present?
+    open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}", options)
+  end
+
   def origin_url_domain
     return nil if self.origin_url.blank?
     require 'uri'
@@ -73,7 +79,7 @@ class Clip < ActiveRecord::Base
     if image.nil?
       require 'open-uri'
       require 'image_size'
-      image_size = ImageSize.new(open_uri_sweet(@url))
+      image_size = ImageSize.new(open_image)
       image = Image.create(url: @url, width: image_size.width, height: image_size.height)
       return false if image.nil?
     end

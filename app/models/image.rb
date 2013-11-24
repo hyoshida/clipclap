@@ -11,6 +11,18 @@ class Image < ActiveRecord::Base
 
   include OpenUriSweet
 
+  def open_image
+    clip = clips.first
+    return clip.open_image if clip
+    options = {}
+    options['Referer'] = self.url if self.url.present?
+    open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}", options)
+  end
+
+  def thumb_url
+    [ self.id, :thubnail ].join('/')
+  end
+
   def thumb_path
     require 'digest/sha2'
     sha256 = Digest::SHA256.hexdigest(self.url)
@@ -19,7 +31,7 @@ class Image < ActiveRecord::Base
 
   def create_thumb_cache_file
     FileUtils.mkdir_p Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
-    image = MiniMagick::Image.read(open_uri_sweet(self.url, "rb:#{Encoding::ASCII_8BIT}").read)
+    image = MiniMagick::Image.read(self.open_image.read)
     image.format Settings.thumb_format
     image.resize "#{self.thumb_width}x#{self.thumb_height}"
     image.write self.thumb_path

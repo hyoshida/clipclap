@@ -16,7 +16,7 @@
 
   .info id="clip_#{@clip.id}"
     .image_box
-      = link_to image_tag(@clip.url), @clip.url
+      = link_to image_tag(image_path(@clip.image)), @clip.url
 
     - if @clip.title.present?
       h2.title = @clip.title

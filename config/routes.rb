@@ -42,6 +42,7 @@ Clipclap::Application.routes.draw do
 
   match 'tags/:name' => 'tags#show', via: :get, as: :tag
   resources :tags, only: [ :index ]
+  match 'images/:id/:type' => 'images#show', via: :get
   resources :images, only: [ :show ]
 
   resources :matomes, only: [ :index, :show, :new, :create, :edit, :update ] do
