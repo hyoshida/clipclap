@@ -49,6 +49,20 @@ class MatomesController < ApplicationController
     @cover_clip = @clips.try(:first)
   end
 
+  # PUT /clips/:id
+  def update
+    clip_ids = params[:matome].delete(:clip_ids)
+    @matome = Matome.find(params[:id])
+
+    @matome.clip_ids = Clip.where(user_id: current_user.id, id: clip_ids).pluck(:id)
+
+    if @matome.update_attributes(params[:matome])
+      redirect_to @matome, notice: "「#{@matome.title}」まとめを更新しました"
+    else
+      render action: :edit
+    end
+  end
+
   private
 
   def insert_div_tag_for_image_tag
