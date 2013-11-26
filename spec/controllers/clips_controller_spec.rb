@@ -5,6 +5,23 @@ describe ClipsController do
 
   before_stub_request
 
+  describe "GET 'show'" do
+    let (:request) { get :show, id: clip.id }
+
+    render_views
+
+    context "未ログインの場合" do
+      before { request }
+      its (:response) { should be_success }
+    end
+
+    context "ログイン済みの場合" do
+      before_sign_in
+      before { request }
+      its (:response) { should be_success }
+    end
+  end
+
   describe "PUT 'create'" do
     context "未ログインの場合" do
       it "ログインページにリダイレクトすること" do
