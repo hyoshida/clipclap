@@ -12,7 +12,7 @@
       = f.submit
 
     #matome_container
-      - @clips.each do |clip|
+      - @matome.clips.each do |clip|
         .box
           .image_box
             = link_to image_tag_by_clip(clip), clip, remote: true
