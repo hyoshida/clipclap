@@ -90,6 +90,15 @@ $cover_size: 100px;
     .title {
     }
   }
+
+  #edit {
+    width: $cover_size;
+    text-align: center;
+
+    a {
+      color: #444;
+    }
+  }
 }
 
 // form
