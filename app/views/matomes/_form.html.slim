@@ -9,9 +9,14 @@
       h1 = f.text_field :title, placeholder: 'タイトル'
       .description
         p = f.text_area :description, placeholder: '説明', rows: 3
-      = f.submit '作成'
+      = f.submit
 
     #matome_container
+      - @clips.each do |clip|
+        .box
+          .image_box
+            = link_to image_tag_by_clip(clip), clip, remote: true
+            = f.hidden_field :clip_ids, multiple: true, value: clip.id
 
     #clip_selecter
       = f.submit 'クリップを追加', id: 'new_clip', :type => 'button'
@@ -19,6 +24,8 @@
 #matome_dialog
   h3 投稿済みのクリップから選択
   = form_for @matome, url: { action: :clips }, remote: true, method: :get do |f|
+    - @matome.clip_ids.each do |clip_id|
+      = f.hidden_field :clip_ids, multiple: true, value: clip_id
     = f.submit '選択...', id: 'load', disable_with: '取得中...'
 
   #container

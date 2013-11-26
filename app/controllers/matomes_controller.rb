@@ -22,7 +22,8 @@ class MatomesController < ApplicationController
 
   # XHR GET /matomes/clips
   def clips
-    @clips = Clip.where(user_id: current_user.id).paginate(page: params[:page])
+    clip_ids = params[:matome].delete(:clip_ids)
+    @clips = Clip.where(user_id: current_user.id).where.not(id: clip_ids).paginate(page: params[:page])
     render text: "<html><body><div id='container'>#{@clips.map(&insert_div_tag_for_image_tag).join}</div></body></html>" unless first_page?
   end
 
@@ -39,6 +40,27 @@ class MatomesController < ApplicationController
     else
       flash[:alert] = @matome.errors.full_messages.join
       render action: :new
+    end
+  end
+
+  # GET /matomes/:id/edit
+  def edit
+    @matome = Matome.find(params[:id])
+    @clips = @matome.clips
+    @cover_clip = @clips.try(:first)
+  end
+
+  # PUT /clips/:id
+  def update
+    clip_ids = params[:matome].delete(:clip_ids)
+    @matome = Matome.find(params[:id])
+
+    @matome.clip_ids = Clip.where(user_id: current_user.id, id: clip_ids).pluck(:id)
+
+    if @matome.update_attributes(params[:matome])
+      redirect_to @matome, notice: "「#{@matome.title}」まとめを更新しました"
+    else
+      render action: :edit
     end
   end
 

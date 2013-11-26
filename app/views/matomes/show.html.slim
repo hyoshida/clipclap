@@ -15,6 +15,10 @@
       span.avatar = link_to_user_by_avatar(@matome.user)
       span.name = "#{@matome.user.nick_name}"
       span.title さん
+    - if current_user
+      - if current_user.id == @matome.user_id
+        p#edit
+          = link_to 'まとめを編集', edit_matome_path(@matome)
     .clear
 
 - if @clips.present?

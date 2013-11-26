@@ -44,7 +44,7 @@ Clipclap::Application.routes.draw do
   resources :tags, only: [ :index ]
   resources :images, only: [ :show ]
 
-  resources :matomes, only: [ :index, :show, :new, :create ] do
+  resources :matomes, only: [ :index, :show, :new, :create, :edit, :update ] do
     collection do
       get :clips
     end
