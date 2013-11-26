@@ -11,9 +11,9 @@
             = matome.clips.size
             | クリップ
         .image_box
-          - clip = matome.clips.shift
-          = link_to image_tag_for_tag(clip), matome
           - if matome.clips.size.nonzero?
+            - clip = matome.clips.shift
+            = link_to image_tag_for_tag(clip), matome
             ul.sub_image_boxes
               - clips = matome.clips.take(3)
               - clips += [ nil ] * 3
