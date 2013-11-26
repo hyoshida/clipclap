@@ -42,6 +42,13 @@ class MatomesController < ApplicationController
     end
   end
 
+  # GET /matomes/:id/edit
+  def edit
+    @matome = Matome.find(params[:id])
+    @clips = @matome.clips
+    @cover_clip = @clips.try(:first)
+  end
+
   private
 
   def insert_div_tag_for_image_tag

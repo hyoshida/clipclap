@@ -9,9 +9,14 @@
       h1 = f.text_field :title, placeholder: 'タイトル'
       .description
         p = f.text_area :description, placeholder: '説明', rows: 3
-      = f.submit '作成'
+      = f.submit
 
     #matome_container
+      - @clips.each do |clip|
+        .box
+          .image_box
+            = link_to image_tag_by_clip(clip), clip, remote: true
+            = f.hidden_field :clip_ids, multiple: true, value: clip.id
 
     #clip_selecter
       = f.submit 'クリップを追加', id: 'new_clip', :type => 'button'
