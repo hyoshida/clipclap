@@ -24,6 +24,8 @@
 #matome_dialog
   h3 投稿済みのクリップから選択
   = form_for @matome, url: { action: :clips }, remote: true, method: :get do |f|
+    - @matome.clip_ids.each do |clip_id|
+      = f.hidden_field :clip_ids, multiple: true, value: clip_id
     = f.submit '選択...', id: 'load', disable_with: '取得中...'
 
   #container

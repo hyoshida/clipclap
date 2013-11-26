@@ -22,7 +22,8 @@ class MatomesController < ApplicationController
 
   # XHR GET /matomes/clips
   def clips
-    @clips = Clip.where(user_id: current_user.id).paginate(page: params[:page])
+    clip_ids = params[:matome].delete(:clip_ids)
+    @clips = Clip.where(user_id: current_user.id).where.not(id: clip_ids).paginate(page: params[:page])
     render text: "<html><body><div id='container'>#{@clips.map(&insert_div_tag_for_image_tag).join}</div></body></html>" unless first_page?
   end
 
