@@ -21,6 +21,11 @@ describe MatomesController do
     end
   end
 
+  describe "GET 'new'" do
+    before { get :new }
+    its (:response) { should be_success }
+  end
+
   describe "GET 'edit'" do
     before { get :edit, id: matome.id }
 
@@ -51,5 +56,17 @@ describe MatomesController do
       its (:description) { should eq(description) }
       its (:clip_ids) { should match_array(new_clip_ids) }
     end
+  end
+
+  describe "XHR GET 'clips'" do
+    before_sign_in
+    before { xhr :get, :clips }
+    its (:response) { should be_success }
+  end
+
+  describe "GET 'clips'" do
+    before_sign_in
+    subject { get :clips }
+    it { expect { subject }.to raise_error(ActionView::MissingTemplate) }
   end
 end
