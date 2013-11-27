@@ -29,12 +29,7 @@ describe MatomesController do
     context "@matome" do
       subject { assigns :matome }
       it { should be_persisted }
-    end
-
-    context "@clips" do
-      subject { assigns :clips }
-      it { should be_present }
-      its (:count) { should eq(clips.count) }
+      its (:clip_ids) { should match_array(clips.map(&:id)) }
     end
   end
 
