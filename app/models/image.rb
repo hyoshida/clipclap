@@ -20,7 +20,7 @@ class Image < ActiveRecord::Base
   end
 
   def thumb_url
-    [ self.id, :thubnail ].join('/')
+    [ self.id, :thumbnail ].join('/')
   end
 
   def thumb_path
