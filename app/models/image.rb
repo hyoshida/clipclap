@@ -56,8 +56,7 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def thumb_size_for_style_sheet(options={})
-    return "width: #{self.thumb_width}px;" if self.thumb_height.zero? # for 下位互換
+  def size_for_stylesheet(options={})
     case options[:mode]
     when :crop
       crop_size = options[:size]
@@ -66,8 +65,10 @@ class Image < ActiveRecord::Base
       width_offset = width - crop_size
       height_offset = height - crop_size
       "width: #{width}px; height: #{height}px; margin-left: -#{width_offset / 2}px; margin-top: -#{height_offset / 2}px;"
-    else
+    when :thumbnail
       "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
+    else
+      "width: #{self.width}px; height: #{self.height}px;"
     end
   end
 end

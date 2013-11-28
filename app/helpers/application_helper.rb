@@ -93,7 +93,7 @@ module ApplicationHelper
   end
 
   def image_tag_by_clip(clip, options={})
-    style = clip.thumb_size_for_style_sheet(options)
+    style = clip.size_for_stylesheet(options)
     image_tag image_path(clip.image.thumb_url), alt: clip.title, style: style
   end
 

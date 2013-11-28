@@ -91,7 +91,7 @@ class Clip < ActiveRecord::Base
     self.image.try(:url) || @url
   end
 
-  delegate :thumb_size_for_style_sheet, to: :image
+  delegate :size_for_stylesheet, to: :image
 
   def create_html_only_images
     images = [ @url ] if @url
