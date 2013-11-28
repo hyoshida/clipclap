@@ -11,6 +11,7 @@
             .dropdown-menu role="menu"
               ul
                 li = link_to 'URLから投稿', new_clip_path
+                li = link_to 'ブックマークレットから投稿', bookmarklet_path
                 li.hr
                 li = link_to 'まとめを作成', new_matome_path
           li = link_to(user_likes_path(current_user), title: 'お気に入り') { icon_tag('heart') }

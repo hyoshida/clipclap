@@ -50,6 +50,7 @@ Clipclap::Application.routes.draw do
     end
   end
 
+  get 'bookmarklet' => 'home#bookmarklet', via: :get, as: :bookmarklet
   get "home/index"
   root :to => "home#index"
 
