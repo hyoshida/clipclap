@@ -2,6 +2,7 @@
 @import "bootstrap/mixins";
 @import "bootstrap/buttons";
 @import "compass/css3";
+@import "compass/utilities";
 
 @import "carousel";
 
@@ -49,22 +50,27 @@ $user_menu_height: 100px;
   .avatar {
     float: left;
     margin-right: 20px;
+    width: 128px;
+    height: 128px;
   }
 
   .name {
+    margin-bottom: 5px;
+    height: 1em;
     font-size: xx-large;
-    height: $profile_height / 3;
-    line-height: $profile_height / 3;
+    @include ellipsis;
   }
 
   .description {
+    height: 3em;
     font-size: large;
-    height: $profile_height / 3;
+    overflow-y: hidden;
+    word-wrap: break-word;
   }
 
   .buttons {
-    height: $profile_height / 3;
-    line-height: $profile_height / 3;
+    margin-top: 10px;
+    height: 1em;
     text-align: right;
   }
 }
