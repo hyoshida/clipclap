@@ -4,7 +4,13 @@ class ImagesController < ApplicationController
   def show
     image = Image.find(params[:id])
     return if image.nil?
-    image.create_thumb_cache_file unless File.exist? image.thumb_path
-    send_data File.binread(image.thumb_path)
+
+    case params[:type].try(:to_sym)
+    when :thumbnail
+      image.create_thumb_cache_file unless File.exist? image.thumb_path
+      send_data File.binread(image.thumb_path)
+    else
+      send_data image.open_image.read
+    end
   end
 end
