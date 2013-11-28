@@ -1,3 +1,39 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "common";
+
+// bookmarklet
+#bookmarklet {
+  width: 1024px;
+  font-size: 140%;
+  margin: 10px;
+
+  p {
+    line-height: 130%;
+  }
+}
+
+#bookmarklet h1 {
+  margin: 0 0 0.25em;
+  line-height: 150%;
+  font-size: xx-large;
+}
+
+#bookmarklet .well {
+  margin: 1em 0;
+  text-align: center;
+  font-size: xx-large;
+  font-family: $font_gothic;
+  letter-spacing: 3px;
+  font-weight: bold;
+
+  a {
+    color: #666;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

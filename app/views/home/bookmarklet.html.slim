@@ -1,0 +1,5 @@
+#bookmarklet
+  h1 ブックマークレット
+  p 「@clip」のリンクをブックマークバーにドラッグ＆ドロップすることで、様々なサイトから１クリックでクリップできるようになります。
+  p.well
+    = link_to '@clip', "javascript:(function(){location.href='http://clipclap.org/clips/new?url='+encodeURIComponent(location.href);})();"
