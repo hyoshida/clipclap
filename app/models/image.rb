@@ -33,7 +33,7 @@ class Image < ActiveRecord::Base
     FileUtils.mkdir_p Settings.image_cache_dir unless File.exist? Settings.image_cache_dir
     image = MiniMagick::Image.read(self.open_image.read)
     image.format Settings.thumb_format
-    image.resize "#{self.thumb_width}x#{self.thumb_height}"
+    image.resize "#{self.thumb_width}x#{self.thumb_height}!"
     image.write self.thumb_path
   end
 
