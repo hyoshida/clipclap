@@ -48,6 +48,85 @@ describe ClipsController do
     end
   end
 
+  describe "PUT 'like'" do
+    let (:request) { put :like, id: clip.id }
+
+    context "未ログインの場合" do
+      before { request }
+      its (:response) { should redirect_to :new_user_session }
+    end
+
+    context "ログイン済みの場合" do
+      before_sign_in
+      # TODO: 正常にイイネ！できるようにする
+      it { expect { request }.to raise_error ActionView::MissingTemplate }
+    end
+  end
+
+  describe "PUT 'unlike'" do
+    let (:request) { put :unlike, id: clip.id }
+
+    context "未ログインの場合" do
+      before { request }
+      its (:response) { should redirect_to :new_user_session }
+    end
+
+    context "ログイン済みの場合" do
+      before_sign_in
+      # TODO: 正常にイイネ！解除できるようにする
+      it { expect { request }.to raise_error ActionView::MissingTemplate }
+    end
+  end
+
+  describe "XHR-PUT 'like'" do
+    let (:request) { xhr :put, :like, id: clip.id }
+
+    context "未ログインの場合" do
+      before { request }
+
+      it "ログインページにリダイレクトすること" do
+        response.body.should include('window.location')
+        response.body.should include(new_user_session_path)
+      end
+    end
+
+    context "ログイン済みの場合" do
+      before_sign_in
+      before { request }
+
+      its (:response) { should be_success }
+      its (:current_user) { should be_present }
+
+      it 'イイネ！に成功していること' do
+        expect(assigns[:clip].likes.count).to eq(1)
+      end
+    end
+  end
+
+  describe "XHR-PUT 'unreclip'" do
+    let (:request) { xhr :put, :unlike, id: clip.id }
+
+    context "未ログインの場合" do
+      before { request }
+      it "ログインページにリダイレクトすること" do
+        response.body.should include('window.location')
+        response.body.should include(new_user_session_path)
+      end
+    end
+
+    context "ログイン済みの場合" do
+      before_sign_in
+      before { xhr :put, :like, id: clip.id }
+      before { request }
+
+      its (:response) { should be_success }
+      its (:current_user) { should be_present }
+
+      it 'イイネ！解除に成功していること' do
+        expect(assigns[:clip].likes.count).to eq(0)
+      end
+    end
+  end
   describe "PUT 'reclip'" do
     before { clip }
 

@@ -37,12 +37,12 @@ class ClipsController < ApplicationController
 
   def like
     @clip = Clip.where(id: params[:id]).first
-    current_user.like(@clip) unless @clip.nil?
+    current_user.like(@clip) if @clip
   end
 
   def unlike
     @clip = Clip.where(id: params[:id]).first
-    current_user.unlike(@clip) unless @clip.nil?
+    current_user.unlike(@clip) if @clip
   end
 
   def tagging
