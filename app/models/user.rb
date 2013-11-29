@@ -80,7 +80,9 @@ class User < ActiveRecord::Base
   end
 
   def unlike(clip)
-    self.likes.where(clip_id: clip.id).first.destroy
+    like = self.likes.where(clip_id: clip.id).first
+    return false unless like
+    like.destroy
   end
 
   def reclip?(clip)
