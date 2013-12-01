@@ -69,6 +69,7 @@ gem 'unicorn-rails'
 
 # To use user authentication
 gem 'devise'
+gem 'devise-i18n'
 
 # HTMLをRubyで簡単に扱えるようにする
 gem 'hpricot'
