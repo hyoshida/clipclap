@@ -9,6 +9,8 @@ ja:
   name: &g_name ユーザー名
   email: &g_email メールアドレス
   password: &g_password パスワード
+  created_at: &g_created_at 作成日時
+  updated_at: &g_updated_at 更新日時
   refresh: 更新
 
   activerecord:
@@ -19,15 +21,19 @@ ja:
       like: イイネ
       clip: クリップ
       tag: タグ
+      comment: コメント
+      follow: フォロー
+      matome: まとめ
 
     attributes:
       user: &user
-        current_sign_in_at: current_sign_in_at  #g
-        current_sign_in_ip: current_sign_in_ip  #g
+        sign_in_count: ログイン回数
+        current_sign_in_at: 現行ログイン日時
+        current_sign_in_ip: 現行ログインIP
         email: *g_email
         encrypted_password: encrypted_password  #g
-        last_sign_in_at: last_sign_in_at  #g
-        last_sign_in_ip: last_sign_in_ip  #g
+        last_sign_in_at: 最終ログイン日
+        last_sign_in_ip: 最終ログインIP
         name: *g_name
         remember_created_at: remember_created_at  #g
         reset_password_sent_at: reset_password_sent_at  #g
@@ -39,43 +45,73 @@ ja:
         sign_in: ログイン
         sign_out: ログアウト
         current_password: 現在のパスワード
-        likes: likes  #g
-        clips: clips  #g
-        tags: tags  #g
+        likes: :activerecord.models.like
+        clips: :activerecord.models.clip
+        tags: :activerecord.models.tag
+        matomes: :activerecord.models.matome
         description: 自己紹介
+        created_at: *g_created_at
+        updated_at: *g_updated_at
 
       admin_user:
         <<: *user
 
       image:
         delete_ordered_at: delete_ordered_at  #g
-        likes: likes  #g
-        clips: clips  #g
+        likes: :activerecord.models.like
+        clips: :activerecord.models.clip
         url: URL
         width: 幅
         height: 高さ
+        created_at: *g_created_at
+        updated_at: *g_updated_at
 
       like:
         image: :activerecord.models.image  #g
         clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
+        matome: :activerecord.models.matome
+        created_at: *g_created_at
+        updated_at: *g_updated_at
 
       clip:
         image: :activerecord.models.image  #g
-        likes: likes  #g
+        likes: :activerecord.models.like
         origin_html: origin_html  #g
         origin_url: origin_url  #g
-        tags: tags  #g
         title: タイトル
+        view_count: 閲覧数
+        tags: :activerecord.models.tag
         user: :activerecord.models.user  #g
+        comments: :activerecord.models.comment
+        matomes: :activerecord.models.matome
+        created_at: *g_created_at
+        updated_at: *g_updated_at
 
       tag:
         name: タグ名
         clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
+        created_at: *g_created_at
+        updated_at: *g_updated_at
+
+      comment:
+        clip: :activerecord.models.clip
+        user: :activerecord.models.user
+        body: 本文
+        created_at: *g_created_at
+        updated_at: *g_updated_at
+
+      follow:
+        created_at: *g_created_at
+        updated_at: *g_updated_at
 
       matome:
         title: タイトル
         description: 説明
-        clips: clips
+        clips: :activerecord.models.clip
         user: :activerecord.models.user
+        likes: :activerecord.models.like
+        view_count: 閲覧数
+        created_at: *g_created_at
+        updated_at: *g_updated_at
