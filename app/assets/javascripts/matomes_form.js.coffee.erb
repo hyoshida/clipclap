@@ -6,6 +6,7 @@ $( ->
   $container = $('#container')
   $matome_container = $('#matome_container')
 
+  resize_images($matome_container)
   initialize_masonry($matome_container)
 
   $container.on('click', '.box img', ->
