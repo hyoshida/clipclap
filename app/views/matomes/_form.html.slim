@@ -15,7 +15,7 @@
       - @matome.clips.each do |clip|
         .box
           .image_box
-            = link_to image_tag_by_clip(clip), clip, remote: true
+            = image_tag_by_clip(clip)
             = f.hidden_field :clip_ids, multiple: true, value: clip.id
 
     #clip_selecter
