@@ -63,6 +63,8 @@
       ul
         li.twitter
           == render partial: 'base/twitter_button'
+        li.facebook
+          == render partial: 'base/facebook_button'
 
   .other_info
     - if user_signed_in? && @clip.user_id == current_user.id
