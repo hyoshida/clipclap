@@ -34,23 +34,24 @@
           = f.submit 'クリップ', class: 'hidden btn'
 
   .additional_info
-    .tag_feild
-      ul#tags
-        - @clip.tags.each do |tag|
-          li id="tag_#{tag.id}"
-            = link_to tag.name, controller: :tags, action: :show, name: tag.name
-            span &nbsp;
-            = link_to '×', untagging_clip_path(tag_id: tag.id), class: 'remove', remote: true if user_signed_in? && tag.user_id == current_user.id
+    - if @clip.tags.size.nonzero?
+      .tag_feild
+        ul#tags
+          - @clip.tags.each do |tag|
+            li id="tag_#{tag.id}"
+              = link_to tag.name, controller: :tags, action: :show, name: tag.name
+              span &nbsp;
+              = link_to '×', untagging_clip_path(tag_id: tag.id), class: 'remove', remote: true if user_signed_in? && tag.user_id == current_user.id
 
-      - if user_signed_in? && !@clip.tags_maximum?
-        = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
-          = f.text_field :name, class: 'span2'
-          = f.submit 'タグを追加', class: 'btn'
+        - if user_signed_in? && !@clip.tags_maximum?
+          = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
+            = f.text_field :name, class: 'span2'
+            = f.submit 'タグを追加', class: 'btn'
 
-    -if @clip.reclips.size.nonzero?
+    - if @clip.reclips.size.nonzero?
       = render partial: 'carousel', locals: { objects: @clip.reclips, name: 'reclips_carousel', message: 'がリクリップしています' }
 
-    -if @clip.likes.size.nonzero?
+    - if @clip.likes.size.nonzero?
       = render partial: 'carousel', locals: { objects: @clip.likes, name: 'likes_carousel', message: 'がイイネ！と言っています' }
 
     .view_feild
