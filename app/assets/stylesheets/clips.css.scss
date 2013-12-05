@@ -204,6 +204,18 @@ strong {
   @include additional_info_box;
 }
 
+#clip .social_feild {
+  li {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    &.twitter {
+      width: 90px;
+    }
+  }
+}
+
 #clip .other_info {
   clear: both;
 }
