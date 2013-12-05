@@ -59,6 +59,11 @@
           span.count = @clip.view_count
           span.message 回の訪問があります
 
+    .social_feild
+      ul
+        li.twitter
+          == render partial: 'base/twitter_button'
+
   .other_info
     - if user_signed_in? && @clip.user_id == current_user.id
       = link_to 'Destroy', @clip, confirm: 'Are you sure?', method: :delete
