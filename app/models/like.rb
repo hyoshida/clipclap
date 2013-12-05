@@ -7,4 +7,6 @@ class Like < ActiveRecord::Base
   validates :clip_id, :presence => true
   validates :user_id, :presence => true
   validates :image, :presence => true
+
+  default_scope order: 'created_at DESC'
 end

@@ -7,6 +7,8 @@ class Tag < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :name, :presence => true, :uniqueness => { scope: :clip_id }, :length => { minimum: 2 }
 
+  default_scope order: 'created_at DESC'
+
   def shortname(length = 4)
     return self.name if self.name.size <= length
     self.name[0..length] + '...'
