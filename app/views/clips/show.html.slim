@@ -64,7 +64,7 @@
         li.twitter
           == render partial: 'base/twitter_button'
         li.facebook
-          == render partial: 'base/facebook_button'
+          == render partial: 'base/facebook_button', locals: { target: @clip }
         li.mixi
           == render partial: 'base/mixi_button'
 
