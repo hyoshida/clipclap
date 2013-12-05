@@ -9,7 +9,7 @@
 #introduction h1 {
   margin: 0.5em 5px;
   color: #666;
-  font-size: xx-large;
+  font-size: x-large;
   font-family: $font_serif;
   line-height: 250%;
   border-bottom: 1px solid #888;
@@ -34,5 +34,14 @@
   .btn-like {
     @include icon(heart-empty);
     @include btn-like;
+  }
+
+  .tip {
+    margin: 0 3px;
+    padding: 3px 6px;
+    color: #666;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    @include border-radius(4px);
   }
 }

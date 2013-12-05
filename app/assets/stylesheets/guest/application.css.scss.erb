@@ -17,7 +17,7 @@ $font-awesome-enable-ie7-support: true;
 // variables
 $contents_width: 1000px;
 $header_width: $contents_width;
-$header_height: 300px;
+$header_height: 40px;
 
 // wrapper
 #wrapper {
@@ -27,21 +27,23 @@ $header_height: 300px;
 // header
 #header {
   margin-bottom: 50px;
+  height: $header_height;
 }
 
 #header .wrap {
 }
 
 #header .logo {
-  padding: 0.5em 0;
   color: #fff;
-  font-size: 72pt;
-  font-family: $font_serif;
+  height: $header_height;
+  line-height: $header_height;
+  font-size: normal;
+  font-family: $font_gothic;
   font-weight: bold;
   text-align: center;
   background-color: #000;
-  border-bottom: 10px solid #f90;
-  @include zurui-gradient-top-lighten(#222);
+  border-bottom: 4px solid #f70;
+  @include zurui-gradient-top-lighten(#1a1a1a);
 }
 
 #header .form {
