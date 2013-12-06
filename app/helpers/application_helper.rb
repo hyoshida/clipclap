@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def comment_text_to(comment)
-    raw comment.body
+    h comment.body
   end
 
   def nostyle_like
@@ -64,7 +64,7 @@ module ApplicationHelper
   def uncomment_to(comment)
     options = { remote: true, title: 'コメントを取り消す', class: 'remove' }
     remove_link = link_to(icon_remove + nostyle_remove, uncomment_clip_path(id: comment.clip_id, comment_id: comment.id), options)
-    comment_text_to(comment) + remove_link
+    raw comment_text_to(comment) + remove_link
   end
 
   def follow_to(followable, options={})
