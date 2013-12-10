@@ -12,4 +12,14 @@ class Matome < ActiveRecord::Base
 
   attr_accessible :title
   attr_accessible :description
+  attr_accessible :view_count
+  attr_accessible :last_access_ip
+
+  def increment_view_count!(request = nil)
+    return false if self.last_access_ip == request.remote_ip
+    self.update_attributes(
+      view_count: self.view_count + 1,
+      last_access_ip: request.remote_ip
+    )
+  end
 end
