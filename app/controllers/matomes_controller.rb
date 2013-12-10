@@ -67,14 +67,14 @@ class MatomesController < ApplicationController
   def like
     @matome = Matome.where(id: params[:id]).first
     current_user.like(@matome) if @matome
-    render nothing: true
+    render action: :like
   end
 
   # XHR DELETE /matomes/:id/like
   def unlike
     @matome = Matome.where(id: params[:id]).first
     current_user.unlike(@matome) if @matome
-    render nothing: true
+    render action: :unlike
   end
 
   private
