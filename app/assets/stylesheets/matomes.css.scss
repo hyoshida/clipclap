@@ -142,7 +142,25 @@ $cover_size: 100px;
     &:before {
       font-size: x-small;
       color: #c03;
+      line-height: normal;
     }
+  }
+
+  .description {
+    color: #666;
+    font-size: xx-small;
+  }
+}
+
+#matome .view {
+  display: inline-block;
+  text-align: center;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #ddd;
+
+  .count {
+    font-size: large;
   }
 
   .description {
