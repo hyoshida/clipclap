@@ -22,11 +22,13 @@ describe MatomesController do
   end
 
   describe "GET 'new'" do
+    before_sign_in
     before { get :new }
     its (:response) { should be_success }
   end
 
   describe "GET 'edit'" do
+    before_sign_in
     before { get :edit, id: matome.id }
 
     its (:response) { should be_success }
@@ -39,6 +41,7 @@ describe MatomesController do
   end
 
   describe "PUT 'update'" do
+    before_sign_in
     before_sign_in
 
     let (:title) { '更新後のまとめタイトル' }

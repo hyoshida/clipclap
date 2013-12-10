@@ -1,4 +1,6 @@
 class MatomesController < ApplicationController
+  before_filter :authenticate_user!, except: [ :index, :show ]
+
   # GET /matomes
   def index
     if params[:user_id]
