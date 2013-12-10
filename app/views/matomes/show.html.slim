@@ -26,6 +26,9 @@
           .like
             p.count = "#{@matome.likes.size}"
             p.description イイネ！
+          .view
+            p.count = "#{@matome.view_count}"
+            p.description view
         - if user_signed_in? && current_user.unlike?(@matome)
           p.like_button = like_to_matome @matome
         - else

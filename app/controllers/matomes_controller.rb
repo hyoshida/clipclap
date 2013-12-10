@@ -11,6 +11,7 @@ class MatomesController < ApplicationController
   # GET /matomes/:id
   def show
     @matome = Matome.find(params[:id])
+    @matome.increment_view_count!(request)
     @clips = @matome.clips
     @cover_clip = @clips.try(:first)
   end
