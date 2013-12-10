@@ -63,6 +63,20 @@ class MatomesController < ApplicationController
     end
   end
 
+  # XHR POST /matomes/:id/like
+  def like
+    @matome = Matome.where(id: params[:id]).first
+    current_user.like(@matome) if @matome
+    render action: :like
+  end
+
+  # XHR DELETE /matomes/:id/like
+  def unlike
+    @matome = Matome.where(id: params[:id]).first
+    current_user.unlike(@matome) if @matome
+    render action: :unlike
+  end
+
   private
 
   def insert_div_tag_for_image_tag

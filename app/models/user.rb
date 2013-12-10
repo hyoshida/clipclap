@@ -64,23 +64,60 @@ class User < ActiveRecord::Base
     self.name.presence || self.email
   end
 
-  def like?(clip)
-    self.likes.exists?(clip_id: clip.id)
+  def like?(object)
+    case object
+    when Clip
+      self.likes.exists?(clip_id: object.id)
+    when Matome
+      self.likes.exists?(matome_id: object.id)
+    else
+      raise
+    end
   end
 
-  def unlike?(clip)
-    not like?(clip)
+  def unlike?(object)
+    not like?(object)
   end
 
-  def like(clip)
+  def like(object)
+    case object
+    when Clip
+      like_clip(object)
+    when Matome
+      like_matome(object)
+    else
+      raise
+    end
+  end
+
+  def like_clip(clip)
     self.likes.create(
       clip_id: clip.id,
       image_id: clip.image_id
     )
   end
 
-  def unlike(clip)
+  def like_matome(matome)
+    self.likes.create(matome_id: matome.id)
+  end
+
+  def unlike(object)
+    case object
+    when Clip
+      unlike_clip(object)
+    when Matome
+      unlike_matome(object)
+    else
+      raise
+    end
+  end
+
+  def unlike_clip(clip)
     self.likes.where(clip_id: clip.id).first.destroy
+  end
+
+  def unlike_matome(matome)
+    self.likes.where(matome_id: matome.id).first.destroy
   end
 
   def reclip?(clip)

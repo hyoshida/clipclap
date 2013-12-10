@@ -69,4 +69,27 @@ describe MatomesController do
     subject { get :clips }
     it { expect { subject }.to raise_error(ActionView::MissingTemplate) }
   end
+
+  describe "XHR POST 'like'" do
+    before_sign_in
+    before { xhr :post, :like, id: matome.id }
+    its (:response) { should be_success }
+
+    context "@matome" do
+      subject { assigns :matome }
+      its (:likes) { should have(1).items }
+    end
+  end
+
+  describe "XHR DELETE 'unlike'" do
+    before_sign_in
+    before { xhr :post, :like, id: matome.id }
+    before { xhr :delete, :unlike, id: matome.id }
+    its (:response) { should be_success }
+
+    context "@matome" do
+      subject { assigns :matome }
+      its (:likes) { should be_empty }
+    end
+  end
 end

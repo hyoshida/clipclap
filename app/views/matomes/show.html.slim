@@ -1,24 +1,35 @@
 #matome
   .header
-    - if @cover_clip
-      .cover = image_tag_for_matome_cover(@cover_clip)
-    - else
-      .cover.none
-    h1 = @matome.title
-    p.meta
-      - if @matome.description.present?
-        span.description = @matome.description
-      span.updated_at
-        | 更新日:
-        = I18n.l @matome.updated_at.to_date, format: :long
-    p.user
-      span.avatar = link_to_user_by_avatar(@matome.user)
-      span.name = "#{@matome.user.nick_name}"
-      span.title さん
-    - if current_user
-      - if current_user.id == @matome.user_id
-        p#edit
-          = link_to 'まとめを編集', edit_matome_path(@matome)
+    .wrap
+      .infomation
+        - if @cover_clip
+          .cover = image_tag_for_matome_cover(@cover_clip)
+        - else
+          .cover.none
+        h1 = @matome.title
+        p.meta
+          - if @matome.description.present?
+            span.description = @matome.description
+          span.updated_at
+            | 更新日:
+            = I18n.l @matome.updated_at.to_date, format: :long
+        p.user
+          span.avatar = link_to_user_by_avatar(@matome.user)
+          span.name = "#{@matome.user.nick_name}"
+          span.title さん
+        - if current_user
+          - if current_user.id == @matome.user_id
+            p#edit
+              = link_to 'まとめを編集', edit_matome_path(@matome)
+      .contribute
+        p.meta
+          .like
+            p.count = "#{@matome.likes.size}"
+            p.description イイネ！
+        - if user_signed_in? && current_user.unlike?(@matome)
+          p.like_button = like_to_matome @matome
+        - else
+          p.like_button = unlike_to_matome @matome
     .clear
 
 - if @clips.present?

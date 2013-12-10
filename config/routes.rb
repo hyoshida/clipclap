@@ -46,6 +46,11 @@ Clipclap::Application.routes.draw do
   resources :images, only: [ :show ]
 
   resources :matomes, only: [ :index, :show, :new, :create, :edit, :update ] do
+    member do
+      post :like
+      delete :like, action: :unlike, as: :unlike
+    end
+
     collection do
       get :clips
     end
