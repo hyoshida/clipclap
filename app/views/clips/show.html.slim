@@ -34,7 +34,7 @@
           = f.submit 'クリップ', class: 'hidden btn'
 
   .additional_info
-    - if @clip.tags.size.nonzero?
+    - if user_signed_in? || @clip.tags.size.nonzero?
       .tag_feild
         ul#tags
           - @clip.tags.each do |tag|
