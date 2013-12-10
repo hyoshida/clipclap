@@ -64,12 +64,19 @@ class User < ActiveRecord::Base
     self.name.presence || self.email
   end
 
-  def like?(clip)
-    self.likes.exists?(clip_id: clip.id)
+  def like?(object)
+    case object
+    when Clip
+      self.likes.exists?(clip_id: object.id)
+    when Matome
+      self.likes.exists?(matome_id: object.id)
+    else
+      raise
+    end
   end
 
-  def unlike?(clip)
-    not like?(clip)
+  def unlike?(object)
+    not like?(object)
   end
 
   def like(object)

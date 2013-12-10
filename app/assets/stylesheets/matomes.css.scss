@@ -10,15 +10,24 @@
 @import "compass/css3";
 @import "common";
 
+$header_width: 960px;
+$infomation_width: 600px;
+$contribute_width: 300px;
 $cover_size: 100px;
 
 // header
 #matome .header {
   margin-bottom: 10px;
   padding: 20px;
-  //height: $cover_size;
   background-color: #f9f9f9;
   border-bottom: 2px solid #f0f0f0;
+}
+
+#matome .header .wrap {
+  float: none;
+
+  //height: $cover_size;
+  width: $header_width;
 
   h1 {
     font-size: xx-large;
@@ -56,12 +65,9 @@ $cover_size: 100px;
     }
   }
 
-  h1,
-  p {
-    line-height: 150%;
-  }
-
   .meta {
+    margin-left: $cover_size;
+
     .description {
       margin-right: 0.5em;
     }
@@ -98,6 +104,67 @@ $cover_size: 100px;
     a {
       color: #444;
     }
+  }
+}
+
+#matome .infomation {
+  float: left;
+  width: $infomation_width;
+
+  h1,
+  p {
+    line-height: 150%;
+  }
+}
+
+#matome .contribute {
+  float: right;
+  width: $contribute_width;
+  text-align: right;
+
+  p {
+    line-height: 120%;
+  }
+
+  .meta {
+    display: inline-block;
+  }
+}
+
+#matome .like {
+  display: inline-block;
+  text-align: center;
+
+  .count {
+    font-size: large;
+    @include icon(heart);
+
+    &:before {
+      font-size: x-small;
+      color: #c03;
+    }
+  }
+
+  .description {
+    color: #666;
+    font-size: xx-small;
+  }
+}
+
+#matome .like_button {
+  display: inline-block;
+  margin-top: 10px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  @include icon(heart);
+  @extend .btn;
+
+  a:link, a:visited, a:active {
+    text-decoration: none;
+  }
+
+  &:before {
+    color: #aaa;
   }
 }
 
