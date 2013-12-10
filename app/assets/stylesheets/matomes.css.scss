@@ -39,7 +39,6 @@ $cover_size: 100px;
     $background_color: #eee;
 
     float: left;
-    margin-right: 20px;
     width: $size;
     height: $size;
     overflow: hidden;
@@ -65,9 +64,11 @@ $cover_size: 100px;
     }
   }
 
-  .meta {
-    margin-left: $cover_size;
+  .text {
+    margin-left: $cover_size + 20px;
+  }
 
+  .meta {
     .description {
       margin-right: 0.5em;
     }
@@ -100,6 +101,9 @@ $cover_size: 100px;
   #edit {
     width: $cover_size;
     text-align: center;
+    position: absolute;
+    margin-top: $cover_size;
+    padding-top: 0.5em;
 
     a {
       color: #444;
@@ -113,7 +117,8 @@ $cover_size: 100px;
 
   h1,
   p {
-    line-height: 150%;
+    line-height: 120%;
+    padding-bottom: 0.25em;
   }
 }
 

@@ -6,21 +6,22 @@
           .cover = image_tag_for_matome_cover(@cover_clip)
         - else
           .cover.none
-        h1 = @matome.title
-        p.meta
-          - if @matome.description.present?
-            span.description = @matome.description
-          span.updated_at
-            | 更新日:
-            = I18n.l @matome.updated_at.to_date, format: :long
-        p.user
-          span.avatar = link_to_user_by_avatar(@matome.user)
-          span.name = "#{@matome.user.nick_name}"
-          span.title さん
         - if current_user
           - if current_user.id == @matome.user_id
             p#edit
               = link_to 'まとめを編集', edit_matome_path(@matome)
+        .text
+          h1 = @matome.title
+          p.meta
+            - if @matome.description.present?
+              span.description = @matome.description
+            span.updated_at
+              | 更新日:
+              = I18n.l @matome.updated_at.to_date, format: :long
+          p.user
+            span.avatar = link_to_user_by_avatar(@matome.user)
+            span.name = "#{@matome.user.nick_name}"
+            span.title さん
       .contribute
         p.meta
           .like
