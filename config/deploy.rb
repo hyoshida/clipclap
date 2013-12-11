@@ -88,7 +88,7 @@ after "deploy:update", "bluepill:restart"
 namespace :deploy do
   desc "Create a symbolic link .env file to release path"
   task :link_dotenv, roles: :app do
-    run "ln -fns #{shared_path}/config/.env #{release_path}/.env"
+    run "ln -fns #{shared_path}/config/.env #{current_path}/.env"
   end
 end
 
