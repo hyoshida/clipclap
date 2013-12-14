@@ -74,7 +74,8 @@ infinitescroll_options = ->
     nextSelector: '#page-nav a',  # 次ページへのリンク
     itemSelector: '.box',         # 持ってくる要素のclass
     loading: {
-      finishedMsg: 'image was finished.',   # 次のページがない場合に表示するテキスト
+      finishedMsg: 'すべてのクリップを読み込みました',
+      msgText: 'クリップを読み込み中...',
       img: '<%= image_path 'loader.gif' %>' # ローディング画像のパス
     },
     state: {
