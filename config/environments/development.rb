@@ -44,4 +44,7 @@ Clipclap::Application.configure do
 
   # Ignore /public/assets
   config.serve_static_assets = false
+
+  # disable buffer stdout for Foreman
+  $stdout.sync = true
 end
