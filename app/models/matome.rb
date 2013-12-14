@@ -1,4 +1,6 @@
 class Matome < ActiveRecord::Base
+  include ActiveRecordExtension
+
   belongs_to :user
   has_many :clips
   has_many :likes, dependent: :destroy
@@ -19,9 +21,11 @@ class Matome < ActiveRecord::Base
 
   def increment_view_count!(request = nil)
     return false if self.last_access_ip == request.remote_ip
-    self.update_attributes(
-      view_count: self.view_count + 1,
-      last_access_ip: request.remote_ip
-    )
+    self.class.without_record_timestamps do
+      self.update_attributes(
+        view_count: self.view_count + 1,
+        last_access_ip: request.remote_ip
+      )
+    end
   end
 end
