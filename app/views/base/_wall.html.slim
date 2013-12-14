@@ -68,4 +68,4 @@
               = form.submit 'クリップ', class: 'hidden btn'
 
   #page-nav
-    = link_to 'next', page: @clips.next_page if @clips.respond_to?(:next_page) && @clips.next_page.present?
+    = link_to 'next', page: @clips.current_page + 1 if @clips.respond_to? :current_page

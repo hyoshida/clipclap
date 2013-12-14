@@ -79,7 +79,9 @@ infinitescroll_options = ->
     state: {
       isDestroyed: false,
       isDone: false
-    }
+    },
+    errorCallback: ->
+      $('#done').removeClass('hidden')
   }
 
 window.can_scroll = ->

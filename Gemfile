@@ -82,6 +82,7 @@ gem 'settingslogic'
 
 # ページングに利用(TODO: kaminariに切り替え)
 gem 'will_paginate', '~> 3.0.3'
+gem 'kaminari'
 
 # DBデータのインポート/エクスポート
 gem 'yaml_db'

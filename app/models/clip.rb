@@ -23,6 +23,7 @@ class Clip < ActiveRecord::Base
 
   before_create :create_image
 
+  # TODO: kaminari に移行する
   self.per_page = Settings.page
 
   include OpenUriSweet
