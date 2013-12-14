@@ -37,6 +37,7 @@ window.initialize_masonry = ($container) ->
       isAnimated: false
     })
     @.animate({ opacity: 1 })
+    @.infinitescroll('retrieve') unless can_scroll()
   )
 
 window.register_event_for_close_clip_detail_pane =->
