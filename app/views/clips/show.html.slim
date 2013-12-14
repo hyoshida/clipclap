@@ -16,7 +16,7 @@
 
   .info id="clip_#{@clip.id}"
     .image_box
-      = link_to image_tag_by_clip(@clip), @clip.url
+      = link_to image_tag_by_clip(@clip, max_width: 800), @clip.url
 
     - if @clip.title.present?
       h2.title = @clip.title

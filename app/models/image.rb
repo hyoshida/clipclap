@@ -68,7 +68,13 @@ class Image < ActiveRecord::Base
     when :thumbnail
       "width: #{self.thumb_width}px; height: #{self.thumb_height}px;"
     else
-      "width: #{self.width}px; height: #{self.height}px;"
+      width = self.width
+      height = self.height
+      if options[:max_width] && width > options[:max_width]
+        height = (height * (options[:max_width] / width.to_f)).floor
+        width = options[:max_width]
+      end
+      "width: #{width}px; height: #{height}px;"
     end
   end
 end
