@@ -400,6 +400,7 @@ DEPENDENCIES
   image_size
   jquery-rails (~> 2.1.4)
   jquery-ui-rails
+  kaminari
   masonry-rails
   mini_magick
   mysql2

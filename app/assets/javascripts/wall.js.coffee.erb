@@ -37,6 +37,7 @@ window.initialize_masonry = ($container) ->
       isAnimated: false
     })
     @.animate({ opacity: 1 })
+    @.infinitescroll('retrieve') unless can_scroll()
   )
 
 window.register_event_for_close_clip_detail_pane =->
@@ -79,7 +80,9 @@ infinitescroll_options = ->
     state: {
       isDestroyed: false,
       isDone: false
-    }
+    },
+    errorCallback: ->
+      $('#done').removeClass('hidden')
   }
 
 window.can_scroll = ->

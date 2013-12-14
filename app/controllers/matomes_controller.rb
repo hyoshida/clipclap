@@ -14,8 +14,9 @@ class MatomesController < ApplicationController
   def show
     @matome = Matome.find(params[:id])
     @matome.increment_view_count!(request)
-    @clips = @matome.clips
+    @clips = @matome.clips.page(params[:page])
     @cover_clip = @clips.try(:first)
+    render 'home/next_page', layout: false unless first_page?
   end
 
   # GET /matomes/new

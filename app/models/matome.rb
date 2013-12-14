@@ -15,6 +15,8 @@ class Matome < ActiveRecord::Base
   attr_accessible :view_count
   attr_accessible :last_access_ip
 
+  paginates_per Settings.page
+
   def increment_view_count!(request = nil)
     return false if self.last_access_ip == request.remote_ip
     self.update_attributes(
