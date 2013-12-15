@@ -255,6 +255,11 @@ $cover_size: 100px;
 
 // dialog
 #matome_dialog {
+  .masonry {
+    height: 350px !important;
+    overflow: auto;
+  }
+
   img {
     border: 5px solid transparent;
 
