@@ -11,8 +11,8 @@
 @import "common";
 
 $header_width: 960px;
-$infomation_width: 600px;
-$contribute_width: 300px;
+$infomation_width: 760px;
+$contribute_width: 200px;
 $cover_size: 100px;
 
 // header
@@ -69,6 +69,8 @@ $cover_size: 100px;
   }
 
   .meta {
+    vertical-align: middle;
+
     .description {
       margin-right: 0.5em;
     }
@@ -79,7 +81,8 @@ $cover_size: 100px;
   }
 
   .user {
-    margin-top: 0.5em;
+    display: inline-block;
+    margin-top: 10px;
 
     img {
       vertical-align: middle;
@@ -92,9 +95,6 @@ $cover_size: 100px;
 
     .name {
       font-weight: bold;
-    }
-
-    .title {
     }
   }
 
@@ -227,6 +227,28 @@ $cover_size: 100px;
 
     img {
       @include border-radius(4px);
+    }
+  }
+}
+
+// social button
+#matome .social {
+  display: inline-block;
+  margin-top: 3px;
+  margin-left: 10px;
+  height: 26px;
+  max-width: 330px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+
+  li {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    &.twitter {
+      width: 90px;
     }
   }
 }

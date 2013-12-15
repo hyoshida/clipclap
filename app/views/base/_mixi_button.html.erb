@@ -1,2 +1,2 @@
-<div data-plugins-type="mixi-favorite" data-service-key="<%= Settings.mixi_key %>" data-size="medium" data-href="" data-show-faces="false" data-show-count="true" data-show-comment="true" data-width=""></div>
+<div data-plugins-type="mixi-favorite" data-service-key="<%= Settings.mixi_key %>" data-size="medium" data-href="<%= url_for id: target ||= nil, only_path: false %>" data-show-faces="false" data-show-count="true" data-show-comment="true" data-width=""></div>
 <script type="text/javascript">$(document).ajaxComplete(function() { try{ $('[data-plugins-type="mixi-favorite"]:empty').each(function(i, element) { new __MIXI_PLUGINS__.FavoriteFrame(element); }); } catch(e) {} });</script>
