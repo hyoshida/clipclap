@@ -42,3 +42,24 @@
 // variables
 $font_gothic: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
 $font_serif: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
+
+// class
+.noscroll {
+  overflow: hidden;
+}
+
+// jQuery
+.ui-dialog-titlebar {
+  display: none;
+}
+
+.ui-widget-overlay {
+  z-index: 90;
+  background: transparent url('/assets/transblack.png') repeat !important;
+}
+
+.ui-dialog {
+  .ui-button.ui-state-default {
+    @extend .btn;
+  }
+}
