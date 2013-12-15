@@ -249,24 +249,19 @@ ul.comments li p {
 }
 
 .image_box .status .reclip {
-  float: left;
-  text-align: left;
   width: 50%;
+  @include btn-left;
+
   a {
     @include btn-reclip;
-    height: 24px;
-    line-height: 24px;
   }
 }
 
 .image_box .status .like {
-  text-align: right;
+  @include btn-right;
 }
 
 .image_box .status .like a {
-  text-decoration: none;
-  height: 24px;
-  line-height: 24px;
   @include btn-like;
   &:hover.opacity, &:focus.opacity {
     @include opacity(0.75);

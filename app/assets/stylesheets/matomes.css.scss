@@ -260,11 +260,34 @@ $cover_size: 100px;
     overflow: auto;
   }
 
-  img {
-    border: 5px solid transparent;
+  input[type="submit"] {
+    @extend .btn;
+  }
 
-    &#selected {
-      border: 5px solid #666;
+  .image_box img {
+    display: block;
+    background: #fff;
+    vertical-align: bottom;
+    @include border-radius(4px);
+  }
+}
+
+// container
+.image_box .status {
+  .clip {
+    width: 50%;
+    @include btn-left;
+    a {
+      @include btn-reclip;
+      @include icon(paper-clip)
+    }
+  }
+
+  .remove {
+    @include btn-right;
+    a {
+      @include btn-remove;
+      @include icon(remove)
     }
   }
 }
