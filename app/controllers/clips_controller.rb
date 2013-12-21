@@ -174,13 +174,6 @@ class ClipsController < ApplicationController
 
   private
 
-  def authenticate_user!
-    return super unless request.xhr?
-    return if user_signed_in?
-    flash[:alert] = 'この操作にはログインが必要です'
-    render js: %{window.location = "#{new_user_session_path}"}
-  end
-
   def insert_div_tag_for_image_tag
     -> image_tag { "<div class='box image_box'>#{image_tag}</div>" }
   end
