@@ -9,6 +9,7 @@ ja:
   name: &g_name ユーザー名
   email: &g_email メールアドレス
   password: &g_password パスワード
+  password_confirmation: &g_password_confirmation パスワード（確認）
   created_at: &g_created_at 作成日時
   updated_at: &g_updated_at 更新日時
   refresh: 更新
@@ -39,7 +40,7 @@ ja:
         reset_password_sent_at: reset_password_sent_at  #g
         reset_password_token: reset_password_token  #g
         password: *g_password
-        password_confirmation: パスワード（確認）
+        password_confirmation: *g_password_confirmation
         remember_me: 次回から自動的にログイン
         sign_up: 新規登録
         sign_in: ログイン

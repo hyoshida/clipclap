@@ -1,3 +1,8 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/alerts";
+@import "bootstrap/forms";
+
 body {
   background-color: #fff;
   color: #333;
@@ -26,31 +31,30 @@ div {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+  @extend .control-group;
+  @extend .error;
+  margin-bottom: 0;
+  display: inline-block;
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+  @extend .alert;
+  @extend .alert-error;
+  @extend .alert-block;
+
   h2 {
-    text-align: left;
+    font-size: large;
     font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
   }
-  ul li {
-    font-size: 12px;
-    list-style: square;
+
+  ul {
+    margin-top: 0.5em;
+    margin-left: 2em;
+    list-style-type: disc;
+  }
+
+  li {
+    line-height: 120%;
   }
 }
 
