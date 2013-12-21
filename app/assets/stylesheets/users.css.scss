@@ -6,6 +6,8 @@
 
 @import "carousel";
 
+@import "common";
+
 $screen_width: 900px;
 $carousel_item_count_x: 4;
 $carousel_item_count_y: 2;
@@ -150,16 +152,6 @@ $user_menu_height: 100px;
   right: 0;
 }
 
-#user {
-  form {
-    width: $screen_width;
-  }
-
-  fieldset {
-    margin-bottom: 50px;
-  }
-}
-
 #user_header .profile {
   #edit_button {
     visibility: hidden;
@@ -168,4 +160,66 @@ $user_menu_height: 100px;
   &:hover #edit_button {
     visibility: visible;
   }
+}
+
+/* user */
+#user {
+  h2 {
+    font-size: large;
+    margin-bottom: 0.5em;
+  }
+}
+
+/* forms */
+#user form.edit_user {
+  width: $screen_width;
+
+  fieldset {
+    margin-bottom: 50px;
+  }
+}
+
+#user form.new_user {
+  input[type="submit"] {
+    @extend .btn;
+    @extend .btn-large;
+  }
+
+  .must {
+    &:after {
+      content: '*';
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
+
+#user .shared_links {
+  margin-top: 15px;
+  margin-left: 5px;
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  .facebook a {
+    padding: 10px 20px;
+    font-size: large;
+    font-family: $font_gothic;
+    @extend .btn;
+  }
+
+  .facebook a {
+    @extend .btn-primary;
+    @include icon(facebook);
+    &:before {
+      margin-right: 15px;
+      padding-right: 17px;
+      border-right: 1px solid #37d;
+    }
+  }
+}
+
+#dialog #user {
+  text-align: center;
 }

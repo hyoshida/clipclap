@@ -52,4 +52,7 @@
   p クリップが存在しません
 
 #done.hidden
-  = link_to "ほかのまとめを見る", matomes_path
+  - if user_signed_in? || left_clips_count.zero?
+    = link_to "ほかのまとめを見る", matomes_path
+  - else
+    = link_to "もっと見る (#{left_clips_count})", new_user_registration_path, remote: true

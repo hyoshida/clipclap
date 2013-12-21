@@ -16,7 +16,14 @@ class MatomesController < ApplicationController
     @matome.increment_view_count!(request)
     @clips = @matome.clips.page(params[:page])
     @cover_clip = @clips.try(:first)
-    render 'home/next_page', layout: false unless first_page?
+
+    return if first_page?
+
+    if user_signed_in?
+      render 'home/next_page', layout: false
+    else
+      render nothing: true
+    end
   end
 
   # GET /matomes/new

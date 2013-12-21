@@ -1,0 +1,22 @@
+#user
+  h2 新規登録
+
+  = form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+    = devise_error_messages!
+
+    .name
+      = f.text_field :name, placeholder: I18n.t(:name)
+
+    .email.must
+      = f.email_field :email, placeholder: I18n.t(:email)
+
+    .password.must
+      = f.password_field :password, placeholder: I18n.t(:password)
+
+    .password_confirmation.must
+      = f.password_field :password_confirmation, placeholder: I18n.t(:password_confirmation)
+
+    .submit
+      = f.submit I18n.t(:sign_up)
+
+  == render partial: 'devise/shared/links'

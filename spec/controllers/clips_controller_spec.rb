@@ -24,9 +24,9 @@ describe ClipsController do
 
   describe "PUT 'create'" do
     context "未ログインの場合" do
-      it "ログインページにリダイレクトすること" do
+      it "新規登録ページにリダイレクトすること" do
         put :reclip, id: clip.id
-        response.should redirect_to(:new_user_session)
+        response.should redirect_to(:new_user_registration)
       end
     end
 
@@ -52,9 +52,9 @@ describe ClipsController do
     before { clip }
 
     context "未ログインの場合" do
-      it "ログインページにリダイレクトすること" do
+      it "新規登録ページにリダイレクトすること" do
         put :reclip, id: clip.id
-        response.should redirect_to(:new_user_session)
+        response.should redirect_to(:new_user_registration)
       end
     end
 
@@ -69,9 +69,9 @@ describe ClipsController do
 
   describe "PUT 'unreclip'" do
     context "未ログインの場合" do
-      it "ログインページにリダイレクトすること" do
+      it "新規登録ページにリダイレクトすること" do
         put :reclip, id: clip.id
-        response.should redirect_to(:new_user_session)
+        response.should redirect_to(:new_user_registration)
       end
     end
 
@@ -86,10 +86,9 @@ describe ClipsController do
 
   describe "XHR-PUT 'reclip'" do
     context "未ログインの場合" do
-      it "ログインページにリダイレクトすること" do
+      it "新規登録ページにリダイレクトすること" do
         xhr :put, :reclip, id: clip.id
-        response.body.should include('window.location')
-        response.body.should include(new_user_session_path)
+        response.header['Location'].should include(new_user_registration_path)
       end
     end
 
@@ -108,10 +107,9 @@ describe ClipsController do
 
   describe "XHR-PUT 'unreclip'" do
     context "未ログインの場合" do
-      it "ログインページにリダイレクトすること" do
+      it "新規登録ページにリダイレクトすること" do
         xhr :put, :unreclip, id: clip.id
-        response.body.should include('window.location')
-        response.body.should include(new_user_session_path)
+        response.header['Location'].should include(new_user_registration_path)
       end
     end
 

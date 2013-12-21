@@ -12,4 +12,8 @@ module MatomesHelper
     default_options = { method: :delete, remote: true }
     link_to('イイネ！を取り消す', like_matome_path(matome), default_options.merge(options))
   end
+
+  def left_clips_count
+    @clips.total_count - @clips.size
+  end
 end
