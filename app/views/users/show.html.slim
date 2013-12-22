@@ -1,6 +1,5 @@
-#user
-  == render partial: '/base/user'
+== render partial: '/base/user'
 
-  #user_wrapper
-    - if @clips.present?
-      == render partial: '/base/wall'
+#user
+  - if @clips.present?
+    == render partial: '/base/wall'

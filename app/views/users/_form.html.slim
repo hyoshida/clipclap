@@ -1,10 +1,12 @@
+= f.error_messages
+
 table.table.table-hover.table-bordered
   tr
     th = f.label :name
     td = f.text_field :name, placeholder: @user.class.human_attribute_name(:name)
 
   tr
-    th = f.label :email
+    th = f.label :email, class: 'must'
     td = f.text_field :email, placeholder: @user.class.human_attribute_name(:email)
 
   tr
