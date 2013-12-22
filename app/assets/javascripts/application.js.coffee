@@ -30,6 +30,15 @@
 $( ->
   $("[data-toggle='tooltip']").tooltip()
   register_event_for_close_dialog()
+
+  if $('#notice').length > 0
+    height =  $('#notice').css('height')
+    $('#notice')
+      .css({ height: 0 })
+      .delay(400)
+      .animate({ height: height })
+      .delay(5 * 1000)
+      .animate({ height: 0 })
 )
 
 register_event_for_close_dialog =->
