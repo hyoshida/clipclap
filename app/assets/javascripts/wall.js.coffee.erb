@@ -33,6 +33,7 @@ window.initialize_masonry = ($container) ->
   $container.css({ opacity: 0 }).imagesLoaded( ->
     @.removeClass('hidden')
     @.masonry({
+      isFitWidth: true,
       itemSelector: '.box',
       isAnimated: false
     })

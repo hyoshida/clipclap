@@ -12,17 +12,8 @@ html
     == render partial: '/base/header'
     == render partial: '/base/social'
 
-  #main
-    #leftContainer
-      - if user_signed_in?
-       ul
-         li = link_to(user_path(current_user), title: 'ユーザー') { icon_tag('user') }
-      ul
-        li = link_to(matomes_path, title: 'まとめ') { icon_tag('star')  }
-        li = link_to(tags_path, title: 'タグ') { icon_tag('tags') }
-        li = link_to(ranking_views_path, title: 'ランキング') { icon_tag('signal') }
-
-    #mainContainer
-      p#notice = notice
-      p#alert = alert
-      == yield
+    #main
+      .wrap
+        p#notice = notice
+        p#alert = alert
+        == yield

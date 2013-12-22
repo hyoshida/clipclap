@@ -48,6 +48,7 @@
 
 /* header */
 $header_height: 40px;
+$header_border_height: 4px;
 $logo_width: 150px;
 $logo_height: $header_height;
 
@@ -60,14 +61,14 @@ $logo_height: $header_height;
 }
 
 #header {
-  margin-bottom: $header_height + 10px;
+  margin-bottom: $header_height;
   height: $header_height;
   font-size: 13px;
   font-family: $font_gothic;
   font-weight: bold;
   text-align: center;
   background-color: #000;
-  border-bottom: 4px solid #f70;
+  border-bottom: $header_border_height solid #f70;
   @include zurui-gradient-top-lighten(#1a1a1a);
   z-index: 999;
   position: fixed;
@@ -261,81 +262,17 @@ $logo_height: $header_height;
 }
 
 /* main */
+$main_width: 1000px;
+
 #main {
-  margin-top: 40px + 4px;
-  width: 100%;
-  min-width: 480px;
-  min-height: 300px;
-  background-color: #333;
-  font-size: 75%;
-}
-
-#leftContainer {
-  float: left;
-  padding: 15px 0;
-  width: 65px;
-  min-height: 100%;
-  font-size: 150%;
-  position: absolute;
-  position: fixed;
-  top: 40px;
-  @include background-image(linear-gradient(top, #ddd, #eee));
-  @include background-image(linear-gradient(top, #f4f4f4, #e4e4e4));
-  /* background-color: #ddd; */
-  border-top: 2px solid #d48423;
-}
-
-#leftContainer ul {
-  padding: 0;
-  padding-bottom: 20px;
-  margin: 0;
-  list-style-type: none;
-}
-
-#leftContainer ul li a {
-  display: block;
-  padding-left: 20px;
-  width: 45px;
-  height: 40px;
-  line-height: 40px;
-  text-align: left;
-  color: #867c6d !important;
-  color: #789 !important;
-  font-weight: bold;
-}
-
-#leftContainer ul li a, #leftContainer ul li a:visited {
-  color: #000;
-  text-decoration: none;
-}
-
-#leftContainer ul li a:hover {
-  color: #fff;
-  background-color: #666;
-  background-color: #000;
-  background-color: #d0d0d0;
-}
-
-#leftContainer ul li a[class^="icon-"]:before, #leftContainer ul li a[class*=" icon-"]:before {
-  letter-spacing: 10px;
-}
-
-#mainContainer {
-  margin-left: 65px;
+  margin-top: $header_height + $header_border_height;
   padding: 10px;
-  min-height: 100%;
-  border-right: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  background-color: #eee;
-  background-color: #fff;
-  position: relative;
+  font-size: 13px;
 }
 
-#mainContainer .wrap {
-  float: right;
-  /* width: 838px; */
-  width: 100%;
+/* container */
+#container {
+  margin: 0 auto;
 }
 
 /* dialog */
