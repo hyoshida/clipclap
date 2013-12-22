@@ -5,16 +5,47 @@
 @import "compass/utilities";
 @import "compass/css3";
 
-#image_selecter .box img#selected {
-  border: 5px solid #666666;
-}
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/buttons";
+@import "bootstrap/forms";
 
-#image_selecter .box img {
-  border: 5px solid transparent;
-}
+$margin: 20px;
+$clip_width: 860px;
+$image_box_width: 580px;
+$info_box_width: $clip_width - $image_box_width - $margin;
 
-#clip_dialog #clip_title {
-  width: 200px;
+#image_selecter {
+  h2 {
+    font-size: x-large;
+    margin-bottom: 0.5em;
+  }
+
+  h3 {
+    font-size: large;
+    margin-bottom: 0.5em;
+  }
+
+  form {
+    margin: 20px auto;
+    text-align: center;
+    @extend .form-inline;
+
+    input[type="submit"] {
+      @extend .btn;
+    }
+  }
+
+  .box img {
+    border: 5px solid transparent;
+    &#selected {
+      border-color: #666666;
+    }
+  }
+
+  #container {
+    text-align: center;
+  }
 }
 
 #preview {
@@ -23,23 +54,37 @@
   min-height: 150px;
 }
 
-#clip_detail_pane {
-  $header_menu_height: 40px;
-  $header_border_height: 4px;
-  $header_height: $header_menu_height + $header_border_height;
-  width: 85%;
-  z-index: 100;
-  position: fixed;
-  top: $header_height;
-  bottom: 0;
-  right: 0;
-  background-color: #fff;
-  border-left: 1px solid #aaa;
-  overflow-y: scroll;
+/* dialoo */
+#clip_dialog {
+  $padding: 20px;
+
+  #clip {
+    padding: 0;
+  }
+
+  .modal {
+    width: $clip_width + $padding * 2;
+    margin-left: -($clip_width / 2);
+    left: 50%;
+    overflow-y: auto;
+
+    &.fade {
+      top: 5%;
+      bottom: 5%;
+      @include transition-duration(200ms);
+    }
+
+    .modal-body {
+      max-height: none !important;
+    }
+  }
 }
 
+/* clip */
 #clip {
-  padding: 20px;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: $clip_width;
 }
 
 #clip .profile {
@@ -50,6 +95,10 @@
   .avatar {
     float: left;
     margin-right: 20px;
+    img {
+      width: 64px;
+      height: 64px;
+    }
   }
 
   .description {
@@ -76,29 +125,29 @@
 #clip .info {
   margin: 0px;
   padding: 0px;
-  width: 800px;
+  width: $image_box_width;
 }
 
 #clip .image_box {
   margin: 0;
   text-align: center;
-  border: 1px solid #aaa;
+  border: 1px solid #ccc;
 
   img {
-    max-width: 800px;
+    max-width: $image_box_width;
     border: none !important;
     vertical-align: bottom;
   }
 }
 
 h2.title {
-  margin-top: 20px;
+  margin-top: $margin;
   text-align: center;
   font-size: x-large;
 }
 
 #clip .comment_feild {
-  margin: 20px 0 0;
+  margin: $margin 0 0;
   border: 1px solid #ddd;
   border-top: none;
   font-size: medium;
@@ -106,7 +155,7 @@ h2.title {
 
   input[type="text"] {
     height: 48px - 8px;
-    width: 800px - 40px - 48px - 20px;
+    width: $image_box_width - 40px - 48px - $margin;
   }
   .body {
     margin-bottom: 3px;
@@ -114,6 +163,10 @@ h2.title {
   ul.commentsd li, form {
     padding: 5px;
     min-height: 48px + 10px;
+  }
+  .avatar img {
+    width: 48px;
+    height: 48px;
   }
 }
 
@@ -126,17 +179,20 @@ h2.title {
 
 #clip .info {
   float: left;
-  margin-right: 20px;
+  margin-right: $margin;
 }
 
 #clip .additional_info {
-  width: 320px;
-  margin-left: 800px + 20px;
+  width: $info_box_width;
+  margin-left: $image_box_width + $margin;
 }
 
 @mixin additional_info_box {
-  margin-bottom: 20px;
-  padding: 10px;
+  $padding: 10px;
+
+  margin-bottom: $margin;
+  width: $info_box_width - $padding * 2;
+  padding: $padding;
   border: 1px solid #ccc;
 
   .count {
@@ -171,6 +227,16 @@ h2.title {
 
   form {
     margin-top: 5px;
+    @extend .form-inline;
+
+    input[type="text"] {
+      width: 110px;
+    }
+
+    input[type="submit"] {
+      @extend .btn;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -182,22 +248,14 @@ strong {
 }
 
 #clip .carousel_box {
+  @include carousel($item_count_x: 4, $item_count_y: 2, $item_size: 36px, $item_margin: 16px, $width: $info_box_width);
+  @include border-radius(0);
+  margin-bottom: $margin;
+  border: 1px solid #ccc;
+
   .count {
     @extend strong;
   }
-}
-
-#clip #reclips_carousel_box {
-  @include carousel(5, 2, 36px, 16px, 21px);
-  @include border-radius(0);
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-}
-
-#clip #likes_carousel_box {
-  @include carousel(5, 2, 36px, 16px, 21px);
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
 }
 
 #clip .view_feild {

@@ -1,59 +1,60 @@
 #header
-  #headerBar.navbar
-    #logo.lfloat.navbar-brand
-      h1 = link_to Settings.site_name, root_path
-
-    #menu.lfloat.nav.navbar-nav
+  .wrap
+    .left
       ul
         - if user_signed_in?
           li.dropdown
-            = link_to(new_clip_path, class: "profile dropdown-toggle", role: "button", data: { toggle: "dropdown" }) { icon_tag('plus') }
-            .dropdown-menu role="menu"
+            = link_to(new_clip_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }) { icon_tag('plus') }
+            .dropdown-menu role='menu'
               ul
                 li = link_to 'URLから投稿', new_clip_path
                 li = link_to 'ブックマークレットから投稿', bookmarklet_path
-                li.hr
+                li.divider
                 li = link_to 'まとめを作成', new_matome_path
           li = link_to(user_likes_path(current_user), title: 'お気に入り') { icon_tag('heart') }
-        - if false
-          li = link_to '閲覧数ランキング', controller: :ranking, action: :views
-          li = link_to 'イイネ！ランキング', controller: :ranking, action: :likes
 
-    - if !user_signed_in? && (devise_mapping.registerable? && controller_name != 'registrations')
-      #signup.rfloat.nav.navbar-nav.pull-right
-        p = link_to '新規登録', new_registration_path(resource_name)
+    .center.logo
+      h1 = link_to Settings.site_name, root_path
 
-    - if controller_name != 'sessions'
-      #signin.rfloat.nav.navbar-nav.pull-right
-        - if user_signed_in?
-          .dropdown
-            = link_to(root_path, class: "profile dropdown-toggle", role: "button", data: { toggle: "dropdown" }) do
-              span.avatar = image_tag avatar_url(current_user)
-              span.name = current_user.nick_name
-              span.arrow = icon_tag('angle-down')
-            #account_from.dropdown-menu role="menu"
-              ul
-                li = link_to 'プロフィール', user_path(current_user)
-                li = link_to 'ログアウト', destroy_user_session_path, method: :delete
-        - else
-          .dropdown
-            = link_to(user_session_path, class: "dropdown-toggle", role: "button", data: { toggle: "dropdown" }) do
-              span = icon_tag('signin')
-              span = ' ログイン '
-              span = icon_tag('angle-down')
-            #account_from.dropdown-menu role="menu"
-              = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-                = f.email_field :email, class: "input-small", placeholder: I18n.t(:email)
-                = f.password_field :password, class: "input-small", placeholder: I18n.t(:password)
+    .right
+      ul
+        - if controller_name != 'sessions'
+          - if user_signed_in?
+            li.profile
+              .dropdown
+                = link_to(root_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }) do
+                  span.avatar = image_tag avatar_url(current_user)
+                  span.name = current_user.nick_name
+                  span.angle-down
+                .dropdown-menu role="menu"
+                  ul
+                    li = link_to 'まとめ', user_matomes_path(current_user)
+                    li = link_to 'クリップ', user_clips_path(current_user)
+                    li = link_to 'タグ', user_tags_path(current_user)
+                    li = link_to 'イイネ！', user_likes_path(current_user)
+                    li.divider
+                    li = link_to '設定', edit_user_path(current_user)
+                    li = link_to 'ログアウト', destroy_user_session_path, method: :delete
+          - else
+            li.signin
+              .dropdown
+                = link_to(user_session_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }) do
+                  span = 'ログイン'
+                  span.angle-down
+                .dropdown-menu role="menu"
+                  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                    = f.email_field :email, placeholder: I18n.t(:email)
+                    = f.password_field :password, placeholder: I18n.t(:password)
+                    - if devise_mapping.rememberable?
+                      p.remenber
+                        = f.check_box :remember_me
+                        = f.label :remember_me
+                    = f.submit 'ログイン'
+                  == render partial: 'devise/shared/links'
 
-                - if devise_mapping.rememberable?
-                  = f.check_box :remember_me
-                  = f.label :remember_me
+        - if !user_signed_in? && (devise_mapping.registerable? && controller_name != 'registrations')
+          li.signup
+            = link_to '新規登録', new_registration_path(resource_name)
 
-                p = f.submit "ログイン", class: "btn btn-warning btn-large"
-              == render partial: "devise/shared/links"
-
-    - if false
-      #search_form
-        input type="text"
-        input type="button" value="検索"
+    - if notice.present?
+      #notice = notice

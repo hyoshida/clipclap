@@ -8,7 +8,6 @@
 
 @import "common";
 
-$screen_width: 900px;
 $carousel_item_count_x: 4;
 $carousel_item_count_y: 2;
 $carousel_item_size: 32px;
@@ -18,26 +17,35 @@ $carousel_inner_width: ($carousel_item_size + $carousel_item_margin) * $carousel
 $carousel_inner_height: ($carousel_item_size + $carousel_item_margin) * $carousel_item_count_y - $carousel_item_margin;
 $carousel_width: $carousel_inner_width + $carousel_item_margin + $carousel_control_size * 2;
 $carousel_height: $carousel_inner_height;
-$user_info_width: $screen_width;
+$user_info_width: $contents_width;
 $user_info_height: 168px;
 $profile_margin: 20px;
 $profile_padding: 20px;
-$profile_width: $screen_width - $carousel_width - $profile_margin - $profile_padding * 2;
+$profile_width: $contents_width - $carousel_width - $profile_margin - $profile_padding * 2;
 $profile_height: $user_info_height - $profile_padding * 2;
 $user_menu_height: 100px;
 
 #user_header {
   margin-bottom: 10px;
-  width: $screen_width;
-  height: $user_info_height + $user_menu_height + 2px;
+  height: ($user_info_height / 2) + $user_menu_height + 1px;
+
+  margin-top: $user_info_height / 2;
+  background-color: #f7efe0;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+#user_header .wrap {
+  margin: 0 auto;
+  width: $contents_width;
 }
 
 #user_header .user_info {
-  margin: 20px;
   width: $user_info_width;
   height: $user_info_height;
   z-index: 12;
   position: relative;
+  margin-top: -($user_info_height / 2);
 }
 
 #user_header .profile {
@@ -78,22 +86,9 @@ $user_menu_height: 100px;
 }
 
 #user_header ul.user_menu {
-  $top: $profile_height / 2;
-  $padding-top: $profile_height / 2 + 20px;
   $user_menu_height: 100px;
 
-  padding-top: $padding-top;
-  width: 100%;
   height: $user_menu_height;
-  background-color: #f7efe0;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
-  z-index: 11;
-  position: relative;
-  position: absolute;
-  top: $profile_height / 2 + 40px + 10px;
-
-  left: 0;
 
   &:before {
     content: '';
@@ -102,6 +97,7 @@ $user_menu_height: 100px;
   }
 
   li {
+    margin: 0 auto;
     display: inline-block;
     font-size: larger;
     a {
@@ -133,10 +129,6 @@ $user_menu_height: 100px;
   }
 }
 
-#user_header #user_wrapper {
-  margin-top: 100px;
-}
-
 #follow_button a {
   @extend .btn;
 }
@@ -164,16 +156,27 @@ $user_menu_height: 100px;
 
 /* user */
 #user {
+  margin: 0 auto;
+  width: $contents_width;
+
   h2 {
     font-size: large;
     margin-bottom: 0.5em;
   }
 }
 
+/* user.new */
+#user.new {
+  width: $contents_width / 2;
+
+  h2 {
+    margin: 10px 0 20px;
+    text-align: center;
+  }
+}
+
 /* forms */
 #user form.edit_user {
-  width: $screen_width;
-
   fieldset {
     margin-bottom: 50px;
   }
@@ -184,14 +187,6 @@ $user_menu_height: 100px;
     @extend .btn;
     @extend .btn-large;
   }
-
-  .must {
-    &:after {
-      content: '*';
-      color: red;
-      font-weight: bold;
-    }
-  }
 }
 
 #user .shared_links {
@@ -199,7 +194,12 @@ $user_menu_height: 100px;
   margin-left: 5px;
 
   li {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  .sign_in a {
+    font-weight: bold;
+    color: #f90;
   }
 
   .facebook a {
@@ -221,5 +221,5 @@ $user_menu_height: 100px;
 }
 
 #dialog #user {
-  text-align: center;
+  width: $contents_width / 2;
 }

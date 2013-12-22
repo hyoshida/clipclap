@@ -20,21 +20,21 @@ a {
   }
 }
 
+h2 {
+  font-size: large;
+}
+
 div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
 }
 
-#notice {
-  color: green;
-}
-
 .field_with_errors {
   @extend .control-group;
   @extend .error;
   margin-bottom: 0;
-  display: inline-block;
+  display: inline;
 }
 
 #error_explanation {
@@ -70,15 +70,15 @@ form {
 }
 
 input, textarea {
-  margin: 7px 5px;
+  margin: 10px 5px;
   &[type="radio"], &[type="checkbox"] {
-    margin: 7px 5px;
+    margin: 7px 5px 10px;
   }
 }
 
 label {
   display: inline;
-  margin: 7px 5px;
+  margin: 5px;
 }
 
 .input-small {

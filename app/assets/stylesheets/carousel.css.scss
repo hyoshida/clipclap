@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@mixin carousel($item_count_x: 4, $item_count_y: 2, $item_size: 32px, $item_margin: 7px, $control_size: 20px) {
+@mixin carousel($item_count_x: 4, $item_count_y: 2, $item_size: 32px, $item_margin: 7px, $control_size: 20px, $width: false) {
   $carousel_inner_width: ($item_size + $item_margin) * $item_count_x;
   $carousel_inner_height: ($item_size + $item_margin) * $item_count_y - $item_margin;
-  $carousel_width: $carousel_inner_width + $item_margin + $control_size * 2;
+  $carousel_width: if($width, $width, $carousel_inner_width + $item_margin + $control_size * 2);
   $carousel_height: $carousel_inner_height;
 
   width: $carousel_width;
@@ -21,20 +21,19 @@
 
   .carousel {
     margin: 20px 0;
-    width: $carousel_width;
     height: $carousel_height;
     position: relative;
 
     ul {
+      margin-left: ($carousel_width - $carousel_inner_width) / 2;
       width: $carousel_inner_width;
       height: $carousel_inner_height;
-      margin-left: $control_size;
-      padding: 0 $item_margin;
     }
 
     li {
       display: inline-block;
-      width: $item_size + $item_margin;
+      margin: 0 ($item_margin / 2);
+      width: $item_size;
       height: $item_size + $item_margin;
     }
 

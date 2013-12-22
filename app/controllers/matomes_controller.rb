@@ -50,7 +50,7 @@ class MatomesController < ApplicationController
     if @matome.save
       redirect_to @matome, notice: "「#{@matome.title}」まとめを作成しました"
     else
-      flash[:alert] = @matome.errors.full_messages.join
+      @clips = @matome.clips
       render action: :new
     end
   end
@@ -72,6 +72,7 @@ class MatomesController < ApplicationController
     if @matome.update_attributes(params[:matome])
       redirect_to @matome, notice: "「#{@matome.title}」まとめを更新しました"
     else
+      @clips = @matome.clips
       render action: :edit
     end
   end

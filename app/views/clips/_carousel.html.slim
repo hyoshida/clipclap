@@ -12,7 +12,7 @@
        span.count = count
        span.unit 人
     span.message = message
-  .carousel.slide id="{name}"
+  .carousel.slide id="#{name}"
     .carousel-inner
       - users.each_slice(8).each_with_index do |sliced_users,index|
         - class_names = [ :item ]

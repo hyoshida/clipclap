@@ -1,88 +1,89 @@
 #user_header
-  .user_info
-    .profile
-      p.avatar = image_tag avatar_url(@user, size: 128)
-      h2.name = @user.nick_name
-      p.description = @user.description
-      .buttons
-        - if current_user
-          - if current_user.id == @user.id
-            p#edit_button.button
-              = link_to 'プロフィールを編集', edit_user_path(@user), class: 'btn'
-          - else
-            p#follow_button.button
-              - if current_user.following? @user
-                = unfollow_to @user
-              - else
-                = follow_to @user
+  .wrap
+    .user_info
+      .profile
+        p.avatar = image_tag avatar_url(@user, size: 128)
+        h2.name = @user.nick_name
+        p.description = @user.description
+        .buttons
+          - if current_user
+            - if current_user.id == @user.id
+              p#edit_button.button
+                = link_to 'プロフィールを編集', edit_user_path(@user), class: 'btn'
+            - else
+              p#follow_button.button
+                - if current_user.following? @user
+                  = unfollow_to @user
+                - else
+                  = follow_to @user
 
-    #follower_list.carousel_box
-      .description
-        strong
-          i.icon-star-empty &nbsp;
-          = @user.followers.size
-        | 人のフォロワー
-      #followers_carousel.carousel.slide
-        .carousel-inner
-          - @user.followers.each_slice(8).each_with_index do |followers,index|
-            - class_names = [ :item ]
-            - class_names << :active if index.zero?
-            ul class="#{class_names.join(' ')}"
-              - followers.each do |follower|
-                li.avatar = link_to_user_by_avatar(follower)
-        a.carousel-control.left href="#followers_carousel" data-slide="prev" &lsaquo;
-        a.carousel-control.right href="#followers_carousel" data-slide="next" &rsaquo;
+      #follower_list.carousel_box
+        .description
+          strong
+            i.icon-star-empty &nbsp;
+            = @user.followers.size
+          | 人のフォロワー
+        #followers_carousel.carousel.slide
+          .carousel-inner
+            - @user.followers.each_slice(8).each_with_index do |followers,index|
+              - class_names = [ :item ]
+              - class_names << :active if index.zero?
+              ul class="#{class_names.join(' ')}"
+                - followers.each do |follower|
+                  li.avatar = link_to_user_by_avatar(follower)
+          a.carousel-control.left href="#followers_carousel" data-slide="prev" &lsaquo;
+          a.carousel-control.right href="#followers_carousel" data-slide="next" &rsaquo;
 
-    #following_list.carousel_box
-      .description
-        strong
-          i.icon-heart-empty &nbsp;
-          = @user.all_following.size
-        | 人をフォロー
-      #following_carousel.carousel.slide
-        .carousel-inner
-          - @user.all_following.each_slice(8).each_with_index do |followings,index|
-            - class_names = [ :item ]
-            - class_names << :active if index.zero?
-            ul class="#{class_names.join(' ')}"
-              - followings.each do |following|
-                li.avatar = link_to_user_by_avatar(following)
-        a.carousel-control.left href="#following_carousel" data-slide="prev" &lsaquo;
-        a.carousel-control.right href="#following_carousel" data-slide="next" &rsaquo;
+      #following_list.carousel_box
+        .description
+          strong
+            i.icon-heart-empty &nbsp;
+            = @user.all_following.size
+          | 人をフォロー
+        #following_carousel.carousel.slide
+          .carousel-inner
+            - @user.all_following.each_slice(8).each_with_index do |followings,index|
+              - class_names = [ :item ]
+              - class_names << :active if index.zero?
+              ul class="#{class_names.join(' ')}"
+                - followings.each do |following|
+                  li.avatar = link_to_user_by_avatar(following)
+          a.carousel-control.left href="#following_carousel" data-slide="prev" &lsaquo;
+          a.carousel-control.right href="#following_carousel" data-slide="next" &rsaquo;
 
-  ul.user_menu
-    li.user_matomes
-      - class_name = nil
-      - class_name = 'current' if params[:controller] == 'matomes'
-      = link_to user_matomes_path(@user), class: class_name do
-        p.count = @user.matomes.size
-        p.title
-          i.icon-star
-          span まとめ
+    ul.user_menu
+      li.user_matomes
+        - class_name = nil
+        - class_name = 'current' if params[:controller] == 'matomes'
+        = link_to user_matomes_path(@user), class: class_name do
+          p.count = @user.matomes.size
+          p.title
+            i.icon-star
+            span まとめ
 
-    li.user_clips
-      - class_name = nil
-      - class_name = 'current' if params[:controller] == 'clips'
-      = link_to user_clips_path(@user), class: class_name do
-        p.count = @user.clips.size
-        p.title
-          i.icon-paper-clip
-          span クリップ
+      li.user_clips
+        - class_name = nil
+        - class_name = 'current' if params[:controller] == 'clips'
+        = link_to user_clips_path(@user), class: class_name do
+          p.count = @user.clips.size
+          p.title
+            i.icon-paper-clip
+            span クリップ
 
-    li.user_tags
-      - class_name = nil
-      - class_name = 'current' if params[:controller] == 'tags'
-      = link_to user_tags_path(@user), class: class_name do
-        p.count = @user.tags.size
-        p.title
-          i.icon-tags
-          span タグ
+      li.user_tags
+        - class_name = nil
+        - class_name = 'current' if params[:controller] == 'tags'
+        = link_to user_tags_path(@user), class: class_name do
+          p.count = @user.tags.size
+          p.title
+            i.icon-tags
+            span タグ
 
-    li.user_likes
-      - class_name = nil
-      - class_name = 'current' if params[:controller] == 'likes'
-      = link_to user_likes_path(@user), class: class_name do
-        p.count = @user.likes.size
-        p.title
-          i.icon-heart
-          span イイネ！
+      li.user_likes
+        - class_name = nil
+        - class_name = 'current' if params[:controller] == 'likes'
+        = link_to user_likes_path(@user), class: class_name do
+          p.count = @user.likes.size
+          p.title
+            i.icon-heart
+            span イイネ！

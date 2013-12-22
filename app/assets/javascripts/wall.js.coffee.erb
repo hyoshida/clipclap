@@ -1,7 +1,7 @@
 $( ->
   initialize_masonry()
   initialize_infinitescroll()
-  register_event_for_close_clip_detail_pane()
+  register_event_for_close_clip_dialog()
 )
 
 window.destroy_infinitescroll = ->
@@ -33,18 +33,12 @@ window.initialize_masonry = ($container) ->
   $container.css({ opacity: 0 }).imagesLoaded( ->
     @.removeClass('hidden')
     @.masonry({
+      isFitWidth: true,
       itemSelector: '.box',
       isAnimated: false
     })
     @.animate({ opacity: 1 })
     @.infinitescroll('retrieve') unless can_scroll()
-  )
-
-window.register_event_for_close_clip_detail_pane =->
-  $(document).on('click', '#slide_overlay', ->
-    $('#clip_detail_pane').hide("slide", { direction: "right" }, 400, -> $(@).remove())
-    $('#slide_overlay').hide("fade", null, 400, -> $(@).remove())
-    $('body').removeClass('noscroll')
   )
 
 window.resize_images = ($container) ->
@@ -89,3 +83,8 @@ infinitescroll_options = ->
 window.can_scroll = ->
   # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
   $(window).height() <= $('html').height()
+
+window.register_event_for_close_clip_dialog = ->
+  $(document).on('hide', '#clip_dialog', ->
+    $('body').removeClass('noscroll')
+  )
