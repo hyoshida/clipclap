@@ -15,16 +15,37 @@ $clip_width: 860px;
 $image_box_width: 580px;
 $info_box_width: $clip_width - $image_box_width - $margin;
 
-#image_selecter .box img#selected {
-  border: 5px solid #666666;
-}
+#image_selecter {
+  h2 {
+    font-size: x-large;
+    margin-bottom: 0.5em;
+  }
 
-#image_selecter .box img {
-  border: 5px solid transparent;
-}
+  h3 {
+    font-size: large;
+    margin-bottom: 0.5em;
+  }
 
-#clip_dialog #clip_title {
-  width: 200px;
+  form {
+    margin: 20px auto;
+    text-align: center;
+    @extend .form-inline;
+
+    input[type="submit"] {
+      @extend .btn;
+    }
+  }
+
+  .box img {
+    border: 5px solid transparent;
+    &#selected {
+      border-color: #666666;
+    }
+  }
+
+  #container {
+    text-align: center;
+  }
 }
 
 #preview {

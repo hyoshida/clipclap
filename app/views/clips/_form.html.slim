@@ -7,8 +7,9 @@
 = subscribe_to "/cliped"
 
 #image_selecter
-  h3 1. 画像をセレクト
   = form_for @clip, url: { action: :clipping }, remote: true, html: { id: 'load_form' } do |f|
+    h2 あたらしくクリップ
+    h3 1. 画像をセレクト
     p 画像のあるページのURLを入力してください。
     = f.text_field :origin_url, id: 'loading_url', value: @url
     = f.submit 'ロード', id: 'load'
@@ -19,14 +20,8 @@
     = link_to 'next', controller: :clips, action: :get_image_tags, page: 2
 
 #clip_dialog
-  = form_for(@clip) do |f|
-    - if @clip.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(@clip.errors.count, "error")} prohibited this clip from being saved:"
-
-        ul
-          - @clip.errors.full_messages.each do |msg|
-            li = msg
+  = form_for @clip do |f|
+    = f.error_messages
 
     #preview
 
