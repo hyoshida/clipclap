@@ -1,22 +1,14 @@
-$clip_detail_pane = $('#clip_detail_pane')
-if $clip_detail_pane.length == 0
-  $clip_detail_pane = $('<div/>')
+$clip_dialog = $('#clip_dialog')
+if $clip_dialog.length == 0
+  $clip_dialog = $('<div/>')
 else
-  $clip_detail_pane.remove()
+  $clip_dialog.remove()
 
-$clip_detail_pane.attr('id', 'clip_detail_pane')
-$clip_detail_pane.css('display', 'none')
-$clip_detail_pane.html('<%= escape_javascript(render template: 'clips/show', id: @clip, formats: :html) %>')
-$('#mainContainer').append($clip_detail_pane)
-
-$slide_overlay = $('<div/>')
-$slide_overlay.attr('id', 'slide_overlay')
-$slide_overlay.attr('class', 'ui-widget-overlay')
-$slide_overlay.css({ display: 'none', width: '100%', height: '100%' })
-$('#mainContainer').append($slide_overlay)
-
-$clip_detail_pane.show("slide", { direction: "right" })
-$slide_overlay.show("fade")
+$clip_dialog.attr('id', 'clip_dialog')
+$clip_dialog.html('<%= escape_javascript(render template: 'base/_dialog', formats: :html, locals: { title: 'クリップ詳細' }) %>')
+$clip_dialog.find('.modal-body').html('<%= escape_javascript(render template: 'clips/show', formats: :html) %>')
+$('#main').append($clip_dialog)
+$clip_dialog.find('.modal').modal('show')
 
 $('body').addClass('noscroll')
 

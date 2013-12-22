@@ -16,7 +16,7 @@
 
   .info id="clip_#{@clip.id}"
     .image_box
-      = link_to image_tag_by_clip(@clip, max_width: 800), @clip.url
+      = link_to image_tag_by_clip(@clip, max_width: 580), @clip.url
 
     - if @clip.title.present?
       h2.title = @clip.title
@@ -45,8 +45,8 @@
 
         - if user_signed_in? && !@clip.tags_maximum?
           = form_for Tag.new, url: { action: :tagging }, remote: true, html: { id: 'tagging_form' } do |f|
-            = f.text_field :name, class: 'span2'
-            = f.submit 'タグを追加', class: 'btn'
+            = f.text_field :name
+            = f.submit 'タグを追加'
 
     - if @clip.reclips.size.nonzero?
       = render partial: 'carousel', locals: { objects: @clip.reclips, name: 'reclips_carousel', message: 'がリクリップしています' }
