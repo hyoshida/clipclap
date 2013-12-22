@@ -84,7 +84,10 @@ window.can_scroll = ->
   # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
   $(window).height() <= $('html').height()
 
-window.register_event_for_close_clip_dialog = ->
+register_event_for_close_clip_dialog = ->
   $(document).on('hide', '#clip_dialog', ->
+    top = parseInt($('body').css('top'))
     $('body').removeClass('noscroll')
+    $('body').css({ top: 'auto' })
+    $(document).scrollTop(-top)
   )

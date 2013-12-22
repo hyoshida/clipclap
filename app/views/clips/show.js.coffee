@@ -10,6 +10,7 @@ $clip_dialog.find('.modal-body').html('<%= escape_javascript(render template: 'c
 $('#main').append($clip_dialog)
 $clip_dialog.find('.modal').modal('show')
 
+$('body').css({ top: -$(window).scrollTop() })
 $('body').addClass('noscroll')
 
 $(':focus').blur()
