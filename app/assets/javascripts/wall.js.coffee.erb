@@ -1,6 +1,7 @@
 $( ->
   initialize_masonry()
   initialize_infinitescroll()
+  register_event_for_close_clip_dialog()
 )
 
 window.destroy_infinitescroll = ->
@@ -82,3 +83,8 @@ infinitescroll_options = ->
 window.can_scroll = ->
   # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
   $(window).height() <= $('html').height()
+
+window.register_event_for_close_clip_dialog = ->
+  $(document).on('hide', '#clip_dialog', ->
+    $('body').removeClass('noscroll')
+  )
