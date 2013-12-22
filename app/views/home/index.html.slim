@@ -1,6 +1,6 @@
-h1 = "Welcoma to #{Settings.site_name}"
+#home
+  h2 新着クリップ
 
-h2 最近のクリップ一覧
 - if @clips.present?
   == render partial: '/base/wall'
 - else
