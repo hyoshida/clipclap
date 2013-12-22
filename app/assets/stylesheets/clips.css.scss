@@ -227,22 +227,14 @@ strong {
 }
 
 #clip .carousel_box {
+  @include carousel($item_count_x: 4, $item_count_y: 2, $item_size: 36px, $item_margin: 16px, $width: $info_box_width);
+  @include border-radius(0);
+  margin-bottom: $margin;
+  border: 1px solid #ccc;
+
   .count {
     @extend strong;
   }
-}
-
-#clip #reclips_carousel_box {
-  @include carousel(5, 2, 36px, 16px, 21px);
-  @include border-radius(0);
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-}
-
-#clip #likes_carousel_box {
-  @include carousel(5, 2, 36px, 16px, 21px);
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
 }
 
 #clip .view_feild {
