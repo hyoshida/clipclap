@@ -28,7 +28,12 @@
                   span.angle-down
                 .dropdown-menu role="menu"
                   ul
-                    li = link_to 'プロフィール', user_path(current_user)
+                    li = link_to 'まとめ', user_matomes_path(current_user)
+                    li = link_to 'クリップ', user_clips_path(current_user)
+                    li = link_to 'タグ', user_tags_path(current_user)
+                    li = link_to 'イイネ！', user_likes_path(current_user)
+                    li.divider
+                    li = link_to '設定', edit_user_path(current_user)
                     li = link_to 'ログアウト', destroy_user_session_path, method: :delete
           - else
             li.signin
