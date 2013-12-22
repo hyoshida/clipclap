@@ -1,0 +1,17 @@
+- show_remove_flag ||= false
+ul
+  - @clips.each do |clip|
+    li.box id="clip_#{clip.id}" data-clip-id="#{clip.id}"
+      .image_box
+        = image_tag_by_clip(clip, mode: :thumbnail)
+        .status
+          p.clip class="#{'hidden' if show_remove_flag}"
+            = link_to 'クリップ', '#add'
+          p.remove class="#{'hidden' unless show_remove_flag}"
+            = link_to '削除', '#remove'
+
+      - if clip.title.present?
+        p.title = clip.title
+
+      .hidden
+        = hidden_field_tag 'matome[clip_ids][]', clip.id

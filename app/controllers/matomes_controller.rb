@@ -29,13 +29,14 @@ class MatomesController < ApplicationController
   # GET /matomes/new
   def new
     @matome = Matome.new
+    @clips = @matome.clips
   end
 
   # XHR GET /matomes/clips
   def clips
     clip_ids = params[:matome][:clip_ids] if params[:matome]
     @clips = Clip.where(user_id: current_user.id).where.not(id: clip_ids).paginate(page: params[:page])
-    render text: "<html><body><div id='container'>#{@clips.map(&insert_div_tag_for_image_tag).join}</div></body></html>" unless first_page?
+    render template: "matomes/_wall" unless first_page?
   end
 
   # POST /clips
@@ -57,6 +58,7 @@ class MatomesController < ApplicationController
   # GET /matomes/:id/edit
   def edit
     @matome = Matome.find(params[:id])
+    @clips = @matome.clips
     @cover_clip = @clips.try(:first)
   end
 

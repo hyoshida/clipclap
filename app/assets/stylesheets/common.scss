@@ -6,11 +6,31 @@
 @import 'font-awesome';
 
 // mix-in
+@mixin btn-left {
+  float: left;
+  text-align: left;
+
+  a {
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
+@mixin btn-right {
+  text-align: right;
+
+  a {
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
 @mixin btn-reclip {
   @extend .btn;
   @extend .btn-warning;
   @include zurui-gradient-top-lighten($color: #fa0, $lighten: 20%);
   @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
+  text-decoration: none;
   color: #4f2e2b;
   border: 1px solid #a60;
   &:hover, &:focus {
@@ -22,8 +42,16 @@
 @mixin btn-like {
   @extend .btn;
   @include box-shadow(rgba(0, 0, 0, .25) 0 1px 2px);
+  text-decoration: none;
   color: #666;
   border: 1px solid #aaa;
+}
+
+@mixin btn-remove {
+  @extend .btn;
+  @extend .btn-danger;
+  text-decoration: none;
+  color: #fff;
 }
 
 // from https://github.com/FortAwesome/Font-Awesome/issues/213
@@ -42,3 +70,24 @@
 // variables
 $font_gothic: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
 $font_serif: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'ＭＳ Ｐ明朝', 'MS PMincho', serif;
+
+// class
+.noscroll {
+  overflow: hidden;
+}
+
+// jQuery
+.ui-dialog-titlebar {
+  display: none;
+}
+
+.ui-widget-overlay {
+  z-index: 90;
+  background: transparent url('/assets/transblack.png') repeat !important;
+}
+
+.ui-dialog {
+  .ui-button.ui-state-default {
+    @extend .btn;
+  }
+}

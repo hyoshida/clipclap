@@ -4,6 +4,7 @@ describe "matomes/new.html.slim" do
   let (:matome) { Matome.new }
 
   before { assign(:matome, matome) }
+  before { assign(:clips, matome.clips) }
   before { render }
 
   subject { response }

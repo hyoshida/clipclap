@@ -255,11 +255,39 @@ $cover_size: 100px;
 
 // dialog
 #matome_dialog {
-  img {
-    border: 5px solid transparent;
+  .masonry {
+    height: 350px !important;
+    overflow: auto;
+  }
 
-    &#selected {
-      border: 5px solid #666;
+  input[type="submit"] {
+    @extend .btn;
+  }
+
+  .image_box img {
+    display: block;
+    background: #fff;
+    vertical-align: bottom;
+    @include border-radius(4px);
+  }
+}
+
+// container
+.image_box .status {
+  .clip {
+    width: 50%;
+    @include btn-left;
+    a {
+      @include btn-reclip;
+      @include icon(paper-clip)
+    }
+  }
+
+  .remove {
+    @include btn-right;
+    a {
+      @include btn-remove;
+      @include icon(remove)
     }
   }
 }
