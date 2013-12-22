@@ -165,6 +165,16 @@ $user_menu_height: 100px;
   }
 }
 
+/* user.new */
+#user.new {
+  width: $contents_width / 2;
+
+  h2 {
+    margin: 10px 0 20px;
+    text-align: center;
+  }
+}
+
 /* forms */
 #user form.edit_user {
   fieldset {
@@ -184,7 +194,12 @@ $user_menu_height: 100px;
   margin-left: 5px;
 
   li {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  .sign_in a {
+    font-weight: bold;
+    color: #f90;
   }
 
   .facebook a {
@@ -206,6 +221,5 @@ $user_menu_height: 100px;
 }
 
 #dialog #user {
-  width: auto;
-  text-align: center;
+  width: $contents_width / 2;
 }

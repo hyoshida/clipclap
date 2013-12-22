@@ -1,6 +1,6 @@
 ja:
-  "Sign up": 新規登録
-  sign_up: 新規登録
+  sign_up: &g_sign_up 新規登録
+  sign_in: &g_sign_in ログイン
   home: ホーム
   game: パズル
   option: 設定
@@ -42,8 +42,8 @@ ja:
         password: *g_password
         password_confirmation: *g_password_confirmation
         remember_me: 次回から自動的にログイン
-        sign_up: 新規登録
-        sign_in: ログイン
+        sign_up: *g_sign_up
+        sign_in: *g_sign_in
         sign_out: ログアウト
         current_password: 現在のパスワード
         likes: :activerecord.models.like

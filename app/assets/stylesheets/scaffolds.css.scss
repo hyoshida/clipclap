@@ -70,15 +70,15 @@ form {
 }
 
 input, textarea {
-  margin: 7px 5px;
+  margin: 10px 5px;
   &[type="radio"], &[type="checkbox"] {
-    margin: 7px 5px;
+    margin: 7px 5px 10px;
   }
 }
 
 label {
   display: inline;
-  margin: 7px 5px;
+  margin: 5px;
 }
 
 .input-small {
