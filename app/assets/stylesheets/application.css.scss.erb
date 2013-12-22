@@ -45,6 +45,14 @@
   opacity: 0.9;
 }
 
+.must {
+  &:after {
+    content: '*';
+    color: red;
+    font-weight: bold;
+  }
+}
+
 
 /* header */
 $header_height: 40px;
@@ -271,7 +279,7 @@ $main_width: 1000px;
 }
 
 /* container */
-#container {
+#main .masonry {
   margin: 0 auto;
 }
 

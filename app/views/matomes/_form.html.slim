@@ -5,12 +5,20 @@
 #matome
   = form_for @matome do |f|
     .header
-      //.cover &nbsp;
-      h1 = f.text_field :title, placeholder: 'タイトル'
-      .description
-        p = f.text_area :description, placeholder: '説明', rows: 3
-      = f.submit 'クリップを追加', id: 'new_clip', type: 'button'
-      = f.submit
+      .wrap
+        //.cover &nbsp;
+        .form-horizontal
+          h1
+            = f.label :title, class: 'control-label must'
+            .controls
+              = f.text_field :title, placeholder: 'タイトル'
+          .description
+            = f.label :description, class: 'control-label'
+            .controls
+              = f.text_area :description, placeholder: '説明', rows: 3
+          .controls
+            = f.submit 'クリップを追加', id: 'new_clip', type: 'button'
+            = f.submit
 
     #matome_container
       == render partial: 'wall', locals: { show_remove_flag: true }

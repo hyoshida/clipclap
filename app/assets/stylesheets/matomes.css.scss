@@ -10,9 +10,9 @@
 @import "compass/css3";
 @import "common";
 
-$header_width: 960px;
+$header_width: $contents_width;
 $infomation_width: 760px;
-$contribute_width: 200px;
+$contribute_width: $header_width - $infomation_width;
 $cover_size: 100px;
 
 // header
@@ -26,7 +26,7 @@ $cover_size: 100px;
 #matome .header .wrap {
   float: none;
 
-  //height: $cover_size;
+  margin: 0 auto;
   width: $header_width;
 
   h1 {
@@ -256,6 +256,7 @@ $cover_size: 100px;
 // dialog
 #matome_dialog {
   .masonry {
+    width: auto !important;
     height: 350px !important;
     overflow: auto;
   }

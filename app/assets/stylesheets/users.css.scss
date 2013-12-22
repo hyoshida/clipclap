@@ -184,14 +184,6 @@ $user_menu_height: 100px;
     @extend .btn;
     @extend .btn-large;
   }
-
-  .must {
-    &:after {
-      content: '*';
-      color: red;
-      font-weight: bold;
-    }
-  }
 }
 
 #user .shared_links {
