@@ -22,6 +22,7 @@
 @import "compass/utilities";
 @import "compass/css3";
 @import "zurui-sass";
+@import "common";
 
 /* commons */
 .lfloat {
@@ -46,22 +47,9 @@
 
 
 /* header */
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#header {
-  top: 0;
-  left: 0;
-  right: 0;
-  min-width: 980px;
-  height: 40px;
-  position: fixed;
-  @include zurui-gradient-top-lighten(#1a1a1a);
-  border-bottom: 4px solid #f70;
-  z-index: 999;
-}
+$header_height: 40px;
+$logo_width: 150px;
+$logo_height: $header_height;
 
 @mixin hilight_menu_item {
   @include background-image(linear-gradient(top, #fa0, #f70));
@@ -71,160 +59,206 @@ body {
   @include zurui-gradient-top-lighten(#111);
 }
 
+#header {
+  margin-bottom: $header_height + 10px;
+  height: $header_height;
+  font-size: 13px;
+  font-family: $font_gothic;
+  font-weight: bold;
+  text-align: center;
+  background-color: #000;
+  border-bottom: 4px solid #f70;
+  @include zurui-gradient-top-lighten(#1a1a1a);
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#header .wrap {
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  .center {
+    margin-left: -($logo_width / 2);
+    position: absolute;
+    left: 50%;
+  }
+
+  li {
+    display: inline-block;
+  }
+}
+
 #header a {
   display: block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 20px;
-  text-decoration: none;
-
+  height: $header_height;
+  line-height: $header_height;
   color: #fff;
-  &:hover, &:focus {
+  text-decoration: none;
+  text-align: center;
+  padding: 0 1.5em;
+
+  &:hover {
     @include hilight_menu_item;
   }
 }
 
-.dropdown.open a.dropdown-toggle {
-  @include hilight_right_menu_item;
-}
-
-.navbar .pull-right .dropdown-menu {
-  left: auto;
-  right: 0px;
-  margin-top: 3px !important;
-}
-
-#headerBar {
-  height: 40px;
-  position: relative;
-}
-
-#logo a {
-  text-align: center;
-  text-decoration: none;
-  font-size: 100%;
-  color: #fff;
-  &:hover, &:focus {
-    @include hilight_right_menu_item;
-  }
-}
-
-#menu {
-  margin-left: 10px;
-}
-
-#menu li {
+#header .logo {
   display: inline-block;
-  height: 40px;
-}
+  width: $logo_width;
+  height: $logo_height;
+  line-height: $logo_height;
+  color: #fff;
+  font-size: 16px;
 
-#signin a {
-  text-align: right;
-  &:hover, &:focus {
+  a:hover {
     @include hilight_right_menu_item;
   }
 }
 
-#signin .profile {
-  a {
-    font-weight: normal;
+#header .profile a,
+#header .signin a {
+  font-weight: normal;
+
+  &:hover {
+    @include hilight_right_menu_item;
   }
-  span {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-  span.avatar {
+}
+
+#header .profile span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+
+  &.avatar {
     vertical-align: top;
+
     img {
       margin: 4px 0;
+      width: 32px;
+      height: 32px;
     }
   }
 }
 
-#signup a {
+#header .signup a {
   font-weight: bold;
   text-align: right;
   background: #a30;
   @include background-image(linear-gradient(top, #c40, #a30));
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
+
+  &:hover {
+    color: #fff;
+    background: #e30;
+    @include background-image(linear-gradient(top, #f40, #e30));
+    border-left: 1px solid #d20;
+    border-right: 1px solid #d20;
+  }
 }
 
-#signup a:hover {
-  color: #fff;
-  background: #e30;
-  @include background-image(linear-gradient(top, #f40, #e30));
-  border-left: 1px solid #d20;
-  border-right: 1px solid #d20;
-}
+#header form {
+  $width: 250px;
+  $padding: 12px;
 
-#account_from {
-  width: 300px;
-}
-
-#account_from form {
-  padding: 10px;
+  width: $width;
+  padding: $padding;
   text-align: center;
   background-color: #fff3da;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  @include border-bottom-radius(4px);
+
   input {
     margin-bottom: 10px;
+
+    &[type="email"], &[type="password"] {
+      width: ($width / 2) - $padding * 2;
+    }
+
+    &[type="email"] {
+      margin-left: 0;
+      margin-right: $padding / 2;
+    }
+
+    &[type="password"] {
+      margin-right: 0;
+      margin-left: $padding / 2;
+    }
+
     &[type="radio"], &[type="checkbox"] {
       margin-top: 10px;
+    }
+
+    &[type="submit"] {
+      @extend .btn;
+      @extend .btn-warning;
+      @extend .btn-large;
+      margin-bottom: 10px;
     }
   }
 }
 
 #header .dropdown-menu {
-  min-width: 260px;
-}
+  margin-top: 3px;
+  min-width: 220px;
 
-#header .dropdown-menu a {
-  color: #333;
-  font-weight: normal;
-  text-align: left;
-  background: transparent;
-}
-
-#header .dropdown-menu ul {
-  margin: 0;
-  padding: 0;
-}
-
-#header .dropdown-menu li {
-  display: block;
-
-  &.hr {
-    margin: 0.5em 0;
-    height: auto;
-    @extend hr;
+  li {
+    display: block;
   }
 
-  a:hover,
-  a:focus {
-    color: #fff;
-    text-decoration: underline;
+  a {
+    color: #333;
+    font-weight: normal;
+    text-align: left;
+    background: transparent;
+
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+      @include hilight_menu_item;
+    }
+  }
+}
+
+#header .left .dropdown {
+  .dropdown-menu {
+    @extend .pull-left;
+  }
+
+  &.open a.dropdown-toggle {
     @include hilight_menu_item;
   }
 }
 
-#search_form {
-  display: none;
-/*
-  float: right;
-  margin: 0 1px;
-  padding: 0 20px;
-  width: 818px;
-  height: 40px;
-  line-height: 40px;
-  background: #eee;
-  border-bottom: 1px solid #aaa;
-*/
+#header .right .dropdown {
+  .dropdown-menu {
+    @extend .pull-right;
+  }
+
+  &.open a.dropdown-toggle {
+    @include hilight_right_menu_item;
+  }
 }
 
+#header a.dropdown-toggle .angle-down {
+  margin-right: 0;
+  @include icon(angle-down);
+  &:before {
+    margin-right: 0;
+    margin-left: 0.4em;
+  }
+}
 
+#header .signin a.dropdown-toggle {
+  @include icon(signin);
+}
 
 /* main */
 #main {
