@@ -8,6 +8,8 @@
       .wrap
         //.cover &nbsp;
         .form-horizontal
+          = f.error_messages
+
           h1
             = f.label :title, class: 'control-label must'
             .controls

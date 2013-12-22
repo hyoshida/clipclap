@@ -30,7 +30,7 @@ div {
   @extend .control-group;
   @extend .error;
   margin-bottom: 0;
-  display: inline-block;
+  display: inline;
 }
 
 #error_explanation {
