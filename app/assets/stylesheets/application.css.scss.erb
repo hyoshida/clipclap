@@ -18,6 +18,7 @@
 //
 
 @import "bootstrap";
+@import "bootstrap-modal";
 @import 'font-awesome';
 @import "compass/utilities";
 @import "compass/css3";
@@ -299,6 +300,19 @@ $main_width: 1000px;
   font-size: x-large;
 }
 
-.modal-backdrop {
-  background-color: white;
+.modal {
+  &.fade {
+    top: -25%;
+  }
+  &.fade.in {
+    top: 50%;
+  }
+}
+
+.wrapper {
+  @extend .page-container;
+
+  #header {
+    @extend .navbar-fixed-top;
+  }
 }

@@ -86,5 +86,7 @@ window.can_scroll = ->
 
 register_event_for_close_clip_dialog = ->
   $(document).on('hide', '#clip_dialog', ->
-    $('body').removeClass('noscroll')
+    # その場でフェードアウトするように以前のtop値をそのまま割り当てる
+    top = $('#clip_dialog.modal.fade.in').css('top')
+    $('#clip_dialog.modal.fade').css({ top: top })
   )

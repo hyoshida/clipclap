@@ -54,7 +54,7 @@ $info_box_width: $clip_width - $image_box_width - $margin;
   min-height: 150px;
 }
 
-/* dialoo */
+/* dialog */
 #clip_dialog {
   $padding: 20px;
 
@@ -62,16 +62,13 @@ $info_box_width: $clip_width - $image_box_width - $margin;
     padding: 0;
   }
 
-  .modal {
+  &.modal {
     width: $clip_width + $padding * 2;
     margin-left: -($clip_width / 2);
     left: 50%;
-    overflow-y: auto;
 
     &.fade {
-      top: 5%;
-      bottom: 5%;
-      @include transition-duration(200ms);
+      @include transition(opacity 0.3s linear);
     }
 
     .modal-body {
