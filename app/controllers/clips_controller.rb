@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 class ClipsController < ApplicationController
-  before_filter :authenticate_user!, except: [ :index, :show, :get_image_tags ]
+  before_filter :authenticate_user!, except: [ :index, :get_image_tags ]
+  skip_before_filter :authenticate_user!, if: :show_for_not_xhr?
 
   require 'will_paginate/array'
 
@@ -191,5 +192,11 @@ class ClipsController < ApplicationController
 
   def html_cache_file_path
     File.join(Settings.html_cache_dir, "#{current_user.id}.html")
+  end
+
+  def show_for_not_xhr?
+    # skip_before_filterではonlyとifを併用できないバグあり
+    # https://github.com/rails/rails/issues/9703
+    params[:action].to_sym == :show && !request.xhr?
   end
 end
