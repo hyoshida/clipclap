@@ -45,6 +45,9 @@ group :assets do
   gem 'compass-rails'
   gem 'compass-colors'
   gem 'zurui-sass-rails'
+
+  # デプロイの高速化 (Rails4では不要)
+  gem 'turbo-sprockets-rails3'
 end
 
 # 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
