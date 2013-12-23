@@ -74,12 +74,7 @@ $font_serif: 'ヒラギノ明朝 Pro W3', 'Hiragino Mincho Pro', 'ＭＳ Ｐ明�
 
 // class
 .noscroll {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 // jQuery

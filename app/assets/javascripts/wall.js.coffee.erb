@@ -86,8 +86,5 @@ window.can_scroll = ->
 
 register_event_for_close_clip_dialog = ->
   $(document).on('hide', '#clip_dialog', ->
-    top = parseInt($('body').css('top'))
     $('body').removeClass('noscroll')
-    $('body').css({ top: 'auto' })
-    $(document).scrollTop(-top)
   )
