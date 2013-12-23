@@ -40,6 +40,7 @@ group :assets do
   # to use Twitter-Boostrap
   gem 'therubyracer'
   gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'bootstrap-modal-rails'
 
   gem 'compass-rails'
   gem 'compass-colors'

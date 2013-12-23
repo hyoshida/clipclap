@@ -22,6 +22,7 @@
 #= require bootstrap-carousel
 #= require bootstrap-transition
 #= require bootstrap-modal
+#= require bootstrap-modalmanager
 #= require masonry/jquery.masonry
 #= require masonry/jquery.imagesloaded.min
 #= require masonry/jquery.infinitescroll.min

@@ -9,10 +9,11 @@ html
     = analytics_init if Rails.env.production?
 
   body
-    == render partial: '/base/header'
-    == render partial: '/base/social'
+    .wrapper
+      == render partial: '/base/header'
+      == render partial: '/base/social'
 
-    #main
-      .wrap
-        p#alert = alert
-        == yield
+      #main
+        .wrap
+          p#alert = alert
+          == yield
