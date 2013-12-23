@@ -94,17 +94,8 @@ module ApplicationHelper
 
   def image_tag_by_clip(clip, options={})
     style = clip.size_for_stylesheet(options)
-    style += "background: url('#{image_path(clip.image.thumb_url)}') no-repeat center center; background-size: contain;"
+    style += background_thumbnail_for_stylesheet(clip, options)
     image_tag image_path(image_url_by_clip(clip, options)), alt: clip.title, style: style
-  end
-
-  def image_url_by_clip(clip, options={})
-    case options[:mode].try(:to_sym)
-    when :thumbnail, :crop
-      clip.image.thumb_url
-    else
-      clip.image_id
-    end
   end
 
   def resource_name
@@ -126,5 +117,19 @@ module ApplicationHelper
       default: 'identicon',
       size: 32
     }
+  end
+
+  def image_url_by_clip(clip, options={})
+    case options[:mode].try(:to_sym)
+    when :thumbnail, :crop
+      clip.image.thumb_url
+    else
+      clip.image_id
+    end
+  end
+
+  def background_thumbnail_for_stylesheet(clip, options={})
+    return '' if options[:mode].to_s.in? %w( thumbnail crop )
+    "background: url('#{image_path(clip.image.thumb_url)}') no-repeat center center; background-size: contain;"
   end
 end
