@@ -94,6 +94,7 @@ module ApplicationHelper
 
   def image_tag_by_clip(clip, options={})
     style = clip.size_for_stylesheet(options)
+    style += "background: url('#{image_path(clip.image.thumb_url)}') no-repeat center center; background-size: contain;"
     image_tag image_path(image_url_by_clip(clip, options)), alt: clip.title, style: style
   end
 
