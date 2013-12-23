@@ -318,10 +318,10 @@ ul.comments li p {
   @include border-radius(4px);
   @include transition-property(opacity);
   @include transition-duration(0.25s);
-  opacity: 1;
+  @include opacity(1);
 
   &:hover {
     text-decoration: none;
-    opacity: 0.5;
+    @include opacity(0.5);
   }
 }
