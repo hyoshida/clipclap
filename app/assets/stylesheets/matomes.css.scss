@@ -292,3 +292,18 @@ $cover_size: 100px;
     }
   }
 }
+
+// done
+#done .related {
+  margin: 1.5em auto;
+  text-align: center;
+
+  h2 {
+    margin: 1.5em 0 1em;
+    font-size: x-large;
+  }
+
+  li {
+    display: inline-block;
+  }
+}

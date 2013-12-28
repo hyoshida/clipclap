@@ -6,6 +6,18 @@ class Matome < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :clips
 
+  scope :related_by_user, lambda {|matome|
+    where(user_id: matome.user_id).
+    where.not(id: matome.id)
+  }
+
+  scope :related_by_clips, lambda {|matome|
+    joins(:clips).
+    where('clips.id' => matome.clips.map(&:id)).
+    where.not(id: matome.id).
+    group(:id)
+  }
+
   default_scope order: 'created_at DESC'
 
   validates :user_id, presence: true
