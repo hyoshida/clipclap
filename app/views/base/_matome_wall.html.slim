@@ -14,13 +14,12 @@
           - if matome.clips.size.nonzero?
             - clip = matome.clips.shift
             = link_to image_tag_for_tag(clip), matome
-          - if matome.clips.size.nonzero?
-            ul.sub_image_boxes
-              - clips = matome.clips.take(3)
-              - clips += [ nil ] * 3
-              - clips.take(3).each do |clip|
-                li
-                  - if clip
-                    = link_to image_tag_for_tag_small(clip), matome
-                  - else
-                    = link_to '', matome
+        ul.sub_image_boxes
+          - clips = matome.clips.take(3)
+          - clips += [ nil ] * 3
+          - clips.take(3).each do |clip|
+            li
+              - if clip
+                = link_to image_tag_for_tag_small(clip), matome
+              - else
+                = link_to '', matome
