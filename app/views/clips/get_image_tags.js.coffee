@@ -5,10 +5,13 @@ $container = $('#container')
 $container.html('&nbsp;')
 $container.attr('style', 'position: relative;')
 
+# 次のページが存在する場合のみinfinitescroll用のリンクを追加
+<% if @image_tags.next_page %>
 page_nav = $('<div/>')
 page_nav.attr('id', 'page-nav')
 page_nav.html('<%= link_to 'next', page: @image_tags.next_page %>')
 page_nav.insertAfter('#container')
+<% end %>
 
 # <div />で囲まないと、body 直下の img が取得できない
 html = '<div><%= raw @html.gsub("'", '"').presence || (@clip.url && image_tag(@clip.url)) || '' %></div>'
