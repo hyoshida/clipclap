@@ -12,13 +12,14 @@ class Matome < ActiveRecord::Base
   }
 
   scope :related_by_clips, lambda {|matome|
+    related_clip_ids = matome.clips.map(&:id) + matome.clips.map(&:parent_id)
     joins(:clips).
-    where('clips.id' => matome.clips.map(&:id)).
-    where.not(id: matome.id).
-    group(:id)
+    where(Clip.arel_table[:id].in(related_clip_ids).or(Clip.arel_table[:parent_id].in(related_clip_ids))).
+    where.not('matomes.id' => matome.id).
+    group('matomes.id')
   }
 
-  default_scope order: 'created_at DESC'
+  default_scope order: 'matomes.created_at DESC'
 
   validates :user_id, presence: true
   validates :title, presence: true
