@@ -58,9 +58,12 @@
     - else
       = link_to "もっと見る (#{left_clips_count})", new_user_registration_path, remote: true
 
-  .related
-    h2 関連まとめ
-    == render partial: 'related', locals: { matomes: @related_matomes[:clip] }
+  - if @related_matomes[:clip].present?
+    .related
+      h2 関連まとめ
+      == render partial: 'related', locals: { matomes: @related_matomes[:clip] }
 
-    h2 #{@matome.user.nick_name}さんのまとめ
-    == render partial: 'related', locals: { matomes: @related_matomes[:user] }
+  - if @related_matomes[:user].present?
+    .related
+      h2 #{@matome.user.nick_name}さんのまとめ
+      == render partial: 'related', locals: { matomes: @related_matomes[:user] }
