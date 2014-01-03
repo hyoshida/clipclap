@@ -61,7 +61,7 @@
   - if @related_matomes[:clip].present?
     .related
       h2 関連まとめ
-      == render partial: 'related', locals: { matomes: @related_matomes[:clip] }
+      == render partial: 'base/matomes', locals: { matomes: @related_matomes[:clip] }
 
   - if @related_matomes[:user].present?
     .related
@@ -69,4 +69,4 @@
         span.name =  link_to @matome.user.nick_name, user_path(@matome.user)
         span.title さん
         span.message のまとめ
-      == render partial: 'related', locals: { matomes: @related_matomes[:user] }
+      == render partial: 'base/matomes', locals: { matomes: @related_matomes[:user] }
