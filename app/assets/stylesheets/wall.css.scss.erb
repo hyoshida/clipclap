@@ -29,58 +29,40 @@
   text-indent: -9999px;
 }
 
-li.box {
-  display: block;
-  width: <%= Settings.thumb_width %>px;
-  margin: 4px;
-  padding-bottom: 0;
-  padding: 0;
-  list-style-type: none;
-  background-color: #fff;
-  border: 1px solid #aaa;
+.box {
+  @include box(<%= Settings.thumb_width %>px);
   @include border-top-radius(5px);
-}
-
-li.box .title {
-  position: relative;
-  top: -5px;
-  margin: 0;
-  padding: 4px 10px;
-
-  display: block;
   width: <%= Settings.thumb_width %>px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* text-wrap: none; */
-}
 
-li.box .title a {
-  font-weight: bold;
-  color: #444;
-  text-decoration: none;
-}
+  .title {
+    position: relative;
+    top: -5px;
+    margin: 0;
+    padding: 4px 10px;
 
-li.box .title a:hover {
-  color: #666;
-  text-decoration: underline;
-  background: none;
-}
+    display: block;
+    width: <%= Settings.thumb_width %>px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* text-wrap: none; */
 
-li.box .image_box {
-  display: block;
-  width: <%= Settings.thumb_width %>px;
-}
+    a {
+      font-weight: bold;
+      color: #444;
+      text-decoration: none;
 
-li.box .image_box a:hover {
-}
+      &:hover {
+        color: #666;
+        text-decoration: underline;
+        background: none;
+      }
+    }
+  }
 
-li.box .image_box a img {
-  display: block;
-  background: #fff;
-  margin-bottom: 10px;
-  vertical-align: bottom;
-  @include border-top-radius(5px);
-  cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
+  .image_box a img {
+    @include border-top-radius(5px);
+    cursor: url("<%= image_path 'cursor_zoom_in.cur' %>"), pointer;
+  }
 }
 
 
@@ -286,15 +268,107 @@ ul.comments li p {
   letter-spacing: 0;
 }
 
+/* group */
+@import "compass/utilities";
+
+$group_box_width: <%= Settings.thumb_width %>px;
+$group_box_height: <%= Settings.thumb_width %>px;
+
+.group_box {
+  $margin: 5px;
+  $border: 1px;
+
+  @include border-radius(5px);
+
+  .title {
+    margin: 0.75em $margin 0;
+    padding: 0;
+    width: $group_box_width - ($margin * 2);
+    font-size: x-large;
+    text-align: center;
+
+    a {
+      @include ellipsis;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .description {
+    margin: 0 $margin 0.75em;
+    color: #888;
+    text-align: center;
+  }
+
+  .image_box {
+    margin-bottom: $margin;
+    width: $group_box_width;
+    height: $group_box_height;
+    overflow: hidden;
+    background-color: #fff;
+
+    img {
+      max-width: none;
+    }
+  }
+
+  .sub_image_boxes {
+    $width: $group_box_width - ($margin * 2);
+    $height: ($group_box_height / 3) - ($margin * 2);
+
+    display: inline-block;
+    margin: $margin;
+    margin-top: 0;
+    width: $width;
+    height: $height;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      display: inline-block;
+      width: ($width - ($margin * 2)) / 3 - ($border * 2);
+      height: $height - ($border * 2);
+      overflow: hidden;
+      border: 1px solid #aaa;
+      @include border-radius(5px);
+
+      &:first-child {
+        margin-right: $margin;
+      }
+
+      &:last-child {
+        margin-left: $margin;
+      }
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      background-color: #eee;
+
+      img {
+        max-width: none;
+        @include border-radius(0);
+      }
+    }
+  }
+}
+
 /* done */
-#done a {
+#done .more a {
+  $height: 3em;
+
   display: block;
   margin-top: 10px;
   width: 100%;
-  height: 50px;
-  line-height: 50px;
+  height: $height;
+  line-height: $height;
   font-family: $font_gothic;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
   text-align: center;
   color: #fa4;

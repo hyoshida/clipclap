@@ -1,0 +1,21 @@
+ul
+  - matomes.each do |matome|
+    - clips = matome.clips.all
+    li.group_box.box
+      h3.title = link_to matome.title, matome
+      p.description
+        span.clip_count
+          = clips.size
+          | クリップ
+      .image_box
+        - if clips.size.nonzero?
+          - main_clip = clips.shift
+          = link_to image_tag_for_tag(main_clip), matome
+      ul.sub_image_boxes
+        - sub_clips = (clips + Array.new(3)).take(3)
+        - sub_clips.each do |clip|
+          li
+            - if clip
+              = link_to image_tag_for_tag_small(clip), matome
+            - else
+              = link_to '', matome

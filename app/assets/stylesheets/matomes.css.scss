@@ -292,3 +292,19 @@ $cover_size: 100px;
     }
   }
 }
+
+// done
+#done .related {
+  margin: 15px auto;
+  text-align: center;
+  border-top: 1px solid #ddd;
+
+  h2 {
+    margin: 1em 0;
+    font-size: x-large;
+  }
+
+  li {
+    display: inline-block;
+  }
+}

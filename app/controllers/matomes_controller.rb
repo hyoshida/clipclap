@@ -17,6 +17,14 @@ class MatomesController < ApplicationController
     @clips = @matome.clips.page(params[:page])
     @cover_clip = @clips.try(:first)
 
+    # 関連まとめ
+    @related_matomes = {}
+    # 1. 同じキュレータ
+    @related_matomes[:user] = Matome.related_by_user(@matome).limit(5)
+    # 2. 同じクリップを含む
+    @related_matomes[:clip] = Matome.related_by_clips(@matome).limit(5)
+    # TODO: 3. 同じタグを含む
+
     return if first_page?
 
     if user_signed_in?

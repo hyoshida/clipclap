@@ -54,6 +54,30 @@
   color: #fff;
 }
 
+@mixin box($width: auto, $height: auto) {
+  display: block;
+  margin: 4px;
+  padding: 0;
+  width: $width;
+  height: $height;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  @include border-radius(5px);
+
+  .image_box {
+    display: block;
+    width: $width;
+
+    a img {
+      display: block;
+      background: #fff;
+      margin-bottom: 10px;
+      vertical-align: bottom;
+    }
+  }
+}
+
+
 // from https://github.com/FortAwesome/Font-Awesome/issues/213
 @mixin icon($name) {
   &:before {

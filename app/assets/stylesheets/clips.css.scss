@@ -36,6 +36,12 @@ $info_box_width: $clip_width - $image_box_width - $margin;
     }
   }
 
+  .box {
+    margin: 0;
+    width: auto;
+    border: 0;
+  }
+
   .box img {
     border: 5px solid transparent;
     &#selected {
