@@ -65,5 +65,8 @@
 
   - if @related_matomes[:user].present?
     .related
-      h2 #{@matome.user.nick_name}さんのまとめ
+      h2
+        span.name =  link_to @matome.user.nick_name, user_path(@matome.user)
+        span.title さん
+        span.message のまとめ
       == render partial: 'related', locals: { matomes: @related_matomes[:user] }
