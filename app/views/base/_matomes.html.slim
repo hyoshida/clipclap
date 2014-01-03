@@ -1,19 +1,19 @@
 ul
   - matomes.each do |matome|
+    - clips = matome.clips.all
     li.group_box.box
       h3.title = link_to matome.title, matome
       p.description
         span.clip_count
-          = matome.clips.size
+          = clips.size
           | クリップ
       .image_box
-        - if matome.clips.size.nonzero?
-          - clip = matome.clips.shift
-          = link_to image_tag_for_tag(clip), matome
+        - if clips.size.nonzero?
+          - main_clip = clips.shift
+          = link_to image_tag_for_tag(main_clip), matome
       ul.sub_image_boxes
-        - clips = matome.clips.take(3)
-        - clips += [ nil ] * 3
-        - clips.take(3).each do |clip|
+        - sub_clips = (clips + Array.new(3)).take(3)
+        - sub_clips.each do |clip|
           li
             - if clip
               = link_to image_tag_for_tag_small(clip), matome
