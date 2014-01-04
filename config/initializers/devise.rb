@@ -209,7 +209,7 @@ Devise.setup do |config|
   #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE unless Rails.env.production?
 
   require 'omniauth-facebook'
-  config.omniauth :facebook, Settings.facebook_id, Settings.facebook_key
+  config.omniauth :facebook, Settings.facebook_id, ENV['FACEBOOK_SECURET']
 
   require 'omniauth-twitter'
   config.omniauth :twitter, Settings.twitter_id, ENV['TWITTER_SECURET']
