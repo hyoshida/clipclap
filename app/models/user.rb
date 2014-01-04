@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 class User < ActiveRecord::Base
+  include UserOmniauth
+
   has_many :clips
   has_many :likes, :dependent => :destroy
   has_many :tags, :dependent => :destroy
@@ -21,54 +23,6 @@ class User < ActiveRecord::Base
   attr_accessible :description
 
   validates :email, :presence => true, :format => { :with => /^.{1,}@.{2,}\..{2,}$/ }
-
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = self.where(provider: auth.provider, uid: auth.uid).first
-    user ||= self.create_or_update_with_auth(auth)
-    user
-  end
-
-  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
-    user = self.where(provider: auth.provider, uid: auth.uid).first
-    user ||= self.create_or_update_with_auth(auth)
-    user
-  end
-
-  def self.email_for_oauth(auth)
-    auth.info.email || "#{auth.uid}@#{auth.provider}.com"
-  end
-
-  def self.create_or_update_with_auth(auth)
-    user = self.where(email: email_for_oauth(auth)).first
-    return self.create_with_auth(auth) if user.nil?
-    user.update_with_auth(auth)
-    user
-  end
-
-  def self.create_with_auth(auth)
-    User.create(
-      name: auth.extra.raw_info.name,
-      provider: auth.provider,
-      uid: auth.uid,
-      email: email_for_oauth(auth),
-      password: Devise.friendly_token[0, 20]
-    )
-  end
-
-  def update_with_auth(auth)
-    self.update_attributes(
-      provider: auth.provider,
-      uid: auth.uid
-    )
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
 
   def nick_name
     self.name.presence || self.email
