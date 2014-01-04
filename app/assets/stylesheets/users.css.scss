@@ -206,16 +206,31 @@ $user_menu_height: 100px;
     padding: 10px 20px;
     font-size: large;
     font-family: $font_gothic;
-    @extend .btn;
-  }
 
-  .facebook a {
+    @extend .btn;
     @extend .btn-primary;
     @include icon(facebook);
+
     &:before {
       margin-right: 15px;
       padding-right: 17px;
       border-right: 1px solid #37d;
+    }
+  }
+
+  .twitter a {
+    padding: 10px 20px;
+    font-size: large;
+    font-family: $font_gothic;
+
+    @extend .btn;
+    @extend .btn-info;
+    @include icon(twitter);
+
+    &:before {
+      margin-right: 15px;
+      padding-right: 17px;
+      border-right: 1px solid #5bc;
     }
   }
 }
