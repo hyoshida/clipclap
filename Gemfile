@@ -102,6 +102,8 @@ gem 'everywhere'
 
 # Facebookでログイン
 gem 'omniauth-facebook'
+# Twitterでログイン
+gem 'omniauth-twitter'
 
 # RailsのViewにSlimを利用
 gem "slim-rails"
