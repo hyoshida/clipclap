@@ -14,6 +14,7 @@ defaults: &defaults
   facebook_id: '520109864725351'
   facebook_key: 'd56427de565d1fbc5d7f2268063c4a30'
   mixi_key: '138755f57dd15996cafaf13177bb1d70114b1760'
+  twitter_id: 'TrZTve5b1xwZaxBD8AB3Q'
 
 development:
   <<: *defaults

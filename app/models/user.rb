@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [ :facebook ]
+         :omniauthable, :omniauth_providers => [ :facebook, :twitter ]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -28,8 +28,18 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
+    user = self.where(provider: auth.provider, uid: auth.uid).first
+    user ||= self.create_or_update_with_auth(auth)
+    user
+  end
+
+  def self.email_for_oauth(auth)
+    auth.info.email || "#{auth.uid}@#{auth.provider}.com"
+  end
+
   def self.create_or_update_with_auth(auth)
-    user = self.where(email: auth.info.email).first
+    user = self.where(email: email_for_oauth(auth)).first
     return self.create_with_auth(auth) if user.nil?
     user.update_with_auth(auth)
     user
@@ -40,7 +50,7 @@ class User < ActiveRecord::Base
       name: auth.extra.raw_info.name,
       provider: auth.provider,
       uid: auth.uid,
-      email: auth.info.email,
+      email: email_for_oauth(auth),
       password: Devise.friendly_token[0, 20]
     )
   end
