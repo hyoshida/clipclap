@@ -44,6 +44,7 @@ notify = ->
   return if $('#notice').length <= 0
   height =  $('#notice').css('height')
   $('#notice')
+    .removeClass('hidden')
     .css({ height: 0 })
     .delay(400)
     .animate({ height: height })
