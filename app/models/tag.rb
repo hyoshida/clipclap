@@ -5,10 +5,11 @@ class Tag < ActiveRecord::Base
 
   scope :uniques, group(:name)
   scope :by, lambda {|user| where(user_id: user.id) }
+  scope :for, lambda {|tagged| where(tagged_id: tagged.id, tagged_type: tagged.class.name) }
 
   validates :tagged_id, :presence => true
   validates :user_id, :presence => true
-  validates :name, :presence => true, :uniqueness => { scope: :clip_id }, :length => { minimum: 2 }
+  validates :name, :presence => true, :uniqueness => { scope: [ :tagged_id, :tagged_type ] }, :length => { minimum: 2 }
 
   default_scope order: 'created_at DESC'
 
