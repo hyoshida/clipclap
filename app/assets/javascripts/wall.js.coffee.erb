@@ -65,7 +65,7 @@ is_available_image_size = (width, height) ->
 infinitescroll_options = ->
   {
     navSelector: '#page-nav',     # ページのナビゲーションを選択
-    nextSelector: '#page-nav a',  # 次ページへのリンク
+    nextSelector: '#page-nav a:first',  # 次ページへのリンク
     itemSelector: '.box',         # 持ってくる要素のclass
     loading: {
       finishedMsg: 'すべてのクリップを読み込みました',
@@ -78,6 +78,9 @@ infinitescroll_options = ->
     },
     errorCallback: ->
       $('#done').removeClass('hidden')
+    # URLをうまくパースできない場合があるので独自にパース
+    pathParse: (path, currentPage) ->
+      path.match(/^(.*?page=)2(\/.*|$)/).slice(1)
   }
 
 window.can_scroll = ->
