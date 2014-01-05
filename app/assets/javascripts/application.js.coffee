@@ -32,10 +32,8 @@
 $( ->
   $("[data-toggle='tooltip']").tooltip()
   register_event_for_close_dialog()
-
   notify()
-
-  $('.chosen-select').chosen(no_results_text: '一致する項目がありませんでした')
+  initialize_chosen()
 )
 
 register_event_for_close_dialog =->
@@ -53,3 +51,36 @@ notify = ->
     .animate({ height: height })
     .delay(5 * 1000)
     .animate({ height: 0 })
+
+initialize_chosen = ->
+  $chosen_select = $('.chosen-select')
+  $chosen_select.chosen(no_results_text: 'エンターキーで次のタグを追加: ')
+  $('.chosen-container-multi').on('keyup', 'input[type="text"]', (event) ->
+    # Enterキーでない場合は何もしない
+    VK_ENTER = 13
+    keycode = event.keyCode || event.which
+    return unless keycode == VK_ENTER
+
+    # マッチする結果がある場合は何もしない
+    chosen = $chosen_select.data('chosen')
+    return unless chosen
+    return if chosen.result_highlight
+
+    # すでに存在する項目であれば何もしない
+    old_values = []
+    $chosen_select.find('option').each( ->
+      old_values.push($(@).val().toLowerCase())
+    )
+    new_value = $(@).val()
+    return if $.inArray(new_value.toLowerCase(), old_values) != -1
+
+    # あたらしい項目を追加する
+    event.preventDefault()
+
+    selected_values = $chosen_select.val() || []
+    selected_values.push(new_value)
+
+    $chosen_select.append("<option value='" + new_value + "'>" + new_value + "</option>")
+    $chosen_select.val(selected_values)
+    $chosen_select.trigger("chosen:updated")
+  )
