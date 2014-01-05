@@ -3,10 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //
 
+@import "compass/utilities";
+@import "compass/css3";
+
 /* tag */
 #tag {
   h2 {
-    margin: 10px 0 20px;
+    margin: 20px 0;
     text-align: center;
   }
+
+  .nav  {
+    text-align: center;
+  }
+
+  .nav > li {
+    float: none;
+    vertical-align: top;
+    @include inline-block;
+  }
+}
+
+.nonresult {
+  text-align: center;
 }

@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe "matomes/edit.html.slim" do
+  let (:current_user) { FactoryGirl.build(:user) }
+
   before_stub_request
+  before { view.stub(:current_user).and_return(current_user) }
   before { assign(:matome, matome) }
   before { assign(:clips, matome.clips) }
   before { render }

@@ -7,7 +7,7 @@ class Clip < ActiveRecord::Base
   belongs_to :parent, class_name: 'Clip'
   belongs_to :origin, class_name: 'Clip'
   has_many :likes, :dependent => :destroy
-  has_many :tags, :dependent => :destroy
+  has_many :tags, :as => :tagged, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_and_belongs_to_many :matomes
 

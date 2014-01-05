@@ -137,3 +137,6 @@ gem 'open_uri_redirections'
 
 # 画像リサイズ用
 gem 'mini_magick'
+
+# タグ追加時の選択フォーム
+gem 'chosen-rails'

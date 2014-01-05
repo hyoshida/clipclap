@@ -39,7 +39,7 @@
         ul#tags
           - @clip.tags.each do |tag|
             li id="tag_#{tag.id}"
-              = link_to tag.name, controller: :tags, action: :show, name: tag.name
+              = link_to tag.name, tag_path(name: tag.name, type: :clips)
               span &nbsp;
               = link_to '×', untagging_clip_path(tag_id: tag.id), class: 'remove', remote: true if user_signed_in? && tag.user_id == current_user.id
 

@@ -1,4 +1,17 @@
 #matome
+  .breadcrumb
+    ul
+      li
+        = link_to 'まとめトップ', matomes_path
+        span.divider >
+      li.active
+        - if @matome.tags.size.zero?
+          | タグがありません
+        - else
+          ul.tags
+            - @matome.tags.each do |tag|
+              li = link_to tag.name, tag_path(name: tag.name, type: :matomes)
+
   .header
     .wrap
       .infomation
@@ -47,7 +60,7 @@
     .clear
 
 - if @clips.present?
-  == render partial: '/base/wall'
+  == render partial: '/base/clip_wall'
 - else
   p クリップが存在しません
 

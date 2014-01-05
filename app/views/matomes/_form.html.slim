@@ -14,6 +14,10 @@
             = f.label :title, class: 'control-label must'
             .controls
               = f.text_field :title, placeholder: 'タイトル'
+          .tags
+            = f.label :tags, class: 'control-label'
+            .controls
+              = f.select :tags, Tag.uniques.by(current_user).pluck(:name), { include_blank: true, selected: Tag.uniques.by(current_user).for(@matome).pluck(:name) }, { class: 'chosen-select', multiple: true, data: { placeholder: 'タグ' } }
           .description
             = f.label :description, class: 'control-label'
             .controls
