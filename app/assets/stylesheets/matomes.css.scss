@@ -6,6 +6,7 @@
 @import "bootstrap/mixins";
 @import "bootstrap/buttons";
 @import "bootstrap/forms";
+@import "bootstrap/breadcrumbs";
 @import "compass/utilities";
 @import "compass/css3";
 @import "common";
@@ -14,6 +15,37 @@ $header_width: $contents_width;
 $infomation_width: 760px;
 $contribute_width: $header_width - $infomation_width;
 $cover_size: 100px;
+
+// breadcrumb
+#matome div.breadcrumb {
+  margin: 0;
+  @extend .breadcrumb;
+  @include border-radius(0);
+  background-color: #f3f3f3;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #e3e3e3;
+}
+
+#matome .breadcrumb > ul {
+  @extend .breadcrumb;
+  margin: 0 auto;
+  padding: 0;
+  width: $header_width;
+}
+
+#matome .breadcrumb .tags {
+  display: inline-block;
+
+  li {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px;
+    background-color: #d4e1f5;
+    border: 1px solid #a9c4eb;
+    @include border-radius(4px);
+  }
+}
 
 // header
 #matome .header {
