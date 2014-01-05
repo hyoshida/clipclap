@@ -372,19 +372,19 @@ $group_box_height: <%= Settings.thumb_width %>px;
   height: $height;
   line-height: $height;
   font-family: $font_gothic;
-  font-size: x-large;
+  font-size: large;
   font-weight: bold;
   text-align: center;
-  color: #fa4;
-  background-color: #ffd;
-  border: 1px solid #fa0;
+  color: #fff;
+  border: 1px solid #ff9d00;
+  @include zurui-gradient-top-lighten(#fb2);
+  @include text-shadow( 0 -1px 0 rgba(#000, 0.25));
   @include border-radius(4px);
   @include transition-property(opacity);
   @include transition-duration(0.25s);
   @include opacity(1);
 
   &:hover {
-    text-decoration: none;
-    @include opacity(0.5);
+    @include opacity(0.75);
   }
 }
