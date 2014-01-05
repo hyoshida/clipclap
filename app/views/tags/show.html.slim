@@ -1,10 +1,18 @@
-#tag
-  h2 「#{params[:name]}」タグがつけられたクリップ
-
 - if @user.present?
   == render partial: '/base/user'
 
-- if @clips.present?
-  == render partial: '/base/wall'
+#tag
+  h2 「#{params[:name]}」タグがつけられた#{tagged_type_name}
+
+  ul.nav.nav-pills
+    li class="#{'active' if tag_for_all?}"
+      = link_to "すべて (#{count_tag_for_all})", tag_path(name: params[:name], user_id: params[:user_id])
+    li class="#{'active' if tag_for_clip?}"
+      = link_to "クリップ (#{count_tag_for_clip})", tag_path(name: params[:name], user_id: params[:user_id], type: :clips)
+    li class="#{'active' if tag_for_matome?}"
+      = link_to "まとめ (#{count_tag_for_matome})", tag_path(name: params[:name], user_id: params[:user_id], type: :matomes)
+
+- if @taggeds.present?
+  == render partial: '/base/wall', locals: { records: @taggeds }
 - else
-  p クリップが存在しません
+  p.nonresult #{tagged_type_name}が存在しません

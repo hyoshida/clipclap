@@ -10,7 +10,7 @@
         - else
           ul.tags
             - @matome.tags.each do |tag|
-              li = link_to tag.name, controller: :tags, action: :show, name: tag.name
+              li = link_to tag.name, tag_path(name: tag.name, type: :matomes)
 
   .header
     .wrap
@@ -60,7 +60,7 @@
     .clear
 
 - if @clips.present?
-  == render partial: '/base/wall'
+  == render partial: '/base/clip_wall'
 - else
   p クリップが存在しません
 

@@ -18,7 +18,7 @@ class Tag < ActiveRecord::Base
     self.name[0..length] + '...'
   end
 
-  def clips
+  def all_clips
     case self.tagged
     when Clip
       [ self.tagged ]
@@ -27,7 +27,15 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  def all_clip
+    self.all_clips.first
+  end
+
   def clip
-    self.clips.first
+    self.tagged if self.tagged.is_a? Clip
+  end
+
+  def matome
+    self.tagged if self.tagged.is_a? Matome
   end
 end

@@ -35,13 +35,14 @@ Clipclap::Application.routes.draw do
 
     resources :clips, only: :index
     resources :tags, only: :index
-    match 'tags/:name' => 'tags#show', via: :get, as: :tag
+    match 'tags/:name(/:type)' => 'tags#show', via: :get, as: :tag
     resources :likes, only: :index
     resources :matomes, only: :index
   end
 
-  match 'tags/:name' => 'tags#show', via: :get, as: :tag
+  match 'tags/:name(/:type)' => 'tags#show', via: :get, as: :tag
   resources :tags, only: [ :index ]
+
   match 'images/:id/:type' => 'images#show', via: :get
   resources :images, only: [ :show ]
 

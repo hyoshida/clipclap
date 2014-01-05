@@ -4,19 +4,25 @@
 #container.hidden
   ul
     - @grouped_tags.each_pair do |tag_name,tags|
+      - clips = tags.map(&:clip).compact
+      - matomes = tags.map(&:matome).compact
+      - all_clips = tags.map(&:all_clip)
       li.group_box.box
         h3.title = link_to tag_name, tag_path(tag_name)
         p.description
-          span.clip_count
-            = tags.size
+          span.count
+            = clips.size
             | クリップ
+          span.divider
+            | /
+          span.count
+            = matomes.size
+            | まとめ
         .image_box
-          - clip = tags.shift.clip
+          - clip = all_clips.shift
           = link_to image_tag_for_tag(clip), tag_path(user_id: @user, name: tag_name)
         ul.sub_image_boxes
-          - clips = tags.take(3).map(&:clip)
-          - clips += [ nil ] * 3
-          - clips.take(3).each do |clip|
+          - (all_clips + Array.new(3)).take(3).each do |clip|
             li
               - if clip
                 = link_to image_tag_for_tag_small(clip), tag_path(user_id: @user, name: tag_name)

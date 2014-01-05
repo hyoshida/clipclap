@@ -1,0 +1,59 @@
+li.box id="clip_#{clip.id}"
+  .image_box
+    = link_to image_tag_by_clip(clip, mode: :thumbnail), clip, remote: true
+    .status
+      p.tag
+        - if clip.tags.any?
+          span = "##{clip.tags.last.shortname}"
+        - else
+          span タグなし
+      p.reclip
+        - if user_signed_in? && current_user.reclip?(clip)
+          = unreclip_to clip
+        - else
+          = reclip_to clip
+      p.like
+        - if !user_signed_in? || current_user.unlike?(clip)
+          = like_to clip
+        - else
+          = unlike_to clip
+
+  - if clip.title.present?
+    p.title = link_to clip.title, clip
+
+  .info
+    p.reclip_count
+      i.icon-paper-clip title="リクリップ数"
+      = clip.reclip_count
+
+    p.like
+      - if user_signed_in? && current_user.unlike?(clip)
+        = like_to clip
+      - else
+        = unlike_to clip
+
+    - if false && clip.image.likes.any?
+      p.we_like
+        i.icon-group title="みんなのイイネ！"
+        = clip.image.likes.size
+
+    p.view_count
+      i.icon-eye-open title="閲覧数"
+      = clip.view_count
+
+    - if clip.comments.any?
+      p.comment_count
+        i.icon-comment-alt title="コメント数"
+        = clip.comments.size
+
+  .comment_feild
+    ul class="comments#{' signed_in' if user_signed_in?}"
+      - clip.comments.take(Settings.maximum_comment_count).each do |comment|
+        li id="comment_#{comment.id}"
+          = render partial: '/base/comment', locals: { comment: comment }
+
+    - if user_signed_in?
+      = form_for Comment.new, url: { controller: :clips, action: :comment, id: clip.id }, remote: true, html: { id: "comment_form_#{clip.id}" } do |form|
+        p.avatar = link_to_user_by_avatar current_user
+        = form.text_field :body, placeholder: 'コメントする'
+        = form.submit 'クリップ', class: 'hidden btn'
