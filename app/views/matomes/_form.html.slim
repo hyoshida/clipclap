@@ -29,7 +29,7 @@
     #matome_container
       == render partial: 'wall', locals: { show_remove_flag: true }
 
-#matome_dialog
+#matome_dialog.dialog
   h3 投稿済みのクリップから選択
   = form_for @matome, url: { action: :clips }, remote: true, method: :get do |f|
     - @matome.clip_ids.each do |clip_id|

@@ -63,7 +63,9 @@ is_available_image_size = (width, height) ->
     aspect >= (vertical_aspect / horizontal_aspect)
 
 infinitescroll_options = ->
-  {
+  additional_options = {}
+  additional_options = infinitescroll_options_for_dialog() if is_infinitescroll_on_dialog()
+  $.extend({
     navSelector: '#page-nav',     # ページのナビゲーションを選択
     nextSelector: '#page-nav a:first',  # 次ページへのリンク
     itemSelector: '.box',         # 持ってくる要素のclass
@@ -81,11 +83,17 @@ infinitescroll_options = ->
     # URLをうまくパースできない場合があるので独自にパース
     pathParse: (path, currentPage) ->
       path.match(/^(.*?page=)2(\/.*|$)/).slice(1)
+  }, additional_options)
+
+infinitescroll_options_for_dialog = ->
+  {
+    behavior: 'local',
+    binder: $('#container')
   }
 
 window.can_scroll = ->
   # ダイアログが開かれている場合はそちらを優先
-  if $('.ui-dialog').is(':visible')
+  if is_visible_dialog()
     $container = $('#container')
     $container.height() <= $container.get(0).scrollHeight
   else
@@ -98,3 +106,9 @@ register_event_for_close_clip_dialog = ->
     top = $('#clip_dialog.modal.fade.in').css('top')
     $('#clip_dialog.modal.fade').css({ top: top })
   )
+
+is_visible_dialog = ->
+  $('.ui-dialog').is(':visible')
+
+is_infinitescroll_on_dialog = ->
+  $('.dialog').find('#container').length > 0
