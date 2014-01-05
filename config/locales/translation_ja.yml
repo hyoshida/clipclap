@@ -93,6 +93,7 @@ ja:
         name: タグ名
         clip: :activerecord.models.clip  #g
         user: :activerecord.models.user  #g
+        matome: :activerecord.models.matome
         created_at: *g_created_at
         updated_at: *g_updated_at
 
@@ -116,3 +117,4 @@ ja:
         view_count: 閲覧数
         created_at: *g_created_at
         updated_at: *g_updated_at
+        tags: :activerecord.models.tag

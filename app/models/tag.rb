@@ -3,6 +3,9 @@ class Tag < ActiveRecord::Base
   belongs_to :tagged, polymorphic: true
   belongs_to :user
 
+  scope :uniques, group(:name)
+  scope :by, lambda {|user| where(user_id: user.id) }
+
   validates :tagged_id, :presence => true
   validates :user_id, :presence => true
   validates :name, :presence => true, :uniqueness => { scope: :clip_id }, :length => { minimum: 2 }

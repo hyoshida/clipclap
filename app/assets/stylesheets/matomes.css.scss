@@ -193,7 +193,7 @@ $cover_size: 100px;
 
 // form
 #matome form {
-  input[type="text"] {
+  h1 input {
     font-size: x-large;
     height: 1.5em;
     line-height: 1.5em;
@@ -215,6 +215,21 @@ $cover_size: 100px;
   input[type="submit"] {
     @extend .btn;
     @extend .btn-primary;
+  }
+
+  .chosen-container {
+    margin: 10px 5px 0;
+
+    .chosen-choices {
+      @extend input[type="text"];
+      @include box-sizing(content-box);
+      width: 640px;
+      margin: 0;
+    }
+
+    input {
+      padding-left: 0;
+    }
   }
 }
 

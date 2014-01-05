@@ -27,12 +27,15 @@
 #= require masonry/jquery.imagesloaded.min
 #= require masonry/jquery.infinitescroll.min
 #= require private_pub
+#= require chosen-jquery
 
 $( ->
   $("[data-toggle='tooltip']").tooltip()
   register_event_for_close_dialog()
 
   notify()
+
+  $('.chosen-select').chosen(no_results_text: '一致する項目がありませんでした')
 )
 
 register_event_for_close_dialog =->
