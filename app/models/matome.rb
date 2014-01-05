@@ -4,6 +4,7 @@ class Matome < ActiveRecord::Base
   belongs_to :user
   has_many :clips
   has_many :likes, dependent: :destroy
+  has_many :tags, as: :tagged, dependent: :destroy
   has_and_belongs_to_many :clips
 
   scope :related_by_user, lambda {|matome|
