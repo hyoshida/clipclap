@@ -84,8 +84,13 @@ infinitescroll_options = ->
   }
 
 window.can_scroll = ->
-  # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
-  $(window).height() <= $('html').height()
+  # ダイアログが開かれている場合はそちらを優先
+  if $('.ui-dialog').is(':visible')
+    $container = $('#container')
+    $container.height() <= $container.get(0).scrollHeight
+  else
+    # documentだとinfiniscroll後、期待するコンテンツの高さが取得できないので'html'にする
+    $(window).height() <= $('html').height()
 
 register_event_for_close_clip_dialog = ->
   $(document).on('hide', '#clip_dialog', ->
