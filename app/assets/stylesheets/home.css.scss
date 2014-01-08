@@ -12,7 +12,16 @@
   }
 }
 
-#home .tag_cloud {
+#home > .matomes {
+  margin: 0 auto 50px;
+  text-align: center;
+
+  li {
+    @include inline-block;
+  }
+}
+
+#home > .tags {
   margin: 0 auto 50px;
   width: $contents_width;
   text-align: center;
