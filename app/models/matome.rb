@@ -11,7 +11,6 @@ class Matome < ActiveRecord::Base
     where(user_id: matome.user_id).
     where.not(id: matome.id)
   }
-
   scope :related_by_clips, lambda {|matome|
     related_clip_ids = matome.clips.map(&:id) + matome.clips.map(&:parent_id)
     joins(:clips).
@@ -19,6 +18,7 @@ class Matome < ActiveRecord::Base
     where.not('matomes.id' => matome.id).
     group('matomes.id')
   }
+  scope :hot, lambda {|limit| reorder('view_count desc').limit(limit) }
 
   default_scope order: 'matomes.created_at DESC'
 
