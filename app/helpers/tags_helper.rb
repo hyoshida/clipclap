@@ -38,14 +38,14 @@ module TagsHelper
   end
 
   def count_tag_for_all
-    Tag.where(name: params[:name]).count
+    Tag.by(params[:user_id]).where(name: params[:name]).count
   end
 
   def count_tag_for_clip
-    Tag.where(name: params[:name], tagged_type: 'Clip').count
+    Tag.by(params[:user_id]).where(name: params[:name], tagged_type: 'Clip').count
   end
 
   def count_tag_for_matome
-    Tag.where(name: params[:name], tagged_type: 'Matome').count
+    Tag.by(params[:user_id]).where(name: params[:name], tagged_type: 'Matome').count
   end
 end

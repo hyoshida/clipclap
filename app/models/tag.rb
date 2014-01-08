@@ -4,7 +4,7 @@ class Tag < ActiveRecord::Base
   belongs_to :user
 
   scope :uniques, group(:name)
-  scope :by, lambda {|user| where(user_id: user.id) }
+  scope :by, lambda {|user| where(user_id: user.is_a?(User) ? user.id : user) if user }
   scope :for, lambda {|tagged| where(tagged_id: tagged.id, tagged_type: tagged.class.name) }
 
   validates :tagged_id, :presence => true
