@@ -18,13 +18,13 @@ feature "ウォール" do
     FactoryGirl.create_list(:clip, per_page + 1)
 
     visit current_path
-    page.should have_css('.box', count: per_page)
+    page.should have_css('.box:not(.adsense)', count: per_page)
 
     # refs http://www.tweetegy.com/2013/05/testing-infinite-scroll-using-rspec-without-sleep-or-wait-until/
     # ただしスクロールのみではなぜか発動しないので、スクロールしたことをinfinitescrollに伝える
     page.execute_script('window.scrollTo(0, document.body.scrollHeight)')
     page.execute_script('$("#container").infinitescroll("scroll")')
 
-    page.should have_css('.box', count: Clip.count)
+    page.should have_css('.box:not(.adsense)', count: Clip.count)
   end
 end
