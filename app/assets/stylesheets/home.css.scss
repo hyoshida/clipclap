@@ -12,6 +12,17 @@
   }
 }
 
+#home .tag_cloud {
+  margin: 0 auto 50px;
+  width: $contents_width;
+  text-align: center;
+
+  li {
+    display: inline;
+    margin: 0 10px;
+  }
+}
+
 // bookmarklet
 #bookmarklet {
   margin: 20px auto;

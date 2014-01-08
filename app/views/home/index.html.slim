@@ -1,6 +1,11 @@
 #home
-  h2 新着クリップ
+  h2 人気タグ
+  ul.tag_cloud
+    - @hot_tags.each do |tag|
+      li style="#{font_size_for_tag_cloud(tag)}"
+        = link_to "#{tag.name} (#{tag.name_count})", tag_path(tag.name)
 
+  h2 新着クリップ
 - if @clips.present?
   == render partial: '/base/clip_wall'
 - else
