@@ -1,7 +1,7 @@
 #user
   = form_for @user, method: :put do |f|
-    = field_set_tag '編集'
+    = field_set_tag title('プロフィール編集')
       == render partial: 'form', locals: { f: f }
   
-    = field_set_tag '削除'
+    = field_set_tag 'アカウント削除'
       = link_to 'アカウントの削除', @user, confirm: "アカウントを削除します。\n本当によろしいですか？", method: :delete, class: 'btn btn-danger'

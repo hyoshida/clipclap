@@ -24,7 +24,7 @@
             p#edit
               = link_to 'まとめを編集', edit_matome_path(@matome)
         .text
-          h1 = @matome.title
+          h1 = title @matome.title
           .meta
             - if @matome.description.present?
               span.description = @matome.description

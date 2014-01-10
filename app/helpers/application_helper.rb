@@ -1,5 +1,10 @@
 # -*- encoding: utf-8 -*-
 module ApplicationHelper
+  def title(title)
+    content_for(:title, "#{title} - ")
+    title
+  end
+
   def icon_tag(icon_name, options ={})
     title = options[:title].try {|p| %{ title="#{p}"} } || ''
     raw %{<i class="icon-#{icon_name}"#{title}></i>}

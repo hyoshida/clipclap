@@ -90,6 +90,11 @@ $info_box_width: $clip_width - $image_box_width - $margin;
   width: $clip_width;
 }
 
+#clip > h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
 #clip .profile {
   margin-bottom: 20px;
   height: 64px;

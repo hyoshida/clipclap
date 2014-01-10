@@ -2,7 +2,7 @@
   == render partial: '/base/user'
 
 #tag
-  h2 「#{params[:name]}」タグがつけられた#{tagged_type_name}
+  h2 = title "「#{params[:name]}」タグがつけられた#{tagged_type_name}"
 
   ul.nav.nav-pills
     li class="#{'active' if tag_for_all?}"
