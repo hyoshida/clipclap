@@ -1,5 +1,24 @@
 # -*- encoding: utf-8 -*-
 module ApplicationHelper
+  def meta_tags_attributes
+    {
+      site: Settings.site_name,
+      description: Settings.site_description,
+      keywords: [ Settings.site_name ] + Settings.site_keywords,
+      open_graph: {
+        title: Settings.site_name,
+        url: root_url,
+        image: [ root_url, 'favicon.png' ].join
+      },
+      twitter: {
+        card: 'summary',
+        site: Settings.twitter_account
+      },
+      separator: '-',
+      reverse: true
+    }
+  end
+
   def icon_tag(icon_name, options ={})
     title = options[:title].try {|p| %{ title="#{p}"} } || ''
     raw %{<i class="icon-#{icon_name}"#{title}></i>}

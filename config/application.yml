@@ -1,5 +1,7 @@
 defaults: &defaults
   site_name: 'Clipclap(β)'
+  site_description: 'お気に入りのイラストをまとめて世界中にシェアしよう！ Clipclapはあなたの好きなイラストを「さがして」「まとめて」「共有」できるサービスです。'
+  site_keywords: [ 'イラスト', 'まとめ', 'SNS', '投稿' ]
   page: 25
   ranking_limit: 50
   thumb_width: 240
@@ -14,6 +16,7 @@ defaults: &defaults
   facebook_id: '520109864725351'
   mixi_key: '138755f57dd15996cafaf13177bb1d70114b1760'
   twitter_id: 'TrZTve5b1xwZaxBD8AB3Q'
+  twitter_account: '@clipclap_org'
 
 development:
   <<: *defaults

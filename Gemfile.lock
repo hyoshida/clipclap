@@ -207,6 +207,8 @@ GEM
       nokogiri (~> 1.4)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
+    meta-tags (1.5.0)
+      actionpack
     mime-types (1.25.1)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
@@ -421,6 +423,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   masonry-rails
+  meta-tags
   mini_magick
   mysql2
   newrelic_rpm

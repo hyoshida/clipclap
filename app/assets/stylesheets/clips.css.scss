@@ -86,6 +86,11 @@ $info_box_width: $clip_width - $image_box_width - $margin;
   width: $clip_width;
 }
 
+#clip > h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
 #clip .profile {
   margin-bottom: 20px;
   height: 64px;
@@ -130,6 +135,7 @@ $info_box_width: $clip_width - $image_box_width - $margin;
 #clip .image_box {
   margin: 0;
   text-align: center;
+  background-color: #fff;
   border: 1px solid #ccc;
 
   img {
@@ -192,6 +198,7 @@ h2.title {
   margin-bottom: $margin;
   width: $info_box_width - $padding * 2;
   padding: $padding;
+  background-color: #fff;
   border: 1px solid #ccc;
 
   .count {

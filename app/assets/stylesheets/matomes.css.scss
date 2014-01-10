@@ -16,6 +16,12 @@ $infomation_width: 760px;
 $contribute_width: $header_width - $infomation_width;
 $cover_size: 100px;
 
+// matome
+#matome > h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
 // breadcrumb
 #matome div.breadcrumb {
   margin: 0;

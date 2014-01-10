@@ -65,3 +65,58 @@
     }
   }
 }
+
+// introduction
+#introduction {
+  color: #333;
+  margin: 30px auto 40px;
+  padding-bottom: 40px;
+  width: $contents_width;;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+#introduction h1 {
+  margin: 0.5em 5px;
+  font-size: xx-large;
+  font-family: $font_gothic;
+
+  .s1 {
+    font-weight: bold;
+  }
+
+  .s2 {
+    font-weight: normal;
+  }
+}
+
+#introduction p {
+  line-height: 250%;
+  font-family: $font_gothic;
+  color: #666;
+
+  i {
+    margin: 0 0.5em;
+    @include opacity(0.75);
+  }
+
+  .btn-reclip {
+    color: #000;
+    @include icon(paper-clip);
+    @include btn-reclip;
+  }
+
+  .btn-like {
+    @include icon(heart-empty);
+    @include btn-like;
+  }
+
+  .tip {
+    color: #333;
+    margin: 0 3px;
+    padding: 3px 6px;
+    background-color: #eee;
+    border: 1px dotted #aaa;
+    @include border-radius(4px);
+  }
+}

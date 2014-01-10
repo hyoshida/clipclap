@@ -19,7 +19,7 @@
       = link_to image_tag_by_clip(@clip, max_width: 580), @clip.url
 
     - if @clip.title.present?
-      h2.title = @clip.title
+      h2.title = title @clip.title
 
     .comment_feild
       ul class="comments#{' signed_in' if user_signed_in?}"
@@ -62,7 +62,7 @@
     .social_feild
       ul
         li.twitter
-          == render partial: '/base/twitter_button', locals: { target: @clip }
+          == render partial: '/base/twitter_button', locals: { target: @clip, tags: @clip.tags }
         li.facebook
           == render partial: '/base/facebook_button', locals: { target: @clip }
         li.mixi
