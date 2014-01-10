@@ -140,3 +140,6 @@ gem 'mini_magick'
 
 # タグ追加時の選択フォーム
 gem 'chosen-rails'
+
+# HTMLのmetaタグを簡単設定
+gem 'meta-tags', require: 'meta_tags'
