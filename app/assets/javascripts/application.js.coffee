@@ -11,9 +11,6 @@
 # GO AFTER THE REQUIRES BELOW.
 #
 #= require jquery
-#= require jquery.ui.dialog
-#= require jquery.ui.effect-slide
-#= require jquery.ui.effect-fade
 #= require jquery_ujs
 #= require bootstrap
 #= require bootstrap-tooltip

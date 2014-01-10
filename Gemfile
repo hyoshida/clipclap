@@ -37,9 +37,9 @@ group :assets do
   # ブロック整列, image loaded, infinitescroll
   gem 'masonry-rails'
 
-  # to use Twitter-Boostrap
+  # to use Twitter-Bootstrap
   gem 'therubyracer'
-  gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'bootstrap-sass'
   gem 'bootstrap-modal-rails'
 
   gem 'compass-rails'
