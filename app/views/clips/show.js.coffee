@@ -2,6 +2,7 @@ $clip_dialog = $('#clip_dialog')
 if $clip_dialog.length == 0
   $clip_dialog = $('<div/>')
 else
+  return if $clip_dialog.is(':visible')
   $clip_dialog.removeAttr('id')
   $clip_dialog.remove()
 
