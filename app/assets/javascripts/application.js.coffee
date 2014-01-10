@@ -12,6 +12,9 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery.ui.dialog
+#= require jquery.ui.effect-slide
+#= require jquery.ui.effect-fade
 #= require bootstrap
 #= require bootstrap-tooltip
 #= require bootstrap-popover
