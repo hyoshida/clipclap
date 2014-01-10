@@ -8,37 +8,11 @@ describe HomeController do
 
   describe "GET 'index'" do
     subject { get :index }
-
-    context "未ログインの場合" do
-      it "ゲスト向けのページが描画されること" do
-        expect(subject).to render_template(:guest)
-      end
-    end
-
-    context "ログイン済みの場合" do
-      before_sign_in
-
-      it "ログインユーザー向けのページが描画されること" do
-        expect(subject).to render_template(:index)
-      end
-    end
+    it { should render_template(:index) }
   end
 
   describe "GET 'bookmarklet'" do
     subject { get :bookmarklet }
-
-    context "未ログインの場合" do
-      it "ゲスト向けのページが描画されること" do
-        expect(subject).to render_template(:guest)
-      end
-    end
-
-    context "ログイン済みの場合" do
-      before_sign_in
-
-      it "ブックマークレットのページが描画されること" do
-        expect(subject).to render_template(:bookmarklet)
-      end
-    end
+    it { should render_template(:bookmarklet) }
   end
 end
