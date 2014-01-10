@@ -2,6 +2,7 @@ $dialog = $('#dialog')
 if $dialog.length == 0
   $dialog = $('<div/>')
 else
+  return if $dialog.is(':visible')
   $dialog.removeAttr('id')
   $dialog.remove()
 

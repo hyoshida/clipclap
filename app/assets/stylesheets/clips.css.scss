@@ -73,10 +73,6 @@ $info_box_width: $clip_width - $image_box_width - $margin;
     margin-left: -($clip_width / 2);
     left: 50%;
 
-    &.fade {
-      @include transition(opacity 0.3s linear);
-    }
-
     .modal-body {
       max-height: none !important;
     }

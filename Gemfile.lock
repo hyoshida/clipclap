@@ -57,9 +57,9 @@ GEM
       daemons (~> 1.1.4)
       i18n (>= 0.5.0)
       state_machine (~> 1.1)
-    bootstrap-modal-rails (2.1.1)
+    bootstrap-modal-rails (2.2.0)
       railties (>= 3.1)
-    bootstrap-sass (2.3.1.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.0.4)
     capistrano (2.14.2)
@@ -180,7 +180,7 @@ GEM
       rails (>= 3.0.0)
     image_size (1.1.2)
     journey (1.0.4)
-    jquery-rails (2.1.4)
+    jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (3.0.1)
@@ -211,7 +211,7 @@ GEM
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
     mono_logger (1.1.0)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
     nested_form (0.3.1)
@@ -309,7 +309,7 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     safe_yaml (0.8.4)
-    sass (3.2.8)
+    sass (3.2.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -395,7 +395,7 @@ DEPENDENCIES
   addressable
   bluepill
   bootstrap-modal-rails
-  bootstrap-sass (~> 2.3.1.0)
+  bootstrap-sass
   capistrano
   capistrano-rbenv
   capybara
@@ -417,7 +417,7 @@ DEPENDENCIES
   hpricot
   i18n_generators
   image_size
-  jquery-rails (~> 2.1.4)
+  jquery-rails
   jquery-ui-rails
   kaminari
   masonry-rails
