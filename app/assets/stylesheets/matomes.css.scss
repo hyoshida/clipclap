@@ -206,7 +206,7 @@ $cover_size: 100px;
   }
 }
 
-#matome .like_button {
+#matome .like_button a {
   display: inline-block;
   margin-top: 10px;
   padding-top: 0.5em;
@@ -214,7 +214,7 @@ $cover_size: 100px;
   @include icon(heart);
   @extend .btn;
 
-  a:link, a:visited, a:active {
+  &:link, &:visited, &:active {
     text-decoration: none;
   }
 
