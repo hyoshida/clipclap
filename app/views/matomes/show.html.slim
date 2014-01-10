@@ -39,7 +39,7 @@
             .social
               ul
                 li.twitter
-                  == render partial: '/base/twitter_button', locals: { target: @matome }
+                  == render partial: '/base/twitter_button', locals: { target: @matome, tags: @matome.tags }
                 li.facebook
                   == render partial: '/base/facebook_button', locals: { target: @matome }
                 li.mixi

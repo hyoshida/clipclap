@@ -62,7 +62,7 @@
     .social_feild
       ul
         li.twitter
-          == render partial: '/base/twitter_button', locals: { target: @clip }
+          == render partial: '/base/twitter_button', locals: { target: @clip, tags: @clip.tags }
         li.facebook
           == render partial: '/base/facebook_button', locals: { target: @clip }
         li.mixi
