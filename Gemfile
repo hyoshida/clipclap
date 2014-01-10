@@ -50,8 +50,7 @@ group :assets do
   gem 'turbo-sprockets-rails3'
 end
 
-# 最新版(jQuery 1.9)だとinfinitescrollが動作しないため2.1.x系(jQuery 1.8)を指定
-gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 # Support CoffeeScript
