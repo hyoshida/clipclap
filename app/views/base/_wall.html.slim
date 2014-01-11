@@ -11,4 +11,4 @@
         == render partial: 'base/matome', locals: { matome: record }
 
   #page-nav
-    = link_to 'next', page: @clips.current_page + 1 if @clips.respond_to? :current_page
+    = link_to 'next', params.merge(page: records.current_page + 1) if records.respond_to? :current_page

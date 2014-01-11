@@ -18,9 +18,10 @@ class TagsController < ApplicationController
       contditions_for_tags.update(user_id: @user.id) if @user
     end
 
-    @taggeds = Tag.
-      where(contditions_for_tags).
-      paginate(page: params[:page]).
-      map(&:tagged)
+    tags = Tag.where(contditions_for_tags)
+    @taggeds = Kaminari.
+      paginate_array(tags.map(&:tagged)).
+      page(params[:page]).
+      per(Settings.page)
   end
 end
