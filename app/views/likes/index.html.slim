@@ -1,9 +1,8 @@
+== render partial: '/base/user'
+#like
+  h2 = title "#{@user.nick_name}さんのイイネ！"
+
 - if @clips.present?
-  == render partial: '/base/user'
-
-  #like
-    h2 = title "#{current_user.nick_name}さんのイイネ！"
-
   == render partial: '/base/clip_wall'
 - else
   p クリップが存在しません

@@ -1,7 +1,7 @@
 - if @user.present?
   == render partial: '/base/user'
   #tag
-    h2 = title "#{current_user.nick_name}さんのタグ"
+    h2 = title "#{@user.nick_name}さんのタグ"
 - else
   #tag
     h2 = title '新着タグ'

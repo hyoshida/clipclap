@@ -1,7 +1,7 @@
 - if @user.present?
   == render partial: '/base/user'
   #matome
-    h2 = title "#{current_user.nick_name}さんのまとめ"
+    h2 = title "#{@user.nick_name}さんのまとめ"
 - else
   #clip
     h2 = title '新着まとめ'
