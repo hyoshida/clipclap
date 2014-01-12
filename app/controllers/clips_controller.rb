@@ -140,10 +140,12 @@ class ClipsController < ApplicationController
 
         format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
         format.json { render json: @clip, status: :created, location: @clip }
+        format.js { render }
       else
         flash.now[:alert] = 'This image was existed.' if exist_image_flag
         format.html { render action: :new }
         format.json { render json: @clip.errors, status: :unprocessable_entity }
+        format.js { render }
       end
     end
   end

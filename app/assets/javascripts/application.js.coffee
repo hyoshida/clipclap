@@ -40,7 +40,7 @@ register_event_for_close_dialog =->
     $('.ui-dialog-content').dialog('close')
   )
 
-notify = ->
+window.notify = ->
   return if $('#notice').length <= 0
   height =  $('#notice').css('height')
   $('#notice')
