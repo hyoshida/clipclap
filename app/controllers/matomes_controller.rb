@@ -20,10 +20,14 @@ class MatomesController < ApplicationController
     # 関連まとめ
     @related_matomes = {}
     # 1. 同じキュレータ
+    # TODO: インスタンスメソッド化
     @related_matomes[:user] = Matome.related_by_user(@matome).limit(5)
     # 2. 同じクリップを含む
+    # TODO: インスタンスメソッド化
     @related_matomes[:clip] = Matome.related_by_clips(@matome).limit(5)
-    # TODO: 3. 同じタグを含む
+    # 3. 同じタグを含む
+    # TODO: SQLの最適化
+    @related_matomes[:tag] = @matome.related_by_tags.take(5)
 
     return if first_page?
 

@@ -42,4 +42,36 @@ class Matome < ActiveRecord::Base
       )
     end
   end
+
+  def related_by_tags
+    (related_by_clip_tags + related_by_matome_tags).uniq
+  end
+
+  def related_by_clip_tags
+    self.class.
+      joins(:clips).
+      merge(related_clips_by_tags).
+      where.not('matomes.id' => self.id).
+      group('matomes.id')
+  end
+
+  def related_by_matome_tags
+    self.class.
+      joins(:tags).
+      merge(related_tags).
+      where.not('matomes.id' => self.id).
+      group('matomes.id')
+  end
+
+  private
+
+  def related_tags
+    related_tag_ids_to_matome = self.tags.uniques.pluck(:name)
+    related_tag_ids_to_clips = Tag.uniques.for(self.clips).pluck(:name)
+    Tag.uniques.where(name: (related_tag_ids_to_matome + related_tag_ids_to_clips).uniq)
+  end
+
+  def related_clips_by_tags
+    Clip.joins(:tags).merge(related_tags)
+  end
 end
