@@ -3,6 +3,8 @@
 
 #container.hidden
   ul
+    - if records.respond_to?(:current_page) && records.current_page == 1
+      == render partial: 'base/adsense'
     - records.each do |record|
       - case record
       - when Clip

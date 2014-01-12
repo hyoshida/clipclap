@@ -7,12 +7,7 @@
 #container.hidden
   ul
     - if @clips.respond_to?(:current_page) && @clips.current_page == 1
-      li.box.adsense
-        p スポンサードリンク
-        = javascript_include_tag src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: true
-        ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-4041207602643401" data-ad-slot="8343200370"
-        javascript:
-          (adsbygoogle = window.adsbygoogle || []).push({});
+      == render partial: 'base/adsense'
     - @clips.each do |clip|
       == render partial: 'base/clip', locals: { clip: clip }
 
