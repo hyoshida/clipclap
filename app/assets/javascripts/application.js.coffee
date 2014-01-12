@@ -30,7 +30,6 @@
 #= require chosen-jquery
 
 $( ->
-  $("[data-toggle='tooltip']").tooltip()
   register_event_for_close_dialog()
   notify()
   initialize_chosen()
