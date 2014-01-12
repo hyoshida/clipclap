@@ -13,7 +13,6 @@ page_nav.attr('id', 'page-nav')
 page_nav.html('<%= link_to 'next', page: @clips.next_page %>')
 page_nav.insertAfter('#container')
 
-# <div />で囲まないと、body 直下の img が取得できない
 $container.html("<%= escape_javascript(render template: 'matomes/_wall', formats: :html) %>")
 
 $container.css({ opacity: 0 }).imagesLoaded( ->

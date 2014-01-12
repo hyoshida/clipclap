@@ -49,7 +49,7 @@ window.resize_images = ($container) ->
       $(@).width(width)
       $(@).height(height)
     else
-      $(@).parent().remove()
+      $(@).closest('.box').remove()
   )
 
 is_available_image_size = (width, height) ->

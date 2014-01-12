@@ -24,16 +24,16 @@ class ClipsController < ApplicationController
 
     doc = Hpricot(load_html_cahce_file)
     @image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    @html = @image_tags.join
+    @image_tags = image_tag(@clip.url) if @image_tags.blank?
   rescue
+    logger.error $!.message + $!.backtrace.join("\n")
     render nothing: true unless @clip
   end
 
   def get_image_tags_for_next_page
     doc = Hpricot(load_html_cahce_file)
     image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    html = "<html><body><div id='container'>#{image_tags.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
-    render text: html
+    render partial: 'wall', locals: { image_tags: image_tags }
   end
 
   def like
