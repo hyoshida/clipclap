@@ -49,6 +49,7 @@ class MatomesController < ApplicationController
 
   # POST /clips
   def create
+    tag_names = tag_names_by_params(:matome)
     clip_ids = params[:matome].delete(:clip_ids)
     @matome = Matome.new(params[:matome])
 
@@ -56,6 +57,7 @@ class MatomesController < ApplicationController
     @matome.clips = Clip.where(user_id: current_user.id, id: clip_ids)
 
     if @matome.save
+      update_tags_for(@matome, tag_names)
       redirect_to @matome, notice: "「#{@matome.title}」まとめを作成しました"
     else
       @clips = @matome.clips
@@ -72,23 +74,14 @@ class MatomesController < ApplicationController
 
   # PUT /clips/:id
   def update
+    tag_names = tag_names_by_params(:matome)
     clip_ids = params[:matome].delete(:clip_ids)
-    tag_names = params[:matome].delete(:tags) || []
-    tag_names.map! {|tag_name| tag_name.strip }
-    tag_names.reject!(&:blank?)
 
     @matome = Matome.find(params[:id])
     @matome.clip_ids = Clip.where(user_id: current_user.id, id: clip_ids).pluck(:id)
 
-    matome_tag_names = Tag.for(@matome).pluck(:name)
-    add_tag_names = tag_names - matome_tag_names
-    remove_tag_names = matome_tag_names - tag_names
-    Tag.where(name: remove_tag_names).for(@matome).destroy_all if remove_tag_names.any?
-    add_tag_names.each do |add_tag_name|
-      @matome.tags.create!(name: add_tag_name, user: current_user)
-    end
-
     if @matome.update_attributes(params[:matome])
+      update_tags_for(@matome, tag_names)
       redirect_to @matome, notice: "「#{@matome.title}」まとめを更新しました"
     else
       @clips = @matome.clips
