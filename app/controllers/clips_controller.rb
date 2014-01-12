@@ -22,18 +22,11 @@ class ClipsController < ApplicationController
     @clip = Clip.new(params[:clip])
     return unless @clip
 
-    doc = Hpricot(load_html_cahce_file)
-    @image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
+    @image_tags = image_tags_from_html
     @image_tags = image_tag(@clip.url) if @image_tags.blank?
   rescue
     logger.error $!.message + $!.backtrace.join("\n")
     render nothing: true unless @clip
-  end
-
-  def get_image_tags_for_next_page
-    doc = Hpricot(load_html_cahce_file)
-    image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    render partial: 'wall', locals: { image_tags: image_tags }
   end
 
   def like
@@ -180,15 +173,13 @@ class ClipsController < ApplicationController
 
   private
 
-  def insert_div_tag_for_image_tag
-    -> image_tag { "<div class='box image_box'>#{image_tag}</div>" }
+  def get_image_tags_for_next_page
+    render partial: 'wall', locals: { image_tags: image_tags_from_html }
   end
 
-  def create_html_cahce_file(html)
-    FileUtils.mkdir Settings.html_cache_dir unless File.exist? Settings.html_cache_dir
-    File.open(html_cache_file_path, 'w') do |file|
-      file.write(html)
-    end
+  def image_tags_from_html
+    doc = Hpricot(load_html_cahce_file)
+    image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
   end
 
   def load_html_cahce_file
