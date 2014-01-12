@@ -14,6 +14,8 @@
     = f.submit 'ロード', id: 'load'
 
   #container
+    - if @url
+      = image_tag('loader.gif')
 
   #page-nav
     = link_to 'next', controller: :clips, action: :get_image_tags, page: 2
