@@ -138,11 +138,11 @@ class ClipsController < ApplicationController
       if !exist_image_flag && @clip.save
         update_tags_for(@clip, tag_names)
 
-        format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
+        format.html { redirect_to @clip, notice: 'クリップを投稿しました' }
         format.json { render json: @clip, status: :created, location: @clip }
         format.js { render }
       else
-        flash.now[:alert] = 'This image was existed.' if exist_image_flag
+        flash.now[:alert] = 'すでに存在している画像です' if exist_image_flag
         format.html { render action: :new }
         format.json { render json: @clip.errors, status: :unprocessable_entity }
         format.js { render }
@@ -157,7 +157,7 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if @clip.update_attributes(params[:clip])
-        format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
+        format.html { redirect_to @clip, notice: 'クリップを更新しました' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
