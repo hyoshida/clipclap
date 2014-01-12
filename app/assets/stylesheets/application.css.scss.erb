@@ -358,3 +358,18 @@ $main_width: 1000px;
 #dialog {
   @extend .fade;
 }
+
+/* chosen */
+form .chosen-container {
+  margin: 10px 5px 0;
+
+  .chosen-choices {
+    @extend input[type="text"];
+    @include box-sizing(content-box);
+    margin: 0;
+  }
+
+  input {
+    padding-left: 0;
+  }
+}

@@ -1,18 +1,7 @@
 $( ->
-  $clip_field = $('#clip_dialog')
   $container = $('#container')
 
-  $clip_field.dialog({
-    autoOpen: false,
-    title: '投稿ダイアログ',
-    closeOnEscape: true,
-    modal: true,
-    resizable: false,
-    minWidth: 480,
-    buttons: {
-      'キャンセル': -> $(@).dialog('close')
-    }
-  })
+  initialize_new_clip_dialog()
 
   $container.on('click', '.clip a', (event) ->
     # デフォルトの挙動をキャンセル
@@ -32,7 +21,7 @@ $( ->
     # $box.css({ opacity: 0.5 })
     # $box.find('.clip').addClass('hidden')
 
-    $clip_field.dialog('open')
+    show_new_clip_dialog()
   )
 
   $('#load').click( ->
@@ -41,3 +30,11 @@ $( ->
     $container.html('<%= image_tag 'loader.gif' %>')
   )
 )
+
+initialize_new_clip_dialog = ->
+  $new_clip_dialog = $('#new_clip_dialog')
+  $new_clip_dialog.appendTo('body')
+
+show_new_clip_dialog = ->
+  $new_clip_dialog = $('#new_clip_dialog')
+  $new_clip_dialog.modal('show')

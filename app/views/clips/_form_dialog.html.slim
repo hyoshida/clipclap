@@ -1,0 +1,16 @@
+= form_for clip, remote: true do |f|
+  = f.error_messages
+  = f.hidden_field :url
+  = f.hidden_field :origin_url
+
+  #preview
+
+  #field
+    .title
+      = f.label :title, class: 'control-label'
+      = f.text_field :title, placeholder: 'タイトル'
+    .tags
+      = f.label :tags, class: 'control-label'
+      = f.select :tags, Tag.uniques.by(current_user).pluck(:name), { include_blank: true, selected: Tag.uniques.by(current_user).for(clip).pluck(:name) }, { class: 'chosen-select', multiple: true, data: { placeholder: 'タグ' } }
+    .controls
+      = f.submit 'あたらしくクリップ'

@@ -128,6 +128,7 @@ class ClipsController < ApplicationController
   # POST /clips
   # POST /clips.json
   def create
+    tag_names = tag_names_by_params(:clip)
     clip_attr = { user_id: current_user.id }
     @clip = Clip.new(clip_attr.merge(params[:clip]))
 
@@ -135,6 +136,8 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if !exist_image_flag && @clip.save
+        update_tags_for(@clip, tag_names)
+
         format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
         format.json { render json: @clip, status: :created, location: @clip }
       else

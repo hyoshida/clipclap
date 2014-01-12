@@ -255,19 +255,8 @@ $cover_size: 100px;
     @extend .btn-primary;
   }
 
-  .chosen-container {
-    margin: 10px 5px 0;
-
-    .chosen-choices {
-      @extend input[type="text"];
-      @include box-sizing(content-box);
-      width: 640px;
-      margin: 0;
-    }
-
-    input {
-      padding-left: 0;
-    }
+  .chosen-choices {
+    width: 640px;
   }
 }
 

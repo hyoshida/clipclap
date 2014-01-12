@@ -10,8 +10,7 @@
   = form_for @clip, url: { action: :clipping }, remote: true, html: { id: 'load_form' } do |f|
     h2 あたらしくクリップ
     h3 1. 画像をセレクト
-    p 画像のあるページのURLを入力してください。
-    = f.text_field :origin_url, id: 'loading_url', value: @url
+    = f.text_field :origin_url, id: 'loading_url', value: @url, placeholder: 'http://画像URL、ページURL'
     = f.submit 'ロード', id: 'load'
 
   #container
@@ -19,20 +18,5 @@
   #page-nav
     = link_to 'next', controller: :clips, action: :get_image_tags, page: 2
 
-#clip_dialog
-  = form_for @clip do |f|
-    = f.error_messages
-
-    #preview
-
-    h3 2. タイトルを入力（任意）
-    #field
-      = f.label :title
-      br
-      = f.text_field :title
-      = f.hidden_field :url
-      = f.hidden_field :origin_url
-
-    h3 3. 投稿！
-    .actions
-      = f.submit
+- body = render partial: 'form_dialog', locals: { clip: @clip }
+== render partial: 'base/dialog', locals: { id: :new_clip_dialog, title: '2. クリップの情報を入力', body: body }
