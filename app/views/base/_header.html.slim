@@ -3,15 +3,18 @@
     .left
       ul
         - if user_signed_in?
-          li.dropdown
-            = link_to(new_clip_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }) { icon_tag('plus') }
+          li.dropdown.new
+            = link_to '投稿', new_clip_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }
             .dropdown-menu role='menu'
               ul
-                li = link_to 'URLから投稿', new_clip_path
+                li
+                  = form_tag new_clip_path, method: :get do
+                    = label_tag :url, 'イラストを投稿:'
+                    = text_field_tag :url, nil, placeholder: 'http://画像URL、ページURL'
                 li = link_to 'ブックマークレットから投稿', bookmarklet_path
                 li.divider
                 li = link_to 'まとめを作成', new_matome_path
-          li = link_to(user_likes_path(current_user), title: 'お気に入り') { icon_tag('heart') }
+          li.like = link_to 'イイネ！', user_likes_path(current_user)
 
     .center.logo
       h1 = link_to Settings.site_name, root_path

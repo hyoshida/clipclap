@@ -135,6 +135,26 @@ $logo_height: $header_height;
   }
 }
 
+#header .left {
+  .new > a,
+  .like > a {
+    // hover時の背景グラデーションがずれるのを防ぐ
+    background-position: 0% 0%;
+    font-weight: normal;
+    &:before {
+      font-weight: bold;
+    }
+  }
+
+  .new > a {
+    @include icon(plus);
+  }
+
+  .like > a {
+    @include icon(heart);
+  }
+}
+
 #header .profile a,
 #header .signin a {
   font-weight: normal;
@@ -177,15 +197,18 @@ $logo_height: $header_height;
   }
 }
 
+#header .signin form {
+  text-align: center;
+}
+
 #header form {
   $width: 250px;
   $padding: 12px;
 
   width: $width;
   padding: $padding;
-  text-align: center;
+  text-align: left;
   background-color: #fff3da;
-  @include border-bottom-radius(4px);
 
   input {
     margin-bottom: 10px;
