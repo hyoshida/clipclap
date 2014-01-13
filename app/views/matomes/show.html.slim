@@ -71,10 +71,10 @@
     - else
       = link_to "続きを見る (#{left_clips_count}件)", new_user_registration_path, remote: true
 
-  - if @related_matomes[:clip].present?
+  - if @related_matomes[:clip].present? || @related_matomes[:tag].present?
     .related
       h2 関連まとめ
-      == render partial: 'base/matomes', locals: { matomes: @related_matomes[:clip] }
+      == render partial: 'base/matomes', locals: { matomes: (@related_matomes[:clip] + @related_matomes[:tag]).uniq }
 
   - if @related_matomes[:user].present?
     .related

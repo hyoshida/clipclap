@@ -4,8 +4,8 @@ class Tag < ActiveRecord::Base
   belongs_to :user
 
   scope :uniques, group(:name)
-  scope :by, lambda {|user| where(user_id: user.is_a?(User) ? user.id : user) if user }
-  scope :for, lambda {|tagged| where(tagged_id: tagged.id, tagged_type: tagged.class.name) }
+  scope :by, lambda {|user| where(user_id: user) }
+  scope :for, lambda {|tagged| where(tagged_id: tagged, tagged_type: tagged.is_a?(Array) ? tagged.first.class.name : tagged.class.name) }
   scope :hot, lambda {|limit| uniques.select("name, COUNT(name) AS name_count").reorder('name_count desc').limit(limit) }
 
   validates :tagged_id, :presence => true
