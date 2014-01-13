@@ -12,4 +12,5 @@
   tag.attr('id', 'tag_<%= @tag.id %>');
   tag.html('<%= @tag.name %><%= link_to '[×]', untagging_clip_path(tag_id: @tag.id), :remote => true %>');
   $('ul#tags').append(tag);
+  $('#tagging_form').get(0).reset();
 <% end %>
