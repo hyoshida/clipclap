@@ -114,10 +114,9 @@ class Clip < ActiveRecord::Base
   def listup_image_urls_from_html
     require 'hpricot'
     return [] if self.origin_html.blank?
-    return [ self.origin_url ] if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
+    return [ self.origin_url ] if self.origin_url =~ support_image_types_regexp
     doc = Hpricot(self.origin_html)
-    # TODO: alt をそいでいる・・
-    (doc/:img).map {|img| BetterImageGetter.new(uri_absolute_path(img.attributes['src'])).exec }.uniq
+    (image_urls_from_image_tags(doc/:img) + image_urls_from_anthor_tags(doc/:a)).uniq
   end
 
   class BetterImageGetter
@@ -143,7 +142,7 @@ class Clip < ActiveRecord::Base
   def fill_origin_entry
     self.origin_url.insert(0, 'http://') unless self.origin_url =~ /^https?:\/\//
 
-    if self.origin_url =~ /\.(jpg|jpeg|png|gif)$/
+    if self.origin_url =~ support_image_types_regexp
       @url = self.origin_url
       return
     end
@@ -160,6 +159,26 @@ class Clip < ActiveRecord::Base
   end
 
   private
+
+  def image_urls_from_image_tags(image_tags)
+    image_tags.map do |image_tag|
+      image_url = image_tag.attributes['src']
+      # TODO: altを活かす
+      BetterImageGetter.new(uri_absolute_path(image_url)).exec
+    end.uniq
+  end
+
+  def image_urls_from_anthor_tags(anchor_tags)
+    anchor_tags.map do |anchor_tag|
+      image_url = anchor_tag.attributes['href']
+      next unless image_url =~ support_image_types_regexp
+      BetterImageGetter.new(uri_absolute_path(image_url)).exec
+    end.compact.uniq
+  end
+
+  def support_image_types_regexp
+    /\.(#{Settings.support_image_types.join('|')})$/
+  end
 
   def uri_absolute_path(path)
     require 'uri'

@@ -4,6 +4,7 @@ defaults: &defaults
   site_keywords: [ 'イラスト', 'まとめ', 'SNS', '投稿' ]
   page: 25
   ranking_limit: 50
+  support_image_types: [ 'jpg', 'jpeg', 'png', 'gif' ]
   thumb_width: 240
   thumb_format: 'jpg'
   html_cache_dir: '/tmp/clipclap/html_cache'
