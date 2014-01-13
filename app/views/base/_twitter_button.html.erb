@@ -1,2 +1,2 @@
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= url_for id: target ||= nil, only_path: false %>" data-lang="ja" data-hashtags="<%= (tags ||= []).map(&:name).join(',') %>">ツイート</a>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= url_for id: target ||= nil, only_path: false %>" data-lang="ja" data-hashtags="<%= (tags ||= []).map(&:hashtag).join(',') %>">ツイート</a>
 <script type="text/javascript">$(document).ajaxComplete(function() { try{ twttr.widgets.load(); } catch(e) {} });</script>

@@ -19,6 +19,12 @@ class Tag < ActiveRecord::Base
     self.name[0..length] + '...'
   end
 
+  # Twitterハッシュタグ用
+  # (句読点などを含むとハッシュタグとして認識されないためこれを取り除く)
+  def hashtag
+    self.name.gsub(/[^[:word:]]/,'')
+  end
+
   def all_clips
     case self.tagged
     when Clip
