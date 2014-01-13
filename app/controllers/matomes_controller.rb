@@ -82,7 +82,7 @@ class MatomesController < ApplicationController
     @matome = Matome.find(params[:id])
     @matome.clip_ids = Clip.where(user_id: current_user.id, id: clip_ids).pluck(:id)
 
-    if @matome.update_attributes(params[:matome])
+    if @matome.force_update_attributes(params[:matome])
       update_tags_for(@matome, tag_names)
       redirect_to @matome, notice: "「#{@matome.title}」まとめを更新しました"
     else
