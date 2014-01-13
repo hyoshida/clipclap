@@ -16,5 +16,6 @@ html
 
       #main
         .wrap
-          p#alert = alert
+          - if alert
+            p#alert = alert
           == yield

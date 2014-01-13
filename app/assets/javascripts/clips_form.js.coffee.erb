@@ -1,33 +1,27 @@
 $( ->
-  $clip_field = $('#clip_dialog')
   $container = $('#container')
 
-  $clip_field.dialog({
-    autoOpen: false,
-    title: '投稿ダイアログ',
-    closeOnEscape: true,
-    modal: true,
-    resizable: false,
-    minWidth: 480,
-    buttons: {
-      'キャンセル': -> $(@).dialog('close')
-    }
-  })
+  initialize_new_clip_dialog()
 
-  $container.on('click', '.box img', ->
-    $('img#selected').removeAttr('id')
-    $(@).attr('id', 'selected')
+  $container.on('click', '.clip a', (event) ->
+    # デフォルトの挙動をキャンセル
+    event.stopPropagation()
+    event.preventDefault()
 
-    url = $(@).attr('src')
-    $('#clip_url').attr('value', url)
-  )
+    $box = $(@).closest('.box')
+    $image = $box.find('img')
 
-  $container.on('click', '#selected', ->
     $preview_image = $('<img/>')
-    $preview_image.attr('src', $(@).attr('src'))
-    $preview_image.attr('style', $(@).attr('style'))
+    $preview_image.attr('src', $image.attr('src'))
+    $preview_image.attr('style', $image.attr('style'))
     $('#preview').html($preview_image)
-    $clip_field.dialog('open')
+    $('#clip_url').attr('value', $image.attr('src'))
+
+    # TODO: 追加済み項目は追加できないようにする
+    # $box.css({ opacity: 0.5 })
+    # $box.find('.clip').addClass('hidden')
+
+    show_new_clip_dialog()
   )
 
   $('#load').click( ->
@@ -36,3 +30,11 @@ $( ->
     $container.html('<%= image_tag 'loader.gif' %>')
   )
 )
+
+initialize_new_clip_dialog = ->
+  $new_clip_dialog = $('#new_clip_dialog')
+  $new_clip_dialog.appendTo('body')
+
+show_new_clip_dialog = ->
+  $new_clip_dialog = $('#new_clip_dialog')
+  $new_clip_dialog.modal('show')

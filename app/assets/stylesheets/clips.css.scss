@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "compass/utilities";
-@import "compass/css3";
-
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 @import "bootstrap/buttons";
 @import "bootstrap/forms";
+
+@import "compass/utilities";
+@import "compass/css3";
 
 $margin: 20px;
 $clip_width: 860px;
@@ -16,6 +16,9 @@ $image_box_width: 580px;
 $info_box_width: $clip_width - $image_box_width - $margin;
 
 #image_selecter {
+  margin: 20px auto;
+  text-align: center;
+
   h2 {
     font-size: x-large;
     margin-bottom: 0.5em;
@@ -25,39 +28,67 @@ $info_box_width: $clip_width - $image_box_width - $margin;
     font-size: large;
     margin-bottom: 0.5em;
   }
+}
 
-  form {
-    margin: 20px auto;
-    text-align: center;
-    @extend .form-inline;
-
-    input[type="submit"] {
-      @extend .btn;
-    }
-  }
+#image_selecter #container {
+  text-align: center;
 
   .box {
-    margin: 0;
-    width: auto;
-    border: 0;
-  }
+    margin: 5px;
 
-  .box img {
-    border: 5px solid transparent;
-    &#selected {
-      border-color: #666666;
+    img {
+      @include border-radius(4px);
     }
-  }
-
-  #container {
-    text-align: center;
   }
 }
 
-#preview {
-  float: left;
-  margin-right: 10px;
-  min-height: 150px;
+// 親ダイアログが.hideを指定していると
+// chosen初期化時にwidth: 0が指定されてしまうので
+// 対策のために一定幅を強制
+#new_clip_dialog {
+  $feild_width: 215px;
+  $padding: 5px;
+
+  .chosen-choices {
+    width: $feild_width - ($padding * 2) !important;
+    input {
+      width: 5em !important;
+    }
+  }
+
+  .chosen-drop,
+  .chosen-drop ul {
+    width: $feild_width !important;
+  }
+}
+
+#new_clip_dialog form {
+  @extend .form-inline;
+
+  label {
+    display: block;
+  }
+
+  .title input,
+  .chosen-container {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  input[type="submit"] {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+
+  #preview {
+    @include inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+  }
+
+  #field {
+    @include inline-block;
+  }
 }
 
 /* dialog */

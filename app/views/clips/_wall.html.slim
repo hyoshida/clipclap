@@ -1,0 +1,8 @@
+ul
+  - image_tags.each do |image_tag|
+    li.box
+      .image_box
+        == image_tag
+        .status
+          p.clip
+            = link_to 'クリップ', '#add'

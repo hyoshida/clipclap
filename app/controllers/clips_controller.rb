@@ -22,18 +22,11 @@ class ClipsController < ApplicationController
     @clip = Clip.new(params[:clip])
     return unless @clip
 
-    doc = Hpricot(load_html_cahce_file)
-    @image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    @html = @image_tags.join
+    @image_tags = image_tags_from_html
+    @image_tags = image_tag(@clip.url) if @image_tags.blank?
   rescue
+    logger.error $!.message + $!.backtrace.join("\n")
     render nothing: true unless @clip
-  end
-
-  def get_image_tags_for_next_page
-    doc = Hpricot(load_html_cahce_file)
-    image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
-    html = "<html><body><div id='container'>#{image_tags.map(&insert_div_tag_for_image_tag).join}</div></body></html>"
-    render text: html
   end
 
   def like
@@ -128,6 +121,7 @@ class ClipsController < ApplicationController
   # POST /clips
   # POST /clips.json
   def create
+    tag_names = tag_names_by_params(:clip)
     clip_attr = { user_id: current_user.id }
     @clip = Clip.new(clip_attr.merge(params[:clip]))
 
@@ -135,12 +129,16 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if !exist_image_flag && @clip.save
-        format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
+        update_tags_for(@clip, tag_names)
+
+        format.html { redirect_to @clip, notice: 'クリップを投稿しました' }
         format.json { render json: @clip, status: :created, location: @clip }
+        format.js { render }
       else
-        flash.now[:alert] = 'This image was existed.' if exist_image_flag
+        flash.now[:alert] = 'すでに存在している画像です' if exist_image_flag
         format.html { render action: :new }
         format.json { render json: @clip.errors, status: :unprocessable_entity }
+        format.js { render }
       end
     end
   end
@@ -152,7 +150,7 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if @clip.update_attributes(params[:clip])
-        format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
+        format.html { redirect_to @clip, notice: 'クリップを更新しました' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -175,15 +173,13 @@ class ClipsController < ApplicationController
 
   private
 
-  def insert_div_tag_for_image_tag
-    -> image_tag { "<div class='box image_box'>#{image_tag}</div>" }
+  def get_image_tags_for_next_page
+    render partial: 'wall', locals: { image_tags: image_tags_from_html }
   end
 
-  def create_html_cahce_file(html)
-    FileUtils.mkdir Settings.html_cache_dir unless File.exist? Settings.html_cache_dir
-    File.open(html_cache_file_path, 'w') do |file|
-      file.write(html)
-    end
+  def image_tags_from_html
+    doc = Hpricot(load_html_cahce_file)
+    image_tags = (doc/:img).paginate(page: params[:page], per_page: Clip.per_page)
   end
 
   def load_html_cahce_file
