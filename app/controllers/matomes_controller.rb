@@ -20,11 +20,9 @@ class MatomesController < ApplicationController
     # 関連まとめ
     @related_matomes = {}
     # 1. 同じキュレータ
-    # TODO: インスタンスメソッド化
-    @related_matomes[:user] = Matome.related_by_user(@matome).limit(5)
+    @related_matomes[:user] = @matome.related_by_user.limit(5)
     # 2. 同じクリップを含む
-    # TODO: インスタンスメソッド化
-    @related_matomes[:clip] = Matome.related_by_clips(@matome).limit(5)
+    @related_matomes[:clip] = @matome.related_by_clips.limit(5)
     # 3. 同じタグを含む
     # TODO: SQLの最適化
     @related_matomes[:tag] = @matome.related_by_tags.take(5)
