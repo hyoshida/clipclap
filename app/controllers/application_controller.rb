@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update_tags_for(obj, tag_names)
+    return if tag_names.blank?
     obj_tag_names = Tag.for(obj).pluck(:name)
     add_tag_names = tag_names - obj_tag_names
     remove_tag_names = obj_tag_names - tag_names
