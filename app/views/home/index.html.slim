@@ -23,9 +23,10 @@
   .tags
     h2 人気タグ
     ul
+      - max_name_count = @hot_tags.map(&:name_count).max
       - @hot_tags.each do |tag|
-        li style="#{font_size_for_tag_cloud(tag)}"
-          = link_to "#{tag.name} (#{tag.name_count})", tag_path(tag.name)
+        li style="#{font_size_for_tag_cloud(tag, max_count: max_name_count)}"
+          = link_to "#{tag.name}&nbsp;(#{tag.name_count})".html_safe, tag_path(tag.name)
 
   h2 新着クリップ
 - if @clips.present?
