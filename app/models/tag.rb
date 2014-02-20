@@ -4,7 +4,7 @@ class Tag < ActiveRecord::Base
   belongs_to :user
 
   scope :uniques, group(:name)
-  scope :by, lambda {|user| where(user_id: user) }
+  scope :by, lambda {|user| where(user_id: user) if user }
   scope :for, lambda {|tagged| where(tagged_id: tagged, tagged_type: tagged.is_a?(Array) ? tagged.first.class.name : tagged.class.name) }
   scope :newest, lambda {|limit| uniques.select("name, COUNT(name) AS name_count, MAX(updated_at) AS newest_updated_at").reorder('newest_updated_at desc').limit(limit) }
   scope :hottest, lambda {|limit| uniques.select("name, COUNT(name) AS name_count").reorder('name_count desc').limit(limit) }
