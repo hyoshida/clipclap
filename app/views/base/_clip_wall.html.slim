@@ -6,8 +6,6 @@
 
 #container.hidden
   ul
-    - if @clips.respond_to?(:current_page) && @clips.current_page == 1
-      == render partial: 'base/adsense'
     - @clips.each do |clip|
       == render partial: 'base/clip', locals: { clip: clip }
 
