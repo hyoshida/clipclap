@@ -32,6 +32,63 @@
   }
 }
 
+// tutorial
+#tutorial {
+  margin: 20px auto;
+  padding: 20px;
+  width: $contents_width;
+  line-height: 200%;
+  font-size: 13px;
+  color: #444;
+  background-color: #fff;
+  @include border-radius(2px);
+  @include single-box-shadow($color: #ccc, $hoff: 0px, $voff: 1px, $blur: 3px);
+}
+
+#tutorial h1 {
+  font-size: large;
+  font-weight: normal;
+}
+
+#tutorial ol {
+  counter-reset: li;
+}
+
+#tutorial li {
+  margin: 20px 0;
+  padding: 20px 0.5em 0;
+  border-top: 1px solid #eee;
+}
+
+#tutorial h2 {
+  font-size: x-large;
+  margin-bottom: 0.5em;
+}
+
+#tutorial h2:before {
+  display: inline-block;
+  counter-increment: li;
+  content: counter(li);
+  margin: .3em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background: #f70;
+  position: relative;
+  left: -0.5em;
+  @include border-radius(2em);
+}
+
+#tutorial a {
+  &, &:link, &:visited, &:hover, &:active {
+    font-weight: bold;
+    color: #f70;
+  }
+}
+
 // bookmarklet
 #bookmarklet {
   margin: 20px auto;
