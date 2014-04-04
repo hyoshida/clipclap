@@ -116,8 +116,9 @@ class Clip < ActiveRecord::Base
     return [] if self.origin_html.blank?
     return [ self.origin_url ] if self.origin_url =~ support_image_types_regexp
     doc = Hpricot(self.origin_html)
-    (image_urls_from_image_tags(doc/:img) + image_urls_from_anthor_tags(doc/:a)).uniq
+    image_urls_from(doc)
   end
+
 
   class BetterImageGetter
     def initialize(url)
@@ -160,6 +161,16 @@ class Clip < ActiveRecord::Base
 
   private
 
+  def image_urls_from(doc)
+    (
+      image_urls_from_image_tags(doc/:img) +
+      image_urls_from_anthor_tags(doc/:a) +
+      # Hpricotで、目的のエレメントがテキストとして認識されてしまうので暫定処理
+      # 本来あるべきセレクタ: doc/'[@style^="background"]'
+      image_urls_from_css((doc/'.photo_stage').map(&:children))
+    ).uniq
+  end
+
   def image_urls_from_image_tags(image_tags)
     image_tags.map do |image_tag|
       image_url = image_tag.attributes['src']
@@ -172,6 +183,24 @@ class Clip < ActiveRecord::Base
     anchor_tags.map do |anchor_tag|
       image_url = anchor_tag.attributes['href']
       next unless image_url =~ support_image_types_regexp
+      BetterImageGetter.new(uri_absolute_path(image_url)).exec
+    end.compact.uniq
+  end
+
+  # for tumblr
+  def image_urls_from_css(tags)
+    tags.map do |tag|
+      # 暫定処置
+      # 本来あるべき処理: attribute = tag.attributes['style']
+      attribute = tag.join
+      next if attribute.blank?
+
+      match = attribute.match(/url\(['"]?(.+)['"]?\)/)
+      next if match.nil?
+
+      image_url = match[1]
+      next unless image_url =~ support_image_types_regexp
+
       BetterImageGetter.new(uri_absolute_path(image_url)).exec
     end.compact.uniq
   end

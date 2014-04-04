@@ -10,7 +10,7 @@
   = form_for @clip, url: { action: :clipping }, remote: true, html: { id: 'load_form' } do |f|
     h2 あたらしくクリップ
     h3 1. 画像をセレクト
-    = f.text_field :origin_url, id: 'loading_url', value: @url, placeholder: 'http://画像URL、ページURL'
+    = f.text_field :origin_url, id: 'loading_url', value: @url, placeholder: 'キーワード or http://ページURL'
     = f.submit 'ロード', id: 'load'
 
   #container

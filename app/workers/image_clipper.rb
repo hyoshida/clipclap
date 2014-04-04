@@ -7,7 +7,10 @@ class ImageClipper
     def perform(user_id, target_url)
       @user_id = user_id
       @target_url = target_url
-      download_html
+      if @target_url.present?
+        @target_url = url_for_keyword(@target_url) unless @target_url.match(/^http/)
+        download_html
+      end
       publish
     end
 
@@ -48,6 +51,11 @@ class ImageClipper
 
     def html_cache_file_path
       File.join(Settings.html_cache_dir, "#{@user_id}.html")
+    end
+
+    def url_for_keyword(keyword)
+      require 'cgi'
+      "http://www.tumblr.com/tagged/#{CGI.escape(keyword)}"
     end
   end
 end
