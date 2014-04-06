@@ -19,3 +19,9 @@ html
           - if alert
             p#alert = alert
           == yield
+
+    - if flash[:user_signup]
+      javascript:
+        try {
+          _gaq.push([ '_trackPageview', '/user/sign_up_completed' ])
+        } catch(e) { }

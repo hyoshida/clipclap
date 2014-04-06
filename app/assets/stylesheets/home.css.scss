@@ -32,37 +32,79 @@
   }
 }
 
-// bookmarklet
-#bookmarklet {
+// tutorial
+#tutorial {
   margin: 20px auto;
+  padding: 20px;
   width: $contents_width;
-  font-size: 16px;
+  line-height: 200%;
+  font-size: 13px;
+  color: #444;
+  background-color: #fff;
+  @include border-radius(2px);
+  @include single-box-shadow($color: #ccc, $hoff: 0px, $voff: 1px, $blur: 3px);
+}
 
-  p {
-    line-height: 130%;
+#tutorial h1 {
+  font-size: large;
+  font-weight: normal;
+}
+
+#tutorial ol {
+  counter-reset: li;
+}
+
+#tutorial li {
+  margin: 20px 0;
+  padding: 20px 0.5em 0;
+  border-top: 1px solid #eee;
+}
+
+#tutorial h2 {
+  font-size: x-large;
+  margin-bottom: 0.5em;
+}
+
+#tutorial h2:before {
+  display: inline-block;
+  counter-increment: li;
+  content: counter(li);
+  margin: .3em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  background: #f70;
+  position: relative;
+  left: -0.5em;
+  @include border-radius(2em);
+}
+
+#tutorial a {
+  &, &:link, &:visited, &:hover, &:active {
+    font-weight: bold;
+    color: #f70;
   }
 }
 
-#bookmarklet h1 {
-  margin: 0 0 0.25em;
-  line-height: 150%;
-  font-size: xx-large;
+// bookmarklet
+#bookmarklet {
+  @extend #tutorial;
 }
 
-#bookmarklet .well {
-  margin: 1em 0;
+#bookmarklet .button {
+  margin: 30px 0;
   text-align: center;
-  font-size: xx-large;
-  font-family: $font_gothic;
-  letter-spacing: 3px;
-  font-weight: bold;
 
   a {
-    color: #666;
-
-    &:hover {
-      text-decoration: none;
-    }
+    @include btn-reclip;
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    font-size: x-large;
+    font-weight: normal;
   }
 }
 

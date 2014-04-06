@@ -11,6 +11,7 @@
                   = label_tag :url, 'イラストを投稿:'
                   = text_field_tag :url, nil, placeholder: 'キーワード or http://ページURL'
               li = link_to 'ブックマークレットから投稿', bookmarklet_path
+              li = link_to 'チュートリアル', tutorial_path
               li.divider
               li = link_to 'まとめを作成', new_matome_path
         - if user_signed_in?

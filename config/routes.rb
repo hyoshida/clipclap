@@ -5,7 +5,10 @@ Clipclap::Application.routes.draw do
   devise_for :admin_users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  devise_for :user, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :user, :controllers => {
+    :registrations => "users/registrations",
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
   resources :clips, except: [ :edit, :update ] do
     member do
@@ -58,6 +61,7 @@ Clipclap::Application.routes.draw do
   end
 
   get 'bookmarklet' => 'home#bookmarklet', via: :get, as: :bookmarklet
+  get 'tutorial' => 'home#tutorial', via: :get, as: :tutorial
   get "home/index"
   root :to => "home#index"
 

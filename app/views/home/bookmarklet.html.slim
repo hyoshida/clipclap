@@ -1,5 +1,13 @@
 #bookmarklet
   h1 ブックマークレット
-  p 「@clip」のリンクをブックマークバーにドラッグ＆ドロップすることで、様々なサイトから１クリックでクリップできるようになります。
-  p.well
+  p ブックマークレットをインストールすることで、いつでも、どんなサイトからでも、簡単に画像を集められるようになります。
+  p 「@clip」ボタンをブックマークバーにドラッグ＆ドロップするだけで、インストールは完了です。
+  p ほかのサイトを見ているときにインストールしたボタンをクリックしてください。
+  p.button
     = link_to '@clip', "javascript:(function(){location.href='http://clipclap.org/clips/new?url='+encodeURIComponent(location.href);})();"
+
+  hr
+
+  p
+    | そのほかの投稿方法については
+    = link_to 'こちら', tutorial_path
